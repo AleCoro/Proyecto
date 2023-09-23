@@ -61,24 +61,13 @@
           id="navbarCollapse"
         >
           <div class="navbar-nav font-weight-bold mx-auto py-0">
-            <a href="inicio" class="nav-item nav-link active">Home</a>
-            <a href="about" class="nav-item nav-link">About</a>
-            <a href="class" class="nav-item nav-link">Classes</a>
-            <a href="team" class="nav-item nav-link">Teachers</a>
-            <a href="gallery" class="nav-item nav-link">Gallery</a>
-            <div class="nav-item dropdown">
-              <a
-                href="#"
-                class="nav-link dropdown-toggle"
-                data-toggle="dropdown"
-                >Pages</a
-              >
-              <div class="dropdown-menu rounded-0 m-0">
-                <a href="blog" class="dropdown-item">Blog Grid</a>
-                <a href="single" class="dropdown-item">Blog Detail</a>
-              </div>
-            </div>
-            <a href="contact" class="nav-item nav-link">Contact</a>
+            <?php
+              foreach ($nav_links as $text => $url) {
+                $activar = ($ruta == $url) ? 'active' : '';
+                
+                echo "<a href='$url' class='nav-item nav-link $activar'>$text</a>";
+              }
+              ?>
           </div>
           <a href="" class="btn btn-primary px-4">Join Class</a>
         </div>
