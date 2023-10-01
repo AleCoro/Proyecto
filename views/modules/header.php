@@ -1,5 +1,9 @@
 <?php
-  $ruta = $_GET["ruta"];
+  if (isset($_GET["ruta"])) {
+    $ruta = $_GET["ruta"];
+  }else {
+    $ruta = "inicio";
+  }
 
   // Define un arreglo de enlaces y sus correspondientes URLs
   $nav_links = array(
