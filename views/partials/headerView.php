@@ -70,6 +70,8 @@
               ?>
           </div>
           <a href="" class="btn btn-primary px-4">Join Class</a>
+          <a href="login" class="btn btn-primary px-4">Login</a>
+          <a href="register" class="btn btn-primary px-4">Register</a>
         </div>
       </nav>
     </div>
