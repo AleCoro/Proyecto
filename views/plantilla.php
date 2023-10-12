@@ -8,7 +8,6 @@
 <!-- CONTENIDO -->
 <?php 
 
-    // var_dump($_SESSION);
     if (isset($_GET["ruta"])) {
         if ($_GET["ruta"]=="inicio"||
             $_GET["ruta"]=="about"||

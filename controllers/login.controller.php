@@ -5,15 +5,15 @@
         public function ctrLogin(){
 
             if (isset($_POST['usuario'])) {
-                $usuario=LoginModel::filtrarVarchar($_POST['usuario']);
+                $usuario=LoginController::ctrfiltrarVarchar($_POST['usuario']);
                 $tabla="usuarios";
-                $comprobar = LoginModel::Comprobar_Exisitencia_Registro($tabla,'usuario',$usuario);
-                $id_usuario = $comprobar["id_usuario"];
+                $comprobar = LoginController::ctrComprobar_Exisitencia_Registro($tabla,'usuario',$usuario);
                 
                 $contraseña = $_POST["password"];
                 // $contraseña = crypt($_POST["password"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
 
                 if ($comprobar!==NULL) {
+                    $id_usuario = $comprobar["id_usuario"];
                     if (isset($contraseña) && !empty($contraseña)) {
                         if ($contraseña==$comprobar["password"]) {
                             $_SESSION["id_usuario"]=$id_usuario;
@@ -36,86 +36,62 @@
             if (isset($_POST["nuevoUsuario"])) {
                 $tabla="usuarios";
                 $columna="usuario";
-                $registro=$_POST["nuevoUsuario"];
+                $registro=$_POST["Usuario"];
 
-                $existe = LoginModel::Comprobar_Exisitencia_Registro($tabla,$columna,$registro);
+                // Comprobamos si ya existe ese usuario
+                $existe = LoginController::ctrComprobar_Exisitencia_Registro($tabla,$columna,$registro);
 
+                // Si no existe validamos los campos y guardamos en la base de datos la informacion
                 if ($existe==null) {
-                    if (preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoNombre"]) &&
-                        preg_match('/^[a-zA-Z0-9]+$/', $_POST["nuevoUsuario"]) &&
-                        preg_match('/^[a-zA-Z0-9]+$/', $_POST["nuevoPassword1"]) &&
-                        preg_match('/^[a-zA-Z0-9]+$/', $_POST["nuevoPassword2"])){
-
-                            $urlUsuarios = "views/img/usuarios/";
-
-                            // VALIDAR Foto
-                            $ruta = "";
-                            if (isset($_FILES["nuevaFoto"]["tmp_name"]) && $_FILES["nuevaFoto"]["tmp_name"]!=null) {
-
-                                list($ancho, $alto) = getimagesize($_FILES["nuevaFoto"]["tmp_name"]);
-                                $nuevoAncho=350;
-                                $nuevoAlto=350;
-
-                                // CREAMOS EL DIRECTORIO DONDE GUARDAR LA FOTO
-                                $directorio = $urlUsuarios.$_POST["nuevoUsuario"];
-                                mkdir($directorio, 0755);
-
-                                // SEGUN FORMATO DE FOTO APLICAMOS UNAS FUNCIONES U OTRAS
-                                if ($_FILES["nuevaFoto"]["type"]=="image/jpeg") {
-                                    $Foto = $_POST["nuevoUsuario"].".jpeg";
-                                    
-                                    // GUARDAMOS LA Foto EN EL DIRECTORIO
-                                    $ruta = $directorio."/".$Foto;
-                                    $origen = imagecreatefromjpeg($_FILES["nuevaFoto"]["tmp_name"]);
-                                    $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-                                    imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-                                    imagejpeg($destino, $ruta);
-                                }
-
-                                if ($_FILES["nuevaFoto"]["type"]=="image/png") {
-                                    $Foto = $_POST["nuevoUsuario"].".png";
-                                    
-                                    // GUARDAMOS LA Foto EN EL DIRECTORIO
-                                    $ruta = $directorio."/".$Foto;
-                                    $origen = imagecreatefrompng($_FILES["nuevaFoto"]["tmp_name"]);
-                                    $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-                                    imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-                                    imagepng($destino, $ruta);
-                                }
-                                
-                            }else {
-                                $Foto = "default.png";
-                                $ruta = $urlUsuarios.$Foto;
-                            }
+                    if (preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nombre"]) &&
+                        preg_match('/^[a-zA-Z0-9]+$/', $_POST["Usuario"]) &&
+                        preg_match('/^[a-zA-Z0-9]+$/', $_POST["password"])){
                         
                             $tabla = "usuarios";
-                            // $encriptada = crypt($_POST["nuevoPassword"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
-                            if ($_POST["nuevoPassword1"]===$_POST["nuevoPassword2"]) {
-                                $NewPassword = $_POST["nuevoPassword1"];
-                                $datos = array(
-                                    "nombre" => $_POST["nuevoNombre"],
-                                    "usuario" => $_POST["nuevoUsuario"],
-                                    "password" => $NewPassword,
-                                    // "imagen" => $ruta
-                                );
+                            $datos = array(
+                                "nombre" => $_POST["nombre"],
+                                "apellidos" => $_POST["apellidos"],
+                                "usuario" => $_POST["Usuario"],
+                                "password" => $_POST["password"],
+                                "direccion" => $_POST["direccion"],
+                                "email" => $_POST["Email"],
+                                "fecha_nacimiento" => $_POST["fecha"]
+                            );
+                            if ($_POST["rol"]=="Profesor") {
+                                $datos["sueldo_hora"] = $_POST["precio"];
+                            }
+                            
 
-                                $respuesta = LoginModel::mdlRegistrarUsuario($tabla, $datos);
-                                if ($respuesta == "SI") {
-                                    echo "<script>
-                                        alert('¡El usuario ha sido guardado correctamente!');
-                                        window.location = 'register';
-                                    </script>";
-                                }else{
-                                    echo "<script>
-                                        alert('¡Error al guardar el usuario!');
-                                        window.location = 'register';
-                                    </script>";
-                                }
-                            }else {
+                            // Introducimos los datos del usuario en la tabla
+                            $respuesta = LoginController::ctrRegistrarUsuario($tabla, $datos);
+
+                            // Sacamos el ultimo usuario que es el que acabamos de añadir
+                            $idRegistroAñadido = LoginController::ctrMostrar_Ultimo_Registro($tabla,"id_usuario");
+
+                            // Sacamos el id del rol
+                            $RolesController = new RolesController();
+                            $rol =  $RolesController->ctrMostrarRegistroWhere("roles","nombre_rol",$_POST["rol"]);
+                            
+                            
+                            // Construimos los datos
+                            $datos = array(
+                              "usuario" => $idRegistroAñadido["id_usuario"],
+                              "rol" => $rol["id_rol"]  
+                            );
+                            
+                            // Insertamos los datos en la tabla es_un
+                            $RolesController->ctrInsertar("es_un", $datos);
+                            
+                            if ($respuesta == "SI") {
                                 echo "<script>
-                                        alert('¡Las contraseñas no coinciden!');
-                                        window.location = 'register';
-                                    </script>";
+                                    alert('¡El usuario ha sido guardado correctamente!');
+                                    window.location = 'login';
+                                </script>";
+                            }else{
+                                echo "<script>
+                                    alert('¡Error al guardar el usuario!');
+                                    window.location = 'register';
+                                </script>";
                             }
                     }else{
 
@@ -133,5 +109,35 @@
 
                 
             }
+        }
+
+        public function ctrComprobar_Exisitencia_Registro($tabla,$columna,$registro){
+            
+            $respuesta=LoginModel::mdlComprobar_Exisitencia_Registro($tabla,$columna,$registro);
+            return $respuesta;
+        }
+
+        public function ctrfiltrarVarchar($texto){
+            
+            $respuesta=LoginModel::mdlfiltrarVarchar($texto);
+            return $respuesta;
+        }
+
+        public function ctrfiltrarCorreo($correo){
+            
+            $respuesta=LoginModel::mdlfiltrarCorreo($correo);
+            return $respuesta;
+        }
+
+        public function ctrRegistrarUsuario($tabla, $datos){
+            
+            $respuesta=LoginModel::mdlRegistrarUsuario($tabla, $datos);
+            return $respuesta;
+        }
+
+        public function ctrMostrar_Ultimo_Registro($tabla,$id){
+            
+            $respuesta=LoginModel::mdlMostrar_Ultimo_Registro($tabla,$id);
+            return $respuesta;
         }
     }

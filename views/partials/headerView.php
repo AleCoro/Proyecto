@@ -70,8 +70,13 @@
               ?>
           </div>
           <a href="" class="btn btn-primary px-4">Join Class</a>
-          <a href="login" class="btn btn-primary px-4">Login</a>
-          <a href="register" class="btn btn-primary px-4">Register</a>
+          <?php if (isset($_SESSION["session_usuario"])) { ?>
+            <a href="logout" class="btn btn-primary px-4">Logout</a>
+          <?php }else { ?>
+            <a href="login" class="btn btn-primary px-4">Login</a>
+            <!-- <a href="register" class="btn btn-primary px-4">Register</a> -->
+          <?php } ?>
+          
         </div>
       </nav>
     </div>

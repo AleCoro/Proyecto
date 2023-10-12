@@ -4,12 +4,13 @@
     class LoginModel{
         // ====================================== Comprobar Exisitencia ======================================
 
-        static public function Comprobar_Exisitencia_Registro($tabla,$columna,$registro){
+        // Comprobar si existe ese registro
+        static public function mdlComprobar_Exisitencia_Registro($tabla,$columna,$registro){
             if (!empty($registro)) {
                 $conexion = Conexion::conectar();
-                $consulta="SELECT * FROM $tabla  WHERE $columna LIKE '$registro' ";
-                $resultados=$conexion->query($consulta);
-                $filas=$resultados->rowCount();
+                $consulta = "SELECT * FROM $tabla  WHERE $columna LIKE '$registro' ";
+                $resultados = $conexion->query($consulta);
+                $filas = $resultados->rowCount();
                 if ($filas>0) {
                     $resultado = $resultados->fetch();
                 }else {
@@ -20,7 +21,7 @@
         }
 
         // Filtrar varchar
-        static public function filtrarVarchar($texto){
+        static public function mdlfiltrarVarchar($texto){
             if (!empty($texto)) {
                 $textoValidado = trim($texto);
                 $textoValidado = filter_var(stripslashes($textoValidado), FILTER_SANITIZE_STRING);
@@ -32,7 +33,7 @@
         }
 
         // Filtrar Correo
-        static public function filtrarCorreo($correo){
+        static public function mdlfiltrarCorreo($correo){
             if (!empty($correo)) {
                 if (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
                     // No es un correo
@@ -48,6 +49,7 @@
             }
         }
 
+        // Registrar Usuario
         static public function mdlRegistrarUsuario($tabla, $datos){
             $conexion = Conexion::conectar();
 
@@ -72,6 +74,17 @@
             }
 
             $sentencia=null;
+        }
+
+        // Mostrar ultimo usuario
+        static public function mdlMostrar_Ultimo_Registro($tabla,$id){
+            $conexion = Conexion::conectar();
+            $consulta="SELECT * FROM $tabla Order by $id desc LIMIT 1";
+            $resultados=$conexion->query($consulta);
+            if ($resultados) {
+                $resultado = $resultados->fetch();
+                return $resultado;
+            }
         }
 
     }
