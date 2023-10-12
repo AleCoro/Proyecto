@@ -18,16 +18,18 @@
                         if ($contraseña==$comprobar["password"]) {
                             $_SESSION["id_usuario"]=$id_usuario;
                             $_SESSION["session_usuario"]=$usuario;
-                            echo '<script>window.location="inicio"</script>';
+                            $respuesta =  '<script>window.location="inicio"</script>';
                         }else {
-                            echo '<br><div class="alert alert-danger">Error al introducir la contraseña</div>';
+                            $respuesta =  '<br><div class="alert alert-danger">Error al introducir la contraseña</div>';
                         }
                     }else {
-                        echo '<br><div class="alert alert-danger">Rellena la contraseña</div>';
+                        $respuesta =  '<br><div class="alert alert-danger">Rellena la contraseña</div>';
                     }
                 }else {
-                    echo '<br><div class="alert alert-danger">El usuario no existe</div>';
+                    $respuesta =  '<br><div class="alert alert-danger">El usuario no existe</div>';
                 }
+
+                return $respuesta;
             }
         }
 
@@ -57,8 +59,18 @@
                                 "email" => $_POST["Email"],
                                 "fecha_nacimiento" => $_POST["fecha"]
                             );
+
+                            // Controlamos que los campos necesarios para el profesor esten rellenos
                             if ($_POST["rol"]=="Profesor") {
-                                $datos["sueldo_hora"] = $_POST["precio"];
+                                if ($_POST["asignatura"]=="") {
+                                    $respuesta =  '<br><div class="alert alert-danger">¡Debes seleccionar una asignatura!</div>';
+                                    return $respuesta;
+                                }elseif ($_POST["precio"]<=0) {
+                                    $respuesta =  '<br><div class="alert alert-danger">¡Debes poner el precio de tu hora!</div>';
+                                    return $respuesta;
+                                }else{
+                                    $datos["sueldo_hora"] = $_POST["precio"];
+                                }
                             }
                             
 
@@ -81,32 +93,32 @@
                             
                             // Insertamos los datos en la tabla es_un
                             $RolesController->ctrInsertar("es_un", $datos);
-                            
-                            if ($respuesta == "SI") {
+
+                            // Construimos los datos
+                            $datos = array(
+                                "clase" => $_POST["asignatura"],
+                                "profesor" => $idRegistroAñadido["id_usuario"]
+                            );
+                            // Insertamos los datos en la tabla imparte
+                            $clasesController = new ClasesController();
+                            $clasesController->ctrInsertar("imparte",$datos);
+
+                            if ($respuesta == true) {
                                 echo "<script>
                                     alert('¡El usuario ha sido guardado correctamente!');
                                     window.location = 'login';
                                 </script>";
                             }else{
-                                echo "<script>
-                                    alert('¡Error al guardar el usuario!');
-                                    window.location = 'register';
-                                </script>";
+                                $respuesta =  '<br><div class="alert alert-danger">¡Error al guardar el usuario!</div>';
                             }
                     }else{
-
-                        echo "<script>
-                            alert('¡El usuario no puede ir vacío o llevar caracteres especiales!');
-                            window.location = 'register';
-                        </script>";
+                        $respuesta =  '<br><div class="alert alert-danger">¡El usuario no puede ir vacío o llevar caracteres especiales!</div>';
                     }
                 }else {
-                    echo "<script>
-                            alert('¡El usuario ya existe!');
-                            window.location = 'register';
-                        </script>";
+                    $respuesta =  '<br><div class="alert alert-danger">¡El usuario ya existe!</div>';
                 }
 
+                return $respuesta;
                 
             }
         }

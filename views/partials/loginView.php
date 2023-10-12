@@ -48,6 +48,7 @@
                 </button>
               </div>
             </form>
+            <?php if(isset($respuesta)){echo $respuesta;}?>
           </div>
         </div>
       </div>

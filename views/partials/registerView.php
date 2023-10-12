@@ -19,50 +19,50 @@
           <div class="form-row">
             <div class="form-group col-md-6">
               <label>Nombre</label>
-              <input type="text" class="form-control" name="nombre" placeholder="Nombre">
+              <input type="text" class="form-control" name="nombre" placeholder="Nombre" value = "<?php if(isset($_POST["nombre"])){echo $_POST["nombre"];} ?>" required>
               <input type="hidden" name="nuevoUsuario" value="nuevoUsuario">
             </div>
             <div class="form-group col-md-6">
               <label>Apellidos</label>
-              <input type="text" class="form-control" name="apellidos" placeholder="Apellidos">
+              <input type="text" class="form-control" name="apellidos" placeholder="Apellidos" value = "<?php if(isset($_POST["apellidos"])){echo $_POST["apellidos"];} ?>" required>
             </div>
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
               <label>Usuario</label>
-              <input type="text" class="form-control" name="Usuario" placeholder="Usuario">
+              <input type="text" class="form-control" name="Usuario" placeholder="Usuario" value = "<?php if(isset($_POST["Usuario"])){echo $_POST["Usuario"];} ?>" required>
             </div>
             <div class="form-group col-md-6">
               <label>Password</label>
-              <input type="password" class="form-control" name="password" placeholder="Password">
+              <input type="password" class="form-control" name="password" placeholder="Password" value = "<?php if(isset($_POST["password"])){echo $_POST["password"];} ?>" required>
             </div>
           </div>
           <div class="form-group">
             <label>Direccion</label>
-            <input type="text" class="form-control" name="direccion" placeholder="Direccion">
+            <input type="text" class="form-control" name="direccion" placeholder="Direccion" value = "<?php if(isset($_POST["direccion"])){echo $_POST["direccion"];} ?>" required>
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
               <label>Email</label>
-              <input type="email" class="form-control" name="Email" placeholder="Email">
+              <input type="email" class="form-control" name="Email" placeholder="Email" value = "<?php if(isset($_POST["Email"])){echo $_POST["Email"];} ?>" required>
             </div>
             <div class="form-group col-md-6">
               <label>Fecha Nacimiento</label>
-              <input type="date" class="form-control" name="fecha" placeholder="Fecha Nacimiento" required>
+              <input type="date" class="form-control" name="fecha" placeholder="Fecha Nacimiento" value = "<?php if(isset($_POST["fecha"])){echo $_POST["fecha"];} ?>" required >
             </div>
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
               <label>Selecciona tu rol de usuario</label>
-              <select name="rol" id="rol" onchange="habilitarCampos()" class="form-control">
-                <option selected>Selecciona</option>
+              <select name="rol" id="rol" onchange="habilitarCampos()" class="form-control" required>
+                <option value="" selected>Selecciona</option>
                 <option>Profesor</option>
                 <option>Alumno</option>
               </select>
             </div>
             <div class="form-group col-md-6">
               <label>Telefono</label>
-              <input type="text" class="form-control" name="telefono" placeholder="Telefono">
+              <input type="text" class="form-control" name="telefono" placeholder="Telefono" value = "<?php if(isset($_POST["telefono"])){echo $_POST["telefono"];} ?>" required>
             </div>
           </div>
 
@@ -71,23 +71,22 @@
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label>Selecciona la asignatura</label>
-                <select name="asignatura" id="asignatura" onchange="habilitarCampos()" class="form-control">
-                  <option selected>Selecciona</option>
-                  <option>PHP</option>
-                  <option>CSS</option>
-                  <option>HTML</option>
+                <select name="asignatura" id="asignatura" class="form-control">
+                  <option value="" selected>Selecciona</option>
+                  <?php foreach ($clases as $clase) { ?>
+                    <option value="<?= $clase["id_clase"]?>" ><?= $clase["nombre_clase"]?></option>
+                  <?php } ?>
                 </select>
               </div>
               <div class="form-group col-md-6">
                 <label>Precio/hora</label>
-                <input type="number" class="form-control" name="precio" placeholder="Precio">
+                <input type="number" class="form-control" name="precio" placeholder="Precio" min="0">
               </div>
             </div>
           </div>
-
-
           <button type="submit" class="btn btn-primary">Registrate</button>
         </form>
+        <?php if(isset($respuesta)){echo $respuesta;}?>
       </div>
     </div>
     <!-- Contact End -->
@@ -97,9 +96,9 @@
         rol = document.getElementById("rol").value;
         if (rol == "Profesor") {
           document.getElementById("porfesor").className = "d-block";
-        }
-        if (rol == "Alumno") {
+        }else{
           document.getElementById("porfesor").className = "d-none";
         }
+        
       }
     </script>
