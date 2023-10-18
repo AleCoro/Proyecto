@@ -27,6 +27,9 @@
 
   <!-- Customized Bootstrap Stylesheet -->
   <link href="views/css/style.css" rel="stylesheet" />
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 
 <body>
@@ -52,7 +55,6 @@
         </div>
         <!-- <a href="" class="btn btn-primary px-4">Join Class</a> -->
         <?php if (isset($_SESSION["session_usuario"])) { ?>
-          <!-- <a href="logout" class="btn btn-primary px-4">Logout</a> -->
           <div class="nav-item dropdown">
             <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown"><?= strtoupper($_SESSION["session_usuario"]); ?></a>
             <div class="dropdown-menu rounded-0 m-0">
