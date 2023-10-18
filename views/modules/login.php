@@ -3,4 +3,5 @@
         $usuario = new LoginController();
         $respuesta = $usuario->ctrLogin();
     }
+
     include("views/partials/loginView.php");
