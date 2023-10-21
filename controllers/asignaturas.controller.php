@@ -1,13 +1,13 @@
 <?php
-class ClasesController{
+class AsignaturasController{
     
     public function ctrInsertar($tabla, $datos){
 
         // Validamos los datos
-        $datos = ClasesController::ctrValidarDatos($datos);
+        $datos = AsignaturasController::ctrValidarDatos($datos);
 
         //Insertamos los datos si todo ha salido bien
-        ClasesModel::mdlInsertar($tabla, $datos);
+        AsignaturasModel::mdlInsertar($tabla, $datos);
 
     }
 
@@ -25,14 +25,14 @@ class ClasesController{
 
     public function ctrMostrarRegistroWhere($tabla,$campo,$valor){
             
-        $respuesta=ClasesModel::mdlMostrarRegistroWhere($tabla,$campo,$valor);
+        $respuesta=AsignaturasModel::mdlMostrarRegistroWhere($tabla,$campo,$valor);
 
         return $respuesta;
     }
 
     public function ctrMostrarRegistros($tabla){
             
-        $respuesta=ClasesModel::mdlMostrarRegistros($tabla);
+        $respuesta=AsignaturasModel::mdlMostrarRegistros($tabla);
 
         return $respuesta;
     }

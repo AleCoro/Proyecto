@@ -16,9 +16,9 @@
         }
     }
 
-    $clasesController = new ClasesController();
-    $clases = $clasesController->ctrMostrarRegistros("clases");
+    $areasAcademicasController = new AreasAcademicasController();
+    $areasAcademicas = $areasAcademicasController->ctrMostrarRegistros("areas_academicas");
 
-    // var_dump($clases);
+    // var_dump($areasAcademicas);
 
     include("views/partials/registerView.php");

@@ -65,17 +65,24 @@
               <input type="text" class="form-control" name="telefono" placeholder="Telefono" value = "<?php if(isset($_POST["telefono"])){echo $_POST["telefono"];} ?>" required>
             </div>
           </div>
+          <!-- Contact End -->
 
-          <!-- Campos Profesor -->
+          <!-- Campos Profesor Start -->
           <div id="porfesor" class="d-none">
             <div class="form-row">
               <div class="form-group col-md-6">
-                <label>Selecciona la asignatura</label>
-                <select name="asignatura" id="asignatura" class="form-control">
+                <label>Selecciona el area academica</label>
+                <select name="areaAcademica" id="areaAcademica" class="form-control" onchange="cargarAsignaturas()">
                   <option value="" selected>Selecciona</option>
-                  <?php foreach ($clases as $clase) { ?>
-                    <option value="<?= $clase["id_clase"]?>" ><?= $clase["nombre_clase"]?></option>
+                  <?php foreach ($areasAcademicas as $areaAcademica) { ?>
+                    <option value="<?= $areaAcademica["id_area"]?>" ><?= $areaAcademica["nombre_area"]?></option>
                   <?php } ?>
+                </select>
+              </div>
+              <div class="form-group col-md-6">
+                <label>Selecciona la asignatura</label>
+                <select name="asignaturas" id="asignaturas" class="form-control">
+                  <option value="" selected>Selecciona</option>
                 </select>
               </div>
               <div class="form-group col-md-6">
@@ -89,7 +96,7 @@
         <?php if(isset($respuesta)){echo $respuesta;}?>
       </div>
     </div>
-    <!-- Contact End -->
+    <!-- Campos Profesor End -->
 
     <script languaje="javascript">
       function habilitarCampos() {

@@ -1,7 +1,7 @@
 <?php 
     require_once("conexion.php");
 
-    class ClasesModel{
+    class AsignaturasModel{
 
         public static function mdlInsertar($tabla,$datos){
             

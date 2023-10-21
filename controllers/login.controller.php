@@ -50,7 +50,7 @@
                         preg_match('/^[a-zA-Z0-9]+$/', $_POST["password"])){
                         
                             $tabla = "usuarios";
-                            $datos = array(
+                            $datos_usuario = array(
                                 "nombre" => $_POST["nombre"],
                                 "apellidos" => $_POST["apellidos"],
                                 "usuario" => $_POST["Usuario"],
@@ -62,20 +62,21 @@
 
                             // Controlamos que los campos necesarios para el profesor esten rellenos
                             if ($_POST["rol"]=="Profesor") {
-                                if ($_POST["asignatura"]=="") {
+                                if (isset($_POST["asignaturas"]) && $_POST["asignaturas"]=="") {
                                     $respuesta =  '<br><div class="alert alert-danger">¡Debes seleccionar una asignatura!</div>';
                                     return $respuesta;
-                                }elseif ($_POST["precio"]<=0) {
+                                }
+                                if ($_POST["precio"]<=0) {
                                     $respuesta =  '<br><div class="alert alert-danger">¡Debes poner el precio de tu hora!</div>';
                                     return $respuesta;
                                 }else{
-                                    $datos["sueldo_hora"] = $_POST["precio"];
+                                    $datos_usuario["sueldo_hora"] = $_POST["precio"];
                                 }
                             }
                             
 
-                            // Introducimos los datos del usuario en la tabla
-                            $respuesta = LoginController::ctrRegistrarUsuario($tabla, $datos);
+                            // Insertamos los datos del usuario en la tabla
+                            $respuesta = LoginController::ctrRegistrarUsuario($tabla, $datos_usuario);
 
                             // Sacamos el ultimo usuario que es el que acabamos de añadir
                             $idRegistroAñadido = LoginController::ctrMostrar_Ultimo_Registro($tabla,"id_usuario");
@@ -85,23 +86,24 @@
                             $rol =  $RolesController->ctrMostrarRegistroWhere("roles","nombre_rol",$_POST["rol"]);
                             
                             
-                            // Construimos los datos
-                            $datos = array(
+                            // Construimos los datos para la tabla es_un
+                            $datos_es_un = array(
                               "usuario" => $idRegistroAñadido["id_usuario"],
                               "rol" => $rol["id_rol"]  
                             );
                             
                             // Insertamos los datos en la tabla es_un
-                            $RolesController->ctrInsertar("es_un", $datos);
+                            $RolesController->ctrInsertar("es_un", $datos_es_un);
 
-                            // Construimos los datos
-                            $datos = array(
-                                "clase" => $_POST["asignatura"],
-                                "profesor" => $idRegistroAñadido["id_usuario"]
+                            // Construimos los datos para la tabla imparte
+                            $datos_imparte = array(
+                                "asignatura" => $_POST["asignaturas"],
+                                "profesor" => $idRegistroAñadido["id_usuario"],
                             );
+
                             // Insertamos los datos en la tabla imparte
-                            $clasesController = new ClasesController();
-                            $clasesController->ctrInsertar("imparte",$datos);
+                            $asignaturasController = new AsignaturasController();
+                            $asignaturasController->ctrInsertar("imparte",$datos_imparte);
 
                             if ($respuesta == true) {
                                 echo "<script>

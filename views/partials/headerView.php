@@ -28,7 +28,11 @@
   <!-- Customized Bootstrap Stylesheet -->
   <link href="views/css/style.css" rel="stylesheet" />
 
+  <!-- Libraries jquery -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- Cargamos nuestros scripts -->
+  <script src="views/js/scripts/funciones.js"></script>
 
 </head>
 
