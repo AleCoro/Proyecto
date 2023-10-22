@@ -8,11 +8,11 @@
   // Define un arreglo de enlaces y sus correspondientes URLs
   $nav_links = array(
     'Home' => 'inicio',
-    'About' => 'about',
-    'Classes' => 'class',
-    'Teachers' => 'team',
-    'Gallery' => 'gallery',
-    'Contact' => 'contact'
+    'Clases' => 'class',
+    'Profesores' => 'team',
+    'Galeria' => 'gallery',
+    'Contacto' => 'contact',
+    'Sobre nosotros' => 'about'
   );
 
   if (isset($_SESSION["id_usuario"])) {

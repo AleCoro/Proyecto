@@ -1,12 +1,13 @@
 <?php
-  session_start();
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Neptuno | MVC</title>
+  <title>Academia</title>
 
   <!-- ========================= PLUGINS DE CSS ========================= -->
   <!-- Google Font: Source Sans Pro -->
@@ -36,52 +37,42 @@
 
 
 </head>
-<body class="hold-transition sidebar-mini">
 <?php
-  if (isset($_SESSION["perfilSeleccionado"]) && $_SESSION["perfilSeleccionado"] == 1) {
-    // <!-- Site wrapper -->
-    echo '<div class="wrapper">';
-    // <!-- NAVEGACION -->
-      include('modulos/header.php');
-    // <!-- /.NAVEGACION -->
+if (isset($_SESSION["perfilSeleccionado"]) && $_SESSION["perfilSeleccionado"] == 1) {
+  // <!-- NAVEGACION -->
+  include('modulos/header.php');
+  // <!-- /.NAVEGACION -->
 
-    // <!-- MENU IZQUIERDO -->
-      include('modulos/menu.php');
-    // <!-- /.MENU IZQUIERDO -->
+  // <!-- MENU IZQUIERDO -->
+  include('modulos/menu.php');
+  // <!-- /.MENU IZQUIERDO -->
 
-    // <!-- CONTENIDO WRAPPER -->
-      if (isset($_GET["ruta"])) {
-        if ($_GET["ruta"]=="inicio" || 
-        $_GET["ruta"] == "inicio" ||
-        $_GET["ruta"] == "about" ||
-        $_GET["ruta"] == "class" ||
-        $_GET["ruta"] == "team" ||
-        $_GET["ruta"] == "gallery" ||
-        $_GET["ruta"] == "blog" ||
-        $_GET["ruta"] == "single" ||
-        $_GET["ruta"] == "contact" ||
-        $_GET["ruta"] == "login" ||
-        $_GET["ruta"] == "register" ||
-        ($_GET["ruta"] == "logout" && $_SESSION["session_usuario"] != "")) {
+  // <!-- CONTENIDO WRAPPER -->
+  if (isset($_GET["ruta"])) {
+    if (
+      $_GET["ruta"] == "inicio" ||
+      $_GET["ruta"] == "inicio" ||
+      $_GET["ruta"] == "alumnos" ||
+      $_GET["ruta"] == "profesores" ||
+      $_GET["ruta"] == "areas_academicas" ||
+      $_GET["ruta"] == "asignaturas" ||
+      ($_GET["ruta"] == "logout" && $_SESSION["session_usuario"] != "")
+    ) {
 
-          include("modulos/".$_GET["ruta"].".php");
-        }else {
-          include("modulos/404.php");
-        }
-      }else {
-        include("modulos/inicio.php");
-      }
-    // <!-- /.CONTENIDO WRAPPER -->
-  }else {
-    header('Location: ../inicio');
+      include("modulos/" . $_GET["ruta"] . ".php");
+    } else {
+      include("modulos/404.php");
+    }
+  } else {
+    include("modulos/inicio.php");
   }
-    
+  // <!-- /.CONTENIDO WRAPPER -->
+} else {
+  header('Location: ../inicio');
+}
 
-    // <!-- FOOTER -->
-      include('modulos/footer.php');
-    // <!-- /.FOOTER -->
-echo "</div>"
-// <!-- ./Site wrapper -->
+
+// <!-- FOOTER -->
+include('modulos/footer.php');
+// <!-- /.FOOTER -->
 ?>
-</body>
-</html>

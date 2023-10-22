@@ -1,6 +1,7 @@
 <?php
 
-
+  $areasAcademicasController = new AreasAcademicasController();
+  $areasAcademicas = $areasAcademicasController->ctrMostrarRegistros("areas_academicas");
 
 
 

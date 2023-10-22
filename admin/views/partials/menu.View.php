@@ -27,32 +27,16 @@
             <a href="inicio" class="nav-link"><i class="nav-icon fas fa-home"></i><p>Inicio</p></a>
           </li>
           <li class="nav-item">
-            <a href="usuarios" class="nav-link"><i class="nav-icon fas fa-users"></i><p>Usuarios</p></a>
+            <a href="alumnos" class="nav-link"><i class="nav-icon fas fa-users"></i><p>Alumnos</p></a>
           </li>
           <li class="nav-item">
-            <a href="categorias" class="nav-link"><i class="nav-icon fas fa-th-list"></i><p>Categorias</p></a>
+            <a href="profesores" class="nav-link"><i class="nav-icon fas fa-users"></i><p>Profesores</p></a>
           </li>
           <li class="nav-item">
-            <a href="productos" class="nav-link"><i class="nav-icon fab fa-product-hunt"></i><p>Productos</p></a>
+            <a href="areas_academicas" class="nav-link"><i class="nav-icon fas fa-graduation-cap"></i><p>Areas Academicas</p></a>
           </li>
           <li class="nav-item">
-            <a href="clientes" class="nav-link"><i class="nav-icon fas fa-address-card"></i><p>Clientes</p></a>
-          </li>
-          <li class="nav-item has-treeview">
-            <a href="pedidos" class="nav-link">
-              <i class="nav-icon fas fa-shopping-cart"></i><p>Pedidos<i class="right fas fa-angle-left"></i></p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="nuevo-pedido" class="nav-link"><i class="fas fa-shopping-basket nav-icon"></i><p>Nuevo pedido</p></a>
-              </li>
-              <li class="nav-item">
-                <a href="gestion-pedidos" class="nav-link"><i class="fas fa-store nav-icon"></i><p>Gestión pedidos</p></a>
-              </li>
-              <li class="nav-item">
-                <a href="informes" class="nav-link"><i class="fas fa-book-open nav-icon"></i><p>Informes</p></a>
-              </li>
-            </ul>
+            <a href="asignaturas" class="nav-link"><i class="nav-icon fas fa-book"></i><p>Asignaturas</p></a>
           </li>
         </ul>
       </nav>

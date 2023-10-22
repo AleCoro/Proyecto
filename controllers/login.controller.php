@@ -75,7 +75,7 @@
                             }
                             
 
-                            // Insertamos los datos del usuario en la tabla
+                            // Insertamos los datos en la tabla usuario
                             $respuesta = LoginController::ctrRegistrarUsuario($tabla, $datos_usuario);
 
                             // Sacamos el ultimo usuario que es el que acabamos de añadir
