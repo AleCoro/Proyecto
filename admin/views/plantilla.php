@@ -54,7 +54,7 @@ if (isset($_SESSION["perfilSeleccionado"]) && $_SESSION["perfilSeleccionado"] ==
       $_GET["ruta"] == "inicio" ||
       $_GET["ruta"] == "alumnos" ||
       $_GET["ruta"] == "profesores" ||
-      $_GET["ruta"] == "areas_academicas" ||
+      $_GET["ruta"] == "areasAcademicas" ||
       $_GET["ruta"] == "asignaturas" ||
       ($_GET["ruta"] == "logout" && $_SESSION["session_usuario"] != "")
     ) {

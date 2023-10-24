@@ -68,7 +68,7 @@
 
             //Y la ejecutamos
             if ($sentencia->execute()) {
-                return true;
+                return $conexion->lastInsertId();
             }else {
                 return false;
             }

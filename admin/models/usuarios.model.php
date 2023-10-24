@@ -5,7 +5,7 @@
         // ====================================== MOSTRAR USUARIOS ======================================
 
         static public function mdlMostrarUsuarios($tabla, $campo, $valor){
-            if ($campo != null) {
+            if ($campo !== null && $valor !== null) {
                 $conexion = Conexion::conectar();
                 $sentencia = $conexion->prepare("SELECT * FROM $tabla WHERE $campo = :valor");
                 $sentencia->bindParam(":valor", $valor, PDO::PARAM_STR);

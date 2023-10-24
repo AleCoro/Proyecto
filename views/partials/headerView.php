@@ -34,6 +34,9 @@
   <!-- Cargamos nuestros scripts -->
   <script src="views/js/scripts/funciones.js"></script>
 
+  <!-- Sweet Alert -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body>

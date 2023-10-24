@@ -9,7 +9,7 @@
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Profesores</a></li>
+            <li class="breadcrumb-item"><a href="#">Areas Academicas</a></li>
             <li class="breadcrumb-item active">Administracion</li>
           </ol>
         </div>
@@ -22,61 +22,38 @@
     <!-- Default box -->
     <div class="card">
       <div class="card-header">
-        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarUsuario">Añadir Profesor</button>
+        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarUsuario">Añadir Area Academica</button>
       </div>
       <div class="card-body">
         <table id="example1" class="table table-bordered table-striped">
-        <thead>
+          <thead>
             <tr>
-              <!-- <th style="width: 10px;">Nº</th> -->
+              <th style="width: 10px;">Nº</th>
               <th style="width: 10px;">Id</th>
-              <!-- <th>Foto</th> -->
+              <th>Foto</th>
               <th>Nombre</th>
               <th>Direccion</th>
               <th>Telefono</th>
               <th>Email</th>
               <th>Fecha Nacimiento</th>
-              <!-- <th>Ultimo acceso</th> -->
+              <th>Ultimo acceso</th>
               <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
-            <?php foreach ($profesores as $profesor) { ?>
-              <tr>
-                <!-- <td></td> -->
-                <td><?= $profesor["id_usuario"]; ?></td>
-                <!-- <td></td> -->
-                <td><?= $profesor["nombre"] . " " . $profesor["apellidos"]; ?></td>
-                <td><?= $profesor["direccion"]; ?></td>
-                <td><?= $profesor["telefono"]; ?></td>
-                <td><?= $profesor["email"]; ?></td>
-                <td><?= $profesor["fecha_nacimiento"]; ?></td>
-                <!-- <td></td> -->
-                <td>
-                  <div class="form-group d-flex">
-                    <button type="button" class="btn btn-warning mr-1">
-                      <i class="fas fa-user-edit"></i>
-                    </button>
-                    <button type="button" class="btn btn-danger">
-                      <i class="fas fa-trash-alt"></i>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            <?php } ?>
 
           </tbody>
           <tfoot>
             <tr>
-              <!-- <th style="width: 10px;">Nº</th> -->
+              <th style="width: 10px;">Nº</th>
               <th style="width: 10px;">Id</th>
-              <!-- <th>Foto</th> -->
+              <th>Foto</th>
               <th>Nombre</th>
               <th>Direccion</th>
               <th>Telefono</th>
               <th>Email</th>
               <th>Fecha Nacimiento</th>
-              <!-- <th>Ultimo acceso</th> -->
+              <th>Ultimo acceso</th>
               <th>Acciones</th>
             </tr>
           </tfoot>
@@ -93,4 +70,3 @@
   <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-</div>

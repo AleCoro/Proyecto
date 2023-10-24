@@ -448,14 +448,14 @@
           </div>
           <div class="modal-body">
             <div class="nav-item dropdown">
-              <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown">Seleccionar</a>
-              <div class="dropdown-menu rounded-0 m-0">
-                <?php foreach ($nombresRoles as $nombreRol) { ?>
-                  <form action="" method="post" name="miFormulario<?= $nombreRol["id_rol"]; ?>">
-                    <button onclick="document.getElementById('miFormulario<?= $nombreRol['id_rol']; ?>').submit()" class="dropdown-item"><?= $nombreRol["nombre_rol"]; ?></button>
-                    <input type="hidden" name="perfilSeleccionado" value="<?= $nombreRol["id_rol"]; ?>">
-                  </form>
-                <?php } ?>
+              <form action="" method="post" id="formularioRoles">
+                <select name="perfilSeleccionado" id="perfilSeleccionado" class="form-control" onchange="document.getElementById('formularioRoles').submit()">
+                  <option value="" selected>Selecciona</option>
+                  <?php foreach ($nombresRoles as $nombreRol) { ?>
+                    <option value="<?= $nombreRol['id_rol']; ?>"><?= $nombreRol["nombre_rol"]; ?></option>
+                  <?php } ?>
+                </select>
+              </form>
               </div>
             </div>
           </div>

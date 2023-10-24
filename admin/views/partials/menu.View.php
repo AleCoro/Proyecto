@@ -33,7 +33,7 @@
             <a href="profesores" class="nav-link"><i class="nav-icon fas fa-users"></i><p>Profesores</p></a>
           </li>
           <li class="nav-item">
-            <a href="areas_academicas" class="nav-link"><i class="nav-icon fas fa-graduation-cap"></i><p>Areas Academicas</p></a>
+            <a href="areasAcademicas" class="nav-link"><i class="nav-icon fas fa-graduation-cap"></i><p>Areas Academicas</p></a>
           </li>
           <li class="nav-item">
             <a href="asignaturas" class="nav-link"><i class="nav-icon fas fa-book"></i><p>Asignaturas</p></a>
