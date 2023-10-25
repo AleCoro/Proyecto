@@ -23,17 +23,27 @@ session_start();
   <!-- ========================= PLUGINS DE JS - JQUERY ========================= -->
   <!-- jQuery -->
   <script src="views/plugins/jquery/jquery.min.js"></script>
+
   <!-- Bootstrap 4 -->
   <script src="views/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
   <!-- AdminLTE App -->
   <script src="views/dist/js/adminlte.min.js"></script>
+
   <!-- AdminLTE for demo purposes -->
   <!-- <script src="views/dist/js/demo.js"></script> -->
+
   <!-- DataTables -->
   <script src="views/plugins/datatables/jquery.dataTables.min.js"></script>
   <script src="views/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
   <script src="views/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
   <script src="views/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+
+  <!-- Cargamos nuestros scripts -->
+  <script src="views/js/scripts/funciones.js"></script>
+
+  <!-- Sweet Alert -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
 </head>
