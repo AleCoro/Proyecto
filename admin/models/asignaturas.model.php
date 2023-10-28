@@ -91,7 +91,7 @@
             $valores = rtrim($valores, ",");
 
             //Hacemos la consulta
-            $sql = "UPDATE $tabla SET $valores WHERE id = :id";
+            $sql = "UPDATE $tabla SET $valores WHERE id_asignatura = :id";
 
             //La preparamos
             $sentencia=$conexion->prepare($sql);

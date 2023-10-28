@@ -54,3 +54,12 @@ function editarArea(area) {
     $('#edit_descripcion').val(area.descripcion_area);
 
 }
+
+function editarAsignatura(asignatura) {
+    $("#formularioEditarAsignaturaModal").modal("show");
+
+    $('#edit_id').val(asignatura.id_asignatura);
+    $('#edit_nombre').val(asignatura.nombre_asignatura);
+    $('#edit_descripcion').val(asignatura.descripcion_asignatura);
+
+}
