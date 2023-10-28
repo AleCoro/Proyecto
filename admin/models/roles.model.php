@@ -61,4 +61,26 @@
             return $registros;
 
         }
+
+        public static function mdlEliminar($tabla, $campo_id, $id){
+            
+            $conexion = Conexion::conectar();
+
+            //Hacemos la consulta
+            $sql = "DELETE FROM $tabla WHERE $campo_id = :id";
+            // var_dump($sql);
+
+            //La preparamos
+            $sentencia=$conexion->prepare($sql);
+            $sentencia->bindValue(":id",$id);
+
+            //Y la ejecutamos
+            if ($sentencia->execute()) {
+                return true;
+            }else {
+                return false;
+            }
+            $sentencia=null;
+
+        }
     }

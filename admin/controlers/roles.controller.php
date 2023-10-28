@@ -44,5 +44,40 @@ class RolesController{
 
         return $respuesta;
     }
+
+    public function ctrEliminar($tabla, $campo_id, $id, $redireccion)
+    {
+        if (isset($id)) {
+            $respuesta = AsignaturasModel::mdlEliminar($tabla, $campo_id, $id);
+
+            if ($respuesta) {
+                echo "<script>
+                        alert('¡Se ha eliminado correctamente!');
+                        window.location = '$redireccion';
+                    </script>";
+            } else {
+                echo "<script>
+                    alert('¡Error al eliminar!');
+                    window.location = '$redireccion';
+                </script>";
+            }
+        }
+
+
+        // Para eliminar datos sigue esta estructura
+        
+        // if (isset($_POST["eliminar"]) && !empty($_POST["eliminar"])) {
+
+        //     $tabla = "producto";
+        //     $redireccion = "inicio";
+
+        //     $id = $_POST["eliminar"];
+
+        //     $crudController = new AsignaturasController();
+        //     $crudController->ctrEliminar($tabla,$redireccion,$id);
+        //     // var_dump($inmueble);
+        //   }
+        
+    }
     
 }

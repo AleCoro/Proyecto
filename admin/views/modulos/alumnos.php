@@ -3,7 +3,7 @@
 $rolesController = new RolesController();
 $datosAlumnos = $rolesController->ctrMostrarRegistrosWhere("es_un", "rol", "3");
 
-$usuariosController = new ControladorUsuarios();
+$usuariosController = new UsuariosController();
 
 foreach ($datosAlumnos as $datoAlumnos) {
     $alumnos[] = $usuariosController->ctrMostrarUsuarios("id_usuario", $datoAlumnos["usuario"]);
@@ -25,6 +25,12 @@ if (isset($_POST["accion"]) && $_POST["accion"] == "EditarAlumno") {
     $id = $_POST["edit_id"];
 
     $usuariosController->ActualizarUsuario($tabla, $datos, $redireccion, $id);
+    
+}
+
+if (isset($_POST["accion"]) && $_POST["accion"] == "EliminarAlumno") {
+    $usuariosController->ctrBorrarUsuario($_POST["id_usuario"], "usuarios", "alumnos", null);
+    $rolesController->ctrEliminar("es_un", "usuario", $_POST["id_usuario"], "alumnos");
     
 }
 

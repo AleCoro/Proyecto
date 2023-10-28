@@ -1,5 +1,5 @@
 <?php
-class ControladorUsuarios
+class UsuariosController
 {
     // ====================================== INGRESO DE USUARIO ======================================
 
@@ -239,24 +239,26 @@ class ControladorUsuarios
 
     // ====================================== BORRAR USUARIO ======================================
 
-    public function ctrBorrarUsuario($id, $usuario, $foto)
+    public function ctrBorrarUsuario($id, $tabla, $redireccion, $foto)
     {
         if (isset($id)) {
             if ($foto != "") {
                 unlink($foto);
-                rmdir('views/img/usuarios/' . $usuario);
+                rmdir('views/img/usuarios/' . $id);
             }
 
-            $tabla = "usuarios";
-            $datos = $id;
+            $respuesta = ModeloUsuarios::mdlBorrarUsuario($tabla, $id);
 
-            $respuesta = ModeloUsuarios::mdlBorrarUsuario($tabla, $datos);
-
-            if ($respuesta == "SI") {
+            if ($respuesta) {
                 echo "<script>
-                        alert('¡El usuario ha sido borrado');
-                        window.location = 'usuarios';
+                        alert('¡Se ha eliminado correctamente!');
+                        window.location = '$redireccion';
                     </script>";
+            }else {
+                echo "<script>
+                    alert('¡Error al eliminar!');
+                    window.location = '$redireccion';
+                </script>";
             }
         }
     }
@@ -284,7 +286,7 @@ class ControladorUsuarios
     public function ActualizarUsuario($tabla, $datos, $redireccion, $id)
     {
         // Validamos los datos
-        $datos = ControladorUsuarios::ValidarDatos($datos, $redireccion);
+        $datos = UsuariosController::ValidarDatos($datos, $redireccion);
 
         $respuesta = ModeloUsuarios::mdlActualizarUsuario($tabla, $datos, $id);
 
@@ -295,7 +297,7 @@ class ControladorUsuarios
                         redirect: 'alumnos',
                         position: 'top-center',
                         icon: 'success',
-                        title: 'Alumno Actualizado',
+                        title: 'Usuario Actualizado',
                         showConfirmButton: false,
                         timer: 1400
                     });
@@ -309,26 +311,6 @@ class ControladorUsuarios
                 window.location = '$redireccion';
             </script>";
         }
-
-
-        // Para actualizar datos sigue esta estructura
-
-        // if (isset($_POST["nombre"]) && !empty($_POST["nombre"])) {
-        //     $datos = array(
-        //         "nombre" => $_POST["nombre"],
-        //         "descripcion" => $_POST["descripcion"],
-        //         "precio" => $_POST["precio"]
-        //     );
-
-        //     $tabla = "producto";
-        //     $redireccion = "inicio";
-
-        //     $id = $_POST["id_producto"];
-
-        //     $crudController = new CRUDController();
-        //     $crudController->Actualizar($tabla,$datos,$redireccion,$id);
-        //     // var_dump($inmueble);
-        //   }
 
     }
 

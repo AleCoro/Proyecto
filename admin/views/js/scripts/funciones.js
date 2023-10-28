@@ -31,3 +31,17 @@ function editarAlumno(alumno) {
     $('#edit_fecha_nacimiento').val(alumno.fecha_nacimiento);
 
 }
+
+function editarProfesor(profesor) {
+    $("#formularioEditarProfesorModal").modal("show");
+
+    $('#edit_id').val(profesor.id_usuario);
+    $('#edit_usuario').val(profesor.usuario);
+    $('#edit_nombre').val(profesor.nombre);
+    $('#edit_apellidos').val(profesor.apellidos);
+    $('#edit_direccion').val(profesor.direccion);
+    $('#edit_telefono').val(profesor.telefono);
+    $('#edit_email').val(profesor.email);
+    $('#edit_fecha_nacimiento').val(profesor.fecha_nacimiento);
+
+}

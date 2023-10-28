@@ -85,18 +85,23 @@
 
         // ====================================== BORRAR USUARIOS ======================================
 
-        static public function mdlBorrarUsuario($tabla, $datos){
+        static public function mdlBorrarUsuario($tabla, $id){
             $conexion = Conexion::conectar();
-            $sentencia = $conexion->prepare("DELETE FROM $tabla WHERE id = :id");
-            $sentencia -> bindParam(":id", $datos, PDO::PARAM_INT);
-            if ($sentencia -> execute()) {
-                return "SI";
-            }else {
-                "Error";
-            }
 
-            // $sentencia -> close();
-            $sentencia = null;
+            //Hacemos la consulta
+            $sql = "DELETE FROM $tabla WHERE id_usuario = :id";
+
+            //La preparamos
+            $sentencia=$conexion->prepare($sql);
+            $sentencia->bindValue(":id",$id);
+
+            //Y la ejecutamos
+            if ($sentencia->execute()) {
+                return true;
+            }else {
+                return false;
+            }
+            $sentencia=null;
         }
 
         public static function mdlActualizarUsuario($tabla,$datos,$id){

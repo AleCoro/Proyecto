@@ -57,9 +57,15 @@
                     <button type="button" class="btn btn-warning mr-1" onclick='editarAlumno(<?= json_encode($alumno); ?>)'>
                       <i class="fas fa-user-edit"></i>
                     </button>
-                    <button type="button" class="btn btn-danger">
-                      <i class="fas fa-trash-alt"></i>
-                    </button>
+                    <?php if ($_SESSION["id_usuario"] !== $alumno["id_usuario"]) { ?>
+                      <form action="" method="post">
+                        <input type="hidden" name="id_usuario" value="<?= $alumno["id_usuario"]; ?>">
+                        <input type="hidden" name="accion" value="EliminarAlumno">
+                        <button type="submit" class="btn btn-danger">
+                          <i class="fas fa-trash-alt"></i>
+                        </button>
+                      </form>
+                    <?php } ?>
                   </div>
                 </td>
               </tr>
