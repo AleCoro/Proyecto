@@ -1,30 +1,30 @@
 <?php
-    Class AsignaturasController{
-        // Cargar Asignaturas
-        public function ctrMostrarAsignaturas($tabla){
+    Class AreasAcademicasController{
+        // Cargar AreasAcademicas
+        public function ctrMostrarAreasAcademicas($tabla){
 
-            $respuesta=AsignaturasModel::mdlMostrarAsignaturas($tabla);
+            $respuesta=AreasAcademicasModel::mdlMostrarAreasAcademicas($tabla);
 
             return $respuesta;
         }
 
-        public function ctrMostrarAsignaturasWhere($tabla,$campo,$valor){
-            
-            $respuesta=AsignaturasModel::mdlMostrarAsignaturasWhere($tabla,$campo,$valor);
+        public function ctrMostrarAreasAcademicasWhere($tabla,$campo,$valor){
+            $tabla="";
+            $respuesta=AreasAcademicasModel::mdlMostrarAreasAcademicasWhere($tabla,$campo,$valor);
 
             return $respuesta;
         }
 
         public function ctrMostrarAsignaturaWhere($tabla,$campo,$valor){
             $tabla="";
-            $respuesta=AsignaturasModel::mdlMostrarAsignaturaWhere($tabla,$campo,$valor);
+            $respuesta=AreasAcademicasModel::mdlMostrarAsignaturaWhere($tabla,$campo,$valor);
 
             return $respuesta;
         }
 
         public function mdlMostrar_Ultima_Asignatura(){
             $tabla="";
-            $respuesta=AsignaturasModel::mdlMostrar_Ultima_Asignatura($tabla);
+            $respuesta=AreasAcademicasModel::mdlMostrar_Ultima_Asignatura($tabla);
 
             return $respuesta;
         }
@@ -32,10 +32,10 @@
         public function ctrInsertar($tabla,$datos,$redireccion)
         {
             // Validamos los datos
-            $datos = AsignaturasController::ctrValidarDatos($datos,$redireccion);
+            $datos = AreasAcademicasController::ctrValidarDatos($datos,$redireccion);
 
             //Insertamos los datos si todo ha salido bien
-            $respuesta=AsignaturasModel::mdlInsertar($tabla,$datos);
+            $respuesta=AreasAcademicasModel::mdlInsertar($tabla,$datos);
 
             if ($respuesta) {
                 echo "<script>
@@ -63,7 +63,7 @@
             //     $redireccion = "inicio";
 
 
-            //     $crudController = new AsignaturasController();
+            //     $crudController = new AreasAcademicasController();
             //     $crudController->ctrInsertar($tabla,$datos,$redireccion);
             //     // var_dump($inmueble);
             //   }
@@ -73,9 +73,9 @@
         public function ctrActualizar($tabla,$datos,$redireccion,$id)
         {
             // Validamos los datos
-            $datos = AsignaturasController::ctrValidarDatos($datos,$redireccion);
+            $datos = AreasAcademicasController::ctrValidarDatos($datos,$redireccion);
 
-            $respuesta=AsignaturasModel::mdlActualizar($tabla,$datos,$id);
+            $respuesta=AreasAcademicasModel::mdlActualizar($tabla,$datos,$id);
 
             if ($respuesta) {
                 echo "<script>
@@ -104,7 +104,7 @@
 
             //     $id = $_POST["id_producto"];
 
-            //     $crudController = new AsignaturasController();
+            //     $crudController = new AreasAcademicasController();
             //     $crudController->ctrActualizar($tabla,$datos,$redireccion,$id);
             //     // var_dump($inmueble);
             //   }
@@ -114,7 +114,7 @@
         public function ctrEliminar($tabla, $campo_id, $id, $redireccion)
         {
             if (isset($id)) {
-                $respuesta = AsignaturasModel::mdlEliminar($tabla, $campo_id, $id);
+                $respuesta = AreasAcademicasModel::mdlEliminar($tabla, $campo_id, $id);
 
                 if ($respuesta) {
                     echo "<script>
@@ -139,7 +139,7 @@
 
             //     $id = $_POST["eliminar"];
 
-            //     $crudController = new AsignaturasController();
+            //     $crudController = new AreasAcademicasController();
             //     $crudController->ctrEliminar($tabla,$redireccion,$id);
             //     // var_dump($inmueble);
             //   }
@@ -171,7 +171,7 @@
                         $directorio = $url.$carpeta;
                         $nombreFichero = $datos["nombre"];
 
-                        $ficheroValidado = AsignaturasModel::mdlValidarFichero($valor,$directorio,$nombreFichero);
+                        $ficheroValidado = AreasAcademicasModel::mdlValidarFichero($valor,$directorio,$nombreFichero);
                         if ($ficheroValidado=="") {
                             echo "<script>
                                 alert('¡El tipo de fichero no es el correcto!');

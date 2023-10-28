@@ -10,6 +10,9 @@
     require_once("controlers/asignaturas.controller.php");
     require_once("models/asignaturas.model.php");
 
+    require_once("controlers/areasAcademicas.controller.php");
+    require_once("models/areasAcademicas.model.php");
+
 
     $plantilla = new PlantillaController();
     $plantilla->ctrPlantilla();

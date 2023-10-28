@@ -45,3 +45,12 @@ function editarProfesor(profesor) {
     $('#edit_fecha_nacimiento').val(profesor.fecha_nacimiento);
 
 }
+
+function editarArea(area) {
+    $("#formularioEditarAreaModal").modal("show");
+
+    $('#edit_id').val(area.id_area);
+    $('#edit_nombre').val(area.nombre_area);
+    $('#edit_descripcion').val(area.descripcion_area);
+
+}
