@@ -25,6 +25,9 @@
   <link href="views/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
   <link href="views/lib/lightbox/css/lightbox.min.css" rel="stylesheet" />
 
+  <!-- Admin style -->
+  <link rel="stylesheet" href="admin/views/dist/css/adminlte.css">
+
   <!-- Customized Bootstrap Stylesheet -->
   <link href="views/css/style.css" rel="stylesheet" />
 
@@ -36,6 +39,14 @@
 
   <!-- Sweet Alert -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <!-- FULL CALENDAR -->
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="admin/views/plugins/fontawesome-free/css/all.min.css">
+  <!-- fullCalendar -->
+  <link rel="stylesheet" href="admin/views/plugins/fullcalendar/main.css">
 
 </head>
 

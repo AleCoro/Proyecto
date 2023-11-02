@@ -116,7 +116,7 @@
             <div class="card border-0 bg-light shadow-sm pb-2">
               <img class="card-img-top mb-2" src="views/img/class-1.jpg" alt="" />
               <div class="card-body text-center">
-                <h4 class="card-title">Drawing Class</h4>
+                <h4>Drawing Class</h4>
                 <p class="card-text">
                   Justo ea diam stet diam ipsum no sit, ipsum vero et et diam
                   ipsum duo et no et, ipsum ipsum erat duo amet clita duo
@@ -148,14 +148,14 @@
                   <div class="col-6 py-1">$290 / Month</div>
                 </div>
               </div>
-              <a href="" class="btn btn-primary px-4 mx-auto mb-4">Join Now</a>
+              <button href="" class="btn btn-primary px-4 mx-auto mb-4">Join Now</button>
             </div>
           </div>
           <div class="col-lg-4 mb-5">
             <div class="card border-0 bg-light shadow-sm pb-2">
               <img class="card-img-top mb-2" src="views/img/class-2.jpg" alt="" />
               <div class="card-body text-center">
-                <h4 class="card-title">Language Learning</h4>
+                <h4>Language Learning</h4>
                 <p class="card-text">
                   Justo ea diam stet diam ipsum no sit, ipsum vero et et diam
                   ipsum duo et no et, ipsum ipsum erat duo amet clita duo
@@ -187,14 +187,14 @@
                   <div class="col-6 py-1">$290 / Month</div>
                 </div>
               </div>
-              <a href="" class="btn btn-primary px-4 mx-auto mb-4">Join Now</a>
+              <button href="" class="btn btn-primary px-4 mx-auto mb-4">Join Now</button>
             </div>
           </div>
           <div class="col-lg-4 mb-5">
             <div class="card border-0 bg-light shadow-sm pb-2">
               <img class="card-img-top mb-2" src="views/img/class-3.jpg" alt="" />
               <div class="card-body text-center">
-                <h4 class="card-title">Basic Science</h4>
+                <h4>Basic Science</h4>
                 <p class="card-text">
                   Justo ea diam stet diam ipsum no sit, ipsum vero et et diam
                   ipsum duo et no et, ipsum ipsum erat duo amet clita duo
@@ -226,7 +226,7 @@
                   <div class="col-6 py-1">$290 / Month</div>
                 </div>
               </div>
-              <a href="" class="btn btn-primary px-4 mx-auto mb-4">Join Now</a>
+              <button href="" class="btn btn-primary px-4 mx-auto mb-4">Join Now</button>
             </div>
           </div>
         </div>
@@ -393,7 +393,7 @@
                   eirmod, duo et sed sit eirmod kasd clita tempor dolor stet
                   lorem. Tempor ipsum justo amet stet...
                 </p>
-                <a href="" class="btn btn-primary px-4 mx-auto my-2">Read More</a>
+                <button href="" class="btn btn-primary px-4 mx-auto my-2">Read More</button>
               </div>
             </div>
           </div>
@@ -412,7 +412,7 @@
                   eirmod, duo et sed sit eirmod kasd clita tempor dolor stet
                   lorem. Tempor ipsum justo amet stet...
                 </p>
-                <a href="" class="btn btn-primary px-4 mx-auto my-2">Read More</a>
+                <button href="" class="btn btn-primary px-4 mx-auto my-2">Read More</button>
               </div>
             </div>
           </div>
@@ -431,7 +431,7 @@
                   eirmod, duo et sed sit eirmod kasd clita tempor dolor stet
                   lorem. Tempor ipsum justo amet stet...
                 </p>
-                <a href="" class="btn btn-primary px-4 mx-auto my-2">Read More</a>
+                <button href="" class="btn btn-primary px-4 mx-auto my-2">Read More</button>
               </div>
             </div>
           </div>

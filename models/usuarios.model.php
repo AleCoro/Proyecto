@@ -5,20 +5,26 @@ class ModeloUsuarios
 {
     // ====================================== MOSTRAR USUARIOS ======================================
 
-    static public function mdlMostrarUsuarios($tabla, $campo, $valor)
+    static public function mdlMostrarUsuarios($tabla)
     {
-        if ($campo !== null && $valor !== null) {
-            $conexion = Conexion::conectar();
-            $sentencia = $conexion->prepare("SELECT * FROM $tabla WHERE $campo = :valor");
-            $sentencia->bindParam(":valor", $valor, PDO::PARAM_STR);
-            $sentencia->execute();
-            return $sentencia->fetch();
-        } else {
-            $conexion = Conexion::conectar();
-            $sentencia = $conexion->prepare("SELECT * FROM $tabla");
-            $sentencia->execute();
-            return $sentencia->fetchAll();
-        }
+        $conexion = Conexion::conectar();
+        $sentencia = $conexion->prepare("SELECT * FROM $tabla");
+        $sentencia->execute();
+        return $sentencia->fetchAll();
+
+        // $sentencia->close();
+        $sentencia = null;
+    }
+
+    // ====================================== MOSTRAR USUARIO WHERE ======================================
+
+    static public function mdlMostrarUsuarioWhere($tabla, $campo, $valor)
+    {
+        $conexion = Conexion::conectar();
+        $sentencia = $conexion->prepare("SELECT * FROM $tabla WHERE $campo = :valor");
+        $sentencia->bindParam(":valor", $valor, PDO::PARAM_STR);
+        $sentencia->execute();
+        return $sentencia->fetch();
 
         // $sentencia->close();
         $sentencia = null;

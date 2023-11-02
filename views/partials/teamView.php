@@ -3,7 +3,7 @@
       <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 400px">
         <h3 class="display-3 font-weight-bold text-white">Our Teachers</h3>
         <div class="d-inline-flex text-white">
-          <p class="m-0"><a class="text-white" href="">Home</a></p>
+          <p class="m-0"><a class="text-white" href="inicio">Home</a></p>
           <p class="m-0 px-2">/</p>
           <p class="m-0">Our Teachers</p>
         </div>
@@ -39,7 +39,7 @@
       <div class="row" style="margin-left: 8em; margin-right: 8em;">
         <?php foreach ($profesores as $profesor) { ?>
 
-          <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column mb-2" id="card_<?= $profesor["id_usuario"]?>">
+          <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column mb-2" id="card_<?= $profesor["id_usuario"] ?>">
             <div class="card bg-light d-flex flex-fill">
               <div class="card-header text-muted border-bottom-0">
                 <?= $profesor["usuario"]; ?>
@@ -61,12 +61,10 @@
               </div>
               <div class="card-footer">
                 <div class="text-right">
-                  <a href="#" class="btn btn-sm bg-teal">
-                    <i class="fas fa-comments"></i>
-                  </a>
-                  <a href="#" class="btn btn-sm btn-primary">
-                    <i class="fas fa-user"></i> Ver Perfil
-                  </a>
+                  <form action="profesor" method="post" class="m-auto">
+                    <input type="hidden" name="id_profesor" value="<?= $profesor["id_usuario"]; ?>">
+                    <button class="btn btn-sm btn-primary"><i class="fas fa-user"></i> Ver mas...</button>
+                  </form>
                 </div>
               </div>
             </div>

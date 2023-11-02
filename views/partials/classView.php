@@ -3,7 +3,7 @@
       <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 400px">
         <h3 class="display-3 font-weight-bold text-white">Nuestras Clases</h3>
         <div class="d-inline-flex text-white">
-          <p class="m-0"><a class="text-white" href="">Home</a></p>
+          <p class="m-0"><a class="text-white" href="inicio">Home</a></p>
           <p class="m-0 px-2">/</p>
           <p class="m-0">Nuestras Clases</p>
         </div>
@@ -26,7 +26,7 @@
               <div class="card border-0 bg-light shadow-sm pb-2">
                 <img class="card-img-top mb-2" src="views/img/class-<?= rand(1, 3); ?>.jpg" alt="" />
                 <div class="card-body text-center">
-                  <h4 class="card-title"><?= $areaAcademica["nombre_area"] ?></h4>
+                  <h4><?= $areaAcademica["nombre_area"] ?></h4>
                   <p class="card-text"><?= $areaAcademica["descripcion_area"] ?></p>
                 </div>
                 <form action="team" method="post" class="m-auto">
@@ -39,7 +39,7 @@
         </div>
       </div>
 
-      <!-- CAMBIAR RUTA -->
+      <!-- Paginacion -->
       <nav class="blog-pagination justify-content-center d-flex">
         <ul class="pagination">
           <li class="page-item h4">

@@ -3,10 +3,19 @@ class UsuariosController
 {
     // ====================================== MOSTRAR USUARIOS ======================================
 
-    public function ctrMostrarUsuarios($campo, $valor)
+    public function ctrMostrarUsuarios()
     {
         $tabla = "usuarios";
-        $respuesta = ModeloUsuarios::mdlMostrarUsuarios($tabla, $campo, $valor);
+        $respuesta = ModeloUsuarios::mdlMostrarUsuarios($tabla);
+        return $respuesta;
+    }
+
+    // ====================================== MOSTRAR USUARIO WHERE ======================================
+
+    public function ctrMostrarUsuarioWhere($campo, $valor)
+    {
+        $tabla = "usuarios";
+        $respuesta = ModeloUsuarios::mdlMostrarUsuarioWhere($tabla, $campo, $valor);
         return $respuesta;
     }
 
@@ -70,7 +79,7 @@ class UsuariosController
     }
 
     // ====================================== VALIDAR DATOS ======================================
-    
+
     public function ValidarDatos($datos, $redireccion)
     {
         // Validamos si en el array asociativo llega un fichero

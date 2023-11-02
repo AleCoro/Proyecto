@@ -18,6 +18,7 @@ if (isset($_SESSION["perfilSeleccionado"]) && $_SESSION["perfilSeleccionado"] ==
             $_GET["ruta"] == "class" ||
             $_GET["ruta"] == "team" ||
             $_GET["ruta"] == "gallery" ||
+            $_GET["ruta"] == "profesor" ||
             $_GET["ruta"] == "blog" ||
             $_GET["ruta"] == "single" ||
             $_GET["ruta"] == "contact" ||
