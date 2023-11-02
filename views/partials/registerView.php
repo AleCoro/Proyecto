@@ -14,7 +14,7 @@
     <!-- Contact Start -->
     <div class="container-fluid pt-5">
       <div class="container">
-        <form action="#" method="post">
+        <form action="" method="post">
           <h3 class="mt-6">Introduce tus datos</h3>
           <div class="form-row">
             <div class="form-group col-md-6">
@@ -62,7 +62,7 @@
             </div>
             <div class="form-group col-md-6">
               <label>Telefono</label>
-              <input type="text" class="form-control" name="telefono" placeholder="Telefono" value = "<?php if(isset($_POST["telefono"])){echo $_POST["telefono"];} ?>" required>
+              <input type="text" class="form-control" name="telefono" id="telefono" placeholder="Telefono" value = "<?php if(isset($_POST["telefono"])){echo $_POST["telefono"];} ?>" required>
             </div>
           </div>
           <!-- Contact End -->

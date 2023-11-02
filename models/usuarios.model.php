@@ -127,15 +127,25 @@ class ModeloUsuarios
     static public function mdlDatosProfesor($area)
     {
         $conexion = Conexion::conectar();
-        $sql = "SELECT *
-        FROM usuarios as usu
-        JOIN imparte as imp ON usu.id_usuario = imp.profesor
-        JOIN asignaturas as asi ON imp.asignatura = asi.id_asignatura
-        JOIN areas_academicas as are ON asi.area_academica = are.id_area
-        WHERE id_area LIKE '$area'
-        GROUP BY id_usuario";
+        if ($area) {
+            $sql = "SELECT *, GROUP_CONCAT(asi.nombre_asignatura) AS todasAsignaturas
+                    FROM usuarios as usu
+                    JOIN imparte as imp ON usu.id_usuario = imp.profesor
+                    JOIN asignaturas as asi ON imp.asignatura = asi.id_asignatura
+                    JOIN areas_academicas as are ON asi.area_academica = are.id_area
+                    WHERE id_area LIKE '$area'
+                    GROUP BY usu.id_usuario";
+        } else {
+            $sql = "SELECT *, GROUP_CONCAT(asi.nombre_asignatura) AS todasAsignaturas
+                    FROM usuarios as usu
+                    JOIN imparte as imp ON usu.id_usuario = imp.profesor
+                    JOIN asignaturas as asi ON imp.asignatura = asi.id_asignatura
+                    JOIN areas_academicas as are ON asi.area_academica = are.id_area
+                    GROUP BY usu.id_usuario";
+        }
 
-        $sentencia = $conexion->prepare("SELECT * FROM $sql");
+
+        $sentencia = $conexion->prepare($sql);
         $sentencia->execute();
         return $sentencia->fetchAll();
 

@@ -61,6 +61,7 @@ class LoginController
                         "usuario" => $_POST["Usuario"],
                         "password" => $_POST["password"],
                         "direccion" => $_POST["direccion"],
+                        "telefono" => $_POST["telefono"],
                         "email" => $_POST["Email"],
                         "fecha_nacimiento" => $_POST["fecha"]
                     );
@@ -106,7 +107,7 @@ class LoginController
 
                         // Insertamos los datos en la tabla imparte
                         $asignaturasController = new AsignaturasController();
-                        $asignaturasController->ctrInsertar("imparte", $datos_imparte);
+                        $asignaturasController->ctrInsertar("imparte", $datos_imparte,null);
                     }
 
                     if ($id_insertado) {

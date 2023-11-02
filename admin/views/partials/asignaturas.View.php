@@ -32,6 +32,7 @@
               <th style="width: 10px;">Id</th>
               <!-- <th>Foto</th> -->
               <th>Nombre</th>
+              <th>Area Academica</th>
               <th>Acciones</th>
             </tr>
           </thead>
@@ -40,6 +41,7 @@
               <tr>
                 <td><?= $dato["id_asignatura"]; ?></td>
                 <td><?= $dato["nombre_asignatura"]; ?></td>
+                <td><?= $dato["nombre_area"]; ?></td>
                 <td>
                   <div class="form-group d-flex">
                     <button type="button" class="btn btn-warning mr-1" onclick='editarAsignatura(<?= json_encode($dato); ?>)'>
@@ -64,6 +66,7 @@
               <th style="width: 10px;">Id</th>
               <!-- <th>Foto</th> -->
               <th>Nombre</th>
+              <th>Area Academica</th>
               <th>Acciones</th>
             </tr>
           </tfoot>

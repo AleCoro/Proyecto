@@ -23,7 +23,7 @@
 
         }
 
-        public static function mdlMostrarAsignaturaWhere($tabla,$campo,$valor){
+        public static function mdlMostrarAreaAcademicaWhere($tabla,$campo,$valor){
             
             $conexion = Conexion::conectar();
             $sentencia=$conexion->prepare("SELECT * FROM $tabla WHERE $campo LIKE '$valor'");
@@ -33,7 +33,7 @@
 
         }
 
-        public static function mdlMostrar_Ultima_Asignatura($tabla){
+        public static function mdlMostrar_Ultima_AreaAcademica($tabla){
             global $conexion;
             $id="id";
             $consulta="SELECT * FROM $tabla Order by $id desc LIMIT 1";

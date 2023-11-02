@@ -13,6 +13,9 @@
 
     require_once "controllers/areasAcademicas.controller.php";
     require_once "models/areasAcademicas.model.php";
+
+    require_once "controllers/usuarios.controller.php";
+    require_once "models/usuarios.model.php";
     
     $plantilla = new PlantillaController();
     $plantilla->ctrPlantilla();

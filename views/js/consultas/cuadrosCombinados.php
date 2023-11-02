@@ -4,7 +4,7 @@
     function MostrarRegistrosWhere($tabla,$campo,$valor){
             
         $conexion = Conexion::conectar();
-        $sentencia = $conexion->prepare("SELECT * FROM $tabla WHERE $campo = :valor");
+        $sentencia = $conexion->prepare("SELECT * FROM $tabla WHERE $campo like :valor");
         $sentencia->bindValue(":valor", $valor);
         $sentencia->execute();
         $registros=$sentencia->fetchAll();

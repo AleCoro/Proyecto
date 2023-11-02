@@ -17,7 +17,7 @@
     }
 
     $areasAcademicasController = new AreasAcademicasController();
-    $areasAcademicas = $areasAcademicasController->ctrMostrarRegistros("areas_academicas");
+    $areasAcademicas = $areasAcademicasController->ctrMostrarAreasAcademicas("areas_academicas");
 
     // var_dump($areasAcademicas);
 

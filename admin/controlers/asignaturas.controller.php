@@ -16,14 +16,12 @@
         }
 
         public function ctrMostrarAsignaturaWhere($tabla,$campo,$valor){
-            $tabla="";
             $respuesta=AsignaturasModel::mdlMostrarAsignaturaWhere($tabla,$campo,$valor);
 
             return $respuesta;
         }
 
-        public function mdlMostrar_Ultima_Asignatura(){
-            $tabla="";
+        public function mdlMostrar_Ultima_Asignatura($tabla){
             $respuesta=AsignaturasModel::mdlMostrar_Ultima_Asignatura($tabla);
 
             return $respuesta;

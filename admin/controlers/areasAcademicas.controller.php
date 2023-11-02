@@ -15,16 +15,15 @@
             return $respuesta;
         }
 
-        public function ctrMostrarAsignaturaWhere($tabla,$campo,$valor){
-            $tabla="";
-            $respuesta=AreasAcademicasModel::mdlMostrarAsignaturaWhere($tabla,$campo,$valor);
+        public function ctrMostrarAreaAcademicaWhere($tabla,$campo,$valor){
+            $respuesta=AreasAcademicasModel::mdlMostrarAreaAcademicaWhere($tabla,$campo,$valor);
 
             return $respuesta;
         }
 
-        public function mdlMostrar_Ultima_Asignatura(){
+        public function mdlMostrar_Ultima_AreaAcademica(){
             $tabla="";
-            $respuesta=AreasAcademicasModel::mdlMostrar_Ultima_Asignatura($tabla);
+            $respuesta=AreasAcademicasModel::mdlMostrar_Ultima_AreaAcademica($tabla);
 
             return $respuesta;
         }

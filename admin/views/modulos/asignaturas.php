@@ -1,8 +1,16 @@
 <?php
 
     $asignaturasController = new AsignaturasController();
+    $areasAcademicasController = new AreasAcademicasController();
 
     $datosAsignaturas = $asignaturasController->ctrMostrarAsignaturas("asignaturas");
+
+    // &$dato se utilizar para guardar los cambios en la variable $datosAsignaturas sin "&" no se veria reflejado en la variable principal
+    foreach ($datosAsignaturas as &$dato) {
+
+        $area = $areasAcademicasController->ctrMostrarAreaAcademicaWhere("areas_academicas", "id_area",$dato["area_academica"]);
+        $dato["nombre_area"] = $area["nombre_area"];
+    }
 
 
     if (isset($_POST["accion"]) && $_POST["accion"] == "InsertarAsignatura") {

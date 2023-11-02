@@ -1,9 +1,6 @@
     <!-- Header Start -->
     <div class="container-fluid bg-primary mb-5">
-      <div
-        class="d-flex flex-column align-items-center justify-content-center"
-        style="min-height: 400px"
-      >
+      <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 400px">
         <h3 class="display-3 font-weight-bold text-white">Our Teachers</h3>
         <div class="d-inline-flex text-white">
           <p class="m-0"><a class="text-white" href="">Home</a></p>
@@ -15,274 +12,69 @@
     <!-- Header End -->
 
     <!-- Team Start -->
-    <div class="container-fluid pt-5">
-      <div class="container">
-        <div class="text-center pb-2">
-          <p class="section-title px-5">
-            <span class="px-2">Our Teachers</span>
-          </p>
-          <h1 class="mb-4">Meet Our Teachers</h1>
+    <section class="content">
+      <!-- Default box -->
+      <div class="form-row ml-5 mr-5 justify-content-center mb-5">
+        <div class="form-group col-md-3">
+          <label>Selecciona el area academica</label>
+          <select name="areaAcademica" id="areaAcademica" class="form-control" onchange="cargarAsignaturas(true);">
+            <option value="" selected>Selecciona</option>
+            <?php foreach ($areasAcademicas as $areaAcademica) { ?>
+              <option value="<?= $areaAcademica["id_area"] ?>" <?= (isset($_POST["id_area"]) && $areaAcademica["id_area"] == $_POST["id_area"]) ? "selected" : ""; ?>><?= $areaAcademica["nombre_area"] ?></option>
+            <?php } ?>
+          </select>
         </div>
-        <div class="row">
-          <div class="col-md-6 col-lg-3 text-center team mb-5">
-            <div
-              class="position-relative overflow-hidden mb-4"
-              style="border-radius: 100%"
-            >
-              <img class="img-fluid w-100" src="views/img/team-1.jpg" alt="" />
-              <div
-                class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute"
-              >
-                <a
-                  class="btn btn-outline-light text-center mr-2 px-0"
-                  style="width: 38px; height: 38px"
-                  href="#"
-                  ><i class="fab fa-twitter"></i
-                ></a>
-                <a
-                  class="btn btn-outline-light text-center mr-2 px-0"
-                  style="width: 38px; height: 38px"
-                  href="#"
-                  ><i class="fab fa-facebook-f"></i
-                ></a>
-                <a
-                  class="btn btn-outline-light text-center px-0"
-                  style="width: 38px; height: 38px"
-                  href="#"
-                  ><i class="fab fa-linkedin-in"></i
-                ></a>
-              </div>
-            </div>
-            <h4>Julia Smith</h4>
-            <i>Music Teacher</i>
-          </div>
-          <div class="col-md-6 col-lg-3 text-center team mb-5">
-            <div
-              class="position-relative overflow-hidden mb-4"
-              style="border-radius: 100%"
-            >
-              <img class="img-fluid w-100" src="views/img/team-2.jpg" alt="" />
-              <div
-                class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute"
-              >
-                <a
-                  class="btn btn-outline-light text-center mr-2 px-0"
-                  style="width: 38px; height: 38px"
-                  href="#"
-                  ><i class="fab fa-twitter"></i
-                ></a>
-                <a
-                  class="btn btn-outline-light text-center mr-2 px-0"
-                  style="width: 38px; height: 38px"
-                  href="#"
-                  ><i class="fab fa-facebook-f"></i
-                ></a>
-                <a
-                  class="btn btn-outline-light text-center px-0"
-                  style="width: 38px; height: 38px"
-                  href="#"
-                  ><i class="fab fa-linkedin-in"></i
-                ></a>
-              </div>
-            </div>
-            <h4>Jhon Doe</h4>
-            <i>Language Teacher</i>
-          </div>
-          <div class="col-md-6 col-lg-3 text-center team mb-5">
-            <div
-              class="position-relative overflow-hidden mb-4"
-              style="border-radius: 100%"
-            >
-              <img class="img-fluid w-100" src="views/img/team-3.jpg" alt="" />
-              <div
-                class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute"
-              >
-                <a
-                  class="btn btn-outline-light text-center mr-2 px-0"
-                  style="width: 38px; height: 38px"
-                  href="#"
-                  ><i class="fab fa-twitter"></i
-                ></a>
-                <a
-                  class="btn btn-outline-light text-center mr-2 px-0"
-                  style="width: 38px; height: 38px"
-                  href="#"
-                  ><i class="fab fa-facebook-f"></i
-                ></a>
-                <a
-                  class="btn btn-outline-light text-center px-0"
-                  style="width: 38px; height: 38px"
-                  href="#"
-                  ><i class="fab fa-linkedin-in"></i
-                ></a>
-              </div>
-            </div>
-            <h4>Mollie Ross</h4>
-            <i>Dance Teacher</i>
-          </div>
-          <div class="col-md-6 col-lg-3 text-center team mb-5">
-            <div
-              class="position-relative overflow-hidden mb-4"
-              style="border-radius: 100%"
-            >
-              <img class="img-fluid w-100" src="views/img/team-4.jpg" alt="" />
-              <div
-                class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute"
-              >
-                <a
-                  class="btn btn-outline-light text-center mr-2 px-0"
-                  style="width: 38px; height: 38px"
-                  href="#"
-                  ><i class="fab fa-twitter"></i
-                ></a>
-                <a
-                  class="btn btn-outline-light text-center mr-2 px-0"
-                  style="width: 38px; height: 38px"
-                  href="#"
-                  ><i class="fab fa-facebook-f"></i
-                ></a>
-                <a
-                  class="btn btn-outline-light text-center px-0"
-                  style="width: 38px; height: 38px"
-                  href="#"
-                  ><i class="fab fa-linkedin-in"></i
-                ></a>
-              </div>
-            </div>
-            <h4>Donald John</h4>
-            <i>Art Teacher</i>
-          </div>
-          <div class="col-md-6 col-lg-3 text-center team mb-5">
-            <div
-              class="position-relative overflow-hidden mb-4"
-              style="border-radius: 100%"
-            >
-              <img class="img-fluid w-100" src="views/img/team-4.jpg" alt="" />
-              <div
-                class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute"
-              >
-                <a
-                  class="btn btn-outline-light text-center mr-2 px-0"
-                  style="width: 38px; height: 38px"
-                  href="#"
-                  ><i class="fab fa-twitter"></i
-                ></a>
-                <a
-                  class="btn btn-outline-light text-center mr-2 px-0"
-                  style="width: 38px; height: 38px"
-                  href="#"
-                  ><i class="fab fa-facebook-f"></i
-                ></a>
-                <a
-                  class="btn btn-outline-light text-center px-0"
-                  style="width: 38px; height: 38px"
-                  href="#"
-                  ><i class="fab fa-linkedin-in"></i
-                ></a>
-              </div>
-            </div>
-            <h4>Julia Smith</h4>
-            <i>Music Teacher</i>
-          </div>
-          <div class="col-md-6 col-lg-3 text-center team mb-5">
-            <div
-              class="position-relative overflow-hidden mb-4"
-              style="border-radius: 100%"
-            >
-              <img class="img-fluid w-100" src="views/img/team-3.jpg" alt="" />
-              <div
-                class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute"
-              >
-                <a
-                  class="btn btn-outline-light text-center mr-2 px-0"
-                  style="width: 38px; height: 38px"
-                  href="#"
-                  ><i class="fab fa-twitter"></i
-                ></a>
-                <a
-                  class="btn btn-outline-light text-center mr-2 px-0"
-                  style="width: 38px; height: 38px"
-                  href="#"
-                  ><i class="fab fa-facebook-f"></i
-                ></a>
-                <a
-                  class="btn btn-outline-light text-center px-0"
-                  style="width: 38px; height: 38px"
-                  href="#"
-                  ><i class="fab fa-linkedin-in"></i
-                ></a>
-              </div>
-            </div>
-            <h4>Jhon Doe</h4>
-            <i>Language Teacher</i>
-          </div>
-          <div class="col-md-6 col-lg-3 text-center team mb-5">
-            <div
-              class="position-relative overflow-hidden mb-4"
-              style="border-radius: 100%"
-            >
-              <img class="img-fluid w-100" src="views/img/team-2.jpg" alt="" />
-              <div
-                class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute"
-              >
-                <a
-                  class="btn btn-outline-light text-center mr-2 px-0"
-                  style="width: 38px; height: 38px"
-                  href="#"
-                  ><i class="fab fa-twitter"></i
-                ></a>
-                <a
-                  class="btn btn-outline-light text-center mr-2 px-0"
-                  style="width: 38px; height: 38px"
-                  href="#"
-                  ><i class="fab fa-facebook-f"></i
-                ></a>
-                <a
-                  class="btn btn-outline-light text-center px-0"
-                  style="width: 38px; height: 38px"
-                  href="#"
-                  ><i class="fab fa-linkedin-in"></i
-                ></a>
-              </div>
-            </div>
-            <h4>Mollie Ross</h4>
-            <i>Dance Teacher</i>
-          </div>
-          <div class="col-md-6 col-lg-3 text-center team mb-5">
-            <div
-              class="position-relative overflow-hidden mb-4"
-              style="border-radius: 100%"
-            >
-              <img class="img-fluid w-100" src="views/img/team-1.jpg" alt="" />
-              <div
-                class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute"
-              >
-                <a
-                  class="btn btn-outline-light text-center mr-2 px-0"
-                  style="width: 38px; height: 38px"
-                  href="#"
-                  ><i class="fab fa-twitter"></i
-                ></a>
-                <a
-                  class="btn btn-outline-light text-center mr-2 px-0"
-                  style="width: 38px; height: 38px"
-                  href="#"
-                  ><i class="fab fa-facebook-f"></i
-                ></a>
-                <a
-                  class="btn btn-outline-light text-center px-0"
-                  style="width: 38px; height: 38px"
-                  href="#"
-                  ><i class="fab fa-linkedin-in"></i
-                ></a>
-              </div>
-            </div>
-            <h4>Donald John</h4>
-            <i>Art Teacher</i>
-          </div>
+        <div class="form-group col-md-3">
+          <label>Selecciona la asignatura</label>
+          <select name="asignaturas" id="asignaturas" class="form-control" onchange="cargarAsignaturas(this.value);">
+            <option value="" selected>Selecciona</option>
+          </select>
+        </div>
+        <div class="form-group col-md-3">
+          <label>Precio/hora</label>
+          <input type="number" class="form-control" name="precio" placeholder="Precio" min="0">
         </div>
       </div>
-    </div>
+
+      <div class="row" style="margin-left: 8em; margin-right: 8em;">
+        <?php foreach ($profesores as $profesor) { ?>
+
+          <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column mb-2" id="card_<?= $profesor["id_usuario"]?>">
+            <div class="card bg-light d-flex flex-fill">
+              <div class="card-header text-muted border-bottom-0">
+                <?= $profesor["usuario"]; ?>
+              </div>
+              <div class="card-body pt-0">
+                <div class="row mt-3">
+                  <div class="col-8">
+                    <h2 class="lead"><b><?= $profesor["nombre"] . " " . $profesor["apellidos"]; ?></b></h2>
+                    <p class="text-muted text-sm"><b>Asignaturas: </b> <?= $profesor["todasAsignaturas"]; ?> </p>
+                    <ul class="ml-4 mb-0 fa-ul text-muted">
+                      <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Direccion: <?= $profesor["direccion"]; ?></li>
+                      <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Telefono: <?= $profesor["telefono"] ?></li>
+                    </ul>
+                  </div>
+                  <div class="col-4 text-center">
+                    <img src="views/img/team-<?= rand(1, 4); ?>.jpg" alt="user-avatar" class="img-circle img-fluid">
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <div class="text-right">
+                  <a href="#" class="btn btn-sm bg-teal">
+                    <i class="fas fa-comments"></i>
+                  </a>
+                  <a href="#" class="btn btn-sm btn-primary">
+                    <i class="fas fa-user"></i> Ver Perfil
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        <?php } ?>
+      </div>
+    </section>
     <!-- Team End -->
 
     <!-- Testimonial Start -->
@@ -302,12 +94,7 @@
               eirmod clita lorem. Dolor tempor ipsum clita
             </div>
             <div class="d-flex align-items-center">
-              <img
-                class="rounded-circle"
-                src="views/img/testimonial-1.jpg"
-                style="width: 70px; height: 70px"
-                alt="Image"
-              />
+              <img class="rounded-circle" src="views/img/testimonial-1.jpg" style="width: 70px; height: 70px" alt="Image" />
               <div class="pl-3">
                 <h5>Parent Name</h5>
                 <i>Profession</i>
@@ -321,12 +108,7 @@
               eirmod clita lorem. Dolor tempor ipsum clita
             </div>
             <div class="d-flex align-items-center">
-              <img
-                class="rounded-circle"
-                src="views/img/testimonial-2.jpg"
-                style="width: 70px; height: 70px"
-                alt="Image"
-              />
+              <img class="rounded-circle" src="views/img/testimonial-2.jpg" style="width: 70px; height: 70px" alt="Image" />
               <div class="pl-3">
                 <h5>Parent Name</h5>
                 <i>Profession</i>
@@ -340,12 +122,7 @@
               eirmod clita lorem. Dolor tempor ipsum clita
             </div>
             <div class="d-flex align-items-center">
-              <img
-                class="rounded-circle"
-                src="views/img/testimonial-3.jpg"
-                style="width: 70px; height: 70px"
-                alt="Image"
-              />
+              <img class="rounded-circle" src="views/img/testimonial-3.jpg" style="width: 70px; height: 70px" alt="Image" />
               <div class="pl-3">
                 <h5>Parent Name</h5>
                 <i>Profession</i>
@@ -359,12 +136,7 @@
               eirmod clita lorem. Dolor tempor ipsum clita
             </div>
             <div class="d-flex align-items-center">
-              <img
-                class="rounded-circle"
-                src="views/img/testimonial-4.jpg"
-                style="width: 70px; height: 70px"
-                alt="Image"
-              />
+              <img class="rounded-circle" src="views/img/testimonial-4.jpg" style="width: 70px; height: 70px" alt="Image" />
               <div class="pl-3">
                 <h5>Parent Name</h5>
                 <i>Profession</i>
@@ -375,3 +147,9 @@
       </div>
     </div>
     <!-- Testimonial End -->
+
+    <script>
+      window.addEventListener('load', function() {
+        cargarAsignaturas();
+      });
+    </script>
