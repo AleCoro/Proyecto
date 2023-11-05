@@ -24,6 +24,7 @@ if (isset($_SESSION["perfilSeleccionado"]) && $_SESSION["perfilSeleccionado"] ==
             $_GET["ruta"] == "contact" ||
             $_GET["ruta"] == "login" ||
             $_GET["ruta"] == "register" ||
+            ($_GET["ruta"] == "miPerfil" && $_SESSION["session_usuario"] != "")||
             ($_GET["ruta"] == "logout" && $_SESSION["session_usuario"] != "")
         ) {
 

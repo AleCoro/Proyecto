@@ -129,9 +129,9 @@ class UsuariosController
 
     // ====================================== CONSULTA MULTITABLA ======================================
 
-    public function ctrDatosProfesor($area)
+    public function ctrDatosProfesorPorArea($area)
     {
-        $respuesta = ModeloUsuarios::mdlDatosProfesor($area);
+        $respuesta = ModeloUsuarios::mdlDatosProfesorPorArea($area);
         return $respuesta;
     }
 }

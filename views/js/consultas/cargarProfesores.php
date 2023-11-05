@@ -1,7 +1,7 @@
 <?php 
     require_once("../../../models/conexion.php");
 
-    function DatosProfesor($area, $asignatura)
+    function DatosProfesorPorAreaYAsignatura($area, $asignatura)
     {
         $conexion = Conexion::conectar();
         if (isset($area) && isset($asignatura)) {
@@ -21,6 +21,6 @@
     }
 
     if (isset($_GET["area"]) && isset($_GET["asignatura"])) {
-        $porfesores = DatosProfesor($_GET["area"],$_GET["asignatura"]);
+        $porfesores = DatosProfesorPorAreaYAsignatura($_GET["area"],$_GET["asignatura"]);
         echo json_encode($porfesores);
     }

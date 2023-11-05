@@ -46,7 +46,6 @@
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/locales/es.js"></script>
 
-
 </head>
 
 <body>
@@ -81,6 +80,7 @@
                   <input type="hidden" name="perfilSeleccionado" value="<?= $nombreRol["id_rol"]; ?>">
                 </form>
               <?php } ?>
+              <a href="miPerfil" class="dropdown-item">Mi perfil</a>
               <a href="logout" class="dropdown-item">Logout</a>
             </div>
           </div>

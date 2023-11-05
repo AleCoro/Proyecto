@@ -130,7 +130,7 @@ class ModeloUsuarios
 
     // ====================================== CONSULTA MULTITABLA ======================================
 
-    static public function mdlDatosProfesor($area)
+    static public function mdlDatosProfesorPorArea($area)
     {
         $conexion = Conexion::conectar();
         if ($area) {
@@ -149,6 +149,50 @@ class ModeloUsuarios
                     JOIN areas_academicas as are ON asi.area_academica = are.id_area
                     GROUP BY usu.id_usuario";
         }
+
+
+        $sentencia = $conexion->prepare($sql);
+        $sentencia->execute();
+        return $sentencia->fetchAll(PDO::FETCH_ASSOC);
+
+        // $sentencia->close();
+        $sentencia = null;
+    }
+
+    // ====================================== CONSULTA DATOS PROFESOR ======================================
+
+    static public function mdlDatosProfesor($profesor)
+    {
+        $conexion = Conexion::conectar();
+        $sql = "SELECT *, GROUP_CONCAT(asi.nombre_asignatura) AS todasAsignaturas
+                FROM usuarios as usu
+                JOIN imparte as imp ON usu.id_usuario = imp.profesor
+                JOIN asignaturas as asi ON imp.asignatura = asi.id_asignatura
+                JOIN areas_academicas as are ON asi.area_academica = are.id_area
+                WHERE usu.id_usuario LIKE '$profesor'
+                GROUP BY usu.id_usuario";
+
+
+        $sentencia = $conexion->prepare($sql);
+        $sentencia->execute();
+        return $sentencia->fetchAll(PDO::FETCH_ASSOC);
+
+        // $sentencia->close();
+        $sentencia = null;
+    }
+
+    // ====================================== CONSULTA DATOS ALUMNO ======================================
+
+    static public function mdlDatosAlumno($alumno)
+    {
+        $conexion = Conexion::conectar();
+        $sql = "SELECT *, GROUP_CONCAT(asi.nombre_asignatura) AS todasAsignaturas
+        FROM usuarios as usu
+        JOIN reservas as res ON usu.id_usuario = res.alumno
+        JOIN asignaturas as asi ON res.asignatura = asi.id_asignatura
+        JOIN areas_academicas as are ON asi.area_academica = are.id_area
+        WHERE res.alumno LIKE '$alumno'
+        GROUP BY usu.id_usuario";
 
 
         $sentencia = $conexion->prepare($sql);

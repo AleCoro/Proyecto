@@ -11,10 +11,10 @@
 
   if (isset($_POST["id_area"]) && !empty($_POST["id_area"])) {
     //Profesores filtrados por area
-    $profesores = $usuariosController->ctrDatosProfesor($_POST["id_area"]);
+    $profesores = $usuariosController->ctrDatosProfesorPorArea($_POST["id_area"]);
   } else {
     //Todos los profesores
-    $profesores = $usuariosController->ctrDatosProfesor(null);
+    $profesores = $usuariosController->ctrDatosProfesorPorArea(null);
   }
 
 
