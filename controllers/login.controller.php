@@ -75,8 +75,6 @@ class LoginController
                         if ($_POST["precio"] <= 0) {
                             $respuesta =  '<br><div class="alert alert-danger">¡Debes poner el precio de tu hora!</div>';
                             return $respuesta;
-                        } else {
-                            $datos_usuario["sueldo_hora"] = $_POST["precio"];
                         }
                     }
 
@@ -100,9 +98,19 @@ class LoginController
 
                     if ($rol["id_rol"] == 2) {
                         // Construimos los datos para la tabla imparte
+                        $fecha = $_POST["fecha_imparte"];
+                        $hora = $_POST["hora_imparte"];
+                
+                        $fechaHora = $fecha . ' ' . $hora;
+                
+                        // Convierte la fecha y hora en un objeto DateTime
+                        $dateTime = new DateTime($fechaHora);
+
                         $datos_imparte = array(
                             "asignatura" => $_POST["asignaturas"],
                             "profesor" => $id_insertado,
+                            "precio" => $_POST["precio"],
+                            "fecha_imparte" => $dateTime->format('Y-m-d H:i:s')
                         );
 
                         // Insertamos los datos en la tabla imparte

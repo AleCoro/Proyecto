@@ -358,7 +358,7 @@
               </div>
               <!-- /.tab-pane -->
               <div class="tab-pane active" id="calendario">
-                <div id="calendario1"></div>
+                <div id="calendarioReserva"></div>
               </div>
               <!-- /.tab-pane -->
             </div>

@@ -40,17 +40,7 @@ class AsignaturasController
         //Insertamos los datos si todo ha salido bien
         $respuesta = AsignaturasModel::mdlInsertar($tabla, $datos);
 
-        if ($respuesta) {
-            echo "<script>
-                        alert('¡Se ha dado de alta correctamente!');
-                        window.location = '$redireccion';
-                    </script>";
-        } else {
-            echo "<script>
-                    alert('¡Error al dar de alta!');
-                    window.location = '$redireccion';
-                </script>";
-        }
+        return $respuesta;
 
 
         // Para insertar datos sigue esta estructura

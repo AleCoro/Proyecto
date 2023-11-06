@@ -106,7 +106,7 @@
                             <?php if ($_SESSION["perfilSeleccionado"] == 2) { ?>
                                 <!-- /.tab-pane -->
                                 <div class="tab-pane active" id="calendario">
-                                    <div id="calendario1"></div>
+                                    <div id="calendarioMiPerfil"></div>
                                 </div>
                                 <!-- /.tab-pane -->
                                 <div class="tab-pane" id="impartir">
@@ -362,62 +362,64 @@
                             </div>
                             <!-- /.tab-pane -->
                             <div class="tab-pane" id="settings">
-                                <form class="form-horizontal">
-                                    <div class="form-group row">
-                                        <label for="inputName" class="col-sm-2 col-form-label">Name</label>
-                                        <div class="col-sm-10">
-                                            <input type="email" class="form-control" id="inputName" placeholder="Name">
+                                <form action="" method="post">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label>Nombre</label>
+                                            <input type="text" class="form-control" name="nombre" placeholder="Nombre" value = "<?php if(isset($usuario["nombre"])){echo $usuario["nombre"];} ?>" required>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Apellidos</label>
+                                            <input type="text" class="form-control" name="apellidos" placeholder="Apellidos" value = "<?php if(isset($usuario["apellidos"])){echo $usuario["apellidos"];} ?>" required>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
-                                        <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
-                                        <div class="col-sm-10">
-                                            <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label>Usuario</label>
+                                            <input type="text" class="form-control" name="usuario" placeholder="Usuario" value = "<?php if(isset($usuario["usuario"])){echo $usuario["usuario"];} ?>" required>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Password</label>
+                                            <input type="password" class="form-control" name="password" placeholder="Password" value = "<?php if(isset($usuario["password"])){echo $usuario["password"];} ?>" required>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
-                                        <label for="inputName2" class="col-sm-2 col-form-label">Name</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="inputName2" placeholder="Name">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label>Direccion</label>
+                                            <input type="text" class="form-control" name="direccion" placeholder="Direccion" value = "<?php if(isset($usuario["direccion"])){echo $usuario["direccion"];} ?>" required>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Telefono</label>
+                                            <input type="text" class="form-control" name="telefono" id="telefono" placeholder="Telefono" value = "<?php if(isset($usuario["telefono"])){echo $usuario["telefono"];} ?>" required>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
-                                        <label for="inputExperience" class="col-sm-2 col-form-label">Experience</label>
-                                        <div class="col-sm-10">
-                                            <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label>Email</label>
+                                            <input type="email" class="form-control" name="email" placeholder="Email" value = "<?php if(isset($usuario["email"])){echo $usuario["email"];} ?>" required>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Fecha Nacimiento</label>
+                                            <input type="date" class="form-control" name="fecha" placeholder="Fecha Nacimiento" value = "<?php if(isset($usuario["fecha_nacimiento"])){echo $usuario["fecha_nacimiento"];} ?>" required >
                                         </div>
                                     </div>
-                                    <div class="form-group row">
-                                        <label for="inputSkills" class="col-sm-2 col-form-label">Skills</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <div class="offset-sm-2 col-sm-10">
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <div class="offset-sm-2 col-sm-10">
-                                            <button type="submit" class="btn btn-danger">Submit</button>
-                                        </div>
+                                    <div class=" d-flex justify-content-center ">
+                                        <input type="hidden" name="id_usuario" value="<?= $usuario["id_usuario"]; ?>">
+                                        <input type="hidden" name="accion" value="editarPerfil">
+                                        <button type="submit" class="btn btn-primary px-5">Editar</button>
                                     </div>
                                 </form>
                                 <?php if (count($usuarioRoles) < 2) { ?>
                                     <hr>
+                                    <br>
                                     <form action="" method="post">
                                         <h3 class="text-center">Roles en de la aplicación</h3>
                                         <?php if (!in_array(2, $usuarioRoles)) { ?>
-                                            <p>¿Quieres empezar a compartir tus conocimientos? </p><button class="btn btn-link" type="submit" name="addRol" value="2">Si</button>
+                                            <p>¿Quieres empezar a compartir tus conocimientos? </p><button class="btn btn-link" type="submit" name="addRol" value="2">Si, quiero ser profesor.</button>
                                         <?php } ?>
 
                                         <?php if (!in_array(3, $usuarioRoles)) { ?>
-                                            <p>¿Quieres empezar a aprender? </p><button class="btn btn-link" type="submit" name="addRol" value="3">Si</button>
+                                            <p>¿Quieres empezar a aprender? </p><button class="btn btn-link" type="submit" name="addRol" value="3">Si, quiero ser alumno.</button>
                                         <?php } ?>
 
                                     </form>
@@ -437,4 +439,35 @@
     </div><!-- /.container-fluid -->
 </section>
 
+<script>
+  cargarCalendarioMiPerfil(<?= $usuario["id_usuario"]; ?>);
+</script>
+
+<!-- Modal -->
+<div class="modal fade" id="modaleditarClase" tabindex="-1" role="dialog" aria-labelledby="nombreAsignatura" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="nombreAsignatura" name="nombreAsignatura">Título del Modal</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="" method="post">
+                <div class="modal-body" id="descripcion">
+                    <p>Contenido del modal. Puedes agregar texto, imágenes u otros elementos aquí.</p>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="accion" value="editarClase">
+                    <button type="submit" class="btn btn-warning">Editar</button>
+            </form>
+            <form action="" method="post">
+                <input type="hidden" name="accion" value="eliminarClase">
+                <button type="submit" class="btn btn-danger">Eliminar</button>
+            </form>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+        </div>
+    </div>
+</div>
 

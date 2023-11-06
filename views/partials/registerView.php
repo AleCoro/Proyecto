@@ -85,6 +85,14 @@
                   <option value="" selected>Selecciona</option>
                 </select>
               </div>
+              <div class="form-group col-md-3">
+                <label>Fecha</label>
+                <input type="date" class="form-control" name="fecha_imparte" id="fecha_imparte" min="<?= date('Y-m-d', strtotime('+1 day')); ?>" required>
+              </div>
+              <div class="form-group col-md-3">
+                <label>Hora</label>
+                <input type="time" class="form-control" name="hora_imparte" id="hora_imparte" min="06:00" max="21:00" required>
+              </div>
               <div class="form-group col-md-6">
                 <label>Precio/hora</label>
                 <input type="number" class="form-control" name="precio" placeholder="Precio" min="0">
