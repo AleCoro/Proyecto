@@ -104,6 +104,38 @@
         </script>";
     }
 
-    var_dump($_POST);
+    //Editamos nuestra clase
+    if (isset($_POST["accion"]) && $_POST["accion"] == "editarClase") {
+        $fecha = $_POST["edit_fecha"];
+        $hora = $_POST["edit_hora"];
+        $id_imparte = $_POST["edit_id"];
+
+        $fechaHora = $fecha . ' ' . $hora;
+
+        // Convierte la fecha y hora en un objeto DateTime
+        $dateTime = new DateTime($fechaHora);
+        
+        $datos = array(
+            "fecha_imparte" => $dateTime->format('Y-m-d H:i:s'),
+            "precio" => $_POST["edit_precio"]
+        );
+
+        $asignaturasController->ctrActualizar("imparte", $datos, null, "id_imparte", $id_imparte);
+        echo "<script>
+            async function showSuccessAlert() {
+                await Swal.fire({
+                    position: 'top-center',
+                    icon: 'success',
+                    title: 'Clase editada correctamente',
+                    showConfirmButton: false,
+                    timer: 1400
+                });
+                window.location.href = 'miPerfil';
+            }
+            showSuccessAlert();
+        </script>";
+    }
+
+    // var_dump($_POST);
 
   include("views/partials/miPerfilView.php");

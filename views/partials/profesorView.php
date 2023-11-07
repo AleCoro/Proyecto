@@ -400,7 +400,7 @@
     <input type="hidden" name="accion" value="reservar">
     <input type="hidden" id="id_alumno" name="id_alumno" value="<?php echo (isset($_SESSION["id_usuario"])) ? $_SESSION["id_usuario"] : "" ; ?>">
     <input type="hidden" id="id_profesor" name="id_profesor" value="<?= $profesor["id_usuario"]; ?>">
-    <input type="hidden" id="asignatura" name="asignatura" value="">
+    <input type="hidden" id="id_asignatura" name="id_asignatura" value="">
     <input type="hidden" id="fecha_clase" name="fecha_clase" value="">
     <input type="hidden" id="id_imparte" name="id_imparte" value="<?=$_POST["id_imparte"];?>">
   </form>

@@ -445,7 +445,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="modaleditarClase" tabindex="-1" role="dialog" aria-labelledby="nombreAsignatura" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="nombreAsignatura" name="nombreAsignatura">Título del Modal</h5>
@@ -457,6 +457,22 @@
                 <div class="modal-body" id="descripcion">
                     <p>Contenido del modal. Puedes agregar texto, imágenes u otros elementos aquí.</p>
                 </div>
+                <div class="form-row p-2">
+                    <div class="form-group col-md-6">
+                        <label>Fecha</label>
+                        <input type="date" class="form-control" name="edit_fecha" id="edit_fecha" min="<?= date('Y-m-d', strtotime('+1 day')); ?>" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Hora</label>
+                        <input type="time" class="form-control" name="edit_hora" id="edit_hora" min="06:00" max="21:00" required>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label>Precio/hora</label>
+                        <input type="number" class="form-control" name="edit_precio" id="edit_precio" placeholder="Precio" min="0" required>
+                    </div>
+                    <input type="hidden" name="edit_id" id="edit_id" value="">
+                </div>
+
                 <div class="modal-footer">
                     <input type="hidden" name="accion" value="editarClase">
                     <button type="submit" class="btn btn-warning">Editar</button>

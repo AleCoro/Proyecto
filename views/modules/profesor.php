@@ -47,10 +47,9 @@ if (isset($_POST["id_profesor"])) {
                     showSuccessAlert();
                 </script>";
             } else {
-                $asignatura = $asignaturasController->ctrMostrarAsignaturaWhere("asignaturas", "nombre_asignatura", $_POST["asignatura"]);
                 $datos["alumno"] = $_POST["id_alumno"];
                 $datos["profesor"] = $_POST["id_profesor"];
-                $datos["asignatura"] = $asignatura["id_asignatura"];
+                $datos["asignatura"] = $_POST["id_asignatura"];
 
                 // Elimina la información de la zona horaria
                 $fecha_clase_str = preg_replace('/\s\([^)]+\)/', '', $_POST["fecha_clase"]);

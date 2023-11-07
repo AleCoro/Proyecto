@@ -126,8 +126,6 @@ function cargarCalendario(usuario) {
         droppable: false, // Esto es para colocar eventos en el calendario.
 
         eventClick: function (info) {
-            fecha = new Date(info.event.start);
-            hoy = new Date();
 
             if (info.event.backgroundColor == "#ff0000") {
                 async function showSuccessAlert() {
@@ -140,7 +138,7 @@ function cargarCalendario(usuario) {
                     });
                 }
                 showSuccessAlert();
-            } else if (hoy > fecha) {
+            } else if (info.event.backgroundColor == "#A4A4A4") {
                 async function showSuccessAlert() {
                     await Swal.fire({
                         position: 'top-center',
@@ -160,7 +158,7 @@ function cargarCalendario(usuario) {
                 //Muestro la descripcion
                 $('#descripcion').text("¿Desea reservar esta hora para " + info.event.title + " a las " + hora + "?");
 
-                $('#asignatura').val(info.event.title);
+                $('#id_asignatura').val(info.event.extendedProps.id_asignatura);
                 $('#fecha_clase').val(info.event.start);
 
                 $('#modalReserva').modal('show');
@@ -190,8 +188,6 @@ function cargarCalendarioMiPerfil(usuario) {
         droppable: false, // Esto es para colocar eventos en el calendario.
 
         eventClick: function (info) {
-            fecha = new Date(info.event.start);
-            hoy = new Date();
 
             if (info.event.backgroundColor == "#ff0000") {
                 async function showSuccessAlert() {
@@ -204,7 +200,7 @@ function cargarCalendarioMiPerfil(usuario) {
                     });
                 }
                 showSuccessAlert();
-            } else if (hoy > fecha) {
+            } else if (info.event.backgroundColor == "#A4A4A4") {
                 async function showSuccessAlert() {
                     await Swal.fire({
                         position: 'top-center',
@@ -221,11 +217,14 @@ function cargarCalendarioMiPerfil(usuario) {
                 //Formateo la fecha para mostrarla en el modal
                 fecha = new Date(info.event.start);
                 hora = fecha.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+                fechaEdit = fecha.toISOString().split('T')[0];
                 //Muestro la descripcion
-                $('#descripcion').text("¿Desea editar esta clase " + info.event.title + " a las " + hora + "?");
+                $('#descripcion').text("¿Desea editar la clase de " + info.event.title + " a las " + hora + "?");
 
-                $('#asignatura').val(info.event.title);
-                $('#fecha_clase').val(info.event.start);
+                $('#edit_fecha').val(fechaEdit);
+                $('#edit_hora').val(hora);
+                $('#edit_precio').val(info.event.extendedProps.precio);
+                $('#edit_id').val(info.event.extendedProps.id_imparte);
 
                 $('#modaleditarClase').modal('show');
             }

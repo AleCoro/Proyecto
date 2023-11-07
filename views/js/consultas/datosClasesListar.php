@@ -3,7 +3,7 @@
 
     function mostrarClases($campo,$valor){
         $conexion = Conexion::conectar();
-        $sql = "SELECT asi.nombre_asignatura as title,  imp.fecha_imparte as 'start', DATE_ADD(imp.fecha_imparte, INTERVAL 1 HOUR) as 'end', disponibilidad
+        $sql = "SELECT asi.id_asignatura, imp.id_imparte, asi.nombre_asignatura as title,  imp.fecha_imparte as 'start', DATE_ADD(imp.fecha_imparte, INTERVAL 1 HOUR) as 'end', disponibilidad, precio
         FROM imparte as imp
         JOIN asignaturas as asi ON imp.asignatura = asi.id_asignatura
         WHERE $campo like :valor";
@@ -24,6 +24,14 @@
             }else {
                 $clase["backgroundColor"] = "#ff0000";
             }
+
+            $fecha = new DateTime($clase["start"]);
+            $hoy = new DateTime();
+
+            if ($fecha < $hoy) {
+                $clase["backgroundColor"] = "#A4A4A4";
+            }
         }
+        // var_dump($clases);
         echo json_encode($clases);
     }
