@@ -18,15 +18,18 @@ function getXMLHTTPRequest() {
 
 var xmlhttp = getXMLHTTPRequest();
 
-function cargarAsignaturas(profesor) {
+function cargarAsignaturas(id_asignatura) {
     var areaAcademica = document.getElementById("areaAcademica");
     var asignaturas = document.getElementById("asignaturas");
 
+    // Saco el valor de la asignatura y pongo a 0 el campo asignatura
     var area = areaAcademica.value;
     asignaturas.innerHTML = '';
 
+    // Si el area esta vacio lo inicio con el valor %
     if (area == "") { area = "%"; }
 
+    // Hago la consulta
     var url = "views/js/consultas/cuadrosCombinados.php?area=" + area;
     xmlhttp.open("GET", url);
     xmlhttp.onreadystatechange = function () {
@@ -34,11 +37,13 @@ function cargarAsignaturas(profesor) {
             if (xmlhttp.status === 200) {
                 var datos = JSON.parse(xmlhttp.responseText);
 
+                // Creo el primer option
                 var opcion = document.createElement("option");
-                opcion.value = "";
+                opcion.value = "SinAsignatura";
                 opcion.textContent = "Selecciona";
                 asignaturas.appendChild(opcion);
 
+                // Luego recorro el resultado de la consulta y lo transformo en options
                 datos.forEach(dato => {
                     var opcion = document.createElement("option");
                     opcion.value = dato.id_asignatura;
@@ -46,13 +51,13 @@ function cargarAsignaturas(profesor) {
                     asignaturas.appendChild(opcion);
                 });
 
-                if (profesor) {
-                    if (profesor !== true) {
-                        // alert(profesor);
-                        // var optionToSelect = asignaturas.querySelector('option[value=' + profesor + ']');
-                        // optionToSelect.selected = true;
+                if (id_asignatura) {
+                    if (id_asignatura !== 'SinAsignatura') {
+                        // Si existe id_asignatura lo selecciono
+                        var optionToSelect = asignaturas.querySelector('option[value="' + id_asignatura + '"]');
+                        optionToSelect.selected = true;
                     }
-                    cargarProfesores(profesor);
+                    cargarProfesores(id_asignatura);
                 }
             } else {
                 alert(xmlhttp.statusText);
@@ -62,15 +67,15 @@ function cargarAsignaturas(profesor) {
     xmlhttp.send(null);
 }
 
-function cargarProfesores(asignatura) {
+function cargarProfesores(id_asignatura) {
+    
     var areaAcademica = document.getElementById("areaAcademica");
-
     var area = areaAcademica.value;
 
     if (area == "") { area = "%"; }
-    if (asignatura == true) { asignatura = "%"; }
+    if (id_asignatura == 'SinAsignatura') { id_asignatura = "%"; }
 
-    var url = "views/js/consultas/cargarProfesores.php?area=" + area + "&asignatura=" + asignatura;
+    var url = "views/js/consultas/cargarProfesores.php?area=" + area + "&asignatura=" + id_asignatura;
     xmlhttp.open("GET", url);
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState === 4) {
@@ -87,6 +92,7 @@ function cargarProfesores(asignatura) {
 
                 profesores = JSON.parse(xmlhttp.responseText);
 
+                //Aqui muestro los necesarios
                 profesores.forEach(profesor => {
                     // alert(profesor.id_usuario);
                     card_profesor = document.getElementById("card_" + profesor.id_usuario);

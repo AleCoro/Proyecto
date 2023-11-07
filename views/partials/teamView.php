@@ -1,11 +1,11 @@
     <!-- Header Start -->
     <div class="container-fluid bg-primary mb-5">
       <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 400px">
-        <h3 class="display-3 font-weight-bold text-white">Our Teachers</h3>
+        <h3 class="display-3 font-weight-bold text-white">Nuestros Profesores</h3>
         <div class="d-inline-flex text-white">
           <p class="m-0"><a class="text-white" href="inicio">Home</a></p>
           <p class="m-0 px-2">/</p>
-          <p class="m-0">Our Teachers</p>
+          <p class="m-0">Nuestros Profesores</p>
         </div>
       </div>
     </div>
@@ -17,7 +17,7 @@
       <div class="form-row ml-5 mr-5 justify-content-center mb-5">
         <div class="form-group col-md-3">
           <label>Selecciona el area academica</label>
-          <select name="areaAcademica" id="areaAcademica" class="form-control" onchange="cargarAsignaturas(true);">
+          <select name="areaAcademica" id="areaAcademica" class="form-control" onchange="cargarAsignaturas('SinAsignatura');">
             <option value="" selected>Selecciona</option>
             <?php foreach ($areasAcademicas as $areaAcademica) { ?>
               <option value="<?= $areaAcademica["id_area"] ?>" <?= (isset($_POST["id_area"]) && $areaAcademica["id_area"] == $_POST["id_area"]) ? "selected" : ""; ?>><?= $areaAcademica["nombre_area"] ?></option>
