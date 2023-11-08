@@ -61,4 +61,17 @@
             return $registros;
 
         }
+
+        public static function mdlComprobarRolUsuario($tabla,$usuario,$rol){
+            
+            $conexion = Conexion::conectar();
+            $sentencia = $conexion->prepare("SELECT * FROM $tabla WHERE usuario LIKE :usuario AND rol LIKE :rol");
+            $sentencia->bindValue(":usuario", $usuario);
+            $sentencia->bindValue(":rol", $rol);
+            $sentencia->execute();
+            $registros=$sentencia->fetch();
+            var_dump($registros);
+            return $registros;
+
+        }
     }

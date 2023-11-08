@@ -147,8 +147,12 @@
     </div>
     <!-- Testimonial End -->
 
-    <script>
-      window.addEventListener('load', function() {
-        cargarAsignaturas();
-      });
-    </script>
+    <?php
+      if (isset($_POST["id_area"]) && !empty($_POST["id_area"])) {
+        //Profesores filtrados por area
+        echo "<script>cargarAsignaturas('SinAsignatura','".$_POST["id_area"]."')</script>";
+      } else {
+        //Todos los profesores
+        echo "<script>cargarAsignaturas('SinAsignatura','SinArea')</script>";
+      }
+    ?>

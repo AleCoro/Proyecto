@@ -4,14 +4,23 @@ if (isset($_POST["id_profesor"])) {
     $usuariosController = new UsuariosController();
     $asignaturasController = new AsignaturasController();
     $reservasController = new ReservasController();
+    $rolesController = new RolesController();
     $profesor = $usuariosController->ctrMostrarUsuarioWhere("id_usuario", $_POST["id_profesor"]);
 
+    if (isset($_SESSION["perfilSeleccionado"]) && $_SESSION["perfilSeleccionado"] == "addRolUser") {
+        $datos["usuario"] = $_SESSION["id_usuario"];
+        $datos["rol"] = "3";
+
+        $existe = $rolesController->ctrComprobarRolUsuario("es_un",$datos["usuario"],$datos["rol"]);
+
+        if ($existe == false) {
+            $_SESSION["perfilSeleccionado"] = "3";
+            $rolesController->ctrInsertar("es_un", $datos);
+        }
+    }
 
     if (isset($_POST["accion"]) && $_POST["accion"] == "reservar") {
-        // Si no has iniciado sesion te manda al login
-        if (count($_SESSION) == 0) {
-            echo "<script> window.location.href = 'login'; </script>";
-        }
+
         // Todo usuario que no sea alumno le saltara el error
         if (isset($_SESSION["perfilSeleccionado"]) && $_SESSION["perfilSeleccionado"] !== "3") {
             echo "<script>
@@ -71,4 +80,9 @@ if (isset($_POST["id_profesor"])) {
 } else {
     echo "<script> window.location.href = 'inicio'; </script>";
 }
+
+
+
+
+
 include("views/partials/profesorView.php");

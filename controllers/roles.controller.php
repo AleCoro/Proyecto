@@ -44,5 +44,12 @@ class RolesController{
 
         return $respuesta;
     }
+
+    public function ctrComprobarRolUsuario($tabla,$usuario,$rol){
+            
+        $respuesta=RolesModel::mdlComprobarRolUsuario($tabla,$usuario,$rol);
+
+        return $respuesta;
+    }
     
 }

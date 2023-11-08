@@ -18,19 +18,19 @@ function getXMLHTTPRequest() {
 
 var xmlhttp = getXMLHTTPRequest();
 
-function cargarAsignaturas(id_asignatura) {
+function cargarAsignaturas(id_asignatura, id_area) {
     var areaAcademica = document.getElementById("areaAcademica");
     var asignaturas = document.getElementById("asignaturas");
 
     // Saco el valor de la asignatura y pongo a 0 el campo asignatura
-    var area = areaAcademica.value;
+    var id_area = areaAcademica.value;
     asignaturas.innerHTML = '';
 
     // Si el area esta vacio lo inicio con el valor %
-    if (area == "") { area = "%"; }
+    if (id_area == "" || id_area == "sinArea") { id_area = "%"; }
 
     // Hago la consulta
-    var url = "views/js/consultas/cuadrosCombinados.php?area=" + area;
+    var url = "views/js/consultas/cuadrosCombinados.php?area=" + id_area;
     xmlhttp.open("GET", url);
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState === 4) {
@@ -160,6 +160,7 @@ function cargarCalendario(usuario) {
 
                 $('#id_asignatura').val(info.event.extendedProps.id_asignatura);
                 $('#fecha_clase').val(info.event.start);
+                $('#id_imparte').val(info.event.extendedProps.id_imparte);
 
                 $('#modalReserva').modal('show');
             }

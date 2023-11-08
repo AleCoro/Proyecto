@@ -35,11 +35,6 @@
     if (isset($_POST["perfilSeleccionado"])) {
       $_SESSION["perfilSeleccionado"] = $_POST["perfilSeleccionado"];
     }
-    
-    // Comprueba si solo tiene un rol
-    if (count($nombresRoles)==1) {
-      $_SESSION["perfilSeleccionado"] = $nombresRoles[0]["id_rol"];
-    }
 
   }
   

@@ -402,6 +402,21 @@
     <input type="hidden" id="id_profesor" name="id_profesor" value="<?= $profesor["id_usuario"]; ?>">
     <input type="hidden" id="id_asignatura" name="id_asignatura" value="">
     <input type="hidden" id="fecha_clase" name="fecha_clase" value="">
-    <input type="hidden" id="id_imparte" name="id_imparte" value="<?=$_POST["id_imparte"];?>">
+    <input type="hidden" id="id_imparte" name="id_imparte" value="">
   </form>
 </div>
+
+<!-- Formulario -->
+<form action="login" id="formReserva" method="post" class="d-none">
+  <input type="hidden" name="accion" value="reserva">
+  <input type="hidden" name="profesor" value="<?=$_POST["id_profesor"];?>">
+</form>
+
+<?php 
+  if (isset($_POST["accion"]) && $_POST["accion"] == "reservar") {
+    // Si no has iniciado sesion te manda al login
+    if (count($_SESSION) == 0) {
+      echo "<script> document.getElementById('formReserva').submit(); </script>";
+    }
+  }
+?>

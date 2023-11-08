@@ -20,7 +20,16 @@ class LoginController
                     if ($contraseña == $comprobar["password"]) {
                         $_SESSION["id_usuario"] = $id_usuario;
                         $_SESSION["session_usuario"] = $usuario;
-                        $respuesta =  '<script>window.location="inicio"</script>';
+
+                        if (isset($_POST["accion"]) && $_POST["accion"] == "reserva") {
+                            $_SESSION["perfilSeleccionado"] = "addRolUser";
+                            $respuesta =  'profesor';
+                        }else{
+                            $respuesta =  'inicio';
+                        }
+
+
+                        // $respuesta =  '<script>window.location="inicio"</script>';
                     } else {
                         $respuesta =  '<br><div class="alert alert-danger">Error al introducir la contraseña</div>';
                     }

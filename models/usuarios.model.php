@@ -134,7 +134,7 @@ class ModeloUsuarios
     {
         $conexion = Conexion::conectar();
         if ($area) {
-            $sql = "SELECT *, GROUP_CONCAT(asi.nombre_asignatura) AS todasAsignaturas
+            $sql = "SELECT *, GROUP_CONCAT(DISTINCT asi.nombre_asignatura) AS todasAsignaturas
                     FROM usuarios as usu
                     JOIN imparte as imp ON usu.id_usuario = imp.profesor
                     JOIN asignaturas as asi ON imp.asignatura = asi.id_asignatura
@@ -142,7 +142,7 @@ class ModeloUsuarios
                     WHERE id_area LIKE '$area'
                     GROUP BY usu.id_usuario";
         } else {
-            $sql = "SELECT *, GROUP_CONCAT(asi.nombre_asignatura) AS todasAsignaturas
+            $sql = "SELECT *, GROUP_CONCAT(DISTINCT asi.nombre_asignatura) AS todasAsignaturas
                     FROM usuarios as usu
                     JOIN imparte as imp ON usu.id_usuario = imp.profesor
                     JOIN asignaturas as asi ON imp.asignatura = asi.id_asignatura

@@ -17,6 +17,11 @@
         <div class="row">
           <div class="col-lg-6 w-50 m-auto">
             <form action="" method="post">
+              <input type="hidden" name="profesor" value="<?php echo (isset($_POST["profesor"])) ? $_POST["profesor"] : "" ;?>">
+              <?php if (isset($_POST["accion"])) { ?>
+                <input type="hidden" name="accion" value="<?= $_POST["accion"];?>">
+                <input type="hidden" name="id_profesor" value="<?= $_POST["profesor"]; ?>">
+              <?php } ?>
               <div class="form-group">
                 <label for="usuario">Usuario</label>
                 <input type="text" class="form-control" name="usuario" id="usuario" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Introduce tu usuario'" placeholder="Usuario">
@@ -54,3 +59,19 @@
       </div>
     </div>
     <!-- Login End -->
+    <form action="profesor" id="continuarReserva" method="post">
+      <input type="hidden" name="id_profesor" value="<?php echo (isset($_POST["profesor"])) ? $_POST["profesor"] : "" ;?>">
+    </form>
+
+    <?php 
+    if (isset($respuesta) && $respuesta=="profesor") {
+      echo "<script> document.getElementById('continuarReserva').submit(); </script>";
+    }
+    if (isset($respuesta) && $respuesta=="inicio") {
+      echo '<script>window.location="inicio"</script>';
+    }
+    
+    
+    
+    
+    ?>
