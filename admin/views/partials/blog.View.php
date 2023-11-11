@@ -25,7 +25,7 @@
                 <button class="btn btn-primary" data-toggle="modal" data-target="#formularioCrearPostModal">Añadir Post</button>
             </div>
             <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
+                <table id="example2" class="table table-bordered table-striped">
                     <thead>
                         <tr>
                             <!-- <th style="width: 10px;">Nº</th> -->
@@ -58,6 +58,7 @@
                                         </button>
                                         <form action="" method="post">
                                             <input type="hidden" name="id_post" value="<?= $post["id_post"]; ?>">
+                                            <input type="hidden" name="img" value="<?= $post["imagen"]; ?>">
                                             <input type="hidden" name="accion" value="EliminarPost">
                                             <button type="submit" class="btn btn-danger">
                                                 <i class="fas fa-trash-alt"></i>
@@ -101,7 +102,6 @@
 <div class="modal fade" id="formularioCrearPostModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalFormTitle" aria-hidden="true">
     <form method="POST" action="blog" id="formularioCrearPost" enctype="multipart/form-data">
         <input type="hidden" name="accion" value="CrearPost">
-        <input type="hidden" name="edit_id" id="edit_id" value="">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -122,14 +122,14 @@
                         </div>
                         <div class="form-group col-md-12">
                             <label for="inputState">Contenido:</label>
-                            <textarea id="editor" maxlength="500" name="add_contenido"></textarea>
+                            <textarea id="editor1" maxlength="500" name="add_contenido"></textarea>
                         </div>
                     </div>
                     <div class="form-row d-flex align-items-center">
                         <div class="form-group col-md-6">
                             <label for="exampleInputFile">Subir Portada</label>
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="add_portada" name="add_portada" lang="es">
+                                <input type="file" class="custom-file-input" id="add_portada" name="add_portada" required onchange="previsualizarIMG(this, 'previsualizarImg')" lang="es">
                                 <label class="custom-file-label" for="customFile">Subir imagen</label>
                             </div>
                         </div>
@@ -149,9 +149,10 @@
 
 <!-- Modal Editar Post -->
 <div class="modal fade" id="formularioEditarPostModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalFormTitle" aria-hidden="true">
-    <form method="POST" action="posts" id="formularioEditarPost">
+    <form method="POST" action="blog" id="formularioEditarPost" enctype="multipart/form-data">
         <input type="hidden" name="accion" value="EditarPost">
-        <input type="hidden" name="edit_id" id="edit_id" value="">
+        <input type="hidden" name="edit_id" id="edit_id" >
+        <input type="hidden" name="img_old" id="img_old" >
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -161,36 +162,32 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <!-- <div class="form-row">
+                <div class="form-row">
                         <div class="form-group col-md-3">
-                            <label for="inputState">Post:</label>
-                            <input type="text" class="form-control" name="edit_post" id="edit_post" required>
+                            <label for="inputState">Titulo:</label>
+                            <input type="text" class="form-control" name="edit_titulo" id="edit_titulo" required>
                         </div>
-                        <div class="form-group col-md-3">
-                            <label for="inputState">Nombre:</label>
-                            <input type="text" class="form-control" name="edit_nombre" id="edit_nombre" required>
+                        <div class="form-group col-md-9">
+                            <label for="inputState">Descripcion:</label>
+                            <input type="text" class="form-control" name="edit_descripcion" id="edit_descripcion" required>
                         </div>
-                        <div class="form-group col-md-3">
-                            <label for="inputState">Apellidos:</label>
-                            <input type="text" class="form-control" name="edit_apellidos" id="edit_apellidos" required>
+                        <div class="form-group col-md-12">
+                            <label for="inputState">Contenido:</label>
+                            <textarea id="editor2" maxlength="500" name="edit_contenido"></textarea>
                         </div>
-                        <div class="form-group col-md-3">
-                            <label for="inputState">Telefono:</label>
-                            <input type="text" class="form-control" name="edit_telefono" id="edit_telefono" required>
+                    </div>
+                    <div class="form-row d-flex align-items-center">
+                        <div class="form-group col-md-6">
+                            <label for="exampleInputFile">Subir Portada</label>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="edit_portada" name="edit_portada" onchange="previsualizarIMG(this, 'edit_previsualizarImg')" lang="es">
+                                <label class="custom-file-label" for="customFile">Subir imagen</label>
+                            </div>
                         </div>
-                        <div class="form-group col-md-4">
-                            <label for="inputState">Direccion:</label>
-                            <input type="text" class="form-control" name="edit_direccion" id="edit_direccion" required>
+                        <div class="form-group col-md-6 align-content-center">
+                            <img id="edit_previsualizarImg" src="#" alt="Vista previa de la imagen" style="display: none;" class="w-100 h-100 m-auto">
                         </div>
-                        <div class="form-group col-md-4">
-                            <label for="inputState">Correo:</label>
-                            <input type="email" class="form-control" name="edit_email" id="edit_email" required>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="inputState">Fecha Nacimiento:</label>
-                            <input type="date" class="form-control" name="edit_fecha_nacimiento" id="edit_fecha_nacimiento" required>
-                        </div>
-                    </div> -->
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="reset" class="btn btn-danger btn-pill" data-dismiss="modal">Cerrar</button>
@@ -219,24 +216,4 @@
 
 <script>
     CargarEditor();
-
-    document.getElementById('add_portada').addEventListener('change', function() {
-        var file = this.files[0];
-        if (file) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                document.getElementById('previsualizarImg').src = e.target.result;
-                document.getElementById('previsualizarImg').style.display = 'block';
-            }
-            reader.readAsDataURL(file);
-        }
-    });
-
-    function mostrarIMG(img) {
-
-        var imagenSrc = $(img).attr("src");
-        $("#imagenGrande").attr("src", imagenSrc);
-        $('#modalImagen').modal('show'); // Muestra el modal con la imagen grande
-
-    }
 </script>

@@ -65,54 +65,76 @@ function editarAsignatura(asignatura) {
 }
 
 function editarPost(post) {
-    $("#formularioEditarPostModal").modal("show");
 
-    // $('#edit_id').val(alumno.id_usuario);
-    // $('#edit_usuario').val(alumno.usuario);
-    // $('#edit_nombre').val(alumno.nombre);
-    // $('#edit_apellidos').val(alumno.apellidos);
-    // $('#edit_direccion').val(alumno.direccion);
-    // $('#edit_telefono').val(alumno.telefono);
-    // $('#edit_email').val(alumno.email);
-    // $('#edit_fecha_nacimiento').val(alumno.fecha_nacimiento);
+    $('#edit_id').val(post.id_post);
+    $('#edit_titulo').val(post.titulo);
+    $('#edit_descripcion').val(post.descripcion);
+    // document.getElementById('editor2').setData(post.contenido);
+
+    editorElement = document.getElementById('editor2');
+    if (editorElement && editorElement.editor) {
+        // Si el editor ya existe, agrega el contenido adicional
+        editorElement.editor.setData(post.contenido);
+    } else {
+        // Si no existe, crea uno nuevo y establece el contenido
+        ClassicEditor
+            .create(editorElement)
+            .then(editor => {
+                editor.setData(post.contenido);
+                editorElement.editor = editor; // Almacena la instancia del editor para usos posteriores
+            })
+            .catch(error => {
+                console.error(error);
+                // En caso de error, establecer el contenido en el textarea directamente
+                editorElement.value = post.contenido;
+            });
+    }
+
+
+    document.getElementById('edit_previsualizarImg').src = post.imagen;
+    document.getElementById('edit_previsualizarImg').style.display = 'block';
+
+    $("#formularioEditarPostModal").modal("show");
 
 }
 
 function CargarEditor() {
-    // ClassicEditor.create(document.querySelector('#editor'))
-    // .then(editor => {
-    //     const maxLength = 500; // Establece el límite de caracteres
-
-    //     editor.model.document.on('change:data', () => {
-    //         const texto = editor.getData().replace(/<[^>]*>/g, ''); // Elimina etiquetas HTML para contar solo el texto
-    //         const caracteresActuales = texto.length;
-
-    //         if (caracteresActuales > maxLength) {
-    //             const textoRecortado = texto.substring(0, maxLength);
-    //             editor.setData(textoRecortado);
-    //         }
-    //     });
-    // })
-    // .catch(error => {
-    //     console.error(error);
-    // });
-
     ClassicEditor
-    .create(document.querySelector('#editor'))
-    .then(editor => {
-        const maxLength = 500; // Establece el límite de caracteres
+        .create(document.querySelector('#editor1'))
+        .then(editor => {
+            const maxLength = 500; // Establece el límite de caracteres
 
-        editor.model.document.on('change:data', () => {
-            const texto = editor.getData().replace(/<[^>]*>/g, ''); // Elimina etiquetas HTML para contar solo el texto
-            const caracteresActuales = texto.length;
+            editor.model.document.on('change:data', () => {
+                const texto = editor.getData().replace(/<[^>]*>/g, ''); // Elimina etiquetas HTML para contar solo el texto
+                const caracteresActuales = texto.length;
 
-            if (caracteresActuales > maxLength) {
-                const textoRecortado = texto.substring(0, maxLength);
-                editor.setData(textoRecortado);
-            }
+                if (caracteresActuales > maxLength) {
+                    const textoRecortado = texto.substring(0, maxLength);
+                    editor.setData(textoRecortado);
+                }
+            });
+        })
+        .catch(error => {
+            console.error(error);
         });
-    })
-    .catch(error => {
-        console.error(error);
-    });
+}
+
+function previsualizarIMG(img, campo) {
+    var file = img.files[0];
+    if (file) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            document.getElementById(campo).src = e.target.result;
+            document.getElementById(campo).style.display = 'block';
+        }
+        reader.readAsDataURL(file);
+    }
+}
+
+function mostrarIMG(img) {
+
+    var imagenSrc = $(img).attr("src");
+    $("#imagenGrande").attr("src", imagenSrc);
+    $('#modalImagen').modal('show'); // Muestra el modal con la imagen grande
+
 }
