@@ -63,3 +63,56 @@ function editarAsignatura(asignatura) {
     $('#edit_descripcion').val(asignatura.descripcion_asignatura);
 
 }
+
+function editarPost(post) {
+    $("#formularioEditarPostModal").modal("show");
+
+    // $('#edit_id').val(alumno.id_usuario);
+    // $('#edit_usuario').val(alumno.usuario);
+    // $('#edit_nombre').val(alumno.nombre);
+    // $('#edit_apellidos').val(alumno.apellidos);
+    // $('#edit_direccion').val(alumno.direccion);
+    // $('#edit_telefono').val(alumno.telefono);
+    // $('#edit_email').val(alumno.email);
+    // $('#edit_fecha_nacimiento').val(alumno.fecha_nacimiento);
+
+}
+
+function CargarEditor() {
+    // ClassicEditor.create(document.querySelector('#editor'))
+    // .then(editor => {
+    //     const maxLength = 500; // Establece el límite de caracteres
+
+    //     editor.model.document.on('change:data', () => {
+    //         const texto = editor.getData().replace(/<[^>]*>/g, ''); // Elimina etiquetas HTML para contar solo el texto
+    //         const caracteresActuales = texto.length;
+
+    //         if (caracteresActuales > maxLength) {
+    //             const textoRecortado = texto.substring(0, maxLength);
+    //             editor.setData(textoRecortado);
+    //         }
+    //     });
+    // })
+    // .catch(error => {
+    //     console.error(error);
+    // });
+
+    ClassicEditor
+    .create(document.querySelector('#editor'))
+    .then(editor => {
+        const maxLength = 500; // Establece el límite de caracteres
+
+        editor.model.document.on('change:data', () => {
+            const texto = editor.getData().replace(/<[^>]*>/g, ''); // Elimina etiquetas HTML para contar solo el texto
+            const caracteresActuales = texto.length;
+
+            if (caracteresActuales > maxLength) {
+                const textoRecortado = texto.substring(0, maxLength);
+                editor.setData(textoRecortado);
+            }
+        });
+    })
+    .catch(error => {
+        console.error(error);
+    });
+}

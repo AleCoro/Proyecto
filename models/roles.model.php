@@ -70,7 +70,6 @@
             $sentencia->bindValue(":rol", $rol);
             $sentencia->execute();
             $registros=$sentencia->fetch();
-            var_dump($registros);
             return $registros;
 
         }

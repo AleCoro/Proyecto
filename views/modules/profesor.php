@@ -12,9 +12,9 @@ if (isset($_POST["id_profesor"])) {
         $datos["rol"] = "3";
 
         $existe = $rolesController->ctrComprobarRolUsuario("es_un",$datos["usuario"],$datos["rol"]);
+        $_SESSION["perfilSeleccionado"] = "3";
 
         if ($existe == false) {
-            $_SESSION["perfilSeleccionado"] = "3";
             $rolesController->ctrInsertar("es_un", $datos);
         }
     }

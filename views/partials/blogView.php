@@ -1,14 +1,11 @@
     <!-- Header Start -->
     <div class="container-fluid bg-primary mb-5">
-      <div
-        class="d-flex flex-column align-items-center justify-content-center"
-        style="min-height: 400px"
-      >
-        <h3 class="display-3 font-weight-bold text-white">Our Blog</h3>
+      <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 400px">
+        <h3 class="display-3 font-weight-bold text-white">Nuestro Blog</h3>
         <div class="d-inline-flex text-white">
           <p class="m-0"><a class="text-white" href="inicio">Home</a></p>
           <p class="m-0 px-2">/</p>
-          <p class="m-0">Our Blog</p>
+          <p class="m-0">Nuestro Blog</p>
         </div>
       </div>
     </div>
@@ -30,24 +27,16 @@
               <div class="card-body bg-light text-center p-4">
                 <h4 class="">Diam amet eos at no eos</h4>
                 <div class="d-flex justify-content-center mb-3">
-                  <small class="mr-3"
-                    ><i class="fa fa-user text-primary"></i> Admin</small
-                  >
-                  <small class="mr-3"
-                    ><i class="fa fa-folder text-primary"></i> Web Design</small
-                  >
-                  <small class="mr-3"
-                    ><i class="fa fa-comments text-primary"></i> 15</small
-                  >
+                  <small class="mr-3"><i class="fa fa-user text-primary"></i> Admin</small>
+                  <small class="mr-3"><i class="fa fa-folder text-primary"></i> Web Design</small>
+                  <small class="mr-3"><i class="fa fa-comments text-primary"></i> 15</small>
                 </div>
                 <p>
                   Sed kasd sea sed at elitr sed ipsum justo, sit nonumy diam
                   eirmod, duo et sed sit eirmod kasd clita tempor dolor stet
                   lorem. Tempor ipsum justo amet stet...
                 </p>
-                <a href="" class="btn btn-primary px-4 mx-auto my-2"
-                  >Read More</a
-                >
+                <button href="" class="btn btn-primary px-4 mx-auto my-2">Read More</button>
               </div>
             </div>
           </div>
@@ -57,24 +46,16 @@
               <div class="card-body bg-light text-center p-4">
                 <h4 class="">Diam amet eos at no eos</h4>
                 <div class="d-flex justify-content-center mb-3">
-                  <small class="mr-3"
-                    ><i class="fa fa-user text-primary"></i> Admin</small
-                  >
-                  <small class="mr-3"
-                    ><i class="fa fa-folder text-primary"></i> Web Design</small
-                  >
-                  <small class="mr-3"
-                    ><i class="fa fa-comments text-primary"></i> 15</small
-                  >
+                  <small class="mr-3"><i class="fa fa-user text-primary"></i> Admin</small>
+                  <small class="mr-3"><i class="fa fa-folder text-primary"></i> Web Design</small>
+                  <small class="mr-3"><i class="fa fa-comments text-primary"></i> 15</small>
                 </div>
                 <p>
                   Sed kasd sea sed at elitr sed ipsum justo, sit nonumy diam
                   eirmod, duo et sed sit eirmod kasd clita tempor dolor stet
                   lorem. Tempor ipsum justo amet stet...
                 </p>
-                <a href="" class="btn btn-primary px-4 mx-auto my-2"
-                  >Read More</a
-                >
+                <button href="" class="btn btn-primary px-4 mx-auto my-2">Read More</button>
               </div>
             </div>
           </div>
@@ -84,24 +65,16 @@
               <div class="card-body bg-light text-center p-4">
                 <h4 class="">Diam amet eos at no eos</h4>
                 <div class="d-flex justify-content-center mb-3">
-                  <small class="mr-3"
-                    ><i class="fa fa-user text-primary"></i> Admin</small
-                  >
-                  <small class="mr-3"
-                    ><i class="fa fa-folder text-primary"></i> Web Design</small
-                  >
-                  <small class="mr-3"
-                    ><i class="fa fa-comments text-primary"></i> 15</small
-                  >
+                  <small class="mr-3"><i class="fa fa-user text-primary"></i> Admin</small>
+                  <small class="mr-3"><i class="fa fa-folder text-primary"></i> Web Design</small>
+                  <small class="mr-3"><i class="fa fa-comments text-primary"></i> 15</small>
                 </div>
                 <p>
                   Sed kasd sea sed at elitr sed ipsum justo, sit nonumy diam
                   eirmod, duo et sed sit eirmod kasd clita tempor dolor stet
                   lorem. Tempor ipsum justo amet stet...
                 </p>
-                <a href="" class="btn btn-primary px-4 mx-auto my-2"
-                  >Read More</a
-                >
+                <button href="" class="btn btn-primary px-4 mx-auto my-2">Read More</button>
               </div>
             </div>
           </div>
@@ -111,24 +84,16 @@
               <div class="card-body bg-light text-center p-4">
                 <h4 class="">Diam amet eos at no eos</h4>
                 <div class="d-flex justify-content-center mb-3">
-                  <small class="mr-3"
-                    ><i class="fa fa-user text-primary"></i> Admin</small
-                  >
-                  <small class="mr-3"
-                    ><i class="fa fa-folder text-primary"></i> Web Design</small
-                  >
-                  <small class="mr-3"
-                    ><i class="fa fa-comments text-primary"></i> 15</small
-                  >
+                  <small class="mr-3"><i class="fa fa-user text-primary"></i> Admin</small>
+                  <small class="mr-3"><i class="fa fa-folder text-primary"></i> Web Design</small>
+                  <small class="mr-3"><i class="fa fa-comments text-primary"></i> 15</small>
                 </div>
                 <p>
                   Sed kasd sea sed at elitr sed ipsum justo, sit nonumy diam
                   eirmod, duo et sed sit eirmod kasd clita tempor dolor stet
                   lorem. Tempor ipsum justo amet stet...
                 </p>
-                <a href="" class="btn btn-primary px-4 mx-auto my-2"
-                  >Read More</a
-                >
+                <button href="" class="btn btn-primary px-4 mx-auto my-2">Read More</button>
               </div>
             </div>
           </div>
@@ -138,24 +103,16 @@
               <div class="card-body bg-light text-center p-4">
                 <h4 class="">Diam amet eos at no eos</h4>
                 <div class="d-flex justify-content-center mb-3">
-                  <small class="mr-3"
-                    ><i class="fa fa-user text-primary"></i> Admin</small
-                  >
-                  <small class="mr-3"
-                    ><i class="fa fa-folder text-primary"></i> Web Design</small
-                  >
-                  <small class="mr-3"
-                    ><i class="fa fa-comments text-primary"></i> 15</small
-                  >
+                  <small class="mr-3"><i class="fa fa-user text-primary"></i> Admin</small>
+                  <small class="mr-3"><i class="fa fa-folder text-primary"></i> Web Design</small>
+                  <small class="mr-3"><i class="fa fa-comments text-primary"></i> 15</small>
                 </div>
                 <p>
                   Sed kasd sea sed at elitr sed ipsum justo, sit nonumy diam
                   eirmod, duo et sed sit eirmod kasd clita tempor dolor stet
                   lorem. Tempor ipsum justo amet stet...
                 </p>
-                <a href="" class="btn btn-primary px-4 mx-auto my-2"
-                  >Read More</a
-                >
+                <button href="" class="btn btn-primary px-4 mx-auto my-2">Read More</button>
               </div>
             </div>
           </div>
@@ -165,24 +122,16 @@
               <div class="card-body bg-light text-center p-4">
                 <h4 class="">Diam amet eos at no eos</h4>
                 <div class="d-flex justify-content-center mb-3">
-                  <small class="mr-3"
-                    ><i class="fa fa-user text-primary"></i> Admin</small
-                  >
-                  <small class="mr-3"
-                    ><i class="fa fa-folder text-primary"></i> Web Design</small
-                  >
-                  <small class="mr-3"
-                    ><i class="fa fa-comments text-primary"></i> 15</small
-                  >
+                  <small class="mr-3"><i class="fa fa-user text-primary"></i> Admin</small>
+                  <small class="mr-3"><i class="fa fa-folder text-primary"></i> Web Design</small>
+                  <small class="mr-3"><i class="fa fa-comments text-primary"></i> 15</small>
                 </div>
                 <p>
                   Sed kasd sea sed at elitr sed ipsum justo, sit nonumy diam
                   eirmod, duo et sed sit eirmod kasd clita tempor dolor stet
                   lorem. Tempor ipsum justo amet stet...
                 </p>
-                <a href="" class="btn btn-primary px-4 mx-auto my-2"
-                  >Read More</a
-                >
+                <button href="" class="btn btn-primary px-4 mx-auto my-2">Read More</button>
               </div>
             </div>
           </div>

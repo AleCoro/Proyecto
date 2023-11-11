@@ -10,7 +10,7 @@
     'Home' => 'inicio',
     'Clases' => 'class',
     'Profesores' => 'team',
-    'Galeria' => 'gallery',
+    'Blog' => 'blog',
     'Contacto' => 'contact',
     'Sobre nosotros' => 'about'
   );

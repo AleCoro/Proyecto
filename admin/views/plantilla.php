@@ -20,6 +20,16 @@ session_start();
   <link rel="stylesheet" href="views/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="views/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
 
+  <!-- ckeditor -->
+  <script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
+  <script src="ruta/a/tu/ckeditor.js"></script>
+
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+  <script type="text/javascript" src="views/plugins/jquery-fancybox/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+  <script type="text/javascript" src="views/plugins/jquery-fancybox/fancybox/jquery.easing-1.4.pack.js"></script>
+  <script type="text/javascript" src="views/plugins/jquery-fancybox/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
+  <link rel="stylesheet" href="views/plugins/jquery-fancybox/fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
+
   <!-- ========================= PLUGINS DE JS - JQUERY ========================= -->
   <!-- jQuery -->
   <script src="views/plugins/jquery/jquery.min.js"></script>
@@ -66,6 +76,7 @@ if (isset($_SESSION["perfilSeleccionado"]) && $_SESSION["perfilSeleccionado"] ==
       $_GET["ruta"] == "profesores" ||
       $_GET["ruta"] == "areasAcademicas" ||
       $_GET["ruta"] == "asignaturas" ||
+      $_GET["ruta"] == "blog" ||
       ($_GET["ruta"] == "logout" && $_SESSION["session_usuario"] != "")
     ) {
 

@@ -38,6 +38,9 @@
           <li class="nav-item">
             <a href="asignaturas" class="nav-link"><i class="nav-icon fas fa-book"></i><p>Asignaturas</p></a>
           </li>
+          <li class="nav-item">
+            <a href="blog" class="nav-link"><i class="nav-icon fas fa-solid fa-blog"></i><p>Blog</p></a>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
