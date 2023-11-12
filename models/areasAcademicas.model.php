@@ -177,7 +177,6 @@ class AreasAcademicasModel
         return $ruta;
     }
 
-    // Cargar Paginacion Habitaciones
     public static function mdlMostrarPaginacion($tabla,$inicio,$registrosxpagina,$orden){
             
         $consulta="SELECT * ";

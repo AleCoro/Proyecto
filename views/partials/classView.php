@@ -54,7 +54,7 @@
           <?php for ($i = 1; $i <= $paginas; $i++) {
             if ($pagina == $i) { ?>
               <li class="page-item h4">
-                <a class="page-link"><?= $i ?></a>
+                <a class="page-link text-dark"><?= $i ?></a>
               </li>
             <?php } else { ?>
               <li class="page-item h4">

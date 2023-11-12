@@ -235,3 +235,7 @@ function cargarCalendarioMiPerfil(usuario) {
 
     calendar.render();
 }
+
+function mostrarComentarios() {
+    document.getElementById("comentarios").classList.remove("d-none");
+}

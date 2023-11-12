@@ -141,7 +141,7 @@ class ModeloUsuarios
         WHERE id_area LIKE '$area'
         GROUP BY id_usuario";
 
-        $sentencia = $conexion->prepare("SELECT * FROM $sql");
+        $sentencia = $conexion->prepare($sql);
         $sentencia->execute();
         return $sentencia->fetchAll(PDO::FETCH_ASSOC);
 
