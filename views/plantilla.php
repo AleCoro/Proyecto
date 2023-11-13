@@ -33,7 +33,7 @@ if (isset($_SESSION["perfilSeleccionado"]) && $_SESSION["perfilSeleccionado"] ==
             include("modules/inicio.php");
         }
     } else {
-        include("modules/404.php");
+        include("modules/inicio.php");
     }
 }
 ?>

@@ -27,11 +27,15 @@
         $usuariosController->ActualizarUsuario($tabla, $datos, $redireccion, $id);
         
     }
-    
+
     if (isset($_POST["accion"]) && $_POST["accion"] == "EliminarProfesor") {
-        $usuariosController->ctrBorrarUsuario($_POST["id_usuario"], "usuarios", "profesores", null);
-        $rolesController->ctrEliminar("es_un", "usuario", $_POST["id_usuario"], "profesores");
-        $asignaturasController->ctrEliminar("imparte", "profesor", $_POST["id_usuario"], "profesores");
+        $datos["estado"] = 0;
+        $usuariosController->ActualizarUsuario("usuarios",$datos,"profesores",$_POST["id_usuario"]);
+    }
+    
+    if (isset($_POST["accion"]) && $_POST["accion"] == "ActivarProfesor") {
+        $datos["estado"] = 1;
+        $usuariosController->ActualizarUsuario("usuarios",$datos,"profesores",$_POST["id_usuario"]);
     }
 
     include("views/partials/profesores.View.php");

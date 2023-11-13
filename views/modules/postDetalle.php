@@ -6,6 +6,10 @@ if (isset($_POST["id_post"])) {
     $_SESSION["id_post"] = $_POST["id_post"];
 }
 
+if (!$_SESSION["id_post"]) {
+    header("Location: blog");
+}
+
 // Saco la informacion del post
 $post = $postsController->ctrMostrarPostWhere("post", "id_post", $_SESSION["id_post"]);
 

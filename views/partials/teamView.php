@@ -55,7 +55,7 @@
                     </ul>
                   </div>
                   <div class="col-4 text-center">
-                    <img src="views/img/team-<?= rand(1, 4); ?>.jpg" alt="user-avatar" class="img-circle img-fluid">
+                    <img src="<?="admin/".$profesor["foto"]?>" alt="user-avatar" class="img-circle img-fluid">
                   </div>
                 </div>
               </div>

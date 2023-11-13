@@ -9,7 +9,7 @@ $datosAlumnos = $rolesController->ctrMostrarRegistrosWhere("es_un", "rol", "3");
 foreach ($datosAlumnos as $datoAlumnos) {
     $alumnos[] = $usuariosController->ctrMostrarUsuarioWhere("id_usuario", $datoAlumnos["usuario"]);
 }
-
+// var_dump($alumnos);
 if (isset($_POST["accion"]) && $_POST["accion"] == "EditarAlumno") {
     $datos = array(
         "usuario" => $_POST["edit_usuario"],
@@ -30,9 +30,13 @@ if (isset($_POST["accion"]) && $_POST["accion"] == "EditarAlumno") {
 }
 
 if (isset($_POST["accion"]) && $_POST["accion"] == "EliminarAlumno") {
-    $usuariosController->ctrBorrarUsuario($_POST["id_usuario"], "usuarios", "alumnos", null);
-    $rolesController->ctrEliminar("es_un", "usuario", $_POST["id_usuario"], "alumnos");
-    
+    $datos["estado"] = 0;
+    $usuariosController->ActualizarUsuario("usuarios",$datos,"alumnos",$_POST["id_usuario"]);
+}
+
+if (isset($_POST["accion"]) && $_POST["accion"] == "ActivarAlumno") {
+    $datos["estado"] = 1;
+    $usuariosController->ActualizarUsuario("usuarios",$datos,"alumnos",$_POST["id_usuario"]);
 }
 
 include("views/partials/alumnos.View.php");

@@ -139,7 +139,7 @@ class ModeloUsuarios
                     JOIN imparte as imp ON usu.id_usuario = imp.profesor
                     JOIN asignaturas as asi ON imp.asignatura = asi.id_asignatura
                     JOIN areas_academicas as are ON asi.area_academica = are.id_area
-                    WHERE id_area LIKE '$area'
+                    WHERE id_area LIKE '$area' && usu.estado like 1
                     GROUP BY usu.id_usuario";
         } else {
             $sql = "SELECT *, GROUP_CONCAT(DISTINCT asi.nombre_asignatura) AS todasAsignaturas
@@ -147,6 +147,7 @@ class ModeloUsuarios
                     JOIN imparte as imp ON usu.id_usuario = imp.profesor
                     JOIN asignaturas as asi ON imp.asignatura = asi.id_asignatura
                     JOIN areas_academicas as are ON asi.area_academica = are.id_area
+                    WHERE  usu.estado like 1
                     GROUP BY usu.id_usuario";
         }
 

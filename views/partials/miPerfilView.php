@@ -19,7 +19,7 @@
                 <div class="card card-outline">
                     <div class="card-body box-profile">
                         <div class="text-center">
-                            <img class="profile-user-img img-fluid img-circle" src="views/img/team-<?= rand(1, 4); ?>.jpg" alt="User profile picture">
+                            <img class="profile-user-img img-fluid img-circle" src="<?= "admin/".$_SESSION["foto"] ?>" alt="User profile picture">
                         </div>
 
                         <h3 class="profile-username text-center"><?= $usuario["nombre"] . " " . $usuario["apellidos"] ?></h3>

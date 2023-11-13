@@ -51,7 +51,7 @@
 
                                         <button type="submit" class="btn btn-dark d-flex align-items-center mr-3">
                                             <i class="far fa-thumbs-up mr-2 text-lg"></i>
-                                            <p class="mb-0"><?= $numLikes["totalLikes"];?></p>
+                                            <p class="mb-0"><?= $numLikes["totalLikes"]; ?></p>
                                         </button>
                                     </form>
                                 <?php } else { ?>
@@ -61,7 +61,7 @@
 
                                         <button type="submit" class="btn btn-primary d-flex align-items-center mr-3">
                                             <i class="far fa-thumbs-up mr-2 text-lg"></i>
-                                            <p class="mb-0"><?= $numLikes["totalLikes"];?></p>
+                                            <p class="mb-0"><?= $numLikes["totalLikes"]; ?></p>
                                         </button>
                                     </form>
                                 <?php }
@@ -71,62 +71,66 @@
 
                                 <button class="btn btn-primary d-flex align-items-center mr-3" onclick="mostrarComentarios()">
                                     <i class="far fa-comment-dots mr-2 text-lg"></i>
-                                    <p class="mb-0"><?= $numComentarios["totalComentarios"];?></p>
+                                    <p class="mb-0"><?= $numComentarios["totalComentarios"]; ?></p>
                                 </button>
                             </div>
                         </article>
-                        <form action="" method="post">
-                            <input type="hidden" name="id_post" value="<?= $_SESSION["id_post"] ?>">
-                            <input type="hidden" name="accion" value="comentar">
-                            <div class="d-flex flex-start w-100">
-                                <img class="rounded-circle shadow-1-strong mr-3" src="views/img/team-2.jpg" alt="avatar" width="40" height="40" />
-                                <div class="form-outline w-100">
-                                    <textarea class="form-control" id="comentario" name="comentario" rows="4" style="background: #fff;"></textarea>
-                                </div>
-                            </div>
-                            <div class="float-end mt-2 pt-1 mb-5">
-                                <button type="submit" class="btn btn-primary btn-sm">Comentar</button>
-                            </div>
-                        </form>
+                        <?php if (isset($_SESSION["id_usuario"])) { ?>
+                            <form action="" method="post">
+                                <input type="hidden" name="id_post" value="<?= $_SESSION["id_post"] ?>">
+                                <input type="hidden" name="accion" value="comentar">
+                                <div class="d-flex flex-start w-100">
 
-                        <!-- Comments section-->
-                        <div class="container d-none" id="comentarios">
-                            <div class="row d-flex justify-content-center">
-                                <div class="card w-100">
-                                    <div class="card-header">
-                                        <h3>Comentarios</h3>
+                                    <img class="rounded-circle shadow-1-strong mr-3" src="<?= "admin/".$_SESSION["foto"]; ?>" alt="avatar" width="40" height="40" />
+                                    <div class="form-outline w-100">
+                                        <textarea class="form-control" id="comentario" name="comentario" rows="4" style="background: #fff;"></textarea>
                                     </div>
-                                    <!-- Comentarios inicio -->
-                                    <?php foreach ($comentarios as $comentario) { ?>
-                                        <div class="card-body">
-                                            <div class="d-flex flex-start align-items-center">
-                                                <img class="rounded-circle shadow-1-strong mr-3" src="views/img/team-1.jpg" alt="avatar" width="60" height="60" />
-                                                <div>
-                                                    <h6 class="fw-bold text-primary mb-1"><?= $comentario["usuario"];?></h6>
-                                                    <p class="text-muted small mb-0">
-                                                        <?= $comentario["fecha_comentario"];?>
-                                                    </p>
+
+                                </div>
+                                <div class="float-end mt-2 pt-1 mb-5">
+                                    <button type="submit" class="btn btn-primary btn-sm">Comentar</button>
+                                </div>
+                            <?php } ?>
+                            </form>
+
+                            <!-- Comments section-->
+                            <div class="container d-none" id="comentarios">
+                                <div class="row d-flex justify-content-center">
+                                    <div class="card w-100">
+                                        <div class="card-header">
+                                            <h3>Comentarios</h3>
+                                        </div>
+                                        <!-- Comentarios inicio -->
+                                        <?php foreach ($comentarios as $comentario) { ?>
+                                            <div class="card-body">
+                                                <div class="d-flex flex-start align-items-center">
+                                                    <img class="rounded-circle shadow-1-strong mr-3" src="<?= "admin/".$comentario["foto"]; ?>" alt="avatar" width="60" height="60" />
+                                                    <div>
+                                                        <h6 class="fw-bold text-primary mb-1"><?= $comentario["usuario"]; ?></h6>
+                                                        <p class="text-muted small mb-0">
+                                                            <?= $comentario["fecha_comentario"]; ?>
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                                <p class="mt-3 mb-4 pb-2">
+                                                    <?= $comentario["comentario"]; ?>
+                                                </p>
+
+                                                <div class="small d-flex justify-content-start">
+                                                    <a href="#!" class="d-flex align-items-center mr-3">
+                                                        <i class="far fa-thumbs-up me-2"></i>
+                                                        <p class="mb-0">Like</p>
+                                                    </a>
+                                                    <a href="#!" class="d-flex align-items-center mr-3">
+                                                        <i class="far fa-comment-dots me-2"></i>
+                                                        <p class="mb-0">Comment</p>
+                                                    </a>
                                                 </div>
                                             </div>
 
-                                            <p class="mt-3 mb-4 pb-2">
-                                                <?= $comentario["comentario"];?>
-                                            </p>
-
-                                            <div class="small d-flex justify-content-start">
-                                                <a href="#!" class="d-flex align-items-center mr-3">
-                                                    <i class="far fa-thumbs-up me-2"></i>
-                                                    <p class="mb-0">Like</p>
-                                                </a>
-                                                <a href="#!" class="d-flex align-items-center mr-3">
-                                                    <i class="far fa-comment-dots me-2"></i>
-                                                    <p class="mb-0">Comment</p>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        
-                                    <?php } ?>
-                                    <!-- <div class="card-body">
+                                        <?php } ?>
+                                        <!-- <div class="card-body">
                                         <div class="d-flex flex-start align-items-center">
                                             <img class="rounded-circle shadow-1-strong mr-3" src="views/img/team-1.jpg" alt="avatar" width="60" height="60" />
                                             <div>
@@ -182,9 +186,9 @@
                                             </a>
                                         </div>
                                     </div> -->
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
                     </div>
                 </div>

@@ -14,7 +14,7 @@
     <!-- Contact Start -->
     <div class="container-fluid pt-5">
       <div class="container">
-        <form action="" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
           <h3 class="mt-6">Introduce tus datos</h3>
           <div class="form-row">
             <div class="form-group col-md-6">
@@ -65,6 +65,18 @@
               <input type="text" class="form-control" name="telefono" id="telefono" placeholder="Telefono" value = "<?php if(isset($_POST["telefono"])){echo $_POST["telefono"];} ?>" required>
             </div>
           </div>
+          <div class="form-row d-flex align-items-center">
+            <div class="form-group col-md-6">
+                <label for="exampleInputFile">Subir Foto</label>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="foto" name="foto" required onchange="previsualizarIMG(this, 'previsualizarImg')">
+                    <label class="custom-file-label" for="customFile">Sube tu foto</label>
+                </div>
+            </div>
+            <div class="form-group col-md-6 align-content-center">
+                <img id="previsualizarImg" src="#" alt="Vista previa de la imagen" style="display: none;" class="w-25 h-25 m-auto rounded-circle">
+            </div>
+          </div>
           <!-- Contact End -->
 
           <!-- Campos Profesor Start -->
@@ -95,7 +107,7 @@
               </div>
               <div class="form-group col-md-6">
                 <label>Precio/hora</label>
-                <input type="number" class="form-control" name="precio" placeholder="Precio" min="0">
+                <input type="number" class="form-control" name="precio" id="precio" placeholder="Precio" min="0">
               </div>
             </div>
           </div>
@@ -105,15 +117,3 @@
       </div>
     </div>
     <!-- Campos Profesor End -->
-
-    <script languaje="javascript">
-      function habilitarCampos() {
-        rol = document.getElementById("rol").value;
-        if (rol == "Profesor") {
-          document.getElementById("porfesor").className = "d-block";
-        }else{
-          document.getElementById("porfesor").className = "d-none";
-        }
-        
-      }
-    </script>

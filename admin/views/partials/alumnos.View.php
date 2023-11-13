@@ -30,12 +30,13 @@
             <tr>
               <!-- <th style="width: 10px;">Nº</th> -->
               <th style="width: 10px;">Id</th>
-              <!-- <th>Foto</th> -->
+              <th>Foto</th>
               <th>Nombre</th>
               <th>Direccion</th>
               <th>Telefono</th>
               <th>Email</th>
               <th>Fecha Nacimiento</th>
+              <th>Estado</th>
               <!-- <th>Ultimo acceso</th> -->
               <th>Acciones</th>
             </tr>
@@ -45,26 +46,47 @@
               <tr>
                 <!-- <td></td> -->
                 <td><?= $alumno["id_usuario"]; ?></td>
-                <!-- <td></td> -->
+                <td>
+                  <?php if (isset($alumno["foto"]) && $alumno["foto"] !== "") { ?>
+                    <img class="rounded-circle" width="60" height="60" src="<?= $alumno["foto"] ?>" alt="">
+                  <?php } else { ?>
+                    <img class="rounded-circle" width="60" height="60" src="views/img/usuarios/user_default.png" alt="">
+                  <?php } ?>
+                </td>
                 <td><?= $alumno["nombre"] . " " . $alumno["apellidos"]; ?></td>
                 <td><?= $alumno["direccion"]; ?></td>
                 <td><?= $alumno["telefono"]; ?></td>
                 <td><?= $alumno["email"]; ?></td>
                 <td><?= $alumno["fecha_nacimiento"]; ?></td>
-                <!-- <td></td> -->
+                <td>
+                  <?php if (isset($alumno["estado"]) && $alumno["estado"] !== "0") { ?>
+                    <div class="badge badge-success py-2">Activo</div>
+                  <?php } else { ?>
+                    <div class="badge badge-danger py-2">Desactivado</div>
+                  <?php } ?>
                 <td>
                   <div class="form-group d-flex">
                     <button type="button" class="btn btn-warning mr-1" onclick='editarAlumno(<?= json_encode($alumno); ?>)'>
                       <i class="fas fa-user-edit"></i>
                     </button>
                     <?php if ($_SESSION["id_usuario"] !== $alumno["id_usuario"]) { ?>
-                      <form action="" method="post">
-                        <input type="hidden" name="id_usuario" value="<?= $alumno["id_usuario"]; ?>">
-                        <input type="hidden" name="accion" value="EliminarAlumno">
-                        <button type="submit" class="btn btn-danger">
-                          <i class="fas fa-trash-alt"></i>
-                        </button>
-                      </form>
+                      <?php if (isset($alumno["estado"]) && $alumno["estado"] !== "0") { ?>
+                        <form action="" method="post">
+                          <input type="hidden" name="id_usuario" value="<?= $alumno["id_usuario"]; ?>">
+                          <input type="hidden" name="accion" value="EliminarAlumno">
+                          <button type="submit" class="btn btn-danger">
+                            <i class="fas fa-trash-alt"></i>
+                          </button>
+                        </form>
+                      <?php } else { ?>
+                        <form action="" method="post">
+                          <input type="hidden" name="id_usuario" value="<?= $alumno["id_usuario"]; ?>">
+                          <input type="hidden" name="accion" value="ActivarAlumno">
+                          <button type="submit" class="btn btn-success">
+                            </i><i class="fas fa-user-plus"></i>
+                          </button>
+                        </form>
+                      <?php } ?>
                     <?php } ?>
                   </div>
                 </td>
@@ -76,12 +98,13 @@
             <tr>
               <!-- <th style="width: 10px;">Nº</th> -->
               <th style="width: 10px;">Id</th>
-              <!-- <th>Foto</th> -->
+              <th>Foto</th>
               <th>Nombre</th>
               <th>Direccion</th>
               <th>Telefono</th>
               <th>Email</th>
               <th>Fecha Nacimiento</th>
+              <th>Estado</th>
               <!-- <th>Ultimo acceso</th> -->
               <th>Acciones</th>
             </tr>

@@ -19,6 +19,7 @@ class LoginController
                 if (isset($contraseña) && !empty($contraseña)) {
                     if ($contraseña == $comprobar["password"]) {
                         $_SESSION["id_usuario"] = $id_usuario;
+                        $_SESSION["foto"] = $comprobar["foto"];
                         $_SESSION["session_usuario"] = $usuario;
 
                         if (isset($_POST["accion"]) && $_POST["accion"] == "reserva") {
@@ -90,6 +91,38 @@ class LoginController
 
                     // Insertamos los datos en la tabla usuario
                     $id_insertado = LoginController::ctrRegistrarUsuario($tabla, $datos_usuario);
+
+                    if (isset($_FILES["foto"]["tmp_name"])) {
+
+                        list($ancho, $alto) = getimagesize($_FILES["foto"]["tmp_name"]);
+                        $nuevoAncho = 300;
+                        $nuevoAlto = 300;
+                
+                        // SEGUN FORMATO DE FOTO APLICAMOS UNAS FUNCIONES U OTRAS
+                        if ($_FILES["foto"]["type"] == "image/jpeg") {
+                            // GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+                            $ruta = "views/img/usuarios/" . $id_insertado . "-" . $_POST["Usuario"] . ".jpeg";
+                            $origen = imagecreatefromjpeg($_FILES["foto"]["tmp_name"]);
+                            $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+                            imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+                            imagejpeg($destino, "admin/".$ruta);
+                        }
+                
+                        if ($_FILES["foto"]["type"] == "image/png") {
+                
+                            // GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+                            $ruta = "views/img/usuarios/" . $id_insertado . "-" . $_POST["Usuario"] . ".png";
+                            $origen = imagecreatefrompng($_FILES["foto"]["tmp_name"]);
+                            $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+                            imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+                            imagepng($destino, "admin/".$ruta);
+                        }
+
+                        $datos_usuario["foto"] = $ruta;
+                    }
+
+                    $UserController = new UsuariosController();
+                    $UserController->ActualizarUsuario("usuarios",$datos_usuario,null,$id_insertado);
 
                     // Sacamos el id del rol
                     $RolesController = new RolesController();

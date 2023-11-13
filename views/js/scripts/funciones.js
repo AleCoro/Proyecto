@@ -68,7 +68,7 @@ function cargarAsignaturas(id_asignatura, id_area) {
 }
 
 function cargarProfesores(id_asignatura) {
-    
+
     var areaAcademica = document.getElementById("areaAcademica");
     var area = areaAcademica.value;
 
@@ -238,4 +238,35 @@ function cargarCalendarioMiPerfil(usuario) {
 
 function mostrarComentarios() {
     document.getElementById("comentarios").classList.remove("d-none");
+}
+
+function previsualizarIMG(img, campo) {
+    var file = img.files[0];
+    if (file) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            document.getElementById(campo).src = e.target.result;
+            document.getElementById(campo).style.display = 'block';
+        }
+        reader.readAsDataURL(file);
+    }
+}
+
+function habilitarCampos() {
+    rol = document.getElementById("rol").value;
+    if (rol == "Profesor") {
+        document.getElementById("porfesor").className = "d-block";
+        $('#areaAcademica').prop('required', true);
+        $('#asignaturas').prop('required', true);
+        $('#fecha_imparte').prop('required', true);
+        $('#hora_imparte').prop('required', true);
+        $('#precio').prop('required', true);
+    } else {
+        document.getElementById("porfesor").className = "d-none";
+        $('#areaAcademica').prop('required', false);
+        $('#asignaturas').prop('required', false);
+        $('#fecha_imparte').prop('required', false);
+        $('#hora_imparte').prop('required', false);
+        $('#precio').prop('required', false);
+    }
 }
