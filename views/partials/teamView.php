@@ -32,7 +32,7 @@
         </div>
         <div class="form-group col-md-3">
           <label>Precio/hora</label>
-          <input type="number" class="form-control" name="precio" placeholder="Precio" min="0">
+          <input type="number" class="form-control" name="precio" id="precio" placeholder="Precio" min="0" onchange="cargarAsignaturas(document.getElementById('asignaturas').value);">
         </div>
       </div>
 

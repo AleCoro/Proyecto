@@ -362,7 +362,7 @@
                             </div>
                             <!-- /.tab-pane -->
                             <div class="tab-pane" id="settings">
-                                <form action="" method="post">
+                                <form action="" method="post" enctype="multipart/form-data">
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label>Nombre</label>
@@ -401,6 +401,18 @@
                                         <div class="form-group col-md-6">
                                             <label>Fecha Nacimiento</label>
                                             <input type="date" class="form-control" name="fecha" placeholder="Fecha Nacimiento" value = "<?php if(isset($usuario["fecha_nacimiento"])){echo $usuario["fecha_nacimiento"];} ?>" required >
+                                        </div>
+                                    </div>
+                                    <div class="form-row d-flex align-items-center">
+                                        <div class="form-group col-md-6">
+                                            <label for="exampleInputFile">Subir Foto</label>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="foto" name="foto" required onchange="previsualizarIMG(this, 'previsualizarImg')">
+                                                <label class="custom-file-label" for="customFile">Sube tu foto</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-6 align-content-center">
+                                            <img id="previsualizarImg" src="<?= "admin/".$_SESSION["foto"] ?>" alt="Vista previa de la imagen" class="w-25 h-25 ml-5 rounded-circle">
                                         </div>
                                     </div>
                                     <div class=" d-flex justify-content-center ">

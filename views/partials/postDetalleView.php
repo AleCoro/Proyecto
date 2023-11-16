@@ -81,7 +81,7 @@
                                 <input type="hidden" name="accion" value="comentar">
                                 <div class="d-flex flex-start w-100">
 
-                                    <img class="rounded-circle shadow-1-strong mr-3" src="<?= "admin/".$_SESSION["foto"]; ?>" alt="avatar" width="40" height="40" />
+                                    <img class="rounded-circle shadow-1-strong mr-3" src="<?= "admin/" . $_SESSION["foto"]; ?>" alt="avatar" width="40" height="40" />
                                     <div class="form-outline w-100">
                                         <textarea class="form-control" id="comentario" name="comentario" rows="4" style="background: #fff;"></textarea>
                                     </div>
@@ -94,7 +94,7 @@
                             </form>
 
                             <!-- Comments section-->
-                            <div class="container d-none" id="comentarios">
+                            <div class="container " id="comentarios">
                                 <div class="row d-flex justify-content-center">
                                     <div class="card w-100">
                                         <div class="card-header">
@@ -104,7 +104,7 @@
                                         <?php foreach ($comentarios as $comentario) { ?>
                                             <div class="card-body">
                                                 <div class="d-flex flex-start align-items-center">
-                                                    <img class="rounded-circle shadow-1-strong mr-3" src="<?= "admin/".$comentario["foto"]; ?>" alt="avatar" width="60" height="60" />
+                                                    <img class="rounded-circle shadow-1-strong mr-3" src="<?= "admin/" . $comentario["foto"]; ?>" alt="avatar" width="60" height="60" />
                                                     <div>
                                                         <h6 class="fw-bold text-primary mb-1"><?= $comentario["usuario"]; ?></h6>
                                                         <p class="text-muted small mb-0">
@@ -112,20 +112,55 @@
                                                         </p>
                                                     </div>
                                                 </div>
-
-                                                <p class="mt-3 mb-4 pb-2">
+                                                <!-- Comentario -->
+                                                <p class="mt-3 mb-4 pb-2" id="campoComentario<?= $comentario['id_comentario']; ?>">
                                                     <?= $comentario["comentario"]; ?>
                                                 </p>
 
-                                                <div class="small d-flex justify-content-start">
-                                                    <a href="#!" class="d-flex align-items-center mr-3">
-                                                        <i class="far fa-thumbs-up me-2"></i>
-                                                        <p class="mb-0">Like</p>
-                                                    </a>
-                                                    <a href="#!" class="d-flex align-items-center mr-3">
-                                                        <i class="far fa-comment-dots me-2"></i>
-                                                        <p class="mb-0">Comment</p>
-                                                    </a>
+                                                <?php if ($comentario["id_usuario"] == $_SESSION["id_usuario"]) { ?>
+                                                    <!-- botonesComentario -->
+                                                    <div id="botones<?= $comentario['id_comentario']; ?>">
+
+                                                        <div class="small d-flex justify-content-start">
+                                                            <button class="btn btn-warning btn-sm d-flex mr-2" onclick="editarComentario(<?= $comentario['id_comentario']; ?>)">
+                                                                <i class="fas fa-pen mr-1"></i>
+                                                                <p class="mb-0">Editar</p>
+                                                            </button>
+                                                            <button class="btn btn-danger btn-sm d-flex" onclick="borrarComentario(<?= $comentario['id_comentario']; ?>)">
+                                                                <i class="fas fa-trash mr-1"></i>
+                                                                <p class="mb-0">Borrar</p>
+                                                            </button>
+                                                        </div>
+
+                                                    </div>
+                                                <?php } ?>
+
+                                                <!-- formularioEditar -->
+                                                <form action="" method="post" id="formularioEditarComentario<?= $comentario['id_comentario']; ?>" class="d-none mt-3 pb-2">
+                                                    <input type="hidden" name="accion" id="accion" value="editarComentario">
+                                                    <input type="hidden" name="id_comentario" value="<?= $comentario['id_comentario']; ?>">
+                                                    <div class="form-group">
+                                                        <input id="my-input" class="form-control" type="text" name="editComentario" value="<?= $comentario["comentario"]; ?>">
+                                                    </div>
+                                                </form>
+                                                <!-- formularioBorrar -->
+                                                <form action="" method="post" id="formularioBorrarComentario<?= $comentario['id_comentario']; ?>" class="d-none mt-3 pb-2">
+                                                    <input type="hidden" name="accion" id="accion" value="borrarComentario">
+                                                    <input type="hidden" name="id_comentario" value="<?= $comentario['id_comentario']; ?>">
+                                                </form>
+                                                <!-- botonesFormulario -->
+                                                <div class="d-none" id="botonesFormulario<?= $comentario['id_comentario']; ?>">
+                                                    <div class="d-flex">
+                                                        <button class="btn btn-success btn-sm d-flex mr-2" onclick="guardarComentario(<?= $comentario['id_comentario']; ?>)">
+                                                            <i class="fas fa-check mr-1"></i>
+                                                            <p class="mb-0">Guardar</p>
+                                                        </button>
+                                                        <button class="btn btn-danger btn-sm d-flex" onclick="cancelarEditComentario(<?= $comentario['id_comentario']; ?>)">
+                                                            <i class="fas fa-arrow-rotate-left mr-1"></i>
+                                                            <p class="mb-0">Cancelar</p>
+                                                        </button>
+
+                                                    </div>
                                                 </div>
                                             </div>
 
@@ -198,3 +233,41 @@
     </div>
 </div>
 <!-- Contact End -->
+<script>
+    function editarComentario(id_comentario) {
+
+        formulario = document.getElementById("formularioEditarComentario" + id_comentario);
+        formulario.classList.remove("d-none");
+
+        formulario = document.getElementById("botonesFormulario" + id_comentario);
+        formulario.classList.remove("d-none");
+
+        campoComentario = document.getElementById("campoComentario" + id_comentario);
+        campoComentario.classList.add("d-none");
+
+        botones = document.getElementById("botones" + id_comentario);
+        botones.classList.add("d-none");
+    }
+
+    function cancelarEditComentario(id_comentario) {
+        formulario = document.getElementById("formularioEditarComentario" + id_comentario);
+        formulario.classList.add("d-none");
+
+        formulario = document.getElementById("botonesFormulario" + id_comentario);
+        formulario.classList.add("d-none");
+
+        campoComentario = document.getElementById("campoComentario" + id_comentario);
+        campoComentario.classList.remove("d-none");
+
+        botones = document.getElementById("botones" + id_comentario);
+        botones.classList.remove("d-none");
+    }
+
+    function borrarComentario(id_comentario) {
+        document.getElementById("formularioBorrarComentario"+id_comentario).submit();
+    }
+
+    function guardarComentario(id_comentario) {
+        document.getElementById("formularioEditarComentario"+id_comentario).submit();
+    }
+</script>

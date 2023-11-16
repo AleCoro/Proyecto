@@ -88,7 +88,42 @@
             "email" => $_POST["email"],
             "fecha_nacimiento" => $_POST["fecha"]
         );
+
+        if (isset($_FILES["foto"]["tmp_name"])) {
+
+            list($ancho, $alto) = getimagesize($_FILES["foto"]["tmp_name"]);
+            $nuevoAncho = 300;
+            $nuevoAlto = 300;
+    
+            // SEGUN FORMATO DE FOTO APLICAMOS UNAS FUNCIONES U OTRAS
+            if ($_FILES["foto"]["type"] == "image/jpeg") {
+                // GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+                $ruta = "views/img/usuarios/" . $_POST["id_usuario"] . "-" . $_POST["usuario"] . ".jpeg";
+                $origen = imagecreatefromjpeg($_FILES["foto"]["tmp_name"]);
+                $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+                imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+                imagejpeg($destino, "admin/".$ruta);
+            }
+    
+            if ($_FILES["foto"]["type"] == "image/png") {
+    
+                // GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+                $ruta = "views/img/usuarios/" . $_POST["id_usuario"] . "-" . $_POST["usuario"] . ".png";
+                $origen = imagecreatefrompng($_FILES["foto"]["tmp_name"]);
+                $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+                imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+                imagepng($destino, "admin/".$ruta);
+            }
+
+            $datos["foto"] = $ruta;
+            $_SESSION["foto"] = $datos["foto"];
+        }
+        
         $usuariosController->ActualizarUsuario('usuarios',$datos,null,$_POST["id_usuario"]);
+
+
+
+
         echo "<script>
             async function showSuccessAlert() {
                 await Swal.fire({

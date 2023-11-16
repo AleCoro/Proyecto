@@ -51,6 +51,48 @@ if (isset($_POST["accion"])) {
                 </script>";
             }
         }
+        //Editar comentario
+        if ($_POST["accion"] == "editarComentario") {
+            $datos["id_comentario"] = $_POST["id_comentario"];
+            $datos["comentario"] = $_POST["editComentario"];
+
+            if ($datos["comentario"] !== "") {
+                $postsController->ctrActualizar("comentarios", $datos, "id_comentario", $_POST["id_comentario"], null);
+
+                echo "<script>
+                            async function showSuccessAlert() {
+                                await Swal.fire({
+                                    position: 'top-center',
+                                    icon: 'success',
+                                    title: 'Comentario Editado',
+                                    showConfirmButton: false,
+                                    timer: 1400
+                                });
+                                window.location.href = 'postDetalle';
+                            }
+                            showSuccessAlert();
+                        </script>";
+            }
+        }
+        //Borrar comentario
+        if ($_POST["accion"] == "borrarComentario") {
+
+            $postsController->ctrEliminar("comentarios", "id_comentario", $_POST["id_comentario"], null);
+
+            echo "<script>
+                async function showSuccessAlert() {
+                    await Swal.fire({
+                        position: 'top-center',
+                        icon: 'success',
+                        title: 'Comentario borrado',
+                        showConfirmButton: false,
+                        timer: 1400
+                    });
+                    window.location.href = 'postDetalle';
+                }
+                showSuccessAlert();
+            </script>";
+        }
     } else {
         echo "<script>
                 async function showSuccessAlert() {
@@ -84,8 +126,6 @@ foreach ($comprobarLikes as $comprobarLike) {
         $id_like = $comprobarLike["id_like"];
     }
 }
-
-
 
 
 

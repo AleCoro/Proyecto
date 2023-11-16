@@ -70,28 +70,15 @@ class PostsController
 
     }
 
-    public function ctrActualizar($tabla, $datos, $redireccion, $id)
+    public function ctrActualizar($tabla,$datos,$campo_id,$id,$redireccion)
     {
         // Validamos los datos
-        $datos = PostsController::ctrValidarDatos($datos, $redireccion);
+        $datos = PostsController::ctrValidarDatos($datos,$redireccion);
 
-        $respuesta = PostsModel::mdlActualizar($tabla, $datos, $id);
-
-        // if ($respuesta) {
-        //     echo "<script>
-        //             alert('¡Se ha actualizado correctamente!');
-        //             window.location = '$redireccion';
-        //         </script>";
-        // }else {
-        //     echo "<script>
-        //         alert('¡Error al hacer la actualizacion!');
-        //         window.location = '$redireccion';
-        //     </script>";
-        // }
-
+        PostsModel::mdlActualizar($tabla,$datos,$campo_id,$id);
 
         // Para actualizar datos sigue esta estructura
-
+        
         // if (isset($_POST["nombre"]) && !empty($_POST["nombre"])) {
         //     $datos = array(
         //         "nombre" => $_POST["nombre"],
@@ -108,7 +95,7 @@ class PostsController
         //     $crudController->ctrActualizar($tabla,$datos,$redireccion,$id);
         //     // var_dump($inmueble);
         //   }
-
+        
     }
 
     public function ctrEliminar($tabla, $campo_id, $id, $redireccion)
@@ -116,15 +103,15 @@ class PostsController
         if (isset($id)) {
             $respuesta = PostsModel::mdlEliminar($tabla, $campo_id, $id);
 
-            if ($respuesta) {
-                echo "<script>
-                            window.location = '$redireccion';
-                        </script>";
-            } else {
-                echo "<script>
-                        window.location = '$redireccion';
-                    </script>";
-            }
+            // if ($respuesta) {
+            //     echo "<script>
+            //                 window.location = '$redireccion';
+            //             </script>";
+            // } else {
+            //     echo "<script>
+            //             window.location = '$redireccion';
+            //         </script>";
+            // }
         }
 
 

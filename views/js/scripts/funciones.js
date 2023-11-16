@@ -22,7 +22,7 @@ function cargarAsignaturas(id_asignatura, id_area) {
     var areaAcademica = document.getElementById("areaAcademica");
     var asignaturas = document.getElementById("asignaturas");
 
-    // Saco el valor de la asignatura y pongo a 0 el campo asignatura
+    // Saco el valor de la asignatura y vacio el campo asignatura
     var id_area = areaAcademica.value;
     asignaturas.innerHTML = '';
 
@@ -69,13 +69,15 @@ function cargarAsignaturas(id_asignatura, id_area) {
 
 function cargarProfesores(id_asignatura) {
 
-    var areaAcademica = document.getElementById("areaAcademica");
-    var area = areaAcademica.value;
+    var area = document.getElementById("areaAcademica").value;
+    var precio = document.getElementById("precio").value;
+    // alert(id_asignatura);
 
     if (area == "") { area = "%"; }
+    if (precio == "") { precio = 0; }
     if (id_asignatura == 'SinAsignatura') { id_asignatura = "%"; }
 
-    var url = "views/js/consultas/cargarProfesores.php?area=" + area + "&asignatura=" + id_asignatura;
+    var url = "views/js/consultas/cargarProfesores.php?area=" + area + "&asignatura=" + id_asignatura+ "&precio=" + precio;
     xmlhttp.open("GET", url);
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState === 4) {
@@ -156,7 +158,7 @@ function cargarCalendario(usuario) {
                 fecha = new Date(info.event.start);
                 hora = fecha.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
                 //Muestro la descripcion
-                $('#descripcion').text("¿Desea reservar esta hora para " + info.event.title + " a las " + hora + "?");
+                $('#descripcion').text("¿Desea reservar esta hora para " + info.event.title + " a las " + hora + " por "+info.event.extendedProps.precio+"€ ?");
 
                 $('#id_asignatura').val(info.event.extendedProps.id_asignatura);
                 $('#fecha_clase').val(info.event.start);

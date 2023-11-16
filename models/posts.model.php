@@ -80,7 +80,7 @@
 
         }
 
-        public static function mdlActualizar($tabla,$datos,$id){
+        public static function mdlActualizar($tabla,$datos,$campo_id,$id){
             
             $conexion = Conexion::conectar();
             //Extraemos los campos
@@ -91,8 +91,8 @@
             $valores = rtrim($valores, ",");
 
             //Hacemos la consulta
-            $sql = "UPDATE $tabla SET $valores WHERE id_post = :id";
-
+            $sql = "UPDATE $tabla SET $valores WHERE $campo_id = :id";
+            
             //La preparamos
             $sentencia=$conexion->prepare($sql);
             foreach ($datos as $campo => $valor) {
