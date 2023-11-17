@@ -94,7 +94,7 @@
                             </form>
 
                             <!-- Comments section-->
-                            <div class="container " id="comentarios">
+                            <div class="container d-none" id="comentarios">
                                 <div class="row d-flex justify-content-center">
                                     <div class="card w-100">
                                         <div class="card-header">
@@ -117,7 +117,7 @@
                                                     <?= $comentario["comentario"]; ?>
                                                 </p>
 
-                                                <?php if ($comentario["id_usuario"] == $_SESSION["id_usuario"]) { ?>
+                                                <?php if (isset($_SESSION["id_usuario"]) && $comentario["id_usuario"] == $_SESSION["id_usuario"]) { ?>
                                                     <!-- botonesComentario -->
                                                     <div id="botones<?= $comentario['id_comentario']; ?>">
 

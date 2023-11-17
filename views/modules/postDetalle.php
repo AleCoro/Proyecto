@@ -121,7 +121,7 @@ $numLikes = $postsController->ctrContarLikes($_SESSION["id_post"]);
 $comprobarLikes = $postsController->ctrMostrarPostsWhere("likes", "post", $_SESSION["id_post"]);
 
 foreach ($comprobarLikes as $comprobarLike) {
-    if ($comprobarLike["usuario"] == $_SESSION["id_usuario"]) {
+    if (isset($_SESSION["id_usuario"]) && $comprobarLike["usuario"] == $_SESSION["id_usuario"]) {
         $like = true;
         $id_like = $comprobarLike["id_like"];
     }
