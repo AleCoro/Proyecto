@@ -101,3 +101,67 @@ function cargarProfesores(asignatura) {
     };
     xmlhttp.send(null);
 }
+
+function cargarCalendario(usuario) {
+    var Calendar = FullCalendar.Calendar;
+    var calendarEl = document.getElementById('calendario1');
+
+    var calendar = new Calendar(calendarEl, {
+        headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        },
+        themeSystem: 'bootstrap',
+        locale: 'es', // Establece el idioma a español
+        firstDay: 1, // Para que empiece en lunes
+        events: 'views/js/consultas/datosClasesListar.php?profesor=' + usuario,
+        editable: false,
+        droppable: false, // Esto es para colocar eventos en el calendario.
+
+        eventClick: function (info) {
+            fecha = new Date(info.event.start);
+            hoy = new Date();
+
+            if (info.event.backgroundColor == "#ff0000") {
+                async function showSuccessAlert() {
+                    await Swal.fire({
+                        position: 'top-center',
+                        icon: 'error',
+                        title: 'Esta clase ya esta reservada',
+                        showConfirmButton: false,
+                        timer: 1400
+                    });
+                }
+                showSuccessAlert();
+            } else if (hoy > fecha) {
+                async function showSuccessAlert() {
+                    await Swal.fire({
+                        position: 'top-center',
+                        icon: 'error',
+                        title: 'La fecha de esta clase ha expirado',
+                        showConfirmButton: false,
+                        timer: 1400
+                    });
+                }
+                showSuccessAlert();
+            } else {
+                //Muestro el titulo
+                $('#nombreAsignatura').text(info.event.title).val(info.event.title);
+                //Formateo la fecha para mostrarla en el modal
+                fecha = new Date(info.event.start);
+                hora = fecha.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+                //Muestro la descripcion
+                $('#descripcion').text("¿Desea reservar esta hora para " + info.event.title + " a las " + hora + "?");
+
+                $('#asignatura').val(info.event.title);
+                $('#fecha_clase').val(info.event.start);
+
+                $('#modalReserva').modal('show');
+            }
+        }
+    });
+
+
+    calendar.render();
+}

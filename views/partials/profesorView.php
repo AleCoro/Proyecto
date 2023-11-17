@@ -90,15 +90,15 @@
         <div class="card">
           <div class="card-header p-2">
             <ul class="nav nav-pills">
-              <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Activity</a></li>
+              <li class="nav-item"><a class="nav-link active" href="#calendario" data-toggle="tab">Disponibilidad</a></li>
+              <li class="nav-item"><a class="nav-link" href="#activity" data-toggle="tab">Activity</a></li>
               <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Timeline</a></li>
               <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Settings</a></li>
-              <li class="nav-item"><a class="nav-link" href="#calendario" data-toggle="tab">Calendario</a></li>
             </ul>
           </div><!-- /.card-header -->
           <div class="card-body">
             <div class="tab-content">
-              <div class="active tab-pane" id="activity">
+              <div class="tab-pane" id="activity">
                 <!-- Post -->
                 <div class="post">
                   <div class="user-block">
@@ -357,9 +357,8 @@
                 </form>
               </div>
               <!-- /.tab-pane -->
-              <div class="tab-pane" id="calendario">
-                <h1>hola</h1>
-
+              <div class="tab-pane active" id="calendario">
+                <div id="calendario1"></div>
               </div>
               <!-- /.tab-pane -->
             </div>
@@ -374,75 +373,35 @@
   </div><!-- /.container-fluid -->
 </section>
 
-<section class="content">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-3">
-        <div class="sticky-top mb-3">
-          <div class="card">
-            <div class="card-header">
-              <h4 class="card-title">Draggable Events</h4>
-            </div>
-            <div class="card-body">
-              <!-- the events -->
-              <div id="external-events">
-                <div class="external-event bg-success">Lunch</div>
-                <div class="external-event bg-warning">Go home</div>
-                <div class="external-event bg-info">Do homework</div>
-                <div class="external-event bg-primary">Work on UI design</div>
-                <div class="external-event bg-danger">Sleep tight</div>
-                <div class="checkbox">
-                  <label for="drop-remove">
-                    <input type="checkbox" id="drop-remove">
-                    remove after drop
-                  </label>
-                </div>
-              </div>
-            </div>
-            <!-- /.card-body -->
-          </div>
-          <!-- /.card -->
-          <div class="card">
-            <div class="card-header">
-              <h3 class="card-title">Create Event</h3>
-            </div>
-            <div class="card-body">
-              <div class="btn-group" style="width: 100%; margin-bottom: 10px;">
-                <ul class="fc-color-picker" id="color-chooser">
-                  <li><a class="text-primary" href="#"><i class="fas fa-square"></i></a></li>
-                  <li><a class="text-warning" href="#"><i class="fas fa-square"></i></a></li>
-                  <li><a class="text-success" href="#"><i class="fas fa-square"></i></a></li>
-                  <li><a class="text-danger" href="#"><i class="fas fa-square"></i></a></li>
-                  <li><a class="text-muted" href="#"><i class="fas fa-square"></i></a></li>
-                </ul>
-              </div>
-              <!-- /btn-group -->
-              <div class="input-group">
-                <input id="new-event" type="text" class="form-control" placeholder="Event Title">
+<script>
+  cargarCalendario(<?= $profesor["id_usuario"] ?>);
+</script>
 
-                <div class="input-group-append">
-                  <button id="add-new-event" type="button" class="btn btn-primary">Add</button>
-                </div>
-                <!-- /btn-group -->
-              </div>
-              <!-- /input-group -->
-            </div>
-          </div>
+<!-- Modal -->
+<div class="modal fade" id="modalReserva" tabindex="-1" role="dialog" aria-labelledby="nombreAsignatura" aria-hidden="true">
+  <form action="" method="post">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="nombreAsignatura" name="nombreAsignatura">Título del Modal</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" id="descripcion">
+          <p>Contenido del modal. Puedes agregar texto, imágenes u otros elementos aquí.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-primary">Reservar</button>
         </div>
       </div>
-      <!-- /.col -->
-      <div class="col-md-9">
-        <div class="card card-primary">
-          <div class="card-body p-0">
-            <!-- THE CALENDAR -->
-            <div id="calendar"></div>
-          </div>
-          <!-- /.card-body -->
-        </div>
-        <!-- /.card -->
-      </div>
-      <!-- /.col -->
     </div>
-    <!-- /.row -->
-  </div><!-- /.container-fluid -->
-</section>
+    <input type="hidden" name="accion" value="reservar">
+    <input type="hidden" id="id_alumno" name="id_alumno" value="<?php echo (isset($_SESSION["id_usuario"])) ? $_SESSION["id_usuario"] : "" ; ?>">
+    <input type="hidden" id="id_profesor" name="id_profesor" value="<?= $profesor["id_usuario"]; ?>">
+    <input type="hidden" id="asignatura" name="asignatura" value="">
+    <input type="hidden" id="fecha_clase" name="fecha_clase" value="">
+    <input type="hidden" id="id_imparte" name="id_imparte" value="<?=$_POST["id_imparte"];?>">
+  </form>
+</div>

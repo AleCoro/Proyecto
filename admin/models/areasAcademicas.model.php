@@ -8,7 +8,7 @@
             $conexion = Conexion::conectar();
             $sentencia=$conexion->prepare("SELECT * FROM $tabla");
             $sentencia->execute();
-            $registros=$sentencia->fetchAll();
+            $registros=$sentencia->fetchAll(PDO::FETCH_ASSOC);
             return $registros;
 
         }
@@ -18,7 +18,7 @@
             $conexion = Conexion::conectar();
             $sentencia=$conexion->prepare("SELECT * FROM $tabla WHERE $campo LIKE '$valor'");
             $sentencia->execute();
-            $registros=$sentencia->fetchAll();
+            $registros=$sentencia->fetchAll(PDO::FETCH_ASSOC);
             return $registros;
 
         }

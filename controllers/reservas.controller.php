@@ -1,33 +1,34 @@
 <?php
-class AsignaturasController
+class ReservasController
 {
-    // Cargar Asignaturas
-    public function ctrMostrarAsignaturas($tabla)
+    // Cargar Reservas
+    public function ctrMostrarReservas($tabla)
     {
 
-        $respuesta = AsignaturasModel::mdlMostrarAsignaturas($tabla);
+        $respuesta = ReservasModel::mdlMostrarReservas($tabla);
 
         return $respuesta;
     }
 
-    public function ctrMostrarAsignaturasWhere($tabla, $campo, $valor)
+    public function ctrMostrarReservasWhere($tabla, $campo, $valor)
     {
-
-        $respuesta = AsignaturasModel::mdlMostrarAsignaturasWhere($tabla, $campo, $valor);
+        $tabla = "";
+        $respuesta = ReservasModel::mdlMostrarReservasWhere($tabla, $campo, $valor);
 
         return $respuesta;
     }
 
-    public function ctrMostrarAsignaturaWhere($tabla, $campo, $valor)
+    public function ctrMostrarReservaWhere($tabla, $campo, $valor)
     {
-        $respuesta = AsignaturasModel::mdlMostrarAsignaturaWhere($tabla, $campo, $valor);
+        $respuesta = ReservasModel::mdlMostrarReservaWhere($tabla, $campo, $valor);
 
         return $respuesta;
     }
 
-    public function mdlMostrar_Ultima_Asignatura($tabla)
+    public function mdlMostrar_Ultima_Reserva()
     {
-        $respuesta = AsignaturasModel::mdlMostrar_Ultima_Asignatura($tabla);
+        $tabla = "";
+        $respuesta = ReservasModel::mdlMostrar_Ultima_Reserva($tabla);
 
         return $respuesta;
     }
@@ -35,16 +36,25 @@ class AsignaturasController
     public function ctrInsertar($tabla, $datos, $redireccion)
     {
         // Validamos los datos
-        $datos = AsignaturasController::ctrValidarDatos($datos, $redireccion);
+        $datos = ReservasController::ctrValidarDatos($datos, $redireccion);
 
         //Insertamos los datos si todo ha salido bien
-        $respuesta = AsignaturasModel::mdlInsertar($tabla, $datos);
+        $respuesta = ReservasModel::mdlInsertar($tabla, $datos);
 
         if ($respuesta) {
             echo "<script>
-                        alert('¡Se ha dado de alta correctamente!');
-                        window.location = '$redireccion';
-                    </script>";
+                async function showSuccessAlert() {
+                    await Swal.fire({
+                        position: 'top-center',
+                        icon: 'success',
+                        title: 'Clase Reservada',
+                        showConfirmButton: false,
+                        timer: 1400
+                    });
+                    window.location.href = '$redireccion';
+                }
+                showSuccessAlert();
+            </script>";
         } else {
             echo "<script>
                     alert('¡Error al dar de alta!');
@@ -66,25 +76,35 @@ class AsignaturasController
         //     $redireccion = "inicio";
 
 
-        //     $crudController = new AsignaturasController();
+        //     $crudController = new ReservasController();
         //     $crudController->ctrInsertar($tabla,$datos,$redireccion);
         //     // var_dump($inmueble);
         //   }
 
     }
 
-    public function ctrActualizar($tabla,$datos,$redireccion,$campo_id,$id)
+    public function ctrActualizar($tabla, $datos, $redireccion, $id)
     {
         // Validamos los datos
-        $datos = AsignaturasController::ctrValidarDatos($datos,$redireccion);
+        $datos = ReservasController::ctrValidarDatos($datos, $redireccion);
 
-        $respuesta=AsignaturasModel::mdlActualizar($tabla,$datos,$campo_id,$id);
+        $respuesta = ReservasModel::mdlActualizar($tabla, $datos, $id);
 
-        return $respuesta;
+        if ($respuesta) {
+            echo "<script>
+                        alert('¡Se ha actualizado correctamente!');
+                        window.location = '$redireccion';
+                    </script>";
+        } else {
+            echo "<script>
+                    alert('¡Error al hacer la actualizacion!');
+                    window.location = '$redireccion';
+                </script>";
+        }
 
 
         // Para actualizar datos sigue esta estructura
-        
+
         // if (isset($_POST["nombre"]) && !empty($_POST["nombre"])) {
         //     $datos = array(
         //         "nombre" => $_POST["nombre"],
@@ -97,17 +117,17 @@ class AsignaturasController
 
         //     $id = $_POST["id_producto"];
 
-        //     $crudController = new AsignaturasController();
+        //     $crudController = new ReservasController();
         //     $crudController->ctrActualizar($tabla,$datos,$redireccion,$id);
         //     // var_dump($inmueble);
         //   }
-        
+
     }
 
     public function ctrEliminar($tabla, $campo_id, $id, $redireccion)
     {
         if (isset($id)) {
-            $respuesta = AsignaturasModel::mdlEliminar($tabla, $campo_id, $id);
+            $respuesta = ReservasModel::mdlEliminar($tabla, $campo_id, $id);
 
             if ($respuesta) {
                 echo "<script>
@@ -132,7 +152,7 @@ class AsignaturasController
 
         //     $id = $_POST["eliminar"];
 
-        //     $crudController = new AsignaturasController();
+        //     $crudController = new ReservasController();
         //     $crudController->ctrEliminar($tabla,$redireccion,$id);
         //     // var_dump($inmueble);
         //   }
@@ -164,7 +184,7 @@ class AsignaturasController
                     $directorio = $url . $carpeta;
                     $nombreFichero = $datos["nombre"];
 
-                    $ficheroValidado = AsignaturasModel::mdlValidarFichero($valor, $directorio, $nombreFichero);
+                    $ficheroValidado = ReservasModel::mdlValidarFichero($valor, $directorio, $nombreFichero);
                     if ($ficheroValidado == "") {
                         echo "<script>
                                 alert('¡El tipo de fichero no es el correcto!');
@@ -185,4 +205,21 @@ class AsignaturasController
         }
         return $datos;
     }
+
+    // Cargar Paginacion
+    public function ctrMostrarPaginacion($tabla,$pagina,$registrosxpagina){
+        $orden="ASC";
+        
+
+        if ($pagina==1) {
+            $inicio=0;
+        }else {
+            $inicio=($pagina*$registrosxpagina)-$registrosxpagina;
+        }
+        
+        $respuesta = ReservasModel::mdlMostrarPaginacion($tabla,$inicio,$registrosxpagina,$orden);
+
+        return $respuesta;
+    }
+
 }

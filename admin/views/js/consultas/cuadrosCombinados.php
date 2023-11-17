@@ -7,7 +7,7 @@
         $sentencia = $conexion->prepare("SELECT * FROM $tabla WHERE $campo = :valor");
         $sentencia->bindValue(":valor", $valor);
         $sentencia->execute();
-        $registros=$sentencia->fetchAll();
+        $registros=$sentencia->fetchAll(PDO::FETCH_ASSOC);
         return $registros;
 
     }

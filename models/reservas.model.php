@@ -1,10 +1,10 @@
 <?php
 require_once("conexion.php");
 
-class AreasAcademicasModel
+class ReservasModel
 {
-    // Cargar AreasAcademicas
-    public static function mdlMostrarAreasAcademicas($tabla)
+    // Cargar Reservas
+    public static function mdlMostrarReservas($tabla)
     {
 
         $conexion = Conexion::conectar();
@@ -14,7 +14,7 @@ class AreasAcademicasModel
         return $registros;
     }
 
-    public static function mdlMostrarAreasAcademicasWhere($tabla, $campo, $valor)
+    public static function mdlMostrarReservasWhere($tabla, $campo, $valor)
     {
 
         $conexion = Conexion::conectar();
@@ -24,7 +24,7 @@ class AreasAcademicasModel
         return $registros;
     }
 
-    public static function mdlMostrarAreaAcademicaWhere($tabla, $campo, $valor)
+    public static function mdlMostrarReservaWhere($tabla, $campo, $valor)
     {
 
         $conexion = Conexion::conectar();
@@ -34,7 +34,7 @@ class AreasAcademicasModel
         return $registros;
     }
 
-    public static function mdlMostrar_Ultima_AreaAcademica($tabla)
+    public static function mdlMostrar_Ultima_Reserva($tabla)
     {
         global $conexion;
         $id = "id";
@@ -46,7 +46,7 @@ class AreasAcademicasModel
         }
     }
 
-    public static function mdlMostrar_AreasAcademicas_Ordenadas($tabla, $campo, $orden)
+    public static function mdlMostrar_Reservas_Ordenadas($tabla, $campo, $orden)
     {
         global $conexion;
         $consulta = "SELECT * FROM $tabla Order by $campo $orden LIMIT 1";

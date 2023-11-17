@@ -41,12 +41,11 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <!-- FULL CALENDAR -->
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="admin/views/plugins/fontawesome-free/css/all.min.css">
-  <!-- fullCalendar -->
   <link rel="stylesheet" href="admin/views/plugins/fullcalendar/main.css">
+  <script src="admin/views/plugins/fullcalendar/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/locales/es.js"></script>
+
 
 </head>
 

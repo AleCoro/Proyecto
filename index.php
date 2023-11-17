@@ -16,6 +16,9 @@
 
     require_once "controllers/usuarios.controller.php";
     require_once "models/usuarios.model.php";
+
+    require_once "controllers/reservas.controller.php";
+    require_once "models/reservas.model.php";
     
     $plantilla = new PlantillaController();
     $plantilla->ctrPlantilla();

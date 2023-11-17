@@ -63,6 +63,7 @@
                 <div class="text-right">
                   <form action="profesor" method="post" class="m-auto">
                     <input type="hidden" name="id_profesor" value="<?= $profesor["id_usuario"]; ?>">
+                    <input type="hidden" name="id_imparte" id="id_imparte" value="<?= $profesor["id_imparte"]; ?>">
                     <button class="btn btn-sm btn-primary"><i class="fas fa-user"></i> Ver mas...</button>
                   </form>
                 </div>

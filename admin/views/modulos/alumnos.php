@@ -1,12 +1,13 @@
 <?php
 
 $rolesController = new RolesController();
-$datosAlumnos = $rolesController->ctrMostrarRegistrosWhere("es_un", "rol", "3");
-
 $usuariosController = new UsuariosController();
 
+$datosAlumnos = $rolesController->ctrMostrarRegistrosWhere("es_un", "rol", "3");
+// var_dump($datosAlumnos);
+
 foreach ($datosAlumnos as $datoAlumnos) {
-    $alumnos[] = $usuariosController->ctrMostrarUsuarios("id_usuario", $datoAlumnos["usuario"]);
+    $alumnos[] = $usuariosController->ctrMostrarUsuarioWhere("id_usuario", $datoAlumnos["usuario"]);
 }
 
 if (isset($_POST["accion"]) && $_POST["accion"] == "EditarAlumno") {

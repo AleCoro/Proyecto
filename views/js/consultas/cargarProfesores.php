@@ -16,7 +16,7 @@
 
         $sentencia = $conexion->prepare($sql);
         $sentencia->execute();
-        return $sentencia->fetchAll();
+        return $sentencia->fetchAll(PDO::FETCH_ASSOC);
 
     }
 

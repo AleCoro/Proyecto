@@ -8,7 +8,7 @@
             $conexion = Conexion::conectar();
             $sentencia=$conexion->prepare("SELECT * FROM $tabla");
             $sentencia->execute();
-            $registros=$sentencia->fetchAll();
+            $registros=$sentencia->fetchAll(PDO::FETCH_ASSOC);
             return $registros;
 
         }
@@ -18,7 +18,7 @@
             $conexion = Conexion::conectar();
             $sentencia=$conexion->prepare("SELECT * FROM $tabla WHERE $campo LIKE '$valor'");
             $sentencia->execute();
-            $registros=$sentencia->fetchAll();
+            $registros=$sentencia->fetchAll(PDO::FETCH_ASSOC);
             return $registros;
 
         }
@@ -80,7 +80,7 @@
 
         }
 
-        public static function mdlActualizar($tabla,$datos,$id){
+        public static function mdlActualizar($tabla,$datos,$campo_id,$id){
             
             $conexion = Conexion::conectar();
             //Extraemos los campos
@@ -91,7 +91,7 @@
             $valores = rtrim($valores, ",");
 
             //Hacemos la consulta
-            $sql = "UPDATE $tabla SET $valores WHERE id_asignatura = :id";
+            $sql = "UPDATE $tabla SET $valores WHERE $campo_id = :id";
 
             //La preparamos
             $sentencia=$conexion->prepare($sql);

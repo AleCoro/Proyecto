@@ -6,7 +6,7 @@
     $datosProfesores = $rolesController->ctrMostrarRegistrosWhere("es_un", "rol","2");
 
     foreach ($datosProfesores as $datoProfesores) {
-        $profesores[] = $usuariosController->ctrMostrarUsuarios("id_usuario", $datoProfesores["usuario"]);
+        $profesores[] = $usuariosController->ctrMostrarUsuarioWhere("id_usuario", $datoProfesores["usuario"]);
     }
 
     if (isset($_POST["accion"]) && $_POST["accion"] == "EditarProfesor") {

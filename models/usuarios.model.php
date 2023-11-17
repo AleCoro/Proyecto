@@ -10,7 +10,7 @@ class ModeloUsuarios
         $conexion = Conexion::conectar();
         $sentencia = $conexion->prepare("SELECT * FROM $tabla");
         $sentencia->execute();
-        return $sentencia->fetchAll();
+        return $sentencia->fetchAll(PDO::FETCH_ASSOC);
 
         // $sentencia->close();
         $sentencia = null;
@@ -153,7 +153,7 @@ class ModeloUsuarios
 
         $sentencia = $conexion->prepare($sql);
         $sentencia->execute();
-        return $sentencia->fetchAll();
+        return $sentencia->fetchAll(PDO::FETCH_ASSOC);
 
         // $sentencia->close();
         $sentencia = null;
