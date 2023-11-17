@@ -25,7 +25,7 @@ class LoginController
                         if (isset($_POST["accion"]) && $_POST["accion"] == "reserva") {
                             $_SESSION["perfilSeleccionado"] = "addRolUser";
                             $respuesta =  'profesor';
-                        }else{
+                        } else {
                             $respuesta =  'inicio';
                         }
 
@@ -92,77 +92,123 @@ class LoginController
                     // Insertamos los datos en la tabla usuario
                     $id_insertado = LoginController::ctrRegistrarUsuario($tabla, $datos_usuario);
 
-                    if (isset($_FILES["foto"]["tmp_name"])) {
+                    if (isset($_FILES["foto"]["tmp_name"]) && $_FILES["foto"]["tmp_name"] !== "") {
+                        //Definimo el tamaño maximo de megas
+                        $sizeMegas = 2;
+                        $sizeMegas = $sizeMegas * 1048576;
+                        //Sacamos el tamaño de nuestro fichero
+                        $size = filesize($_FILES["foto"]["tmp_name"]);
 
-                        list($ancho, $alto) = getimagesize($_FILES["foto"]["tmp_name"]);
-                        $nuevoAncho = 300;
-                        $nuevoAlto = 300;
-                
-                        // SEGUN FORMATO DE FOTO APLICAMOS UNAS FUNCIONES U OTRAS
-                        if ($_FILES["foto"]["type"] == "image/jpeg") {
-                            // GUARDAMOS LA IMAGEN EN EL DIRECTORIO
-                            $ruta = "views/img/usuarios/" . $id_insertado . "-" . $_POST["Usuario"] . ".jpeg";
-                            $origen = imagecreatefromjpeg($_FILES["foto"]["tmp_name"]);
-                            $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-                            imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-                            imagejpeg($destino, "admin/".$ruta);
-                        }
-                
-                        if ($_FILES["foto"]["type"] == "image/png") {
-                
-                            // GUARDAMOS LA IMAGEN EN EL DIRECTORIO
-                            $ruta = "views/img/usuarios/" . $id_insertado . "-" . $_POST["Usuario"] . ".png";
-                            $origen = imagecreatefrompng($_FILES["foto"]["tmp_name"]);
-                            $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-                            imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-                            imagepng($destino, "admin/".$ruta);
+                        if ($size < $sizeMegas) {
+                            list($ancho, $alto) = getimagesize($_FILES["foto"]["tmp_name"]);
+                            $nuevoAncho = 300;
+                            $nuevoAlto = 300;
+
+                            // SEGUN FORMATO DE FOTO APLICAMOS UNAS FUNCIONES U OTRAS
+                            if ($_FILES["foto"]["type"] == "image/jpeg") {
+                                // GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+                                $ruta = "views/img/usuarios/" . $id_insertado . "-" . $_POST["Usuario"] . ".jpeg";
+                                $origen = imagecreatefromjpeg($_FILES["foto"]["tmp_name"]);
+                                $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+                                imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+                                imagejpeg($destino, "admin/" . $ruta);
+                            }
+
+                            if ($_FILES["foto"]["type"] == "image/png") {
+
+                                // GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+                                $ruta = "views/img/usuarios/" . $id_insertado . "-" . $_POST["Usuario"] . ".png";
+                                $origen = imagecreatefrompng($_FILES["foto"]["tmp_name"]);
+                                $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+                                imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+                                imagepng($destino, "admin/" . $ruta);
+                            }
+
+                            if (!isset($destino)) {
+                                echo "<script>
+                                async function showSuccessAlert() {
+                                    await Swal.fire({
+                                        position: 'top-center',
+                                        icon: 'error',
+                                        title: 'Tipo de fichero incorrecto',
+                                        showConfirmButton: false,
+                                        timer: 1400
+                                    });
+                                    window.location.href = 'register';
+                                }
+                                showSuccessAlert();
+                            </script>";
+                                $error = true;
+                            }
+                        } else {
+                            echo "<script>
+                                async function showSuccessAlert() {
+                                    await Swal.fire({
+                                        position: 'top-center',
+                                        icon: 'error',
+                                        title: 'Fichero demasiado grande',
+                                        showConfirmButton: false,
+                                        timer: 1400
+                                    });
+                                    window.location.href = 'register';
+                                }
+                                showSuccessAlert();
+                            </script>";
+                            $error = true;
                         }
 
-                        $datos_usuario["foto"] = $ruta;
+                        if (!isset($error) || $error == false) {
+                            $datos_usuario["foto"] = $ruta;
+                        }
                     }
 
                     $UserController = new UsuariosController();
-                    $UserController->ActualizarUsuario("usuarios",$datos_usuario,null,$id_insertado);
 
-                    // Sacamos el id del rol
-                    $RolesController = new RolesController();
-                    $rol =  $RolesController->ctrMostrarRegistroWhere("roles", "nombre_rol", $_POST["rol"]);
+                    if (!isset($datos_usuario["foto"])) {
+                        $UserController->ctrBorrarUsuario($id_insertado,"usuarios",null,null);
+                        return;
+                    } else {
+                        $UserController->ActualizarUsuario("usuarios", $datos_usuario, null, $id_insertado);
+
+                        // Sacamos el id del rol
+                        $RolesController = new RolesController();
+                        $rol =  $RolesController->ctrMostrarRegistroWhere("roles", "nombre_rol", $_POST["rol"]);
 
 
-                    // Construimos los datos para la tabla es_un
-                    $datos_es_un = array(
-                        "usuario" => $id_insertado,
-                        "rol" => $rol["id_rol"]
-                    );
-
-                    // Insertamos los datos en la tabla es_un
-                    $RolesController->ctrInsertar("es_un", $datos_es_un);
-
-                    if ($rol["id_rol"] == 2) {
-                        // Construimos los datos para la tabla imparte
-                        $fecha = $_POST["fecha_imparte"];
-                        $hora = $_POST["hora_imparte"];
-                
-                        $fechaHora = $fecha . ' ' . $hora;
-                
-                        // Convierte la fecha y hora en un objeto DateTime
-                        $dateTime = new DateTime($fechaHora);
-
-                        $datos_imparte = array(
-                            "asignatura" => $_POST["asignaturas"],
-                            "profesor" => $id_insertado,
-                            "precio" => $_POST["precio"],
-                            "fecha_imparte" => $dateTime->format('Y-m-d H:i:s')
+                        // Construimos los datos para la tabla es_un
+                        $datos_es_un = array(
+                            "usuario" => $id_insertado,
+                            "rol" => $rol["id_rol"]
                         );
 
-                        // Insertamos los datos en la tabla imparte
-                        $asignaturasController = new AsignaturasController();
-                        $asignaturasController->ctrInsertar("imparte", $datos_imparte,null);
-                    }
+                        // Insertamos los datos en la tabla es_un
+                        $RolesController->ctrInsertar("es_un", $datos_es_un);
 
-                    if ($id_insertado) {
-                        $respuesta = "";
-                        echo "<script>
+                        if ($rol["id_rol"] == 2) {
+                            // Construimos los datos para la tabla imparte
+                            $fecha = $_POST["fecha_imparte"];
+                            $hora = $_POST["hora_imparte"];
+
+                            $fechaHora = $fecha . ' ' . $hora;
+
+                            // Convierte la fecha y hora en un objeto DateTime
+                            $dateTime = new DateTime($fechaHora);
+
+                            $datos_imparte = array(
+                                "asignatura" => $_POST["asignaturas"],
+                                "profesor" => $id_insertado,
+                                "precio" => $_POST["precio"],
+                                "fecha_imparte" => $dateTime->format('Y-m-d H:i:s')
+                            );
+
+                            // Insertamos los datos en la tabla imparte
+                            $asignaturasController = new AsignaturasController();
+                            $asignaturasController->ctrInsertar("imparte", $datos_imparte, null);
+                        }
+
+                        if ($id_insertado) {
+                            $respuesta = "";
+                            echo "<script>
                                 async function showSuccessAlert() {
                                     await Swal.fire({
                                         position: 'top-center',
@@ -174,8 +220,9 @@ class LoginController
                                 }
                                 showSuccessAlert();
                             </script>";
-                    } else {
-                        $respuesta =  '<br><div class="alert alert-danger">¡Error al guardar el usuario!</div>';
+                        } else {
+                            $respuesta =  '<br><div class="alert alert-danger">¡Error al guardar el usuario!</div>';
+                        }
                     }
                 } else {
                     $respuesta =  '<br><div class="alert alert-danger">¡El usuario no puede ir vacío o llevar caracteres especiales!</div>';

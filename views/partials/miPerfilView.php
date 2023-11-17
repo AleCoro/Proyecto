@@ -407,7 +407,7 @@
                                         <div class="form-group col-md-6">
                                             <label for="exampleInputFile">Subir Foto</label>
                                             <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="foto" name="foto" required onchange="previsualizarIMG(this, 'previsualizarImg')">
+                                                <input type="file" class="custom-file-input" id="foto" name="foto" onchange="previsualizarIMG(this, 'previsualizarImg')">
                                                 <label class="custom-file-label" for="customFile">Sube tu foto</label>
                                             </div>
                                         </div>

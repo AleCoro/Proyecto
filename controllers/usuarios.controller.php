@@ -31,17 +31,7 @@ class UsuariosController
 
             $respuesta = ModeloUsuarios::mdlBorrarUsuario($tabla, $id);
 
-            if ($respuesta) {
-                echo "<script>
-                        alert('¡Se ha eliminado correctamente!');
-                        window.location = '$redireccion';
-                    </script>";
-            } else {
-                echo "<script>
-                    alert('¡Error al eliminar!');
-                    window.location = '$redireccion';
-                </script>";
-            }
+            return $respuesta;
         }
     }
 

@@ -29,39 +29,77 @@ if (isset($_POST["accion"]) && $_POST["accion"] == "CrearPost") {
 
     $id_post = $postController->ctrInsertar("post", $datos, null);
 
+    // Valido el fichero
     if (isset($_FILES["add_portada"]["tmp_name"]) && $_FILES["edit_portada"]["tmp_name"] !== "") {
+        //Definimo el tamaño maximo de megas
+        $sizeMegas = 2;
+        $sizeMegas = $sizeMegas * 1048576;
+        //Sacamos el tamaño de nuestro fichero
+        $size = filesize($_FILES["foto"]["tmp_name"]);
 
-        list($ancho, $alto) = getimagesize($_FILES["add_portada"]["tmp_name"]);
-        $nuevoAncho = 600;
-        $nuevoAlto = 400;
+        if ($size < $sizeMegas) {
 
-        // // CREAMOS EL DIRECTORIO DONDE GUARDAR LA FOTO
-        // $directorio = "views/img/blog/".$id_post."-".$_POST["add_titulo"];
-        // mkdir($directorio, 0755);
+            list($ancho, $alto) = getimagesize($_FILES["add_portada"]["tmp_name"]);
+            $nuevoAncho = 600;
+            $nuevoAlto = 400;
 
-        // SEGUN FORMATO DE FOTO APLICAMOS UNAS FUNCIONES U OTRAS
-        if ($_FILES["add_portada"]["type"] == "image/jpeg") {
+            // SEGUN FORMATO DE FOTO APLICAMOS UNAS FUNCIONES U OTRAS
+            if ($_FILES["add_portada"]["type"] == "image/jpeg") {
 
-            // GUARDAMOS LA IMAGEN EN EL DIRECTORIO
-            $ruta = "views/img/blog/" . $id_post . "-" . $_POST["add_titulo"] . ".jpeg";
-            $origen = imagecreatefromjpeg($_FILES["add_portada"]["tmp_name"]);
-            $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-            imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-            imagejpeg($destino, $ruta);
-        }
+                // GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+                $ruta = "views/img/blog/" . $id_post . "-" . $_POST["add_titulo"] . ".jpeg";
+                $origen = imagecreatefromjpeg($_FILES["add_portada"]["tmp_name"]);
+                $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+                imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+                imagejpeg($destino, $ruta);
+            }
 
-        if ($_FILES["add_portada"]["type"] == "image/png") {
+            if ($_FILES["add_portada"]["type"] == "image/png") {
 
-            // GUARDAMOS LA IMAGEN EN EL DIRECTORIO
-            $ruta = "views/img/blog/" . $id_post . "-" . $_POST["add_titulo"] . ".png";
-            $origen = imagecreatefrompng($_FILES["add_portada"]["tmp_name"]);
-            $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-            imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-            imagepng($destino, $ruta);
+                // GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+                $ruta = "views/img/blog/" . $id_post . "-" . $_POST["add_titulo"] . ".png";
+                $origen = imagecreatefrompng($_FILES["add_portada"]["tmp_name"]);
+                $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+                imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+                imagepng($destino, $ruta);
+            }
+
+            if (!isset($destino)) {
+                echo "<script>
+                        async function showSuccessAlert() {
+                            await Swal.fire({
+                                position: 'top-center',
+                                icon: 'error',
+                                title: 'Tipo de fichero incorrecto',
+                                showConfirmButton: false,
+                                timer: 1400
+                            });
+                            window.location.href = 'blog';
+                        }
+                        showSuccessAlert();
+                    </script>";
+                return;
+            }
+
+            $datos["imagen"] = $ruta;
+        } else {
+            echo "<script>
+                    async function showSuccessAlert() {
+                        await Swal.fire({
+                            position: 'top-center',
+                            icon: 'error',
+                            title: 'Fichero demasiado grande',
+                            showConfirmButton: false,
+                            timer: 1400
+                        });
+                        window.location.href = 'blog';
+                    }
+                    showSuccessAlert();
+                </script>";
+            return;
         }
     }
 
-    $datos["imagen"] = $ruta;
     $postController->ctrActualizar("post", $datos, null, $id_post);
 
     echo "<script>
@@ -97,35 +135,74 @@ if (isset($_POST["accion"]) && $_POST["accion"] == "EditarPost") {
 
     var_dump($_FILES["edit_portada"]["tmp_name"]);
 
-    if (isset($_FILES["edit_portada"]["tmp_name"]) && $_FILES["edit_portada"]["tmp_name"] !== "") {
+    if (isset($_FILES["add_portada"]["tmp_name"]) && $_FILES["edit_portada"]["tmp_name"] !== "") {
+        //Definimo el tamaño maximo de megas
+        $sizeMegas = 2;
+        $sizeMegas = $sizeMegas * 1048576;
+        //Sacamos el tamaño de nuestro fichero
+        $size = filesize($_FILES["foto"]["tmp_name"]);
 
-        unlink($_POST["img_old"]);
+        if ($size < $sizeMegas) {
 
-        list($ancho, $alto) = getimagesize($_FILES["edit_portada"]["tmp_name"]);
-        $nuevoAncho = 600;
-        $nuevoAlto = 400;
+            list($ancho, $alto) = getimagesize($_FILES["add_portada"]["tmp_name"]);
+            $nuevoAncho = 600;
+            $nuevoAlto = 400;
 
-        // SEGUN FORMATO DE FOTO APLICAMOS UNAS FUNCIONES U OTRAS
-        if ($_FILES["edit_portada"]["type"] == "image/jpeg") {
+            // SEGUN FORMATO DE FOTO APLICAMOS UNAS FUNCIONES U OTRAS
+            if ($_FILES["add_portada"]["type"] == "image/jpeg") {
 
-            // GUARDAMOS LA IMAGEN EN EL DIRECTORIO
-            $ruta = "views/img/blog/" . $id_post . "-" . $_POST["edit_titulo"] . ".jpeg";
-            $origen = imagecreatefromjpeg($_FILES["edit_portada"]["tmp_name"]);
-            $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-            imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-            imagejpeg($destino, $ruta);
+                // GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+                $ruta = "views/img/blog/" . $id_post . "-" . $_POST["add_titulo"] . ".jpeg";
+                $origen = imagecreatefromjpeg($_FILES["add_portada"]["tmp_name"]);
+                $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+                imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+                imagejpeg($destino, $ruta);
+            }
+
+            if ($_FILES["add_portada"]["type"] == "image/png") {
+
+                // GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+                $ruta = "views/img/blog/" . $id_post . "-" . $_POST["add_titulo"] . ".png";
+                $origen = imagecreatefrompng($_FILES["add_portada"]["tmp_name"]);
+                $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+                imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+                imagepng($destino, $ruta);
+            }
+
+            if (!isset($destino)) {
+                echo "<script>
+                        async function showSuccessAlert() {
+                            await Swal.fire({
+                                position: 'top-center',
+                                icon: 'error',
+                                title: 'Tipo de fichero incorrecto',
+                                showConfirmButton: false,
+                                timer: 1400
+                            });
+                            window.location.href = 'blog';
+                        }
+                        showSuccessAlert();
+                    </script>";
+                return;
+            }
+
+            $datos["imagen"] = $ruta;
+        } else {
+            echo "<script>
+                    async function showSuccessAlert() {
+                        await Swal.fire({
+                            position: 'top-center',
+                            icon: 'error',
+                            title: 'Fichero demasiado grande',
+                            showConfirmButton: false,
+                            timer: 1400
+                        });
+                        window.location.href = 'blog';
+                    }
+                    showSuccessAlert();
+                </script>";
+            return;
         }
-
-        if ($_FILES["edit_portada"]["type"] == "image/png") {
-
-            // GUARDAMOS LA IMAGEN EN EL DIRECTORIO
-            $ruta = "views/img/blog/" . $id_post . "-" . $_POST["add_titulo"] . ".png";
-            $origen = imagecreatefrompng($_FILES["add_portada"]["tmp_name"]);
-            $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-            imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-            imagepng($destino, $ruta);
-        }
-        $datos["imagen"] = $ruta;
     }
 
     $postController->ctrActualizar("post", $datos, null, $id_post);

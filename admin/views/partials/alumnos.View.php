@@ -22,7 +22,7 @@
     <!-- Default box -->
     <div class="card">
       <div class="card-header">
-        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarUsuario">Añadir Alumno</button>
+        <h4>Nuestros alumnos</h4>
       </div>
       <div class="card-body">
         <table id="example1" class="table table-bordered table-striped">
