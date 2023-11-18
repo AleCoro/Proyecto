@@ -196,4 +196,24 @@ class ReservasModel
         }
 
     }
+
+    // Ultimas 4 reservas
+    public static function mdlMostrarUltimasReservas($campo, $valor)
+    {
+
+        $conexion = Conexion::conectar();
+        $sql = "SELECT *
+            FROM reservas as res
+            JOIN asignaturas as p ON p.id_asignatura = res.asignatura
+            JOIN usuarios as prof ON prof.id_usuario = res.profesor
+            WHERE res.$campo LIKE '$valor'
+            GROUP BY res.id_reserva
+            ORDER BY res.fecha_reserva DESC
+            LIMIT 4";
+        $sentencia = $conexion->prepare($sql);
+        // var_dump($sentencia);
+        $sentencia->execute();
+        $registros = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+        return $registros;
+    }
 }

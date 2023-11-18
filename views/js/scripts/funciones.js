@@ -77,7 +77,7 @@ function cargarProfesores(id_asignatura) {
     if (precio == "") { precio = 0; }
     if (id_asignatura == 'SinAsignatura') { id_asignatura = "%"; }
 
-    var url = "views/js/consultas/cargarProfesores.php?area=" + area + "&asignatura=" + id_asignatura+ "&precio=" + precio;
+    var url = "views/js/consultas/cargarProfesores.php?area=" + area + "&asignatura=" + id_asignatura + "&precio=" + precio;
     xmlhttp.open("GET", url);
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState === 4) {
@@ -158,11 +158,12 @@ function cargarCalendario(usuario) {
                 fecha = new Date(info.event.start);
                 hora = fecha.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
                 //Muestro la descripcion
-                $('#descripcion').text("¿Desea reservar esta hora para " + info.event.title + " a las " + hora + " por "+info.event.extendedProps.precio+"€ ?");
+                $('#descripcion').text("¿Desea reservar esta hora para " + info.event.title + " a las " + hora + " por " + info.event.extendedProps.precio + "€ ?");
 
                 $('#id_asignatura').val(info.event.extendedProps.id_asignatura);
                 $('#fecha_clase').val(info.event.start);
                 $('#id_imparte').val(info.event.extendedProps.id_imparte);
+                $('#precio').val(info.event.extendedProps.precio);
 
                 $('#modalReserva').modal('show');
             }
@@ -271,4 +272,35 @@ function habilitarCampos() {
         $('#hora_imparte').prop('required', false);
         $('#precio').prop('required', false);
     }
+}
+
+function guardarValoracion(Valor) {
+    puntuacion = Valor.getAttribute('data-value');
+    id_reserva = Valor.getAttribute('id_reserva');
+
+    var url = "views/js/consultas/insertValoracion.php?valoracion=" + puntuacion + "&id_reserva=" + id_reserva;
+    xmlhttp.open("GET", url);
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState === 4) {
+            if (xmlhttp.status === 200) {
+
+                async function showSuccessAlert() {
+                    await Swal.fire({
+                        position: 'top-center',
+                        icon: 'success',
+                        title: 'Gracias por tu valoracion',
+                        showConfirmButton: false,
+                        timer: 1400
+                    });
+                    window.location.href = 'miPerfil';
+                }
+                showSuccessAlert();
+
+            } else {
+                alert(xmlhttp.statusText);
+            }
+        }
+    };
+    xmlhttp.send(null);
+
 }

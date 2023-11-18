@@ -3,7 +3,7 @@ $usuariosController = new UsuariosController();
 $rolesController = new RolesController();
 $areasAcademicasController = new AreasAcademicasController();
 $asignaturasController = new AsignaturasController();
-// $reservasController = new ReservasController();
+$reservasController = new ReservasController();
 
 $usuario = $usuariosController->ctrMostrarUsuarioWhere("id_usuario", $_SESSION["id_usuario"]);
 $rolesUsuario = $rolesController->ctrMostrarRegistrosWhere("es_un", "usuario", $usuario["id_usuario"]);
@@ -211,6 +211,8 @@ if (isset($_POST["accion"]) && $_POST["accion"] == "editarClase") {
         </script>";
 }
 
-// var_dump($_POST);
+$reservas = $reservasController->ctrMostrarUltimasReservas("alumno",$usuario["id_usuario"]);
+
+// var_dump($reservas);
 
 include("views/partials/miPerfilView.php");

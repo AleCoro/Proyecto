@@ -12,7 +12,7 @@ class ReservasController
 
     public function ctrMostrarReservasWhere($tabla, $campo, $valor)
     {
-        $tabla = "";
+        // $tabla = "";
         $respuesta = ReservasModel::mdlMostrarReservasWhere($tabla, $campo, $valor);
 
         return $respuesta;
@@ -221,5 +221,20 @@ class ReservasController
 
         return $respuesta;
     }
+
+    //Ultimas 4 reservas
+    public function ctrMostrarUltimasReservas($campo, $valor)
+    {
+        // $tabla = "";
+        $respuesta = ReservasModel::mdlMostrarUltimasReservas($campo, $valor);
+
+        return $respuesta;
+    }
+
+    public function formatearFecha($fechaOriginal) {
+        $datetime = new DateTime($fechaOriginal);
+        return $datetime->format('d/m/Y H:i');
+    }
+
 
 }

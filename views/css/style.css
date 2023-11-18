@@ -9864,3 +9864,26 @@ a.text-dark:hover, a.text-dark:focus {
   padding: 0;
   list-style-type: none;
 }
+
+.valoracion {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: left;
+  align-items: center;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.star {
+  color: #ddd;
+  transition: color 0.3s;
+}
+
+.star:hover,
+.star:hover~.star {
+  color: #f39c12;
+}
+.star.active,
+.star.active ~ .star {
+    color: #f39c12;
+}

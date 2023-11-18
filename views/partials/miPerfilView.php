@@ -19,7 +19,7 @@
                 <div class="card card-outline">
                     <div class="card-body box-profile">
                         <div class="text-center">
-                            <img class="profile-user-img img-fluid img-circle" src="<?= "admin/".$_SESSION["foto"] ?>" alt="User profile picture">
+                            <img class="profile-user-img img-fluid img-circle" src="<?= "admin/" . $_SESSION["foto"] ?>" alt="User profile picture">
                         </div>
 
                         <h3 class="profile-username text-center"><?= $usuario["nombre"] . " " . $usuario["apellidos"] ?></h3>
@@ -149,6 +149,44 @@
                             <?php if ($_SESSION["perfilSeleccionado"] == 3) { ?>
                                 <!-- /.tab-pane -->
                                 <div class="tab-pane active" id="reservas">
+
+                                    <div class="row">
+                                        <?php foreach ($reservas as $reserva) { ?>
+                                            <div class="col-md-6 mb-3">
+                                                <div class="card" style="max-width: 540px;">
+                                                    <div class="row g-0">
+                                                        <div class="col-md-5">
+                                                            <img src="<?= "admin/" . $reserva["foto"] ?>" class="img-fluid rounded-start w-100 h-100" alt="...">
+                                                        </div>
+                                                        <div class="col-md-7 d-flex flex-column">
+                                                            <div class="card-body">
+                                                                <h5 class="card-title"><?= $reserva["nombre"] . " " . $reserva["apellidos"] ?></h5>
+                                                                <p class="card-text">Clase: <?= $reserva["nombre_asignatura"]; ?></p>
+                                                                <p class="card-text">
+                                                                    <small class="text-muted">
+                                                                        <b>Fecha:</b> <?= $reservasController->formatearFecha($reserva["fecha_clase"]); ?>
+                                                                        <b class="ml-2">Precio:</b> <?= $reserva["pagado"] ?> €
+                                                                    </small>
+                                                                </p>
+                                                                <form action="" name="formularioValorar" method="post" class="mt-auto d-flex">
+                                                                    <input type="hidden" name="accion" value="feedback">
+                                                                    <!-- <div class="d-flex justify-content-end">
+                                                                        <button class="btn btn-sm btn-primary">Valorar Clase</button>
+                                                                    </div> -->
+                                                                </form>
+                                                                <div class="valoracion" id="valoracion">
+                                                                    <?php for ($i = 5; $i >= 1; $i--) { ?>
+                                                                        <span class="fa fa-star star <?= $i <= $reserva["valoracion"] ? 'active' : ''; ?>" data-value="<?= $i; ?>" id_reserva="<?= $reserva["id_reserva"]; ?>" onclick="guardarValoracion(this)" ></span>
+                                                                    <?php } ?>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?php } ?>
+
+                                    </div>
 
                                 </div>
                             <?php } ?>
@@ -366,41 +404,57 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label>Nombre</label>
-                                            <input type="text" class="form-control" name="nombre" placeholder="Nombre" value = "<?php if(isset($usuario["nombre"])){echo $usuario["nombre"];} ?>" required>
+                                            <input type="text" class="form-control" name="nombre" placeholder="Nombre" value="<?php if (isset($usuario["nombre"])) {
+                                                                                                                                    echo $usuario["nombre"];
+                                                                                                                                } ?>" required>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label>Apellidos</label>
-                                            <input type="text" class="form-control" name="apellidos" placeholder="Apellidos" value = "<?php if(isset($usuario["apellidos"])){echo $usuario["apellidos"];} ?>" required>
+                                            <input type="text" class="form-control" name="apellidos" placeholder="Apellidos" value="<?php if (isset($usuario["apellidos"])) {
+                                                                                                                                        echo $usuario["apellidos"];
+                                                                                                                                    } ?>" required>
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label>Usuario</label>
-                                            <input type="text" class="form-control" name="usuario" placeholder="Usuario" value = "<?php if(isset($usuario["usuario"])){echo $usuario["usuario"];} ?>" required>
+                                            <input type="text" class="form-control" name="usuario" placeholder="Usuario" value="<?php if (isset($usuario["usuario"])) {
+                                                                                                                                    echo $usuario["usuario"];
+                                                                                                                                } ?>" required>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label>Password</label>
-                                            <input type="password" class="form-control" name="password" placeholder="Password" value = "<?php if(isset($usuario["password"])){echo $usuario["password"];} ?>" required>
+                                            <input type="password" class="form-control" name="password" placeholder="Password" value="<?php if (isset($usuario["password"])) {
+                                                                                                                                            echo $usuario["password"];
+                                                                                                                                        } ?>" required>
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label>Direccion</label>
-                                            <input type="text" class="form-control" name="direccion" placeholder="Direccion" value = "<?php if(isset($usuario["direccion"])){echo $usuario["direccion"];} ?>" required>
+                                            <input type="text" class="form-control" name="direccion" placeholder="Direccion" value="<?php if (isset($usuario["direccion"])) {
+                                                                                                                                        echo $usuario["direccion"];
+                                                                                                                                    } ?>" required>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label>Telefono</label>
-                                            <input type="text" class="form-control" name="telefono" id="telefono" placeholder="Telefono" value = "<?php if(isset($usuario["telefono"])){echo $usuario["telefono"];} ?>" required>
+                                            <input type="text" class="form-control" name="telefono" id="telefono" placeholder="Telefono" value="<?php if (isset($usuario["telefono"])) {
+                                                                                                                                                    echo $usuario["telefono"];
+                                                                                                                                                } ?>" required>
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label>Email</label>
-                                            <input type="email" class="form-control" name="email" placeholder="Email" value = "<?php if(isset($usuario["email"])){echo $usuario["email"];} ?>" required>
+                                            <input type="email" class="form-control" name="email" placeholder="Email" value="<?php if (isset($usuario["email"])) {
+                                                                                                                                    echo $usuario["email"];
+                                                                                                                                } ?>" required>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label>Fecha Nacimiento</label>
-                                            <input type="date" class="form-control" name="fecha" placeholder="Fecha Nacimiento" value = "<?php if(isset($usuario["fecha_nacimiento"])){echo $usuario["fecha_nacimiento"];} ?>" required >
+                                            <input type="date" class="form-control" name="fecha" placeholder="Fecha Nacimiento" value="<?php if (isset($usuario["fecha_nacimiento"])) {
+                                                                                                                                            echo $usuario["fecha_nacimiento"];
+                                                                                                                                        } ?>" required>
                                         </div>
                                     </div>
                                     <div class="form-row d-flex align-items-center">
@@ -412,7 +466,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group col-md-6 align-content-center">
-                                            <img id="previsualizarImg" src="<?= "admin/".$_SESSION["foto"] ?>" alt="Vista previa de la imagen" class="w-25 h-25 ml-5 rounded-circle">
+                                            <img id="previsualizarImg" src="<?= "admin/" . $_SESSION["foto"] ?>" alt="Vista previa de la imagen" class="w-25 h-25 ml-5 rounded-circle">
                                         </div>
                                     </div>
                                     <div class=" d-flex justify-content-center ">
@@ -452,7 +506,7 @@
 </section>
 
 <script>
-  cargarCalendarioMiPerfil(<?= $usuario["id_usuario"]; ?>);
+    cargarCalendarioMiPerfil(<?= $usuario["id_usuario"]; ?>);
 </script>
 
 <!-- Modal -->
@@ -494,8 +548,6 @@
                 <button type="submit" class="btn btn-danger">Eliminar</button>
             </form>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                </div>
         </div>
     </div>
 </div>
-

@@ -59,6 +59,7 @@ if (isset($_POST["id_profesor"])) {
                 $datos["alumno"] = $_POST["id_alumno"];
                 $datos["profesor"] = $_POST["id_profesor"];
                 $datos["asignatura"] = $_POST["id_asignatura"];
+                $datos["pagado"] = $_POST["precio"];
 
                 // Elimina la información de la zona horaria
                 $fecha_clase_str = preg_replace('/\s\([^)]+\)/', '', $_POST["fecha_clase"]);
