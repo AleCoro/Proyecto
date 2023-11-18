@@ -178,12 +178,13 @@ class ReservasModel
     }
 
     // Cargar Paginacion Habitaciones
-    public static function mdlMostrarPaginacion($tabla,$inicio,$registrosxpagina,$orden){
-            
-        $consulta="SELECT * ";
-        $consulta.="FROM $tabla ";
-        $consulta.="ORDER BY '$orden' "; 
-        $consulta.="LIMIT :inicio , :fin";
+    public static function mdlMostrarPaginacion($tabla, $inicio, $registrosxpagina, $orden)
+    {
+
+        $consulta = "SELECT * ";
+        $consulta .= "FROM $tabla ";
+        $consulta .= "ORDER BY '$orden' ";
+        $consulta .= "LIMIT :inicio , :fin";
         $resultados = Conexion::conectar()->prepare($consulta);
         $resultados->bindParam(':inicio', $inicio, PDO::PARAM_INT);
         $resultados->bindParam(':fin', $registrosxpagina, PDO::PARAM_INT);
@@ -191,25 +192,40 @@ class ReservasModel
         if ($resultados) {
             $resultado = $resultados->fetchAll(PDO::FETCH_ASSOC);
             return $resultado;
-        }else {
+        } else {
             return false;
         }
-
     }
 
-    // Ultimas 4 reservas
-    public static function mdlMostrarUltimasReservas($campo, $valor)
+    // Ultimas 6 reservas
+    public static function mdlMostrarReservasExpiradas($campo, $valor)
     {
 
         $conexion = Conexion::conectar();
-        $sql = "SELECT *
-            FROM reservas as res
+        $sql = "SELECT * FROM reservas as res
+        JOIN asignaturas as p ON p.id_asignatura = res.asignatura
+        JOIN usuarios as prof ON prof.id_usuario = res.profesor
+        WHERE res.$campo LIKE '$valor' AND res.fecha_clase < CURRENT_TIMESTAMP
+        GROUP BY res.id_reserva 
+        ORDER BY res.fecha_reserva DESC LIMIT 6";
+        $sentencia = $conexion->prepare($sql);
+        // var_dump($sentencia);
+        $sentencia->execute();
+        $registros = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+        return $registros;
+    }
+
+    // Ultimas 6 reservas
+    public static function mdlMostrarReservasSinExpirar($campo, $valor)
+    {
+
+        $conexion = Conexion::conectar();
+        $sql = "SELECT * FROM reservas as res
             JOIN asignaturas as p ON p.id_asignatura = res.asignatura
             JOIN usuarios as prof ON prof.id_usuario = res.profesor
-            WHERE res.$campo LIKE '$valor'
-            GROUP BY res.id_reserva
-            ORDER BY res.fecha_reserva DESC
-            LIMIT 4";
+            WHERE res.$campo LIKE '$valor' AND res.fecha_clase > CURRENT_TIMESTAMP
+            GROUP BY res.id_reserva 
+            ORDER BY res.fecha_reserva DESC LIMIT 4";
         $sentencia = $conexion->prepare($sql);
         // var_dump($sentencia);
         $sentencia->execute();

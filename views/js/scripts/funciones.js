@@ -229,6 +229,7 @@ function cargarCalendarioMiPerfil(usuario) {
                 $('#edit_hora').val(hora);
                 $('#edit_precio').val(info.event.extendedProps.precio);
                 $('#edit_id').val(info.event.extendedProps.id_imparte);
+                $('#delete_id').val(info.event.extendedProps.id_imparte);
 
                 $('#modaleditarClase').modal('show');
             }
@@ -302,5 +303,20 @@ function guardarValoracion(Valor) {
         }
     };
     xmlhttp.send(null);
+
+}
+
+function validarHora(hora) {
+    const inputValue = hora.value;
+
+    // Patrón para HH:00
+    const patronHora = /^[0-9]{2}:00$/;
+
+    if (patronHora.test(inputValue)) {
+        document.getElementById("error").innerHTML = "";
+    } else {
+        document.getElementById("error").innerHTML = "La hora debe de ser puntual";
+        document.getElementById(hora.id).focus();
+    }
 
 }

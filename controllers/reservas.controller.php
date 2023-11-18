@@ -222,11 +222,20 @@ class ReservasController
         return $respuesta;
     }
 
-    //Ultimas 4 reservas
-    public function ctrMostrarUltimasReservas($campo, $valor)
+    //Ultimas 6 reservas
+    public function ctrMostrarReservasExpiradas($campo, $valor)
     {
         // $tabla = "";
-        $respuesta = ReservasModel::mdlMostrarUltimasReservas($campo, $valor);
+        $respuesta = ReservasModel::mdlMostrarReservasExpiradas($campo, $valor);
+
+        return $respuesta;
+    }
+
+    //Ultimas 6 reservas
+    public function ctrMostrarReservasSinExpirar($campo, $valor)
+    {
+        // $tabla = "";
+        $respuesta = ReservasModel::mdlMostrarReservasSinExpirar($campo, $valor);
 
         return $respuesta;
     }

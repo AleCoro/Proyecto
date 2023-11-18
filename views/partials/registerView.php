@@ -19,36 +19,50 @@
           <div class="form-row">
             <div class="form-group col-md-6">
               <label>Nombre</label>
-              <input type="text" class="form-control" name="nombre" placeholder="Nombre" value = "<?php if(isset($_POST["nombre"])){echo $_POST["nombre"];} ?>" required>
+              <input type="text" class="form-control" name="nombre" placeholder="Nombre" value="<?php if (isset($_POST["nombre"])) {
+                                                                                                  echo $_POST["nombre"];
+                                                                                                } ?>" required>
               <input type="hidden" name="nuevoUsuario" value="nuevoUsuario">
             </div>
             <div class="form-group col-md-6">
               <label>Apellidos</label>
-              <input type="text" class="form-control" name="apellidos" placeholder="Apellidos" value = "<?php if(isset($_POST["apellidos"])){echo $_POST["apellidos"];} ?>" required>
+              <input type="text" class="form-control" name="apellidos" placeholder="Apellidos" value="<?php if (isset($_POST["apellidos"])) {
+                                                                                                        echo $_POST["apellidos"];
+                                                                                                      } ?>" required>
             </div>
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
               <label>Usuario</label>
-              <input type="text" class="form-control" name="Usuario" placeholder="Usuario" value = "<?php if(isset($_POST["Usuario"])){echo $_POST["Usuario"];} ?>" required>
+              <input type="text" class="form-control" name="Usuario" placeholder="Usuario" value="<?php if (isset($_POST["Usuario"])) {
+                                                                                                    echo $_POST["Usuario"];
+                                                                                                  } ?>" required>
             </div>
             <div class="form-group col-md-6">
               <label>Password</label>
-              <input type="password" class="form-control" name="password" placeholder="Password" value = "<?php if(isset($_POST["password"])){echo $_POST["password"];} ?>" required>
+              <input type="password" class="form-control" name="password" placeholder="Password" value="<?php if (isset($_POST["password"])) {
+                                                                                                          echo $_POST["password"];
+                                                                                                        } ?>" required>
             </div>
           </div>
           <div class="form-group">
             <label>Direccion</label>
-            <input type="text" class="form-control" name="direccion" placeholder="Direccion" value = "<?php if(isset($_POST["direccion"])){echo $_POST["direccion"];} ?>" required>
+            <input type="text" class="form-control" name="direccion" placeholder="Direccion" value="<?php if (isset($_POST["direccion"])) {
+                                                                                                      echo $_POST["direccion"];
+                                                                                                    } ?>" required>
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
               <label>Email</label>
-              <input type="email" class="form-control" name="Email" placeholder="Email" value = "<?php if(isset($_POST["Email"])){echo $_POST["Email"];} ?>" required>
+              <input type="email" class="form-control" name="Email" placeholder="Email" value="<?php if (isset($_POST["Email"])) {
+                                                                                                  echo $_POST["Email"];
+                                                                                                } ?>" required>
             </div>
             <div class="form-group col-md-6">
               <label>Fecha Nacimiento</label>
-              <input type="date" class="form-control" name="fecha" placeholder="Fecha Nacimiento" value = "<?php if(isset($_POST["fecha"])){echo $_POST["fecha"];} ?>" required >
+              <input type="date" class="form-control" name="fecha" placeholder="Fecha Nacimiento" value="<?php if (isset($_POST["fecha"])) {
+                                                                                                            echo $_POST["fecha"];
+                                                                                                          } ?>" required>
             </div>
           </div>
           <div class="form-row">
@@ -62,19 +76,21 @@
             </div>
             <div class="form-group col-md-6">
               <label>Telefono</label>
-              <input type="text" class="form-control" name="telefono" id="telefono" placeholder="Telefono" value = "<?php if(isset($_POST["telefono"])){echo $_POST["telefono"];} ?>" required>
+              <input type="text" class="form-control" name="telefono" id="telefono" placeholder="Telefono" value="<?php if (isset($_POST["telefono"])) {
+                                                                                                                    echo $_POST["telefono"];
+                                                                                                                  } ?>" required>
             </div>
           </div>
           <div class="form-row d-flex align-items-center">
             <div class="form-group col-md-6">
-                <label for="exampleInputFile">Subir Foto</label>
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="foto" name="foto" required onchange="previsualizarIMG(this, 'previsualizarImg')">
-                    <label class="custom-file-label" for="customFile">Sube tu foto</label>
-                </div>
+              <label for="exampleInputFile">Subir Foto</label>
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" id="foto" name="foto" required onchange="previsualizarIMG(this, 'previsualizarImg')">
+                <label class="custom-file-label" for="customFile">Sube tu foto</label>
+              </div>
             </div>
             <div class="form-group col-md-6 align-content-center">
-                <img id="previsualizarImg" src="#" alt="Vista previa de la imagen" style="display: none;" class="w-25 h-25 m-auto rounded-circle">
+              <img id="previsualizarImg" src="#" alt="Vista previa de la imagen" style="display: none;" class="w-25 h-25 m-auto rounded-circle">
             </div>
           </div>
           <!-- Contact End -->
@@ -87,7 +103,7 @@
                 <select name="areaAcademica" id="areaAcademica" class="form-control" onchange="cargarAsignaturas()">
                   <option value="" selected>Selecciona</option>
                   <?php foreach ($areasAcademicas as $areaAcademica) { ?>
-                    <option value="<?= $areaAcademica["id_area"]?>" ><?= $areaAcademica["nombre_area"]?></option>
+                    <option value="<?= $areaAcademica["id_area"] ?>"><?= $areaAcademica["nombre_area"] ?></option>
                   <?php } ?>
                 </select>
               </div>
@@ -103,7 +119,8 @@
               </div>
               <div class="form-group col-md-3">
                 <label>Hora</label>
-                <input type="time" class="form-control" name="hora_imparte" id="hora_imparte" min="06:00" max="21:00" required>
+                <input type="time" class="form-control" name="hora_imparte" id="hora_imparte" min="06:00" max="21:00" onblur="validarHora(this)" required>
+                <span class="text-red" id="error"></span>
               </div>
               <div class="form-group col-md-6">
                 <label>Precio/hora</label>
@@ -113,7 +130,9 @@
           </div>
           <button type="submit" class="btn btn-primary">Registrate</button>
         </form>
-        <?php if(isset($respuesta)){echo $respuesta;}?>
+        <?php if (isset($respuesta)) {
+          echo $respuesta;
+        } ?>
       </div>
     </div>
     <!-- Campos Profesor End -->

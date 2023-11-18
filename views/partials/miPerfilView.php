@@ -94,21 +94,20 @@
                                 <li class="nav-item"><a class="nav-link active" href="#calendario" data-toggle="tab">Disponibilidad</a></li>
                                 <li class="nav-item"><a class="nav-link" href="#impartir" data-toggle="tab">Impartir</a></li>
                             <?php } else { ?>
-                                <li class="nav-item"><a class="nav-link active" href="#reservas" data-toggle="tab">Reservas</a></li>
+                                <li class="nav-item"><a class="nav-link active" href="#proximasClases" data-toggle="tab">Proximas Clases</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#clasesFinalizadas" data-toggle="tab">Clases Finalizadas</a></li>
                             <?php } ?>
-                            <li class="nav-item"><a class="nav-link" href="#activity" data-toggle="tab">Activity</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Timeline</a></li>
                             <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Settings</a></li>
                         </ul>
                     </div><!-- /.card-header -->
                     <div class="card-body">
                         <div class="tab-content">
                             <?php if ($_SESSION["perfilSeleccionado"] == 2) { ?>
-                                <!-- /.tab-pane -->
+                                <!-- CALENDARIO -->
                                 <div class="tab-pane active" id="calendario">
                                     <div id="calendarioMiPerfil"></div>
                                 </div>
-                                <!-- /.tab-pane -->
+                                <!-- IMPARTIR -->
                                 <div class="tab-pane" id="impartir">
                                     <form action="" method="post">
                                         <div class="form-row">
@@ -133,7 +132,8 @@
                                             </div>
                                             <div class="form-group col-md-3">
                                                 <label>Hora</label>
-                                                <input type="time" class="form-control" name="hora" id="hora" min="06:00" max="21:00" required>
+                                                <input type="time" class="form-control" name="hora" id="hora" min="06:00" max="21:00" onblur="validarHora(this)" required>
+                                                <span class="text-red" id="error"></span>
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label>Precio/hora</label>
@@ -143,29 +143,27 @@
                                         <input type="hidden" name="impartir" value="impartir">
                                         <button type="submit" class="btn btn-primary">Publicar</button>
                                     </form>
-
                                 </div>
                             <?php } ?>
                             <?php if ($_SESSION["perfilSeleccionado"] == 3) { ?>
-                                <!-- /.tab-pane -->
-                                <div class="tab-pane active" id="reservas">
-
+                                <!-- PROXIMAS CLASES -->
+                                <div class="tab-pane active" id="proximasClases">
                                     <div class="row">
-                                        <?php foreach ($reservas as $reserva) { ?>
+                                        <?php foreach ($proximasClases as $proximaClase) { ?>
                                             <div class="col-md-6 mb-3">
                                                 <div class="card" style="max-width: 540px;">
                                                     <div class="row g-0">
                                                         <div class="col-md-5">
-                                                            <img src="<?= "admin/" . $reserva["foto"] ?>" class="img-fluid rounded-start w-100 h-100" alt="...">
+                                                            <img src="<?= "admin/" . $proximaClase["foto"] ?>" class="img-fluid rounded-start w-100 h-100" alt="...">
                                                         </div>
                                                         <div class="col-md-7 d-flex flex-column">
                                                             <div class="card-body">
-                                                                <h5 class="card-title"><?= $reserva["nombre"] . " " . $reserva["apellidos"] ?></h5>
-                                                                <p class="card-text">Clase: <?= $reserva["nombre_asignatura"]; ?></p>
+                                                                <h5 class="card-title"><?= $proximaClase["nombre"] . " " . $proximaClase["apellidos"] ?></h5>
+                                                                <p class="card-text">Clase: <?= $proximaClase["nombre_asignatura"]; ?></p>
                                                                 <p class="card-text">
                                                                     <small class="text-muted">
-                                                                        <b>Fecha:</b> <?= $reservasController->formatearFecha($reserva["fecha_clase"]); ?>
-                                                                        <b class="ml-2">Precio:</b> <?= $reserva["pagado"] ?> €
+                                                                        <b>Fecha:</b> <?= $reservasController->formatearFecha($proximaClase["fecha_clase"]); ?>
+                                                                        <b class="ml-2">Precio:</b> <?= $proximaClase["pagado"] ?> €
                                                                     </small>
                                                                 </p>
                                                                 <form action="" name="formularioValorar" method="post" class="mt-auto d-flex">
@@ -174,231 +172,66 @@
                                                                         <button class="btn btn-sm btn-primary">Valorar Clase</button>
                                                                     </div> -->
                                                                 </form>
-                                                                <div class="valoracion" id="valoracion">
-                                                                    <?php for ($i = 5; $i >= 1; $i--) { ?>
-                                                                        <span class="fa fa-star star <?= $i <= $reserva["valoracion"] ? 'active' : ''; ?>" data-value="<?= $i; ?>" id_reserva="<?= $reserva["id_reserva"]; ?>" onclick="guardarValoracion(this)" ></span>
-                                                                    <?php } ?>
-                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         <?php } ?>
-
+                                        <?php if (count($proximasClases) < 1) { ?>
+                                            <h3 class="ml-2">No tienes clases pendientes.</h3>
+                                        <?php } ?>
                                     </div>
+                                </div>
+                                <!-- CLASES FINALIZADAS -->
+                                <div class="tab-pane" id="clasesFinalizadas">
+                                    <div class="row">
+                                        <?php foreach ($clasesFinalizadas as $claseFinalizada) { ?>
+                                            <div class="col-md-6 mb-3">
+                                                <div class="card" style="max-width: 540px;">
+                                                    <div class="row g-0">
+                                                        <div class="col-md-5">
+                                                            <img src="<?= "admin/" . $claseFinalizada["foto"] ?>" class="img-fluid rounded-start w-100 h-100" alt="...">
+                                                        </div>
+                                                        <div class="col-md-7 d-flex flex-column">
+                                                            <div class="card-body">
+                                                                <h5 class="card-title"><?= $claseFinalizada["nombre"] . " " . $claseFinalizada["apellidos"] ?></h5>
+                                                                <p class="card-text">Clase: <?= $claseFinalizada["nombre_asignatura"]; ?></p>
+                                                                <p class="card-text">
+                                                                    <small class="text-muted">
+                                                                        <b>Fecha:</b> <?= $reservasController->formatearFecha($claseFinalizada["fecha_clase"]); ?>
+                                                                        <b class="ml-2">Precio:</b> <?= $claseFinalizada["pagado"] ?> €
+                                                                    </small>
+                                                                </p>
+                                                                <form action="" name="formularioValorar" method="post" class="mt-auto d-flex">
+                                                                    <input type="hidden" name="accion" value="feedback">
+                                                                    <!-- <div class="d-flex justify-content-end">
+                                                                        <button class="btn btn-sm btn-primary">Valorar Clase</button>
+                                                                    </div> -->
+                                                                </form>
+                                                                <?php if ($claseFinalizada["valoracion"] == 0) { ?>
+                                                                    <div class="valoracion" id="valoracion">
+                                                                        <?php for ($i = 5; $i >= 1; $i--) { ?>
+                                                                            <span class="fa fa-star star <?= $i <= $claseFinalizada["valoracion"] ? 'active' : ''; ?>" data-value="<?= $i; ?>" id_reserva="<?= $claseFinalizada["id_reserva"]; ?>" onclick="guardarValoracion(this)"></span>
+                                                                        <?php } ?>
+                                                                    </div>
+                                                                <?php }else{ ?>
+                                                                    <p>Ya has valorado esta clase.</p>
+                                                                <?php } ?>
 
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?php } ?>
+                                        <?php if (count($clasesFinalizadas) < 1) { ?>
+                                            <h3 class="ml-2">Aun no has finalizado ninguna clase.</h3>
+                                        <?php } ?>
+                                    </div>
                                 </div>
                             <?php } ?>
-                            <div class="tab-pane" id="activity">
-                                <!-- Post -->
-                                <div class="post">
-                                    <div class="user-block">
-                                        <img class="img-circle img-bordered-sm" src="views/img/team-<?= rand(1, 4); ?>.jpg" alt="user image">
-                                        <span class="username">
-                                            <a href="#">Jonathan Burke Jr.</a>
-                                            <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
-                                        </span>
-                                        <span class="description">Shared publicly - 7:30 PM today</span>
-                                    </div>
-                                    <!-- /.user-block -->
-                                    <p>
-                                        Lorem ipsum represents a long-held tradition for designers,
-                                        typographers and the like. Some people hate it and argue for
-                                        its demise, but others ignore the hate as they create awesome
-                                        tools to help create filler text for everyone from bacon lovers
-                                        to Charlie Sheen fans.
-                                    </p>
-
-                                    <p>
-                                        <a href="#" class="link-black text-sm mr-2"><i class="fas fa-share mr-1"></i> Share</a>
-                                        <a href="#" class="link-black text-sm"><i class="far fa-thumbs-up mr-1"></i> Like</a>
-                                        <span class="float-right">
-                                            <a href="#" class="link-black text-sm">
-                                                <i class="far fa-comments mr-1"></i> Comments (5)
-                                            </a>
-                                        </span>
-                                    </p>
-
-                                    <input class="form-control form-control-sm" type="text" placeholder="Type a comment">
-                                </div>
-                                <!-- /.post -->
-
-                                <!-- Post -->
-                                <div class="post clearfix">
-                                    <div class="user-block">
-                                        <img class="img-circle img-bordered-sm" src="views/img/team-<?= rand(1, 4); ?>.jpg" alt="User Image">
-                                        <span class="username">
-                                            <a href="#">Sarah Ross</a>
-                                            <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
-                                        </span>
-                                        <span class="description">Sent you a message - 3 days ago</span>
-                                    </div>
-                                    <!-- /.user-block -->
-                                    <p>
-                                        Lorem ipsum represents a long-held tradition for designers,
-                                        typographers and the like. Some people hate it and argue for
-                                        its demise, but others ignore the hate as they create awesome
-                                        tools to help create filler text for everyone from bacon lovers
-                                        to Charlie Sheen fans.
-                                    </p>
-
-                                    <form class="form-horizontal">
-                                        <div class="input-group input-group-sm mb-0">
-                                            <input class="form-control form-control-sm" placeholder="Response">
-                                            <div class="input-group-append">
-                                                <button type="submit" class="btn btn-danger">Send</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <!-- /.post -->
-
-                                <!-- Post -->
-                                <div class="post">
-                                    <div class="user-block">
-                                        <img class="img-circle img-bordered-sm" src="views/img/team-<?= rand(1, 4); ?>.jpg" alt="User Image">
-                                        <span class="username">
-                                            <a href="#">Adam Jones</a>
-                                            <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
-                                        </span>
-                                        <span class="description">Posted 5 photos - 5 days ago</span>
-                                    </div>
-                                    <!-- /.user-block -->
-                                    <div class="row mb-3">
-                                        <div class="col-sm-6">
-                                            <img class="img-fluid" src="views/img/team-<?= rand(1, 4); ?>.jpg alt=" Photo">
-                                        </div>
-                                        <!-- /.col -->
-                                        <div class="col-sm-6">
-                                            <div class="row">
-                                                <div class="col-sm-6">
-                                                    <img class="img-fluid mb-3" src="views/img/team-<?= rand(1, 4); ?>.jpg alt=" Photo">
-                                                    <img class="img-fluid" src="views/img/team-<?= rand(1, 4); ?>.jpg alt=" Photo">
-                                                </div>
-                                                <!-- /.col -->
-                                                <div class="col-sm-6">
-                                                    <img class="img-fluid mb-3" src="views/img/team-<?= rand(1, 4); ?>.jpg alt=" Photo">
-                                                    <img class="img-fluid" src="views/img/team-<?= rand(1, 4); ?>.jpg alt=" Photo">
-                                                </div>
-                                                <!-- /.col -->
-                                            </div>
-                                            <!-- /.row -->
-                                        </div>
-                                        <!-- /.col -->
-                                    </div>
-                                    <!-- /.row -->
-
-                                    <p>
-                                        <a href="#" class="link-black text-sm mr-2"><i class="fas fa-share mr-1"></i> Share</a>
-                                        <a href="#" class="link-black text-sm"><i class="far fa-thumbs-up mr-1"></i> Like</a>
-                                        <span class="float-right">
-                                            <a href="#" class="link-black text-sm">
-                                                <i class="far fa-comments mr-1"></i> Comments (5)
-                                            </a>
-                                        </span>
-                                    </p>
-
-                                    <input class="form-control form-control-sm" type="text" placeholder="Type a comment">
-                                </div>
-                                <!-- /.post -->
-                            </div>
-                            <!-- /.tab-pane -->
-                            <div class="tab-pane" id="timeline">
-                                <!-- The timeline -->
-                                <div class="timeline timeline-inverse">
-                                    <!-- timeline time label -->
-                                    <div class="time-label">
-                                        <span class="bg-danger">
-                                            10 Feb. 2014
-                                        </span>
-                                    </div>
-                                    <!-- /.timeline-label -->
-                                    <!-- timeline item -->
-                                    <div>
-                                        <i class="fas fa-envelope bg-primary"></i>
-
-                                        <div class="timeline-item">
-                                            <span class="time"><i class="far fa-clock"></i> 12:05</span>
-
-                                            <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
-
-                                            <div class="timeline-body">
-                                                Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
-                                                weebly ning heekya handango imeem plugg dopplr jibjab, movity
-                                                jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
-                                                quora plaxo ideeli hulu weebly balihoo...
-                                            </div>
-                                            <div class="timeline-footer">
-                                                <a href="#" class="btn btn-primary btn-sm">Read more</a>
-                                                <a href="#" class="btn btn-danger btn-sm">Delete</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- END timeline item -->
-                                    <!-- timeline item -->
-                                    <div>
-                                        <i class="fas fa-user bg-info"></i>
-
-                                        <div class="timeline-item">
-                                            <span class="time"><i class="far fa-clock"></i> 5 mins ago</span>
-
-                                            <h3 class="timeline-header border-0"><a href="#">Sarah Young</a> accepted your friend request
-                                            </h3>
-                                        </div>
-                                    </div>
-                                    <!-- END timeline item -->
-                                    <!-- timeline item -->
-                                    <div>
-                                        <i class="fas fa-comments bg-warning"></i>
-
-                                        <div class="timeline-item">
-                                            <span class="time"><i class="far fa-clock"></i> 27 mins ago</span>
-
-                                            <h3 class="timeline-header"><a href="#">Jay White</a> commented on your post</h3>
-
-                                            <div class="timeline-body">
-                                                Take me to your leader!
-                                                Switzerland is small and neutral!
-                                                We are more like Germany, ambitious and misunderstood!
-                                            </div>
-                                            <div class="timeline-footer">
-                                                <a href="#" class="btn btn-warning btn-flat btn-sm">View comment</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- END timeline item -->
-                                    <!-- timeline time label -->
-                                    <div class="time-label">
-                                        <span class="bg-success">
-                                            3 Jan. 2014
-                                        </span>
-                                    </div>
-                                    <!-- /.timeline-label -->
-                                    <!-- timeline item -->
-                                    <div>
-                                        <i class="fas fa-camera bg-purple"></i>
-
-                                        <div class="timeline-item">
-                                            <span class="time"><i class="far fa-clock"></i> 2 days ago</span>
-
-                                            <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
-
-                                            <div class="timeline-body">
-                                                <img src="https://placehold.it/150x100" alt="...">
-                                                <img src="https://placehold.it/150x100" alt="...">
-                                                <img src="https://placehold.it/150x100" alt="...">
-                                                <img src="https://placehold.it/150x100" alt="...">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- END timeline item -->
-                                    <div>
-                                        <i class="far fa-clock bg-gray"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /.tab-pane -->
+                            <!-- AJUSTES -->
                             <div class="tab-pane" id="settings">
                                 <form action="" method="post" enctype="multipart/form-data">
                                     <div class="form-row">
@@ -545,6 +378,7 @@
             </form>
             <form action="" method="post">
                 <input type="hidden" name="accion" value="eliminarClase">
+                <input type="hidden" name="delete_id" id="delete_id" value="">
                 <button type="submit" class="btn btn-danger">Eliminar</button>
             </form>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>

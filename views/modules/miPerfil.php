@@ -44,7 +44,7 @@ if (isset($_POST["addRol"])) {
             </script>";
 }
 
-//Guardamos si quiere impartir nuevas asignaturas
+//Guardamos si quiere impartir clases
 if (isset($_POST["impartir"])) {
     $fecha = $_POST["fecha"];
     $hora = $_POST["hora"];
@@ -60,13 +60,37 @@ if (isset($_POST["impartir"])) {
     $datos["precio"] = $_POST["precio"];
     $datos["fecha_imparte"] = $dateTime->format('Y-m-d H:i:s');
     // var_dump($datos);
-    $asignaturasController->ctrInsertar("imparte", $datos, null);
+    $clasesImpartidas = $asignaturasController->ctrMostrarAsignaturasWhere("imparte", "profesor", $_SESSION["id_usuario"]);
 
-    echo "<script>
+    foreach ($clasesImpartidas as $claseImpartida) {
+        if ($datos["fecha_imparte"] == $claseImpartida["fecha_imparte"]) {
+            $ocupado = true;
+        }
+    }
+
+    // Compruebo si ya ha publicado ese dia a esa hora
+    if (isset($ocupado) && $ocupado == true) {
+        echo "<script>
+                async function showSuccessAlert() {
+                    await Swal.fire({
+                        position: 'top-center',
+                        icon: 'error',
+                        title: 'No puedes publicar dos clases el mismo dia a la misma hora',
+                        showConfirmButton: false,
+                        timer: 1400
+                    });
+                }
+                showSuccessAlert();
+            </script>";
+    } else {
+        $asignaturasController->ctrInsertar("imparte", $datos, null);
+
+        echo "<script>
                 async function showSuccessAlert() {
                     await Swal.fire({
                         position: 'top-center',
                         icon: 'success',
+                        title: 'Clase publicada',
                         showConfirmButton: false,
                         timer: 1400
                     });
@@ -74,6 +98,7 @@ if (isset($_POST["impartir"])) {
                 }
                 showSuccessAlert();
             </script>";
+    }
 }
 
 //Editamos nuestro perfil
@@ -211,8 +236,28 @@ if (isset($_POST["accion"]) && $_POST["accion"] == "editarClase") {
         </script>";
 }
 
-$reservas = $reservasController->ctrMostrarUltimasReservas("alumno",$usuario["id_usuario"]);
+//Cancelamos nuestra clase
+if (isset($_POST["accion"]) && $_POST["accion"] == "eliminarClase") {
 
-// var_dump($reservas);
+    $asignaturasController->ctrEliminar("imparte","id_imparte",$_POST["delete_id"],null);
+    
+    echo "<script>
+            async function showSuccessAlert() {
+                await Swal.fire({
+                    position: 'top-center',
+                    icon: 'success',
+                    title: 'Clase eliminada correctamente',
+                    showConfirmButton: false,
+                    timer: 1600
+                });
+                window.location.href = 'miPerfil';
+            }
+            showSuccessAlert();
+        </script>";
+}
 
+$proximasClases = $reservasController->ctrMostrarReservasSinExpirar("alumno", $usuario["id_usuario"]);
+$clasesFinalizadas = $reservasController->ctrMostrarReservasExpiradas("alumno", $usuario["id_usuario"]);
+
+// var_dump($_POST);
 include("views/partials/miPerfilView.php");
