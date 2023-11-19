@@ -130,7 +130,14 @@
           </button>
         </div>
         <div class="modal-body" id="descripcion">
-          <p>Contenido del modal. Puedes agregar texto, imágenes u otros elementos aquí.</p>
+          <h5 id="mensaje">Contenido del modal. Puedes agregar texto, imágenes u otros elementos aquí.</h5>
+          <div class="form-group">
+            <label>Selecciona los temas que quieras ver en la clase</label>
+            <div class="select2-cyan">
+              <select class="select2" multiple="multiple" id="temas" name="temas[]" data-placeholder="Selecciona el tema" style="width: 100%;">
+              </select>
+            </div>
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>

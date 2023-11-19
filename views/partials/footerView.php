@@ -102,5 +102,16 @@
 <!-- Template Javascript -->
 <script src="views/js/main.js"></script>
 
+<!-- Select2 -->
+<script src="admin/views/plugins/select2/js/select2.full.min.js"></script>
+
 </body>
 </html>
+
+<script>
+  $(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2()
+
+  });
+</script>

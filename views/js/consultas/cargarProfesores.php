@@ -15,7 +15,7 @@
                     JOIN imparte as imp ON usu.id_usuario = imp.profesor
                     JOIN asignaturas as asi ON imp.asignatura = asi.id_asignatura
                     JOIN areas_academicas as are ON asi.area_academica = are.id_area
-                    WHERE are.id_area LIKE '$area' AND asi.id_asignatura LIKE '$asignatura' $Where
+                    WHERE are.id_area LIKE '$area' AND asi.id_asignatura LIKE '$asignatura' AND imp.disponibilidad LIKE 0 $Where
                     GROUP BY usu.id_usuario";
             // var_dump($sql);
         }

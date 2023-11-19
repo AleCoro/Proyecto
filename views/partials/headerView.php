@@ -46,6 +46,10 @@
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/locales/es.js"></script>
 
+  <!-- Select2 -->
+  <link rel="stylesheet" href="admin/views/plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="admin/views/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+
 </head>
 
 <body>
@@ -74,15 +78,15 @@
           <div class="nav-item dropdown">
             <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown"><?= strtoupper($_SESSION["session_usuario"]); ?></a>
             <div class="dropdown-menu rounded-0 m-0">
-              <?php if (count($nombresRoles)>1) {
+              <?php if (count($nombresRoles) > 1) {
                 foreach ($nombresRoles as $nombreRol) {
                   if ($_SESSION["perfilSeleccionado"] !== $nombreRol["id_rol"]) { ?>
-                  <form action="" method="post" name="miFormulario<?= $nombreRol["id_rol"]; ?>">
-                    <button onclick="document.getElementById('miFormulario<?= $nombreRol['id_rol']; ?>').submit()" class="dropdown-item"><?= $nombreRol["nombre_rol"]; ?></button>
-                    <input type="hidden" name="perfilSeleccionado" value="<?= $nombreRol["id_rol"]; ?>">
-                  </form>
-              <?php } 
-                } 
+                    <form action="" method="post" name="miFormulario<?= $nombreRol["id_rol"]; ?>">
+                      <button onclick="document.getElementById('miFormulario<?= $nombreRol['id_rol']; ?>').submit()" class="dropdown-item"><?= $nombreRol["nombre_rol"]; ?></button>
+                      <input type="hidden" name="perfilSeleccionado" value="<?= $nombreRol["id_rol"]; ?>">
+                    </form>
+              <?php }
+                }
               } ?>
               <a href="miPerfil" class="dropdown-item">Mi perfil</a>
               <a href="logout" class="dropdown-item">Logout</a>

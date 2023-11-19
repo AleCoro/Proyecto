@@ -31,7 +31,7 @@ if (isset($_SESSION["id_usuario"]) && !isset($_SESSION["perfilSeleccionado"]) &&
         </script>";
 }
 
-if (count($roles) < 2) {
+if (isset($roles) && count($roles) < 2) {
   $_SESSION["perfilSeleccionado"]=$roles[0]["rol"];
 }
 

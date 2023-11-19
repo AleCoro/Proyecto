@@ -70,11 +70,31 @@ if (isset($_POST["id_profesor"])) {
                 // Convierte la fecha en un formato de base de datos (por ejemplo, formato MySQL)
                 $datos["fecha_clase"] = $fecha_clase->format('Y-m-d H:i');
                 //Inserto los datos de la reserva
-                $reservasController->ctrInsertar("reservas", $datos, "team");
+                $id_reserva = $reservasController->ctrInsertar("reservas", $datos, null);
+                // Inserto los temas que se daran en la clase reservada
+                for ($i=0; $i < count($_POST["temas"]) ; $i++) {
+                    $datos_contenido["reserva"] = $id_reserva;
+                    $datos_contenido["tema"] = $_POST["temas"][$i];
+
+                    $reservasController->ctrInsertar("contenido_clase", $datos_contenido, null);
+                }
                 // Actualizo la disponibilidad de la tabla imparte
                 $actualizar_datos["disponibilidad"] = "1";
-                // var_dump($actualizar_datos);
                 $asignaturasController->ctrActualizar("imparte", $actualizar_datos, null, "id_imparte", $_POST["id_imparte"]);
+
+                echo "<script>
+                        async function showSuccessAlert() {
+                            await Swal.fire({
+                                position: 'top-center',
+                                icon: 'success',
+                                title: 'Clase Reservada',
+                                showConfirmButton: false,
+                                timer: 1400
+                            });
+                            window.location.href = 'team';
+                        }
+                        showSuccessAlert();
+                    </script>";
             }
         }
     }

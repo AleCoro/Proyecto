@@ -158,12 +158,17 @@ function cargarCalendario(usuario) {
                 fecha = new Date(info.event.start);
                 hora = fecha.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
                 //Muestro la descripcion
-                $('#descripcion').text("¿Desea reservar esta hora para " + info.event.title + " a las " + hora + " por " + info.event.extendedProps.precio + "€ ?");
+                $('#mensaje').text("¿Desea reservar esta hora para " + info.event.title + " a las " + hora + " por " + info.event.extendedProps.precio + "€ ?");
 
                 $('#id_asignatura').val(info.event.extendedProps.id_asignatura);
                 $('#fecha_clase').val(info.event.start);
                 $('#id_imparte').val(info.event.extendedProps.id_imparte);
                 $('#precio').val(info.event.extendedProps.precio);
+
+                temasPorAsignatura(info.event.extendedProps.id_asignatura);
+
+
+
 
                 $('#modalReserva').modal('show');
             }
@@ -318,5 +323,34 @@ function validarHora(hora) {
         document.getElementById("error").innerHTML = "La hora debe de ser puntual";
         document.getElementById(hora.id).focus();
     }
+
+}
+
+function temasPorAsignatura(id_asignatura) {
+
+    var url = "views/js/consultas/datosClasesListar.php?id_asignatura=" + id_asignatura;
+    xmlhttp.open("GET", url);
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState === 4) {
+            if (xmlhttp.status === 200) {
+
+                temasArray = JSON.parse(xmlhttp.responseText);
+
+                var selectElement = document.getElementById('temas');
+                selectElement.innerHTML="";
+
+                temasArray.forEach(function (tema) {
+                    var option = document.createElement('option');
+                    option.value = tema.id_tema;
+                    option.text = tema.titulo_tema;
+                    selectElement.add(option);
+                });
+
+            } else {
+                alert(xmlhttp.statusText);
+            }
+        }
+    };
+    xmlhttp.send(null);
 
 }

@@ -41,26 +41,7 @@ class ReservasController
         //Insertamos los datos si todo ha salido bien
         $respuesta = ReservasModel::mdlInsertar($tabla, $datos);
 
-        if ($respuesta) {
-            echo "<script>
-                async function showSuccessAlert() {
-                    await Swal.fire({
-                        position: 'top-center',
-                        icon: 'success',
-                        title: 'Clase Reservada',
-                        showConfirmButton: false,
-                        timer: 1400
-                    });
-                    window.location.href = '$redireccion';
-                }
-                showSuccessAlert();
-            </script>";
-        } else {
-            echo "<script>
-                    alert('¡Error al dar de alta!');
-                    window.location = '$redireccion';
-                </script>";
-        }
+        return $respuesta;
 
 
         // Para insertar datos sigue esta estructura

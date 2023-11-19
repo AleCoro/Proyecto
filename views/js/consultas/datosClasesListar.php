@@ -15,7 +15,22 @@
         return $registros;
     }
 
-    if ($_GET["profesor"]) {
+    function mostrarTemasPorClase($valor){
+        $conexion = Conexion::conectar();
+        $sql = "SELECT tem.id_tema, tem.titulo_tema
+        FROM asignaturas as asi
+        JOIN temas as tem ON asi.id_asignatura = tem.asignatura
+        WHERE tem.asignatura like :valor";
+        // var_dump($sql);
+
+        $sentencia = $conexion->prepare($sql);
+        $sentencia->bindValue(":valor", $valor);
+        $sentencia->execute();
+        $registros=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+        return $registros;
+    }
+
+    if (isset($_GET["profesor"]) && $_GET["profesor"]) {
         $clases = mostrarClases("profesor", $_GET["profesor"]);
         
         foreach ($clases as &$clase) {
@@ -32,6 +47,11 @@
                 $clase["backgroundColor"] = "#A4A4A4";
             }
         }
-        // var_dump($clases);
         echo json_encode($clases);
+    }
+
+    if (isset($_GET["id_asignatura"]) && $_GET["id_asignatura"]) {
+        $datos = mostrarTemasPorClase($_GET["id_asignatura"]);
+
+        echo json_encode($datos);
     }
