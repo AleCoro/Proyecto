@@ -25,7 +25,7 @@ class AsignaturasController
         return $respuesta;
     }
 
-    public function mdlMostrar_Ultima_Asignatura($tabla)
+    public function ctrMostrar_Ultima_Asignatura($tabla)
     {
         $respuesta = AsignaturasModel::mdlMostrar_Ultima_Asignatura($tabla);
 
@@ -163,5 +163,11 @@ class AsignaturasController
             }
         }
         return $datos;
+    }
+
+    public function ctrAsignaturasPopulares(){
+        $respuesta = AsignaturasModel::mdlAsignaturasPopulares();
+
+        return $respuesta;
     }
 }

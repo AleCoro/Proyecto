@@ -1,4 +1,5 @@
 <?php
+$asignaturasController = new AsignaturasController();
 
 if (isset($_SESSION["id_usuario"])) {
   $rolesController = new RolesController();
@@ -34,5 +35,7 @@ if (isset($_SESSION["id_usuario"]) && !isset($_SESSION["perfilSeleccionado"]) &&
 if (isset($roles) && count($roles) < 2) {
   $_SESSION["perfilSeleccionado"]=$roles[0]["rol"];
 }
+
+$asignaturasPopulares = $asignaturasController->ctrAsignaturasPopulares();
 
 include("views/partials/inicioView.php");

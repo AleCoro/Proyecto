@@ -158,14 +158,5 @@
 <!-- Formulario -->
 <form action="login" id="formReserva" method="post" class="d-none">
   <input type="hidden" name="accion" value="reserva">
-  <input type="hidden" name="profesor" value="<?= $_POST["id_profesor"]; ?>">
+  <input type="hidden" name="profesor" id="id_profesor_redireccion" value="">
 </form>
-
-<?php
-if (isset($_POST["accion"]) && $_POST["accion"] == "reservar") {
-  // Si no has iniciado sesion te manda al login
-  if (count($_SESSION) == 0) {
-    echo "<script> document.getElementById('formReserva').submit(); </script>";
-  }
-}
-?>

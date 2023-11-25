@@ -36,6 +36,14 @@
         </div>
       </div>
 
+      <div class="row justify-content-center">
+        <h4 class="section-title px-5 pb-3">
+          <span class="px-2" id="tituloProfesores"></span>
+        </h4>
+      </div>
+
+
+
       <div class="row" style="margin-left: 8em; margin-right: 8em;">
         <?php foreach ($profesores as $profesor) { ?>
 
@@ -48,14 +56,13 @@
                 <div class="row mt-3">
                   <div class="col-8">
                     <h2 class="lead"><b><?= $profesor["nombre"] . " " . $profesor["apellidos"]; ?></b></h2>
-                    <p class="text-muted text-sm"><b>Asignaturas: </b> <?= $profesor["todasAsignaturas"]; ?> </p>
                     <ul class="ml-4 mb-0 fa-ul text-muted">
                       <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Direccion: <?= $profesor["direccion"]; ?></li>
                       <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Telefono: <?= $profesor["telefono"] ?></li>
                     </ul>
                   </div>
                   <div class="col-4 text-center">
-                    <img src="<?="admin/".$profesor["foto"]?>" alt="user-avatar" class="img-circle img-fluid">
+                    <img src="<?= "admin/" . $profesor["foto"] ?>" alt="user-avatar" class="img-circle img-fluid">
                   </div>
                 </div>
               </div>
@@ -76,83 +83,20 @@
     </section>
     <!-- Team End -->
 
-    <!-- Testimonial Start -->
-    <div class="container-fluid py-5">
-      <div class="container p-0">
-        <div class="text-center pb-2">
-          <p class="section-title px-5">
-            <span class="px-2">Testimonial</span>
-          </p>
-          <h1 class="mb-4">What Parents Say!</h1>
-        </div>
-        <div class="owl-carousel testimonial-carousel">
-          <div class="testimonial-item px-3">
-            <div class="bg-light shadow-sm rounded mb-4 p-4">
-              <h3 class="fas fa-quote-left text-primary mr-3"></h3>
-              Sed ea amet kasd elitr stet, stet rebum et ipsum est duo elitr
-              eirmod clita lorem. Dolor tempor ipsum clita
-            </div>
-            <div class="d-flex align-items-center">
-              <img class="rounded-circle" src="views/img/testimonial-1.jpg" style="width: 70px; height: 70px" alt="Image" />
-              <div class="pl-3">
-                <h5>Parent Name</h5>
-                <i>Profession</i>
-              </div>
-            </div>
-          </div>
-          <div class="testimonial-item px-3">
-            <div class="bg-light shadow-sm rounded mb-4 p-4">
-              <h3 class="fas fa-quote-left text-primary mr-3"></h3>
-              Sed ea amet kasd elitr stet, stet rebum et ipsum est duo elitr
-              eirmod clita lorem. Dolor tempor ipsum clita
-            </div>
-            <div class="d-flex align-items-center">
-              <img class="rounded-circle" src="views/img/testimonial-2.jpg" style="width: 70px; height: 70px" alt="Image" />
-              <div class="pl-3">
-                <h5>Parent Name</h5>
-                <i>Profession</i>
-              </div>
-            </div>
-          </div>
-          <div class="testimonial-item px-3">
-            <div class="bg-light shadow-sm rounded mb-4 p-4">
-              <h3 class="fas fa-quote-left text-primary mr-3"></h3>
-              Sed ea amet kasd elitr stet, stet rebum et ipsum est duo elitr
-              eirmod clita lorem. Dolor tempor ipsum clita
-            </div>
-            <div class="d-flex align-items-center">
-              <img class="rounded-circle" src="views/img/testimonial-3.jpg" style="width: 70px; height: 70px" alt="Image" />
-              <div class="pl-3">
-                <h5>Parent Name</h5>
-                <i>Profession</i>
-              </div>
-            </div>
-          </div>
-          <div class="testimonial-item px-3">
-            <div class="bg-light shadow-sm rounded mb-4 p-4">
-              <h3 class="fas fa-quote-left text-primary mr-3"></h3>
-              Sed ea amet kasd elitr stet, stet rebum et ipsum est duo elitr
-              eirmod clita lorem. Dolor tempor ipsum clita
-            </div>
-            <div class="d-flex align-items-center">
-              <img class="rounded-circle" src="views/img/testimonial-4.jpg" style="width: 70px; height: 70px" alt="Image" />
-              <div class="pl-3">
-                <h5>Parent Name</h5>
-                <i>Profession</i>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Testimonial End -->
-
     <?php
-      if (isset($_POST["id_area"]) && !empty($_POST["id_area"])) {
-        //Profesores filtrados por area
-        echo "<script>cargarAsignaturas('SinAsignatura','".$_POST["id_area"]."')</script>";
-      } else {
-        //Todos los profesores
-        echo "<script>cargarAsignaturas('SinAsignatura','SinArea')</script>";
-      }
+    if (isset($_POST["id_area"]) && !empty($_POST["id_area"])) {
+      //Profesores filtrados por area
+      echo "<script>cargarAsignaturas('SinAsignatura','" . $_POST["id_area"] . "')</script>";
+    } else {
+      //Todos los profesores
+      echo "<script>cargarAsignaturas('SinAsignatura','SinArea')</script>";
+    }
+
+    if (isset($_POST["id_asignatura"]) && !empty($_POST["id_asignatura"])) {
+      //Profesores filtrados por asignatura
+      echo "<script>cargarAsignaturas('" . $_POST["id_asignatura"] . "','SinArea')</script>";
+    } else {
+      //Todos los profesores
+      echo "<script>cargarAsignaturas('SinAsignatura','SinArea')</script>";
+    }
     ?>

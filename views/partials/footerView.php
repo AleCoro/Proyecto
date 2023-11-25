@@ -1,7 +1,7 @@
 <!-- Footer Start -->
 <div class="container-fluid bg-secondary text-white mt-5 py-5 px-sm-3 px-md-5">
   <div class="row pt-5">
-    <div class="col-lg-3 col-md-6 mb-5">
+    <div class="col-lg-4 col-md-6 mb-5 text-center">
       <a href="" class="navbar-brand font-weight-bold text-primary m-0 mb-4 p-0" style="font-size: 40px; line-height: 40px">
         <i class="flaticon-043-teddy-bear"></i>
         <span class="text-white">KidKinder</span>
@@ -11,40 +11,37 @@
         dolor et magna dolor, elitr rebum duo est sed diam elitr. Stet elitr
         stet diam duo eos rebum ipsum diam ipsum elitr.
       </p>
-      <div class="d-flex justify-content-start mt-4">
+      <div class="d-flex justify-content-center mt-4">
         <a class="btn btn-outline-primary rounded-circle text-center mr-2 px-0" style="width: 38px; height: 38px" href="#"><i class="fab fa-twitter"></i></a>
         <a class="btn btn-outline-primary rounded-circle text-center mr-2 px-0" style="width: 38px; height: 38px" href="#"><i class="fab fa-facebook-f"></i></a>
         <a class="btn btn-outline-primary rounded-circle text-center mr-2 px-0" style="width: 38px; height: 38px" href="#"><i class="fab fa-linkedin-in"></i></a>
         <a class="btn btn-outline-primary rounded-circle text-center mr-2 px-0" style="width: 38px; height: 38px" href="#"><i class="fab fa-instagram"></i></a>
       </div>
     </div>
-    <div class="col-lg-3 col-md-6 mb-5">
+    <div class="col-lg-4 col-md-6 mb-5 text-center">
       <h3 class="text-primary mb-4">Get In Touch</h3>
-      <div class="d-flex">
-        <h4 class="fa fa-map-marker-alt text-primary"></h4>
-        <div class="pl-3">
-          <h5 class="text-white">Address</h5>
+      <div class="d-flex justify-content-center">
+        <div>
+          <h5 class="text-white"><i class="fa fa-map-marker-alt text-primary"></i> Address</h5>
           <p>123 Street, New York, USA</p>
         </div>
       </div>
-      <div class="d-flex">
-        <h4 class="fa fa-envelope text-primary"></h4>
-        <div class="pl-3">
-          <h5 class="text-white">Email</h5>
+      <div class="d-flex justify-content-center">
+        <div>
+          <h5 class="text-white"><i class="fa fa-envelope text-primary"></i> Email</h5>
           <p>info@example.com</p>
         </div>
       </div>
-      <div class="d-flex">
-        <h4 class="fa fa-phone-alt text-primary"></h4>
-        <div class="pl-3">
-          <h5 class="text-white">Phone</h5>
+      <div class="d-flex justify-content-center">
+        <div>
+          <h5 class="text-white"><i class="fa fa-phone-alt text-primary"></i> Phone</h5>
           <p>+012 345 67890</p>
         </div>
       </div>
     </div>
-    <div class="col-lg-3 col-md-6 mb-5">
+    <div class="col-lg-4 col-md-6 mb-5 text-center">
       <h3 class="text-primary mb-4">Quick Links</h3>
-      <div class="d-flex flex-column justify-content-start">
+      <div class="d-flex flex-column justify-content-center">
         <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
         <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>About Us</a>
         <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Classes</a>
@@ -52,22 +49,6 @@
         <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Blog</a>
         <a class="text-white" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
       </div>
-    </div>
-    <div class="col-lg-3 col-md-6 mb-5">
-      <h3 class="text-primary mb-4">Newsletter</h3>
-      <form action="">
-        <div class="form-group">
-          <input type="text" class="form-control border-0 py-4" placeholder="Your Name" required="required" />
-        </div>
-        <div class="form-group">
-          <input type="email" class="form-control border-0 py-4" placeholder="Your Email" required="required" />
-        </div>
-        <div>
-          <button class="btn btn-primary btn-block border-0 py-3" type="submit">
-            Submit Now
-          </button>
-        </div>
-      </form>
     </div>
   </div>
   <div class="container-fluid pt-5" style="border-top: 1px solid rgba(23, 162, 184, 0.2) ;">
@@ -106,12 +87,53 @@
 <script src="admin/views/plugins/select2/js/select2.full.min.js"></script>
 
 </body>
+
 </html>
 
 <script>
-  $(function () {
+  $(function() {
     //Initialize Select2 Elements
     $('.select2').select2()
 
   });
+</script>
+<!-- <div id="paypal-button"></div> -->
+<script>
+  paypal.Button.render({
+    // Configure environment
+    env: 'sandbox',
+    client: {
+      sandbox: 'AbtBcRI2JZp3s7igdC-XfQBUseygSgRafnFI5VAkRBA7RRkrLr8-V8NEnIVqHtFw5VEdEjBv3ikPzAjZ',
+      // production: 'demo_production_client_id'
+    },
+    // Customize button (optional)
+    locale: 'es_ES',
+    style: {
+      size: 'responsive',
+      color: 'gold',
+      shape: 'rect',
+    },
+
+    // Enable Pay Now checkout flow (optional)
+    commit: true,
+
+    // Set up a payment
+    payment: function(data, actions) {
+      return actions.payment.create({
+        transactions: [{
+          amount: {
+            total: '0.01',
+            currency: 'EUR'
+          }
+        }]
+      });
+    },
+    // Execute the payment
+    onAuthorize: function(data, actions) {
+      return actions.payment.execute().then(function() {
+        // Show a confirmation message to the buyer
+        window.alert('Thank you for your purchase!');
+      });
+    }
+  }, '#paypal-button');
 </script>

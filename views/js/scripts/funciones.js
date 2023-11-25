@@ -102,6 +102,12 @@ function cargarProfesores(id_asignatura) {
                     card_profesor.classList.add("d-flex");
                 });
 
+                if (profesores.length == 0) {
+                    $("#tituloProfesores").text("No hay profesores disponibles");
+                } else {
+                    $("#tituloProfesores").text("Profesores disponibles");
+                }
+
             } else {
                 alert(xmlhttp.statusText);
             }
@@ -110,9 +116,11 @@ function cargarProfesores(id_asignatura) {
     xmlhttp.send(null);
 }
 
-function cargarCalendario(usuario) {
+async function cargarCalendario(usuario) {
     var Calendar = FullCalendar.Calendar;
     var calendarEl = document.getElementById('calendarioReserva');
+    var estaLogueado = await comprobarSiEstaLogueado();
+
 
     var calendar = new Calendar(calendarEl, {
         headerToolbar: {
@@ -152,25 +160,40 @@ function cargarCalendario(usuario) {
                 }
                 showSuccessAlert();
             } else {
-                //Muestro el titulo
-                $('#nombreAsignatura').text(info.event.title).val(info.event.title);
-                //Formateo la fecha para mostrarla en el modal
-                fecha = new Date(info.event.start);
-                hora = fecha.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
-                //Muestro la descripcion
-                $('#mensaje').text("¿Desea reservar esta hora para " + info.event.title + " a las " + hora + " por " + info.event.extendedProps.precio + "€ ?");
+                if (estaLogueado) {
 
-                $('#id_asignatura').val(info.event.extendedProps.id_asignatura);
-                $('#fecha_clase').val(info.event.start);
-                $('#id_imparte').val(info.event.extendedProps.id_imparte);
-                $('#precio').val(info.event.extendedProps.precio);
+                    //Muestro el titulo
+                    $('#nombreAsignatura').text(info.event.title).val(info.event.title);
+                    //Formateo la fecha para mostrarla en el modal
+                    fecha = new Date(info.event.start);
+                    hora = fecha.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+                    //Muestro la descripcion
+                    $('#mensaje').text("¿Desea reservar esta hora para " + info.event.title + " a las " + hora + " por " + info.event.extendedProps.precio + "€ ?");
 
-                temasPorAsignatura(info.event.extendedProps.id_asignatura);
+                    $('#id_asignatura').val(info.event.extendedProps.id_asignatura);
+                    $('#fecha_clase').val(info.event.start);
+                    $('#id_imparte').val(info.event.extendedProps.id_imparte);
+                    $('#precio').val(info.event.extendedProps.precio);
 
+                    temasPorAsignatura(info.event.extendedProps.id_asignatura);
 
+                    $('#modalReserva').modal('show');
 
+                } else {
+                    async function showSuccessAlert() {
+                        await Swal.fire({
+                            position: 'top-center',
+                            icon: 'warning',
+                            title: 'No estas logueado',
+                            showConfirmButton: false,
+                            timer: 1400
+                        });
+                        $('#id_profesor_redireccion').val(usuario);
+                        document.getElementById('formReserva').submit();
+                    }
+                    showSuccessAlert();
 
-                $('#modalReserva').modal('show');
+                }
             }
         }
     });
@@ -337,7 +360,7 @@ function temasPorAsignatura(id_asignatura) {
                 temasArray = JSON.parse(xmlhttp.responseText);
 
                 var selectElement = document.getElementById('temas');
-                selectElement.innerHTML="";
+                selectElement.innerHTML = "";
 
                 temasArray.forEach(function (tema) {
                     var option = document.createElement('option');
@@ -353,4 +376,20 @@ function temasPorAsignatura(id_asignatura) {
     };
     xmlhttp.send(null);
 
+}
+
+function comprobarSiEstaLogueado() {
+    return new Promise(function (resolve, reject) {
+        $.ajax({
+            url: 'views/js/consultas/comprobarSession.php',
+            type: 'GET',
+            dataType: 'json',
+            success: function (response) {
+                resolve(response.session_exists);
+            },
+            error: function (error) {
+                reject(error);
+            }
+        });
+    });
 }

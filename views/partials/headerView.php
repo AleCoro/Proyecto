@@ -50,6 +50,8 @@
   <link rel="stylesheet" href="admin/views/plugins/select2/css/select2.min.css">
   <link rel="stylesheet" href="admin/views/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 
+  <!-- Paypal -->
+  <script src="https://www.paypalobjects.com/api/checkout.js"></script>
 </head>
 
 <body>
@@ -96,6 +98,7 @@
           <a href="login" class="btn btn-primary px-4">Login</a>
           <!-- <a href="register" class="btn btn-primary px-4">Register</a> -->
         <?php } ?>
+        <div id="paypal-button"></div>
 
       </div>
     </nav>

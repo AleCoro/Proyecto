@@ -9,10 +9,39 @@
 
         // Verifica si la fecha de nacimiento es válida y cumple con la edad mínima
         if (strtotime($fechaNacimiento) > strtotime($fechaMinima)) {
-            $respuesta =  '<br><div class="alert alert-danger">Debes tener al menos 18 años.</div>';
+            $respuesta =  'Debes tener al menos 18 años';
         } else {
             $loginController = new LoginController();
             $respuesta = $loginController->ctrRegister();
+        }
+
+        if ($respuesta == "") {
+            echo "<script>
+                    async function showSuccessAlert() {
+                        await Swal.fire({
+                            position: 'top-center',
+                            icon: 'success',
+                            title: 'Usuario Registrado',
+                            showConfirmButton: false,
+                            timer: 1400
+                        });
+                        window.location.href = 'login';
+                    }
+                    showSuccessAlert();
+                </script>";
+        }else {
+            echo "<script>
+                    async function showSuccessAlert() {
+                        await Swal.fire({
+                            position: 'top-center',
+                            icon: 'error',
+                            title: '$respuesta',
+                            showConfirmButton: false,
+                            timer: 1400
+                        });
+                    }
+                    showSuccessAlert();
+                </script>";
         }
     }
 

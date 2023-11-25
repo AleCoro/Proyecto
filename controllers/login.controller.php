@@ -79,11 +79,11 @@ class LoginController
                     // Controlamos que los campos necesarios para el profesor esten rellenos
                     if ($_POST["rol"] == "Profesor") {
                         if (isset($_POST["asignaturas"]) && $_POST["asignaturas"] == "") {
-                            $respuesta =  '<br><div class="alert alert-danger">¡Debes seleccionar una asignatura!</div>';
+                            $respuesta =  '¡Debes seleccionar una asignatura!';
                             return $respuesta;
                         }
                         if ($_POST["precio"] <= 0) {
-                            $respuesta =  '<br><div class="alert alert-danger">¡Debes poner el precio de tu hora!</div>';
+                            $respuesta =  '¡Debes poner el precio de tu hora!';
                             return $respuesta;
                         }
                     }
@@ -125,35 +125,11 @@ class LoginController
                             }
 
                             if (!isset($destino)) {
-                                echo "<script>
-                                async function showSuccessAlert() {
-                                    await Swal.fire({
-                                        position: 'top-center',
-                                        icon: 'error',
-                                        title: 'Tipo de fichero incorrecto',
-                                        showConfirmButton: false,
-                                        timer: 1400
-                                    });
-                                    window.location.href = 'register';
-                                }
-                                showSuccessAlert();
-                            </script>";
+                                $respuesta = 'Tipo de fichero incorrecto';
                                 $error = true;
                             }
                         } else {
-                            echo "<script>
-                                async function showSuccessAlert() {
-                                    await Swal.fire({
-                                        position: 'top-center',
-                                        icon: 'error',
-                                        title: 'Fichero demasiado grande',
-                                        showConfirmButton: false,
-                                        timer: 1400
-                                    });
-                                    window.location.href = 'register';
-                                }
-                                showSuccessAlert();
-                            </script>";
+                            $respuesta = 'Fichero demasiado grande';
                             $error = true;
                         }
 
@@ -166,7 +142,7 @@ class LoginController
 
                     if (!isset($datos_usuario["foto"])) {
                         $UserController->ctrBorrarUsuario($id_insertado,"usuarios",null,null);
-                        return;
+                        return $respuesta;
                     } else {
                         $UserController->ActualizarUsuario("usuarios", $datos_usuario, null, $id_insertado);
 
@@ -208,27 +184,15 @@ class LoginController
 
                         if ($id_insertado) {
                             $respuesta = "";
-                            echo "<script>
-                                async function showSuccessAlert() {
-                                    await Swal.fire({
-                                        position: 'top-center',
-                                        icon: 'success',
-                                        title: 'Usuario Registrado',
-                                        showConfirmButton: false,
-                                        timer: 1400
-                                    });
-                                }
-                                showSuccessAlert();
-                            </script>";
                         } else {
-                            $respuesta =  '<br><div class="alert alert-danger">¡Error al guardar el usuario!</div>';
+                            $respuesta =  '¡Error al guardar el usuario!';
                         }
                     }
                 } else {
-                    $respuesta =  '<br><div class="alert alert-danger">¡El usuario no puede ir vacío o llevar caracteres especiales!</div>';
+                    $respuesta =  '¡El usuario no puede ir vacío o llevar caracteres especiales!';
                 }
             } else {
-                $respuesta =  '<br><div class="alert alert-danger">¡El usuario ya existe!</div>';
+                $respuesta =  '¡El usuario ya existe!';
             }
 
             return $respuesta;

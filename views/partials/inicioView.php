@@ -2,23 +2,23 @@
     <div class="container-fluid bg-primary px-0 px-md-5 mb-5">
       <div class="row align-items-center px-3">
         <div class="col-lg-6 text-center text-lg-left">
-          <h4 class="text-white mb-4 mt-5 mt-lg-0">Kids Learning Center</h4>
+          <h4 class="text-white mb-4 mt-5 mt-lg-0">Academia colaborativa</h4>
           <h1 class="display-3 font-weight-bold text-white">
-            New Approach to Kids Education
+            Nuevo enfoque para la educación
           </h1>
           <p class="text-white mb-4">
-            Sea ipsum kasd eirmod kasd magna, est sea et diam ipsum est amet sed
-            sit. Ipsum dolor no justo dolor et, lorem ut dolor erat dolore sed
-            ipsum at ipsum nonumy amet. Clita lorem dolore sed stet et est justo
-            dolore.
+            Descubre el poder de aprender juntos en nuestra innovadora academia colaborativa. Aquí, el conocimiento se fusiona con la creatividad, y cada mente es una fuente de inspiración. Únete a nuestra comunidad educativa donde el aprendizaje es más que una experiencia, es una colaboración que impulsa el éxito.
+            <br>
+            🚀 Explora, conecta y crea con nosotros. ¡Transformemos el aprendizaje en una aventura compartida!
           </p>
-          <a href="about" class="btn btn-secondary mt-1 py-3 px-5">Learn More</a>
+          <a href="about" class="btn btn-secondary mt-1 py-3 px-5">Leer mas</a>
         </div>
         <div class="col-lg-6 text-center text-lg-right">
-          <img class="img-fluid mt-5" src="views/img/header.png" alt="" />
+          <img class="img-fluid mt-2 mb-2 w-75 h-75" src="views/img/header.png" alt="" />
         </div>
       </div>
     </div>
+
     <!-- Header End -->
 
     <!-- Facilities Start -->
@@ -29,22 +29,20 @@
             <div class="d-flex bg-light shadow-sm border-top rounded mb-4" style="padding: 30px">
               <i class="flaticon-050-fence h1 font-weight-normal text-primary mb-3"></i>
               <div class="pl-4">
-                <h4>Play Ground</h4>
+                <h5>Colaboración Ilimitada</h5>
                 <p class="m-0">
-                  Kasd labore kasd et dolor est rebum dolor ut, clita dolor vero
-                  lorem amet elitr vero...
+                  Descubre la sinergia educativa en nuestra academia sin fronteras.
                 </p>
               </div>
             </div>
           </div>
           <div class="col-lg-4 col-md-6 pb-1">
             <div class="d-flex bg-light shadow-sm border-top rounded mb-4" style="padding: 30px">
-              <i class="flaticon-022-drum h1 font-weight-normal text-primary mb-3"></i>
+              <i class="flaticon-048-paper-plane h1 font-weight-normal text-primary mb-3"></i>
               <div class="pl-4">
-                <h4>Music and Dance</h4>
+                <h5>Educación Innovadora</h5>
                 <p class="m-0">
-                  Kasd labore kasd et dolor est rebum dolor ut, clita dolor vero
-                  lorem amet elitr vero...
+                  Sumérgete en un mundo educativo innovador y vanguardista.
                 </p>
               </div>
             </div>
@@ -53,46 +51,42 @@
             <div class="d-flex bg-light shadow-sm border-top rounded mb-4" style="padding: 30px">
               <i class="flaticon-030-crayons h1 font-weight-normal text-primary mb-3"></i>
               <div class="pl-4">
-                <h4>Arts and Crafts</h4>
+                <h5>Mentores Apasionados</h5>
                 <p class="m-0">
-                  Kasd labore kasd et dolor est rebum dolor ut, clita dolor vero
-                  lorem amet elitr vero...
+                  Únete a una comunidad con infinitos mentores listos para inspirarte.
                 </p>
               </div>
             </div>
           </div>
           <div class="col-lg-4 col-md-6 pb-1">
             <div class="d-flex bg-light shadow-sm border-top rounded mb-4" style="padding: 30px">
-              <i class="flaticon-017-toy-car h1 font-weight-normal text-primary mb-3"></i>
+              <i class="flaticon-032-book h1 font-weight-normal text-primary mb-3"></i>
               <div class="pl-4">
-                <h4>Safe Transportation</h4>
+                <h5>Aprendizaje Emocionante</h5>
                 <p class="m-0">
-                  Kasd labore kasd et dolor est rebum dolor ut, clita dolor vero
-                  lorem amet elitr vero...
+                  Haz del aprendizaje una experiencia emocionante con recursos multimedia.
                 </p>
               </div>
             </div>
           </div>
           <div class="col-lg-4 col-md-6 pb-1">
             <div class="d-flex bg-light shadow-sm border-top rounded mb-4" style="padding: 30px">
-              <i class="flaticon-025-sandwich h1 font-weight-normal text-primary mb-3"></i>
+              <i class="flaticon-029-clock h1 font-weight-normal text-primary mb-3"></i>
               <div class="pl-4">
-                <h4>Healthy food</h4>
+                <h5>Flexibilidad Personalizada</h5>
                 <p class="m-0">
-                  Kasd labore kasd et dolor est rebum dolor ut, clita dolor vero
-                  lorem amet elitr vero...
+                  Adaptamos el aprendizaje a tu estilo de vida con horarios flexibles.
                 </p>
               </div>
             </div>
           </div>
           <div class="col-lg-4 col-md-6 pb-1">
             <div class="d-flex bg-light shadow-sm border-top rounded mb-4" style="padding: 30px">
-              <i class="flaticon-047-backpack h1 font-weight-normal text-primary mb-3"></i>
+              <i class="flaticon-028-kindergarten h1 font-weight-normal text-primary mb-3"></i>
               <div class="pl-4">
-                <h4>Educational Tour</h4>
+                <h5>Éxito Colaborativo</h5>
                 <p class="m-0">
-                  Kasd labore kasd et dolor est rebum dolor ut, clita dolor vero
-                  lorem amet elitr vero...
+                  Alcanza alturas inimaginables a través de nuestro espíritu de equipo.
                 </p>
               </div>
             </div>
@@ -107,128 +101,52 @@
       <div class="container">
         <div class="text-center pb-2">
           <p class="section-title px-5">
-            <span class="px-2">Popular Classes</span>
+            <span class="px-2">Clases populares</span>
           </p>
-          <h1 class="mb-4">Classes for Your Kids</h1>
+          <h1 class="mb-4">Descubre nuestras clases más demandadas</h1>
         </div>
         <div class="row">
-          <div class="col-lg-4 mb-5">
-            <div class="card border-0 bg-light shadow-sm pb-2">
-              <img class="card-img-top mb-2" src="views/img/class-1.jpg" alt="" />
-              <div class="card-body text-center">
-                <h4>Drawing Class</h4>
-                <p class="card-text">
-                  Justo ea diam stet diam ipsum no sit, ipsum vero et et diam
-                  ipsum duo et no et, ipsum ipsum erat duo amet clita duo
-                </p>
+          <?php foreach ($asignaturasPopulares as $asignaturaPopular) { ?>
+
+            <div class="col-lg-4 mb-5">
+              <div class="card border-0 bg-light shadow-sm pb-2">
+                <img class="card-img-top mb-2" src="views/img/class-1.jpg" alt="" />
+                <div class="card-body text-center">
+                  <h4><?= $asignaturaPopular["nombre_asignatura"] ?></h4>
+                  <p class="card-text">
+                    Justo ea diam stet diam ipsum no sit, ipsum vero et et diam
+                    ipsum duo et no et, ipsum ipsum erat duo amet clita duo
+                  </p>
+                </div>
+                <div class="card-footer bg-transparent py-4 px-5">
+                  <div class="row border-bottom">
+                    <div class="col-6 py-1 text-right border-right">
+                      <strong>Nº de Reservas</strong>
+                    </div>
+                    <div class="col-6 py-1"><?= $asignaturaPopular["Reservas"] ?></div>
+                  </div>
+                  <div class="row border-bottom">
+                    <div class="col-6 py-1 text-right border-right">
+                      <strong>Profesores:</strong>
+                    </div>
+                    <div class="col-6 py-1"><?= $asignaturaPopular["ProfesoresImpartiendo"] ?></div>
+                  </div>
+                  <div class="row border-bottom">
+                    <div class="col-6 py-1 text-right border-right">
+                      <strong>Precio Medio</strong>
+                    </div>
+                    <div class="col-6 py-1"><?= $asignaturaPopular["PrecioMedio"] ?> €</div>
+                  </div>
+                </div>
+                <form action="team" method="post" class="m-auto">
+                  <input type="hidden" name="id_asignatura" value="<?= $asignaturaPopular["asignatura"]; ?>">
+                  <button class="btn btn-primary px-4 mx-auto mb-4">¡Encuentra a tu profesor!</button>
+                </form>
+                
               </div>
-              <div class="card-footer bg-transparent py-4 px-5">
-                <div class="row border-bottom">
-                  <div class="col-6 py-1 text-right border-right">
-                    <strong>Age of Kids</strong>
-                  </div>
-                  <div class="col-6 py-1">3 - 6 Years</div>
-                </div>
-                <div class="row border-bottom">
-                  <div class="col-6 py-1 text-right border-right">
-                    <strong>Total Seats</strong>
-                  </div>
-                  <div class="col-6 py-1">40 Seats</div>
-                </div>
-                <div class="row border-bottom">
-                  <div class="col-6 py-1 text-right border-right">
-                    <strong>Class Time</strong>
-                  </div>
-                  <div class="col-6 py-1">08:00 - 10:00</div>
-                </div>
-                <div class="row">
-                  <div class="col-6 py-1 text-right border-right">
-                    <strong>Tution Fee</strong>
-                  </div>
-                  <div class="col-6 py-1">$290 / Month</div>
-                </div>
-              </div>
-              <button href="" class="btn btn-primary px-4 mx-auto mb-4">Join Now</button>
             </div>
-          </div>
-          <div class="col-lg-4 mb-5">
-            <div class="card border-0 bg-light shadow-sm pb-2">
-              <img class="card-img-top mb-2" src="views/img/class-2.jpg" alt="" />
-              <div class="card-body text-center">
-                <h4>Language Learning</h4>
-                <p class="card-text">
-                  Justo ea diam stet diam ipsum no sit, ipsum vero et et diam
-                  ipsum duo et no et, ipsum ipsum erat duo amet clita duo
-                </p>
-              </div>
-              <div class="card-footer bg-transparent py-4 px-5">
-                <div class="row border-bottom">
-                  <div class="col-6 py-1 text-right border-right">
-                    <strong>Age of Kids</strong>
-                  </div>
-                  <div class="col-6 py-1">3 - 6 Years</div>
-                </div>
-                <div class="row border-bottom">
-                  <div class="col-6 py-1 text-right border-right">
-                    <strong>Total Seats</strong>
-                  </div>
-                  <div class="col-6 py-1">40 Seats</div>
-                </div>
-                <div class="row border-bottom">
-                  <div class="col-6 py-1 text-right border-right">
-                    <strong>Class Time</strong>
-                  </div>
-                  <div class="col-6 py-1">08:00 - 10:00</div>
-                </div>
-                <div class="row">
-                  <div class="col-6 py-1 text-right border-right">
-                    <strong>Tution Fee</strong>
-                  </div>
-                  <div class="col-6 py-1">$290 / Month</div>
-                </div>
-              </div>
-              <button href="" class="btn btn-primary px-4 mx-auto mb-4">Join Now</button>
-            </div>
-          </div>
-          <div class="col-lg-4 mb-5">
-            <div class="card border-0 bg-light shadow-sm pb-2">
-              <img class="card-img-top mb-2" src="views/img/class-3.jpg" alt="" />
-              <div class="card-body text-center">
-                <h4>Basic Science</h4>
-                <p class="card-text">
-                  Justo ea diam stet diam ipsum no sit, ipsum vero et et diam
-                  ipsum duo et no et, ipsum ipsum erat duo amet clita duo
-                </p>
-              </div>
-              <div class="card-footer bg-transparent py-4 px-5">
-                <div class="row border-bottom">
-                  <div class="col-6 py-1 text-right border-right">
-                    <strong>Age of Kids</strong>
-                  </div>
-                  <div class="col-6 py-1">3 - 6 Years</div>
-                </div>
-                <div class="row border-bottom">
-                  <div class="col-6 py-1 text-right border-right">
-                    <strong>Total Seats</strong>
-                  </div>
-                  <div class="col-6 py-1">40 Seats</div>
-                </div>
-                <div class="row border-bottom">
-                  <div class="col-6 py-1 text-right border-right">
-                    <strong>Class Time</strong>
-                  </div>
-                  <div class="col-6 py-1">08:00 - 10:00</div>
-                </div>
-                <div class="row">
-                  <div class="col-6 py-1 text-right border-right">
-                    <strong>Tution Fee</strong>
-                  </div>
-                  <div class="col-6 py-1">$290 / Month</div>
-                </div>
-              </div>
-              <button href="" class="btn btn-primary px-4 mx-auto mb-4">Join Now</button>
-            </div>
-          </div>
+
+          <?php } ?>
         </div>
       </div>
     </div>
@@ -456,9 +374,9 @@
                   <?php } ?>
                 </select>
               </form>
-              </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
     </div>

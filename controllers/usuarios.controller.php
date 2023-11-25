@@ -45,27 +45,7 @@ class UsuariosController
 
         $respuesta = ModeloUsuarios::mdlActualizarUsuario($tabla, $datos, $id);
 
-        if ($respuesta) {
-            echo "<script>
-                async function showSuccessAlert() {
-                    await Swal.fire({
-                        redirect: 'alumnos',
-                        position: 'top-center',
-                        icon: 'success',
-                        title: 'Usuario Actualizado',
-                        showConfirmButton: false,
-                        timer: 1400
-                    });
-                    window.location.href = '$redireccion';
-                }
-                showSuccessAlert();
-            </script>";
-        } else {
-            echo "<script>
-                alert('¡Error al hacer la actualizacion!');
-                window.location = '$redireccion';
-            </script>";
-        }
+        return $respuesta;
     }
 
     // ====================================== VALIDAR DATOS ======================================

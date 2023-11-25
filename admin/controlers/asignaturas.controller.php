@@ -21,7 +21,7 @@
             return $respuesta;
         }
 
-        public function mdlMostrar_Ultima_Asignatura($tabla){
+        public function ctrMostrar_Ultima_Asignatura($tabla){
             $respuesta=AsignaturasModel::mdlMostrar_Ultima_Asignatura($tabla);
 
             return $respuesta;

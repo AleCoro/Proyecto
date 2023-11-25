@@ -130,9 +130,6 @@
           </div>
           <button type="submit" class="btn btn-primary">Registrate</button>
         </form>
-        <?php if (isset($respuesta)) {
-          echo $respuesta;
-        } ?>
       </div>
     </div>
     <!-- Campos Profesor End -->
