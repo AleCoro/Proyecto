@@ -1,5 +1,7 @@
 <?php
 $asignaturasController = new AsignaturasController();
+$usuariosController = new UsuariosController();
+$postController = new PostsController();
 
 if (isset($_SESSION["id_usuario"])) {
   $rolesController = new RolesController();
@@ -37,5 +39,7 @@ if (isset($roles) && count($roles) < 2) {
 }
 
 $asignaturasPopulares = $asignaturasController->ctrAsignaturasPopulares();
+$profesores = $usuariosController->ctrProfesorMejorValorados();
+$posts = $postController->ctrUltimosPost();
 
 include("views/partials/inicioView.php");

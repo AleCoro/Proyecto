@@ -248,4 +248,21 @@
             $sentencia = null;
         }
 
+        static public function mdlUltimosPost()
+        {
+            $conexion = Conexion::conectar();
+            $sql = "SELECT *
+            FROM post
+            ORDER BY fecha_publicacion DESC
+            LIMIT 3";
+
+    
+            $sentencia = $conexion->prepare($sql);
+            $sentencia->execute();
+            return $sentencia->fetchAll(PDO::FETCH_ASSOC);
+    
+            // $sentencia->close();
+            $sentencia = null;
+        }
+
     }

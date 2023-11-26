@@ -203,4 +203,25 @@ class ModeloUsuarios
         // $sentencia->close();
         $sentencia = null;
     }
+
+    // ====================================== CONSULTA DATOS PROFESORES MEJOR VALORADOS ======================================
+
+    static public function mdlProfesorMejorValorados()
+    {
+        $conexion = Conexion::conectar();
+        $sql = "SELECT *, ROUND(AVG(res.valoracion), 2) as ValoracionMedia
+        FROM usuarios as usu
+        JOIN reservas as res ON usu.id_usuario = res.profesor
+        GROUP BY usu.id_usuario
+        ORDER BY ValoracionMedia DESC
+        LIMIT 4";
+
+
+        $sentencia = $conexion->prepare($sql);
+        $sentencia->execute();
+        return $sentencia->fetchAll(PDO::FETCH_ASSOC);
+
+        // $sentencia->close();
+        $sentencia = null;
+    }
 }

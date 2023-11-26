@@ -218,4 +218,12 @@ class PostsController
 
         return $respuesta;
     }
+
+        //Ultimos Posts
+        public function ctrUltimosPost()
+        {
+            $respuesta = PostsModel::mdlUltimosPost();
+    
+            return $respuesta;
+        }
 }

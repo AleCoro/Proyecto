@@ -178,14 +178,11 @@
         {
             $conexion = Conexion::conectar();
 
-            $consulta = "SELECT asi.*, res.*, COUNT(DISTINCT(res.id_reserva)) as Reservas, ROUND(AVG(res.pagado),2) as PrecioMedio, COUNT(DISTINCT(imp.profesor)) as ProfesoresImpartiendo
-            FROM asignaturas as asi
-            JOIN reservas as res ON asi.id_asignatura = res.asignatura
-            JOIN imparte as imp ON asi.id_asignatura = imp.asignatura
-            GROUP BY id_asignatura
-            ORDER BY Reservas DESC
-            LIMIT 3
-            ";
+            $consulta = "SELECT asi.*, res.*, COUNT(DISTINCT(res.id_reserva)) as Reservas, ROUND(AVG(res.pagado), 2) as PrecioMedio, COUNT(DISTINCT(CASE WHEN imp.disponibilidad = 0 THEN imp.profesor END)) as ProfesoresImpartiendo
+                        FROM asignaturas as asi JOIN reservas as res ON asi.id_asignatura = res.asignatura JOIN imparte as imp ON asi.id_asignatura = imp.asignatura
+                        GROUP BY id_asignatura
+                        ORDER BY Reservas DESC
+                        LIMIT 3; ";
 
             $resultados=$conexion->query($consulta);
             if ($resultados) {

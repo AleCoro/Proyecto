@@ -142,7 +142,7 @@
                   <input type="hidden" name="id_asignatura" value="<?= $asignaturaPopular["asignatura"]; ?>">
                   <button class="btn btn-primary px-4 mx-auto mb-4">¡Encuentra a tu profesor!</button>
                 </form>
-                
+
               </div>
             </div>
 
@@ -157,66 +157,37 @@
       <div class="container">
         <div class="text-center pb-2">
           <p class="section-title px-5">
-            <span class="px-2">Our Teachers</span>
+            <span class="px-2">Nuestros profesores</span>
           </p>
-          <h1 class="mb-4">Meet Our Teachers</h1>
+          <h1 class="mb-4">Mejores Valorados</h1>
         </div>
         <div class="row">
-          <div class="col-md-6 col-lg-3 text-center team mb-5">
-            <div class="position-relative overflow-hidden mb-4" style="border-radius: 100%">
-              <img class="img-fluid w-100" src="views/img/team-1.jpg" alt="" />
-              <div class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute">
-                <a class="btn btn-outline-light text-center mr-2 px-0" style="width: 38px; height: 38px" href="#"><i class="fab fa-twitter"></i></a>
-                <a class="btn btn-outline-light text-center mr-2 px-0" style="width: 38px; height: 38px" href="#"><i class="fab fa-facebook-f"></i></a>
-                <a class="btn btn-outline-light text-center px-0" style="width: 38px; height: 38px" href="#"><i class="fab fa-linkedin-in"></i></a>
+          <?php foreach ($profesores as $profesor) { ?>
+            <div class="col-md-6 col-lg-3 text-center team mb-5">
+              <div class="position-relative overflow-hidden mb-4" style="border-radius: 100%">
+                <img class="img-fluid w-100" src="<?= "admin/" . $profesor["foto"] ?>" alt="" />
+                <div class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute">
+                  <a class="btn btn-outline-light text-center mr-2 px-0" style="width: 38px; height: 38px" href="#"><i class="fab fa-twitter"></i></a>
+                  <a class="btn btn-outline-light text-center mr-2 px-0" style="width: 38px; height: 38px" href="#"><i class="fab fa-facebook-f"></i></a>
+                  <a class="btn btn-outline-light text-center px-0" style="width: 38px; height: 38px" href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+              </div>
+              <h4><?= $profesor["nombre"] . " " . $profesor["apellidos"]; ?></h4>
+              <div class="valoracion justify-content-center" id="valoracion">
+                <?php for ($i = 5; $i >= 1; $i--) { ?>
+                  <span class="fa fa-star starShow <?= $i <= $profesor["ValoracionMedia"] ? 'active' : ''; ?>" data-value="<?= $i; ?>"></span>
+                <?php } ?>
               </div>
             </div>
-            <h4>Julia Smith</h4>
-            <i>Music Teacher</i>
-          </div>
-          <div class="col-md-6 col-lg-3 text-center team mb-5">
-            <div class="position-relative overflow-hidden mb-4" style="border-radius: 100%">
-              <img class="img-fluid w-100" src="views/img/team-2.jpg" alt="" />
-              <div class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute">
-                <a class="btn btn-outline-light text-center mr-2 px-0" style="width: 38px; height: 38px" href="#"><i class="fab fa-twitter"></i></a>
-                <a class="btn btn-outline-light text-center mr-2 px-0" style="width: 38px; height: 38px" href="#"><i class="fab fa-facebook-f"></i></a>
-                <a class="btn btn-outline-light text-center px-0" style="width: 38px; height: 38px" href="#"><i class="fab fa-linkedin-in"></i></a>
-              </div>
-            </div>
-            <h4>Jhon Doe</h4>
-            <i>Language Teacher</i>
-          </div>
-          <div class="col-md-6 col-lg-3 text-center team mb-5">
-            <div class="position-relative overflow-hidden mb-4" style="border-radius: 100%">
-              <img class="img-fluid w-100" src="views/img/team-3.jpg" alt="" />
-              <div class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute">
-                <a class="btn btn-outline-light text-center mr-2 px-0" style="width: 38px; height: 38px" href="#"><i class="fab fa-twitter"></i></a>
-                <a class="btn btn-outline-light text-center mr-2 px-0" style="width: 38px; height: 38px" href="#"><i class="fab fa-facebook-f"></i></a>
-                <a class="btn btn-outline-light text-center px-0" style="width: 38px; height: 38px" href="#"><i class="fab fa-linkedin-in"></i></a>
-              </div>
-            </div>
-            <h4>Mollie Ross</h4>
-            <i>Dance Teacher</i>
-          </div>
-          <div class="col-md-6 col-lg-3 text-center team mb-5">
-            <div class="position-relative overflow-hidden mb-4" style="border-radius: 100%">
-              <img class="img-fluid w-100" src="views/img/team-4.jpg" alt="" />
-              <div class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute">
-                <a class="btn btn-outline-light text-center mr-2 px-0" style="width: 38px; height: 38px" href="#"><i class="fab fa-twitter"></i></a>
-                <a class="btn btn-outline-light text-center mr-2 px-0" style="width: 38px; height: 38px" href="#"><i class="fab fa-facebook-f"></i></a>
-                <a class="btn btn-outline-light text-center px-0" style="width: 38px; height: 38px" href="#"><i class="fab fa-linkedin-in"></i></a>
-              </div>
-            </div>
-            <h4>Donald John</h4>
-            <i>Art Teacher</i>
-          </div>
+
+          <?php } ?>
         </div>
       </div>
     </div>
     <!-- Team End -->
 
     <!-- Testimonial Start -->
-    <div class="container-fluid py-5">
+    <!-- <div class="container-fluid py-5">
       <div class="container p-0">
         <div class="text-center pb-2">
           <p class="section-title px-5">
@@ -283,7 +254,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     <!-- Testimonial End -->
 
     <!-- Blog Start -->
@@ -291,68 +262,32 @@
       <div class="container">
         <div class="text-center pb-2">
           <p class="section-title px-5">
-            <span class="px-2">Latest Blog</span>
+            <span class="px-2">Blog</span>
           </p>
-          <h1 class="mb-4">Latest Articles From Blog</h1>
+          <h1 class="mb-4">Últimos artículos del blog</h1>
         </div>
         <div class="row pb-3">
-          <div class="col-lg-4 mb-4">
-            <div class="card border-0 shadow-sm mb-2">
-              <img class="card-img-top mb-2" src="views/img/blog-1.jpg" alt="" />
-              <div class="card-body bg-light text-center p-4">
-                <h4 class="">Diam amet eos at no eos</h4>
-                <div class="d-flex justify-content-center mb-3">
-                  <small class="mr-3"><i class="fa fa-user text-primary"></i> Admin</small>
-                  <small class="mr-3"><i class="fa fa-folder text-primary"></i> Web Design</small>
-                  <small class="mr-3"><i class="fa fa-comments text-primary"></i> 15</small>
+          <?php foreach ($posts as $post) { ?>
+            <div class="col-lg-4 mb-4">
+              <div class="card border-0 shadow-sm mb-2">
+                <img class="card-img-top mb-2" src="<?= "admin/" . $post["imagen"]; ?>" alt="" />
+                <div class="card-body bg-light text-center p-4">
+                  <h4 class=""><?= $post["titulo"]; ?></h4>
+                  <div class="d-flex justify-content-center mb-3">
+                    <small class="mr-3"><i class="fa fa-user text-primary"></i> Admin</small>
+                    <small class="mr-3"><i class="fa fa-folder text-primary"></i> Web Design</small>
+                    <small class="mr-3"><i class="fa fa-comments text-primary"></i> 15</small>
+                  </div>
+                  <p> <?= $post["descripcion"]; ?> </p>
+                  <form action="postDetalle" method="post">
+                    <input type="hidden" name="id_post" value="<?= $post["id_post"]; ?>">
+                    <button type="submit" class="btn btn-primary px-4 mx-auto my-2">Leer Mas</button>
+                  </form>
                 </div>
-                <p>
-                  Sed kasd sea sed at elitr sed ipsum justo, sit nonumy diam
-                  eirmod, duo et sed sit eirmod kasd clita tempor dolor stet
-                  lorem. Tempor ipsum justo amet stet...
-                </p>
-                <button href="" class="btn btn-primary px-4 mx-auto my-2">Read More</button>
               </div>
             </div>
-          </div>
-          <div class="col-lg-4 mb-4">
-            <div class="card border-0 shadow-sm mb-2">
-              <img class="card-img-top mb-2" src="views/img/blog-2.jpg" alt="" />
-              <div class="card-body bg-light text-center p-4">
-                <h4 class="">Diam amet eos at no eos</h4>
-                <div class="d-flex justify-content-center mb-3">
-                  <small class="mr-3"><i class="fa fa-user text-primary"></i> Admin</small>
-                  <small class="mr-3"><i class="fa fa-folder text-primary"></i> Web Design</small>
-                  <small class="mr-3"><i class="fa fa-comments text-primary"></i> 15</small>
-                </div>
-                <p>
-                  Sed kasd sea sed at elitr sed ipsum justo, sit nonumy diam
-                  eirmod, duo et sed sit eirmod kasd clita tempor dolor stet
-                  lorem. Tempor ipsum justo amet stet...
-                </p>
-                <button href="" class="btn btn-primary px-4 mx-auto my-2">Read More</button>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 mb-4">
-            <div class="card border-0 shadow-sm mb-2">
-              <img class="card-img-top mb-2" src="views/img/blog-3.jpg" alt="" />
-              <div class="card-body bg-light text-center p-4">
-                <h4 class="">Diam amet eos at no eos</h4>
-                <div class="d-flex justify-content-center mb-3">
-                  <small class="mr-3"><i class="fa fa-user text-primary"></i> Admin</small>
-                  <small class="mr-3"><i class="fa fa-folder text-primary"></i> Web Design</small>
-                  <small class="mr-3"><i class="fa fa-comments text-primary"></i> 15</small>
-                </div>
-                <p>
-                  Sed kasd sea sed at elitr sed ipsum justo, sit nonumy diam
-                  eirmod, duo et sed sit eirmod kasd clita tempor dolor stet
-                  lorem. Tempor ipsum justo amet stet...
-                </p>
-                <button href="" class="btn btn-primary px-4 mx-auto my-2">Read More</button>
-              </div>
-            </div>
-          </div>
+          <?php } ?>
+
         </div>
       </div>
     </div>

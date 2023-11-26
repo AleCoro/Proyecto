@@ -120,4 +120,12 @@ class UsuariosController
         $respuesta = ModeloUsuarios::mdlDatosAlumno($alumno);
         return $respuesta;
     }
+
+    // ====================================== CONSULTA PROFESOR MAS VALORADOS ======================================
+
+    public function ctrProfesorMejorValorados()
+    {
+        $respuesta = ModeloUsuarios::mdlProfesorMejorValorados();
+        return $respuesta;
+    }
 }
