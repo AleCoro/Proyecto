@@ -19,9 +19,9 @@
       <div class="container">
         <div class="text-center pb-2">
           <p class="section-title px-5">
-            <span class="px-2">Get In Touch</span>
+            <span class="px-2">Ponte en contacto</span>
           </p>
-          <h1 class="mb-4">Contact Us For Any Query</h1>
+          <h1 class="mb-4">Contáctenos para cualquier consulta</h1>
         </div>
         <div class="row">
           <div class="col-lg-7 mb-5">

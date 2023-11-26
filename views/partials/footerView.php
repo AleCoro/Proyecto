@@ -4,7 +4,7 @@
     <div class="col-lg-4 col-md-6 mb-5 text-center">
       <a href="" class="navbar-brand font-weight-bold text-primary m-0 mb-4 p-0" style="font-size: 40px; line-height: 40px">
         <i class="flaticon-043-teddy-bear"></i>
-        <span class="text-white">KidKinder</span>
+        <span class="text-white">ABCademy</span>
       </a>
       <p>
         Labore dolor amet ipsum ea, erat sit ipsum duo eos. Volup amet ea
@@ -67,6 +67,33 @@
 </div>
 <!-- Footer End -->
 
+<!-- Modal donaciones -->
+<div class="modal fade" id="modalDonaciones" tabindex="-1" role="dialog" aria-labelledby="exampleModalFormTitle" aria-hidden="true">
+    <div class="modal-dialog modal-m" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalFormTitle">Haga su donación para el mantenimiento de esta página</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label for="inputState">Importe:</label>
+              <input type="number" class="form-control" name="donacion" id="donacion" min="1" value="1" required>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div id="paypal-button"></div>
+          <button type="reset" class="btn btn-danger btn-pill" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
 <!-- Back to Top -->
 <a href="#" class="btn btn-primary p-3 back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
@@ -96,9 +123,7 @@
     $('.select2').select2()
 
   });
-</script>
-<!-- <div id="paypal-button"></div> -->
-<script>
+
   paypal.Button.render({
     // Configure environment
     env: 'sandbox',
@@ -119,10 +144,12 @@
 
     // Set up a payment
     payment: function(data, actions) {
+      donacion = $("#donacion").val();
+      donacion = donacion.toString()
       return actions.payment.create({
         transactions: [{
           amount: {
-            total: '0.01',
+            total: donacion,
             currency: 'EUR'
           }
         }]

@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8" />
-  <title>KidKinder - Kindergarten Website Template</title>
+  <title>ABCademy</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewsport" />
   <meta content="Free HTML Templates" name="keywords" />
   <meta content="Free HTML Templates" name="description" />
@@ -59,8 +59,8 @@
   <div class="container-fluid bg-light position-relative shadow">
     <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0 px-lg-5">
       <a href="inicio" class="navbar-brand font-weight-bold text-secondary" style="font-size: 50px">
-        <i class="flaticon-043-teddy-bear"></i>
-        <span class="text-primary">KidKinder</span>
+        <i class="flaticon-033-blocks"></i>
+        <span class="text-primary">ABCademy</span>
       </a>
       <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
         <span class="navbar-toggler-icon"></span>
@@ -75,7 +75,7 @@
           }
           ?>
         </div>
-        <!-- <a href="" class="btn btn-primary px-4">Join Class</a> -->
+        <button class="btn btn-primary px-4 mr-2" data-toggle="modal" data-target="#modalDonaciones">Donaciones</button>
         <?php if (isset($_SESSION["session_usuario"])) { ?>
           <div class="nav-item dropdown">
             <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown"><?= strtoupper($_SESSION["session_usuario"]); ?></a>
@@ -98,7 +98,6 @@
           <a href="login" class="btn btn-primary px-4">Login</a>
           <!-- <a href="register" class="btn btn-primary px-4">Register</a> -->
         <?php } ?>
-        <div id="paypal-button"></div>
 
       </div>
     </nav>

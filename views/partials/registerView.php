@@ -34,7 +34,7 @@
           <div class="form-row">
             <div class="form-group col-md-6">
               <label>Usuario</label>
-              <input type="text" class="form-control" name="Usuario" placeholder="Usuario" value="<?php if (isset($_POST["Usuario"])) {
+              <input type="text" class="form-control" name="Usuario" id="Usuario" placeholder="Usuario" value="<?php if (isset($_POST["Usuario"])) {
                                                                                                     echo $_POST["Usuario"];
                                                                                                   } ?>" required>
             </div>
@@ -54,7 +54,7 @@
           <div class="form-row">
             <div class="form-group col-md-6">
               <label>Email</label>
-              <input type="email" class="form-control" name="Email" placeholder="Email" value="<?php if (isset($_POST["Email"])) {
+              <input type="email" class="form-control" name="Email" id="Email" placeholder="Email" value="<?php if (isset($_POST["Email"])) {
                                                                                                   echo $_POST["Email"];
                                                                                                 } ?>" required>
             </div>

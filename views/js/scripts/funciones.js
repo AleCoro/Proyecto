@@ -393,3 +393,30 @@ function comprobarSiEstaLogueado() {
         });
     });
 }
+
+function enviarCorreoRegistro(usuario,email) {
+    var url = "views/mail/correo.php?registro=true&usuario="+usuario+"&email="+email;
+    xmlhttp.open("GET", url);
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState === 4) {
+            if (xmlhttp.status === 200) {
+
+                async function showSuccessAlert() {
+                    await Swal.fire({
+                        position: 'top-center',
+                        icon: 'success',
+                        title: 'Usuario Registrado',
+                        showConfirmButton: false,
+                        timer: 1400
+                    });
+                    window.location.href = 'login';
+                }
+                showSuccessAlert();
+
+            } else {
+                alert(xmlhttp.statusText);
+            }
+        }
+    };
+    xmlhttp.send(null);
+}
