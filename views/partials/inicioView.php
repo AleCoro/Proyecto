@@ -276,7 +276,7 @@
                   <div class="d-flex justify-content-center mb-3">
                     <small class="mr-3"><i class="fa fa-user text-primary"></i> Admin</small>
                     <small class="mr-3"><i class="fa fa-folder text-primary"></i> Web Design</small>
-                    <small class="mr-3"><i class="fa fa-comments text-primary"></i> 15</small>
+                    <small class="mr-3"><i class="fa fa-comments text-primary"></i> <?= $post["NumComentarios"];?></small>
                   </div>
                   <p> <?= $post["descripcion"]; ?> </p>
                   <form action="postDetalle" method="post">

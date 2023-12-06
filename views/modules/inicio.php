@@ -42,4 +42,10 @@ $asignaturasPopulares = $asignaturasController->ctrAsignaturasPopulares();
 $profesores = $usuariosController->ctrProfesorMejorValorados();
 $posts = $postController->ctrUltimosPost();
 
+foreach ($posts as &$post) {
+  $comentarios = $postController->ctrContarComentarios($post["id_post"]);
+  $post["NumComentarios"] = $comentarios["totalComentarios"];
+}
+unset($post);
+
 include("views/partials/inicioView.php");

@@ -88,7 +88,7 @@
 <div class="modal fade" id="formularioInsertarAsignaturaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalFormTitle" aria-hidden="true">
   <form method="POST" action="asignaturas" id="formularioInsertarAsignatura">
     <input type="hidden" name="accion" value="InsertarAsignatura">
-    <div class="modal-dialog modal-xs" role="document">
+    <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalFormTitle">Insertar Asignatura</h5>
@@ -98,9 +98,17 @@
         </div>
         <div class="modal-body">
           <div class="form-row">
-            <div class="form-group col-md-12">
+            <div class="form-group col-md-6">
               <label for="inputState">Nombre:</label>
-              <input type="text" class="form-control" name="add_nombre" id="add_nombre" required>
+              <input type="text" class="form-control" name="add_nombre" id="add_nombre" placeholder="Asignatura" required>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="inputState">Area Academica:</label>
+              <select class="form-control" name="add_area" id="add_area">
+                <?php foreach ($areasAcademicas as $areasAcademica) { ?>
+                  <option value="<?= $areasAcademica["id_area"];?>"><?= $areasAcademica["nombre_area"];?></option>
+                <?php } ?>
+              </select>
             </div>
           </div>
         </div>
@@ -118,7 +126,7 @@
   <form method="POST" action="asignaturas" id="formularioEditarAsignatura">
     <input type="hidden" name="accion" value="EditarAsignatura">
     <input type="hidden" name="edit_id" id="edit_id" value="">
-    <div class="modal-dialog modal-xs" role="document">
+    <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalFormTitle">Editar Asignatura</h5>
@@ -128,9 +136,17 @@
         </div>
         <div class="modal-body">
           <div class="form-row">
-            <div class="form-group col-md-12">
+            <div class="form-group col-md-6">
               <label for="inputState">Nombre:</label>
               <input type="text" class="form-control" name="edit_nombre" id="edit_nombre" required>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="inputState">Area Academica:</label>
+              <select class="form-control" name="edit_area" id="edit_area">
+                <?php foreach ($areasAcademicas as $areasAcademica) { ?>
+                  <option value="<?= $areasAcademica["id_area"];?>"><?= $areasAcademica["nombre_area"];?></option>
+                <?php } ?>
+              </select>
             </div>
           </div>
         </div>

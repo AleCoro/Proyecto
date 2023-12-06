@@ -6,7 +6,6 @@ $posts = $postController->ctrMostrarPosts("post");
 if (isset($_POST["accion"]) && $_POST["accion"] == "CrearPost") {
     $datos["titulo"] = $_POST["add_titulo"];
     $datos["descripcion"] = $_POST["add_descripcion"];
-    $datos["imagen"] = "";
     // Valido TextArea
     if ($_POST["add_contenido"] == "") {
         echo "<script>
@@ -23,19 +22,19 @@ if (isset($_POST["accion"]) && $_POST["accion"] == "CrearPost") {
                     showSuccessAlert();
                 </script>";
         return;
-    }else {
+    } else {
         $datos["contenido"] = $_POST["add_contenido"];
     }
 
     $id_post = $postController->ctrInsertar("post", $datos, null);
 
     // Valido el fichero
-    if (isset($_FILES["add_portada"]["tmp_name"]) && $_FILES["edit_portada"]["tmp_name"] !== "") {
+    if (isset($_FILES["add_portada"]["tmp_name"]) && $_FILES["add_portada"]["tmp_name"] !== "") {
         //Definimo el tamaño maximo de megas
         $sizeMegas = 2;
         $sizeMegas = $sizeMegas * 1048576;
         //Sacamos el tamaño de nuestro fichero
-        $size = filesize($_FILES["foto"]["tmp_name"]);
+        $size = filesize($_FILES["add_portada"]["tmp_name"]);
 
         if ($size < $sizeMegas) {
 
@@ -63,6 +62,7 @@ if (isset($_POST["accion"]) && $_POST["accion"] == "CrearPost") {
                 imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
                 imagepng($destino, $ruta);
             }
+            $datos["imagen"] = $ruta;
 
             if (!isset($destino)) {
                 echo "<script>
@@ -78,10 +78,8 @@ if (isset($_POST["accion"]) && $_POST["accion"] == "CrearPost") {
                         }
                         showSuccessAlert();
                     </script>";
-                return;
+                $datos["imagen"] = null;
             }
-
-            $datos["imagen"] = $ruta;
         } else {
             echo "<script>
                     async function showSuccessAlert() {
@@ -96,25 +94,30 @@ if (isset($_POST["accion"]) && $_POST["accion"] == "CrearPost") {
                     }
                     showSuccessAlert();
                 </script>";
-            return;
         }
     }
 
-    $postController->ctrActualizar("post", $datos, null, $id_post);
+    if (!isset($datos["imagen"])) {
+        // echo "eliminado";
+        $postController->ctrEliminar("post", "id_post", $id_post, null);
+    } else {
+        // echo "actualizado";
+        $postController->ctrActualizar("post", $datos, null, $id_post);
 
-    echo "<script>
-        async function showSuccessAlert() {
-            await Swal.fire({
-                position: 'top-center',
-                icon: 'success',
-                title: 'PostCreado',
-                showConfirmButton: false,
-                timer: 1400
-            });
-            window.location.href = 'blog';
-        }
-        showSuccessAlert();
-    </script>";
+        echo "<script>
+                async function showSuccessAlert() {
+                    await Swal.fire({
+                        position: 'top-center',
+                        icon: 'success',
+                        title: 'PostCreado',
+                        showConfirmButton: false,
+                        timer: 1400
+                    });
+                    window.location.href = 'blog';
+                }
+                showSuccessAlert();
+            </script>";
+    }
 }
 
 // Eliminar Post
@@ -124,6 +127,19 @@ if (isset($_POST["accion"]) && $_POST["accion"] == "EliminarPost") {
     }
 
     $postController->ctrEliminar("post", "id_post", $_POST["id_post"], null);
+    echo "<script>
+    async function showSuccessAlert() {
+        await Swal.fire({
+            position: 'top-center',
+            icon: 'success',
+            title: 'PostEliminado',
+            showConfirmButton: false,
+            timer: 1400
+        });
+        window.location.href = 'blog';
+    }
+    showSuccessAlert();
+</script>";
 }
 
 // Editar Post
@@ -133,7 +149,7 @@ if (isset($_POST["accion"]) && $_POST["accion"] == "EditarPost") {
     $datos["descripcion"] = $_POST["edit_descripcion"];
     $datos["contenido"] = $_POST["edit_contenido"];
 
-    var_dump($_FILES["edit_portada"]["tmp_name"]);
+    // var_dump($_FILES["edit_portada"]["tmp_name"]);
 
     if (isset($_FILES["add_portada"]["tmp_name"]) && $_FILES["edit_portada"]["tmp_name"] !== "") {
         //Definimo el tamaño maximo de megas

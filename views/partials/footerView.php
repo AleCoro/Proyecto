@@ -1,9 +1,9 @@
 <!-- Footer Start -->
-<div class="container-fluid bg-secondary text-white mt-5 py-5 px-sm-3 px-md-5">
-  <div class="row pt-5">
-    <div class="col-lg-4 col-md-6 mb-5 text-center">
-      <a href="" class="navbar-brand font-weight-bold text-primary m-0 mb-4 p-0" style="font-size: 40px; line-height: 40px">
-        <i class="flaticon-043-teddy-bear"></i>
+<div class="container-fluid bg-secondary text-white mt-3 py-0 px-sm-3 px-md-5">
+  <div class="row pt-4">
+    <div class="col-lg-4 col-md-6 mb-2 mt-4 text-center">
+      <a href="" class="navbar-brand font-weight-bold text-primary m-0 mb-4 p-0" style="font-size: 35px; line-height: 35px">
+        <i class="flaticon-033-blocks"></i>
         <span class="text-white">ABCademy</span>
       </a>
       <p>
@@ -11,15 +11,15 @@
         dolor et magna dolor, elitr rebum duo est sed diam elitr. Stet elitr
         stet diam duo eos rebum ipsum diam ipsum elitr.
       </p>
-      <div class="d-flex justify-content-center mt-4">
+      <div class="d-flex justify-content-center mt-2">
         <a class="btn btn-outline-primary rounded-circle text-center mr-2 px-0" style="width: 38px; height: 38px" href="#"><i class="fab fa-twitter"></i></a>
         <a class="btn btn-outline-primary rounded-circle text-center mr-2 px-0" style="width: 38px; height: 38px" href="#"><i class="fab fa-facebook-f"></i></a>
         <a class="btn btn-outline-primary rounded-circle text-center mr-2 px-0" style="width: 38px; height: 38px" href="#"><i class="fab fa-linkedin-in"></i></a>
         <a class="btn btn-outline-primary rounded-circle text-center mr-2 px-0" style="width: 38px; height: 38px" href="#"><i class="fab fa-instagram"></i></a>
       </div>
     </div>
-    <div class="col-lg-4 col-md-6 mb-5 text-center">
-      <h3 class="text-primary mb-4">Get In Touch</h3>
+    <div class="col-lg-4 col-md-6 mb-2 text-center">
+      <h3 class="text-primary mb-2">Get In Touch</h3>
       <div class="d-flex justify-content-center">
         <div>
           <h5 class="text-white"><i class="fa fa-map-marker-alt text-primary"></i> Address</h5>
@@ -39,29 +39,24 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-4 col-md-6 mb-5 text-center">
-      <h3 class="text-primary mb-4">Quick Links</h3>
+    <div class="col-lg-4 col-md-6 mb-2 text-center">
+      <h3 class="text-primary mb-2">Quick Links</h3>
       <div class="d-flex flex-column justify-content-center">
-        <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
-        <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>About Us</a>
-        <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Classes</a>
-        <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Teachers</a>
-        <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Blog</a>
-        <a class="text-white" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+        <?php foreach ($nav_links as $text => $url) { ?>
+          <a class="text-white mb-2" href="<?= $url; ?>"><i class="fa fa-angle-right mr-2"></i><?= $text; ?></a>
+        <?php } ?>
       </div>
     </div>
   </div>
-  <div class="container-fluid pt-5" style="border-top: 1px solid rgba(23, 162, 184, 0.2) ;">
+  <div class="container-fluid pt-3 pb-3" style="border-top: 1px solid rgba(23, 162, 184, 0.2) ;">
     <p class="m-0 text-center text-white">
       &copy;
-      <a class="text-primary font-weight-bold" href="#">Your Site Name</a>.
-      All Rights Reserved.
+      <a class="text-primary font-weight-bold" href="inicio">ABCademy</a>.
+      Todos los derechos reservados.
 
       <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-      Designed by
-      <a class="text-primary font-weight-bold" href="https://htmlcodex.com">HTML Codex</a>
-      <br />Distributed By:
-      <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+      <br /> Desarrollado por:
+      <a href="" target="">Alejandro Betanzos Coro</a>
     </p>
   </div>
 </div>

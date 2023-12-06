@@ -188,22 +188,23 @@ class ReservasController
     }
 
     // Cargar Paginacion
-    public function ctrMostrarPaginacion($tabla,$pagina,$registrosxpagina){
-        $orden="ASC";
-        
+    public function ctrMostrarPaginacion($tabla, $pagina, $registrosxpagina)
+    {
+        $orden = "ASC";
 
-        if ($pagina==1) {
-            $inicio=0;
-        }else {
-            $inicio=($pagina*$registrosxpagina)-$registrosxpagina;
+
+        if ($pagina == 1) {
+            $inicio = 0;
+        } else {
+            $inicio = ($pagina * $registrosxpagina) - $registrosxpagina;
         }
-        
-        $respuesta = ReservasModel::mdlMostrarPaginacion($tabla,$inicio,$registrosxpagina,$orden);
+
+        $respuesta = ReservasModel::mdlMostrarPaginacion($tabla, $inicio, $registrosxpagina, $orden);
 
         return $respuesta;
     }
 
-    //Ultimas 6 reservas
+    //Ultimas 6 reservas expiradas
     public function ctrMostrarReservasExpiradas($campo, $valor)
     {
         // $tabla = "";
@@ -212,7 +213,7 @@ class ReservasController
         return $respuesta;
     }
 
-    //Ultimas 6 reservas
+    //Ultimas 6 reservas sin expirar
     public function ctrMostrarReservasSinExpirar($campo, $valor)
     {
         // $tabla = "";
@@ -221,10 +222,15 @@ class ReservasController
         return $respuesta;
     }
 
-    public function formatearFecha($fechaOriginal) {
+    public function formatearFecha($fechaOriginal)
+    {
         $datetime = new DateTime($fechaOriginal);
         return $datetime->format('d/m/Y H:i');
     }
 
+    public function ctrValoracionesProfesor($id_profesor){
+         $respuesta = ReservasModel::mdlValoracionesProfesor($id_profesor);
 
+         return $respuesta;
+    }
 }

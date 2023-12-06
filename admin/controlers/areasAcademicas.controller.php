@@ -36,17 +36,6 @@
             //Insertamos los datos si todo ha salido bien
             $respuesta=AreasAcademicasModel::mdlInsertar($tabla,$datos);
 
-            if ($respuesta) {
-                echo "<script>
-                        alert('¡Se ha dado de alta correctamente!');
-                        window.location = '$redireccion';
-                    </script>";
-            }else {
-                echo "<script>
-                    alert('¡Error al dar de alta!');
-                    window.location = '$redireccion';
-                </script>";
-            }
 
 
             // Para insertar datos sigue esta estructura
@@ -76,17 +65,6 @@
 
             $respuesta=AreasAcademicasModel::mdlActualizar($tabla,$datos,$id);
 
-            if ($respuesta) {
-                echo "<script>
-                        alert('¡Se ha actualizado correctamente!');
-                        window.location = '$redireccion';
-                    </script>";
-            }else {
-                echo "<script>
-                    alert('¡Error al hacer la actualizacion!');
-                    window.location = '$redireccion';
-                </script>";
-            }
 
 
             // Para actualizar datos sigue esta estructura
@@ -114,18 +92,6 @@
         {
             if (isset($id)) {
                 $respuesta = AreasAcademicasModel::mdlEliminar($tabla, $campo_id, $id);
-
-                if ($respuesta) {
-                    echo "<script>
-                            alert('¡Se ha eliminado correctamente!');
-                            window.location = '$redireccion';
-                        </script>";
-                } else {
-                    echo "<script>
-                        alert('¡Error al eliminar!');
-                        window.location = '$redireccion';
-                    </script>";
-                }
             }
 
 

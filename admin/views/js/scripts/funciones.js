@@ -61,6 +61,7 @@ function editarAsignatura(asignatura) {
     $('#edit_id').val(asignatura.id_asignatura);
     $('#edit_nombre').val(asignatura.nombre_asignatura);
     $('#edit_descripcion').val(asignatura.descripcion_asignatura);
+    $('#edit_area').val(asignatura.area_academica);
 
 }
 

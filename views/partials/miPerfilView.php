@@ -1,6 +1,6 @@
 <!-- Header Start -->
 <div class="container-fluid bg-primary mb-5">
-    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 400px">
+    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
         <h3 class="display-3 font-weight-bold text-white"><?= $usuario["nombre"] . " " . $usuario["apellidos"] ?></h3>
         <div class="d-inline-flex text-white">
             <p class="m-0"><a class="text-white" href="inicio">Home</a></p>
@@ -215,8 +215,12 @@
                                                                             <span class="fa fa-star star <?= $i <= $claseFinalizada["valoracion"] ? 'active' : ''; ?>" data-value="<?= $i; ?>" id_reserva="<?= $claseFinalizada["id_reserva"]; ?>" onclick="guardarValoracion(this)"></span>
                                                                         <?php } ?>
                                                                     </div>
-                                                                <?php }else{ ?>
-                                                                    <p>Ya has valorado esta clase.</p>
+                                                                <?php } else { ?>
+                                                                    <div class="valoracion justify-content-left" id="valoracion">
+                                                                        <?php for ($i = 5; $i >= 1; $i--) { ?>
+                                                                            <span class="fa fa-star starShow <?= $i <= $claseFinalizada["valoracion"] ? 'active' : ''; ?>" data-value="<?= $i; ?>"></span>
+                                                                        <?php } ?>
+                                                                    </div>
                                                                 <?php } ?>
 
                                                             </div>

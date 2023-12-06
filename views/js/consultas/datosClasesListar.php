@@ -47,6 +47,7 @@
                 $clase["backgroundColor"] = "#A4A4A4";
             }
         }
+        unset($clase);
         echo json_encode($clases);
     }
 

@@ -170,4 +170,10 @@ class AsignaturasController
 
         return $respuesta;
     }
+
+    public function ctrGetAsignaturasImpartidas($id_profesor){
+        $respuesta = AsignaturasModel::mdlGetAsignaturasImpartidas($id_profesor);
+
+        return $respuesta;
+    }
 }

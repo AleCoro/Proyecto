@@ -1,6 +1,6 @@
 <!-- Header Start -->
 <div class="container-fluid bg-primary mb-5">
-  <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 400px">
+  <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
     <h3 class="display-3 font-weight-bold text-white"><?= $profesor["nombre"] . " " . $profesor["apellidos"] ?></h3>
     <div class="d-inline-flex text-white">
       <p class="m-0"><a class="text-white" href="inicio">Home</a></p>
@@ -22,23 +22,19 @@
               <img class="profile-user-img img-fluid img-circle" src="<?= "admin/" . $profesor["foto"] ?>" alt="User profile picture">
             </div>
 
-            <h3 class="profile-username text-center"><?= $profesor["nombre"] . " " . $profesor["apellidos"] ?></h3>
-
-            <p class="text-muted text-center">Software Engineer</p>
+            <h3 class="profile-username text-center"><?= $profesor["nombre"] . " " . $profesor["apellidos"] ?></h3><br>
 
             <ul class="list-group list-group-unbordered mb-3">
               <li class="list-group-item">
-                <b>Followers</b> <a class="float-right">1,322</a>
+                <b>Total alumnos</b> <a class="float-right"><?= $totalAlumnos; ?></a>
               </li>
               <li class="list-group-item">
-                <b>Following</b> <a class="float-right">543</a>
+                <b>Total profesores</b> <a class="float-right"><?= $totalProfesor; ?></a>
               </li>
               <li class="list-group-item">
-                <b>Friends</b> <a class="float-right">13,287</a>
+                <b>Valoraciones</b> <a class="float-right"><?= $totalValoraciones; ?></a>
               </li>
             </ul>
-
-            <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
           </div>
           <!-- /.card-body -->
         </div>
@@ -51,35 +47,25 @@
           </div>
           <!-- /.card-header -->
           <div class="card-body">
-            <strong><i class="fas fa-book mr-1"></i> Education</strong>
+            <strong><i class="fas fa-book mr-1"></i> Asignaturas</strong>
 
             <p class="text-muted">
-              B.S. in Computer Science from the University of Tennessee at Knoxville
+              <?= $asignaturasImpartidas["todasAsignaturas"]; ?>
             </p>
 
             <hr>
 
             <strong><i class="fas fa-map-marker-alt mr-1"></i> Location</strong>
 
-            <p class="text-muted">Malibu, California</p>
+            <p class="text-muted"><?= $profesor["direccion"]; ?></p>
 
             <hr>
 
-            <strong><i class="fas fa-pencil-alt mr-1"></i> Skills</strong>
+            <strong><i class="fas fa-pencil-alt mr-1"></i> Temas</strong>
 
             <p class="text-muted">
-              <span class="tag tag-danger">UI Design</span>
-              <span class="tag tag-success">Coding</span>
-              <span class="tag tag-info">Javascript</span>
-              <span class="tag tag-warning">PHP</span>
-              <span class="tag tag-primary">Node.js</span>
+              <span class="tag tag-danger"><?= $asignaturasImpartidas["todosTemas"]; ?></span>
             </p>
-
-            <hr>
-
-            <strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
-
-            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
           </div>
           <!-- /.card-body -->
         </div>
@@ -100,6 +86,32 @@
                 <div id="calendarioReserva"></div>
               </div>
               <div class="tab-pane" id="valoraciones">
+                <div class="row">
+                  <?php if ($totalValoraciones == 0) { ?>
+                    <h3 class="ml-2">Aun no te han valorado.</h3>
+                    <?php } else {
+                    foreach ($valoraciones as $valoracion) { ?>
+                      <div class="col-md-4 col-sm-6 col-12">
+                        <div class="info-box">
+                          <span class="info-box-icon bg-info"> <img class="info-box-icon h-100 w-100" src="<?= "admin/" . $valoracion["foto"] ?>" alt=""></span>
+                          <div class="info-box-content">
+                            <span class="info-box-text">Alumno: <?= $valoracion["nombre"] . " " . $valoracion["apellidos"] ?></span>
+                            <span class="info-box-text">Clase: <?= $valoracion["nombre_asignatura"] ?></span>
+                            <div class="d-flex d-inline info-box-text mt-1">
+                              <div class="valoracion justify-content-left" id="valoracion">
+                                <?php for ($i = 5; $i >= 1; $i--) { ?>
+                                  <span class="fa fa-star starShow <?= $i <= $valoracion["valoracion"] ? 'active' : ''; ?>" data-value="<?= $i; ?>"></span>
+                                <?php } ?>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- /.info-box-content -->
+                        </div>
+                        <!-- /.info-box -->
+                      </div>
+                  <?php }
+                  } ?>
+                </div>
               </div>
               <!-- /.tab-pane -->
             </div>

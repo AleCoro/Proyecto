@@ -148,4 +148,25 @@ class ModeloUsuarios
         // $sentencia->close();
         $sentencia = null;
     }
+
+    // ====================================== CONSULTA TOTAL ALUMNOS ======================================
+
+    static public function mdlTotalAlumnos($id_Profesor)
+    {
+        $conexion = Conexion::conectar();
+        $sql = "SELECT COUNT(res.profesor)
+                FROM usuarios as usu
+                JOIN reservas as res ON usu.id_usuario = res.profesor
+                JOIN asignaturas as asi ON res.asignatura = asi.id_asignatura
+                JOIN areas_academicas as are ON asi.area_academica = are.id_area
+                WHERE res.profesor = $id_Profesor";
+
+        $sentencia = $conexion->prepare($sql);
+        $sentencia->execute();
+        return $sentencia->fetchAll(PDO::FETCH_ASSOC);
+
+        // $sentencia->close();
+        $sentencia = null;
+    }
+
 }

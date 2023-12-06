@@ -130,4 +130,4 @@ foreach ($comprobarLikes as $comprobarLike) {
 
 
 
-include("views/partials/postDetalleView.php");
+include("views/partials/postDetalle2View.php");

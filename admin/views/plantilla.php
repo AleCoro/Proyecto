@@ -42,8 +42,8 @@ session_start();
   <script src="views/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
   <script src="views/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 
-  <!-- Cargamos nuestros scripts -->
-  <script src="views/js/scripts/funciones.js"></script>
+  <!-- ApexChart -->
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
   <!-- Sweet Alert -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

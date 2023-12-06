@@ -11,6 +11,11 @@
 </aside>
 <!-- /.control-sidebar -->
 </div>
+
+<!-- Cargamos nuestros scripts -->
+<script src="views/js/scripts/charts.js"></script>
+<script src="views/js/scripts/funciones.js"></script>
+
 <!-- DataTables  & Plugins -->
 <script src="views/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="views/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>

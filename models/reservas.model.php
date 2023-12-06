@@ -177,7 +177,7 @@ class ReservasModel
         return $ruta;
     }
 
-    // Cargar Paginacion Habitaciones
+    // Cargar Paginacion Reservas
     public static function mdlMostrarPaginacion($tabla, $inicio, $registrosxpagina, $orden)
     {
 
@@ -226,6 +226,22 @@ class ReservasModel
             WHERE res.$campo LIKE '$valor' AND res.fecha_clase > CURRENT_TIMESTAMP
             GROUP BY res.id_reserva 
             ORDER BY res.fecha_reserva DESC LIMIT 4";
+        $sentencia = $conexion->prepare($sql);
+        // var_dump($sentencia);
+        $sentencia->execute();
+        $registros = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+        return $registros;
+    }
+
+    // Mostrar Valoraciones
+    public static function mdlValoracionesProfesor($id_profesor){
+        $conexion = Conexion::conectar();
+        $sql = "SELECT * FROM reservas as res
+        JOIN asignaturas as p ON p.id_asignatura = res.asignatura
+        JOIN usuarios as alumno ON alumno.id_usuario = res.alumno
+        WHERE res.profesor LIKE '$id_profesor' AND res.valoracion > 0
+        GROUP BY res.id_reserva 
+        ORDER BY res.fecha_reserva";
         $sentencia = $conexion->prepare($sql);
         // var_dump($sentencia);
         $sentencia->execute();

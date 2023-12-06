@@ -1,6 +1,6 @@
     <!-- Header Start -->
     <div class="container-fluid bg-primary mb-5">
-      <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 400px">
+      <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
         <h3 class="display-3 font-weight-bold text-white">Nuestros Profesores</h3>
         <div class="d-inline-flex text-white">
           <p class="m-0"><a class="text-white" href="inicio">Home</a></p>
@@ -47,7 +47,7 @@
       <div class="row" style="margin-left: 8em; margin-right: 8em;">
         <?php foreach ($profesores as $profesor) { ?>
 
-          <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column mb-2" id="card_<?= $profesor["id_usuario"] ?>">
+          <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column mb-2" id="card_<?= $profesor["id_imparte"] ?>">
             <div class="card bg-light d-flex flex-fill">
               <div class="card-header text-muted border-bottom-0">
                 <?= $profesor["usuario"]; ?>
@@ -57,8 +57,9 @@
                   <div class="col-8">
                     <h2 class="lead"><b><?= $profesor["nombre"] . " " . $profesor["apellidos"]; ?></b></h2>
                     <ul class="ml-4 mb-0 fa-ul text-muted">
-                      <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Direccion: <?= $profesor["direccion"]; ?></li>
-                      <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Telefono: <?= $profesor["telefono"] ?></li>
+                      <li class="small mb-2"><span class="fa-li"><i class="fas fa-lg fa-graduation-cap"></i></span> Asignatura: <?= $profesor["nombre_asignatura"]; ?></li>
+                      <li class="small mb-2"><span class="fa-li"><i class="fas fa-lg fa-calendar"></i></span> Fecha: <?= $reservasController->formatearFecha($profesor["fecha_imparte"]); ?></li>
+                      <li class="small mb-2"><span class="fa-li"><i class="fas fa-lg fa-euro-sign"></i></span> Precio: <?= $profesor["precio"] ?> €</li>
                     </ul>
                   </div>
                   <div class="col-4 text-center">

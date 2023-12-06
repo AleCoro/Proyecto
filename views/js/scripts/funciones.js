@@ -97,7 +97,7 @@ function cargarProfesores(id_asignatura) {
                 //Aqui muestro los necesarios
                 profesores.forEach(profesor => {
                     // alert(profesor.id_usuario);
-                    card_profesor = document.getElementById("card_" + profesor.id_usuario);
+                    card_profesor = document.getElementById("card_" + profesor.id_imparte);
                     card_profesor.classList.remove("d-none");
                     card_profesor.classList.add("d-flex");
                 });
@@ -419,4 +419,41 @@ function enviarCorreoRegistro(usuario,email) {
         }
     };
     xmlhttp.send(null);
+}
+
+function editarComentario(id_comentario) {
+
+    formulario = document.getElementById("formularioEditarComentario" + id_comentario);
+    formulario.classList.remove("d-none");
+
+    formulario = document.getElementById("botonesFormulario" + id_comentario);
+    formulario.classList.remove("d-none");
+
+    campoComentario = document.getElementById("campoComentario" + id_comentario);
+    campoComentario.classList.add("d-none");
+
+    botones = document.getElementById("botones" + id_comentario);
+    botones.classList.add("d-none");
+}
+
+function cancelarEditComentario(id_comentario) {
+    formulario = document.getElementById("formularioEditarComentario" + id_comentario);
+    formulario.classList.add("d-none");
+
+    formulario = document.getElementById("botonesFormulario" + id_comentario);
+    formulario.classList.add("d-none");
+
+    campoComentario = document.getElementById("campoComentario" + id_comentario);
+    campoComentario.classList.remove("d-none");
+
+    botones = document.getElementById("botones" + id_comentario);
+    botones.classList.remove("d-none");
+}
+
+function borrarComentario(id_comentario) {
+    document.getElementById("formularioBorrarComentario"+id_comentario).submit();
+}
+
+function guardarComentario(id_comentario) {
+    document.getElementById("formularioEditarComentario"+id_comentario).submit();
 }

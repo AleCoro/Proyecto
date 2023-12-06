@@ -178,7 +178,7 @@
         {
             $conexion = Conexion::conectar();
 
-            $consulta = "SELECT asi.*, res.*, COUNT(DISTINCT(res.id_reserva)) as Reservas, ROUND(AVG(res.pagado), 2) as PrecioMedio, COUNT(DISTINCT(CASE WHEN imp.disponibilidad = 0 THEN imp.profesor END)) as ProfesoresImpartiendo
+            $consulta = "SELECT asi.*, res.*, COUNT(DISTINCT(res.id_reserva)) as Reservas, ROUND(AVG(res.pagado), 2) as PrecioMedio, COUNT(DISTINCT(CASE WHEN imp.disponibilidad = 0 AND imp.fecha_imparte > NOW() THEN imp.profesor END)) as ProfesoresImpartiendo
                         FROM asignaturas as asi JOIN reservas as res ON asi.id_asignatura = res.asignatura JOIN imparte as imp ON asi.id_asignatura = imp.asignatura
                         GROUP BY id_asignatura
                         ORDER BY Reservas DESC
@@ -187,6 +187,24 @@
             $resultados=$conexion->query($consulta);
             if ($resultados) {
                 $resultado = $resultados->fetchAll();
+                return $resultado;
+            }
+        }
+
+        public static function mdlGetAsignaturasImpartidas($id_profesor)
+        {
+            $conexion = Conexion::conectar();
+
+            $consulta = "SELECT id_reserva, alumno, profesor, GROUP_CONCAT(nombre_asignatura) as 'todasAsignaturas', GROUP_CONCAT(titulo_tema) as 'todosTemas'
+            FROM reservas as r
+            INNER JOIN asignaturas as a ON r.asignatura = a.id_asignatura
+            INNER JOIN contenido_clase as c ON r.id_reserva = c.reserva
+            INNER JOIN temas as t ON c.tema = t.id_tema
+            WHERE profesor LIKE $id_profesor;";
+
+            $resultados=$conexion->query($consulta);
+            if ($resultados) {
+                $resultado = $resultados->fetch();
                 return $resultado;
             }
         }

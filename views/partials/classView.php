@@ -1,6 +1,6 @@
     <!-- Header Start -->
     <div class="container-fluid bg-primary mb-5">
-      <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 400px">
+      <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
         <h3 class="display-3 font-weight-bold text-white">Nuestras Clases</h3>
         <div class="d-inline-flex text-white">
           <p class="m-0"><a class="text-white" href="inicio">Home</a></p>

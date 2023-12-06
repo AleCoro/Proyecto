@@ -115,18 +115,6 @@
         {
             if (isset($id)) {
                 $respuesta = PostsModel::mdlEliminar($tabla, $campo_id, $id);
-
-                if ($respuesta) {
-                    echo "<script>
-                            alert('¡Se ha eliminado correctamente!');
-                            window.location = '$redireccion';
-                        </script>";
-                } else {
-                    echo "<script>
-                        alert('¡Error al eliminar!');
-                        window.location = '$redireccion';
-                    </script>";
-                }
             }
 
 

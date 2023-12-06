@@ -98,6 +98,19 @@ if (isset($_POST["id_profesor"])) {
             }
         }
     }
+
+    // Valoraciones
+    $valoraciones = $reservasController->ctrValoracionesProfesor($_POST["id_profesor"]);
+    $totalValoraciones = count($valoraciones);
+    // Total alumnos
+    $reservas_alumnos = $reservasController->ctrMostrarReservasWhere("reservas","profesor",$_POST["id_profesor"]);
+    $totalAlumnos = count($reservas_alumnos);
+    // Total profesores
+    $reservas_profesor = $reservasController->ctrMostrarReservasWhere("reservas","alumno",$_POST["id_profesor"]);
+    $totalProfesor = count($reservas_profesor);
+    // Asignaturas y temas Dados
+    $asignaturasImpartidas = $asignaturasController->ctrGetAsignaturasImpartidas($_POST["id_profesor"]);
+    
 } else {
     echo "<script> window.location.href = 'inicio'; </script>";
 }
