@@ -151,39 +151,40 @@ if (isset($_POST["accion"]) && $_POST["accion"] == "EditarPost") {
 
     // var_dump($_FILES["edit_portada"]["tmp_name"]);
 
-    if (isset($_FILES["add_portada"]["tmp_name"]) && $_FILES["edit_portada"]["tmp_name"] !== "") {
+    if (isset($_FILES["edit_portada"]["tmp_name"]) && $_FILES["edit_portada"]["tmp_name"] !== "") {
         //Definimo el tamaño maximo de megas
         $sizeMegas = 2;
         $sizeMegas = $sizeMegas * 1048576;
         //Sacamos el tamaño de nuestro fichero
-        $size = filesize($_FILES["foto"]["tmp_name"]);
+        $size = filesize($_FILES["edit_portada"]["tmp_name"]);
 
         if ($size < $sizeMegas) {
 
-            list($ancho, $alto) = getimagesize($_FILES["add_portada"]["tmp_name"]);
+            list($ancho, $alto) = getimagesize($_FILES["edit_portada"]["tmp_name"]);
             $nuevoAncho = 600;
             $nuevoAlto = 400;
 
             // SEGUN FORMATO DE FOTO APLICAMOS UNAS FUNCIONES U OTRAS
-            if ($_FILES["add_portada"]["type"] == "image/jpeg") {
+            if ($_FILES["edit_portada"]["type"] == "image/jpeg") {
 
                 // GUARDAMOS LA IMAGEN EN EL DIRECTORIO
-                $ruta = "views/img/blog/" . $id_post . "-" . $_POST["add_titulo"] . ".jpeg";
-                $origen = imagecreatefromjpeg($_FILES["add_portada"]["tmp_name"]);
+                $ruta = "views/img/blog/" . $id_post . "-" . $_POST["edit_titulo"] . ".jpeg";
+                $origen = imagecreatefromjpeg($_FILES["edit_portada"]["tmp_name"]);
                 $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
                 imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
                 imagejpeg($destino, $ruta);
             }
 
-            if ($_FILES["add_portada"]["type"] == "image/png") {
+            if ($_FILES["edit_portada"]["type"] == "image/png") {
 
                 // GUARDAMOS LA IMAGEN EN EL DIRECTORIO
-                $ruta = "views/img/blog/" . $id_post . "-" . $_POST["add_titulo"] . ".png";
-                $origen = imagecreatefrompng($_FILES["add_portada"]["tmp_name"]);
+                $ruta = "views/img/blog/" . $id_post . "-" . $_POST["edit_titulo"] . ".png";
+                $origen = imagecreatefrompng($_FILES["edit_portada"]["tmp_name"]);
                 $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
                 imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
                 imagepng($destino, $ruta);
             }
+            $datos["imagen"] = $ruta;
 
             if (!isset($destino)) {
                 echo "<script>
@@ -199,10 +200,8 @@ if (isset($_POST["accion"]) && $_POST["accion"] == "EditarPost") {
                         }
                         showSuccessAlert();
                     </script>";
-                return;
+                $datos["imagen"] = null;
             }
-
-            $datos["imagen"] = $ruta;
         } else {
             echo "<script>
                     async function showSuccessAlert() {
@@ -217,13 +216,13 @@ if (isset($_POST["accion"]) && $_POST["accion"] == "EditarPost") {
                     }
                     showSuccessAlert();
                 </script>";
-            return;
         }
     }
 
-    $postController->ctrActualizar("post", $datos, null, $id_post);
+    if (isset($datos["imagen"]) && $datos["imagen"] !== null) {
+        $postController->ctrActualizar("post", $datos, null, $id_post);
 
-    echo "<script>
+        echo "<script>
         async function showSuccessAlert() {
             await Swal.fire({
                 position: 'top-center',
@@ -236,6 +235,7 @@ if (isset($_POST["accion"]) && $_POST["accion"] == "EditarPost") {
         }
         showSuccessAlert();
     </script>";
+    }
 }
 
 

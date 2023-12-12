@@ -16,6 +16,12 @@
   $total=Count($posts);
   $paginas=ceil($total/$registrosxpagina);
 
+  foreach ($postsPaginados as &$postPaginados) {
+    $comentarios = $postsController->ctrContarComentarios($postPaginados["id_post"]);
+    $postPaginados["NumComentarios"] = $comentarios["totalComentarios"];
+  }
+  unset($postPaginados);
+
 
 
 

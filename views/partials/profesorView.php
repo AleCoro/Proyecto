@@ -50,7 +50,7 @@
             <strong><i class="fas fa-book mr-1"></i> Asignaturas</strong>
 
             <p class="text-muted">
-              <?= $asignaturasImpartidas["todasAsignaturas"]; ?>
+              <?= (isset($asignaturasImpartidas["todasAsignaturas"])) ? $asignaturasImpartidas["todasAsignaturas"] : "Aun no ha impartido clases" ; ?>
             </p>
 
             <hr>
@@ -64,7 +64,7 @@
             <strong><i class="fas fa-pencil-alt mr-1"></i> Temas</strong>
 
             <p class="text-muted">
-              <span class="tag tag-danger"><?= $asignaturasImpartidas["todosTemas"]; ?></span>
+              <span class="tag tag-danger"><?= (isset($asignaturasImpartidas["todosTemas"])) ? $asignaturasImpartidas["todosTemas"] : "Aun no ha impartido clases" ; ?></span>
             </p>
           </div>
           <!-- /.card-body -->

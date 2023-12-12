@@ -127,6 +127,18 @@ foreach ($comprobarLikes as $comprobarLike) {
     }
 }
 
+// Ultimos Posts
+$ultimosPosts = $postsController->ctrUltimosPost();
+foreach ($ultimosPosts as &$ultimoPost) {
+    $numComentariosRecientes = $postsController->ctrContarComentarios($ultimoPost["id_post"]);
+    $ultimoPost["NumComentarios"] = $numComentariosRecientes["totalComentarios"];
+}
+unset($ultimoPost);
+
+// Informacion del Creador
+$creador = $usuariosController->ctrMostrarUsuarioWhere("id_usuario", $_SESSION["id_post"]);
+// var_dump($creador);
+
 
 
 

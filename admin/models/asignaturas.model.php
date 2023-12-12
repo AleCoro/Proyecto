@@ -200,7 +200,8 @@ class AsignaturasModel
 
         $consulta = "SELECT COUNT(id_reserva) AS TotalReservas, DATE_FORMAT(fecha_reserva, '%d/%m/%Y') AS 'FechaReserva'
         FROM reservas
-        GROUP BY FechaReserva;";
+        GROUP BY FechaReserva
+        ORDER BY fecha_reserva ASC;";
 
         $resultados = $conexion->query($consulta);
         

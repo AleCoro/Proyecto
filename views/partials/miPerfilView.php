@@ -24,21 +24,18 @@
 
                         <h3 class="profile-username text-center"><?= $usuario["nombre"] . " " . $usuario["apellidos"] ?></h3>
 
-                        <p class="text-muted text-center">Software Engineer</p>
-
                         <ul class="list-group list-group-unbordered mb-3">
                             <li class="list-group-item">
-                                <b>Followers</b> <a class="float-right">1,322</a>
+                                <b>Total alumnos</b> <a class="float-right"><?= $totalAlumnos; ?></a>
                             </li>
                             <li class="list-group-item">
-                                <b>Following</b> <a class="float-right">543</a>
+                                <b>Total profesores</b> <a class="float-right"><?= $totalProfesor; ?></a>
                             </li>
                             <li class="list-group-item">
-                                <b>Friends</b> <a class="float-right">13,287</a>
+                                <b>Valoraciones</b> <a class="float-right"><?= $totalValoraciones; ?></a>
                             </li>
                         </ul>
 
-                        <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
                     </div>
                     <!-- /.card-body -->
                 </div>
@@ -51,35 +48,25 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <strong><i class="fas fa-book mr-1"></i> Education</strong>
+                        <strong><i class="fas fa-book mr-1"></i> Asignaturas</strong>
 
                         <p class="text-muted">
-                            B.S. in Computer Science from the University of Tennessee at Knoxville
+                            <?= (isset($asignaturasImpartidas["todasAsignaturas"])) ? $asignaturasImpartidas["todasAsignaturas"] : "Aun no ha impartido clases"; ?>
                         </p>
 
                         <hr>
 
                         <strong><i class="fas fa-map-marker-alt mr-1"></i> Location</strong>
 
-                        <p class="text-muted">Malibu, California</p>
+                        <p class="text-muted"><?= $usuario["direccion"]; ?></p>
 
                         <hr>
 
-                        <strong><i class="fas fa-pencil-alt mr-1"></i> Skills</strong>
+                        <strong><i class="fas fa-pencil-alt mr-1"></i> Temas</strong>
 
                         <p class="text-muted">
-                            <span class="tag tag-danger">UI Design</span>
-                            <span class="tag tag-success">Coding</span>
-                            <span class="tag tag-info">Javascript</span>
-                            <span class="tag tag-warning">PHP</span>
-                            <span class="tag tag-primary">Node.js</span>
+                            <span class="tag tag-danger"><?= (isset($asignaturasImpartidas["todosTemas"])) ? $asignaturasImpartidas["todosTemas"] : "Aun no ha impartido clases"; ?></span>
                         </p>
-
-                        <hr>
-
-                        <strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
-
-                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
                     </div>
                     <!-- /.card-body -->
                 </div>

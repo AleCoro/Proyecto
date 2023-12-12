@@ -86,7 +86,7 @@ if (grafica3 !== null) {
     console.log("success grafica3");
     var options = {
         series: [{
-            name: "Resrvas",
+            name: "Reservas",
             data: datos.datos
         }],
         chart: {

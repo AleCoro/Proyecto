@@ -5,6 +5,7 @@ $areasAcademicasController = new AreasAcademicasController();
 $asignaturasController = new AsignaturasController();
 $reservasController = new ReservasController();
 
+
 $usuario = $usuariosController->ctrMostrarUsuarioWhere("id_usuario", $_SESSION["id_usuario"]);
 $rolesUsuario = $rolesController->ctrMostrarRegistrosWhere("es_un", "usuario", $usuario["id_usuario"]);
 $areasAcademicas = $areasAcademicasController->ctrMostrarAreasAcademicas("areas_academicas");
@@ -239,8 +240,8 @@ if (isset($_POST["accion"]) && $_POST["accion"] == "editarClase") {
 //Cancelamos nuestra clase
 if (isset($_POST["accion"]) && $_POST["accion"] == "eliminarClase") {
 
-    $asignaturasController->ctrEliminar("imparte","id_imparte",$_POST["delete_id"],null);
-    
+    $asignaturasController->ctrEliminar("imparte", "id_imparte", $_POST["delete_id"], null);
+
     echo "<script>
             async function showSuccessAlert() {
                 await Swal.fire({
@@ -258,6 +259,19 @@ if (isset($_POST["accion"]) && $_POST["accion"] == "eliminarClase") {
 
 $proximasClases = $reservasController->ctrMostrarReservasSinExpirar("alumno", $usuario["id_usuario"]);
 $clasesFinalizadas = $reservasController->ctrMostrarReservasExpiradas("alumno", $usuario["id_usuario"]);
+
+
+// Valoraciones
+$valoraciones = $reservasController->ctrValoracionesProfesor($usuario["id_usuario"]);
+$totalValoraciones = count($valoraciones);
+// Total alumnos
+$reservas_alumnos = $reservasController->ctrMostrarReservasWhere("reservas", "profesor", $usuario["id_usuario"]);
+$totalAlumnos = count($reservas_alumnos);
+// Total profesores
+$reservas_profesor = $reservasController->ctrMostrarReservasWhere("reservas", "alumno", $usuario["id_usuario"]);
+$totalProfesor = count($reservas_profesor);
+// Asignaturas y temas Dados
+$asignaturasImpartidas = $asignaturasController->ctrGetAsignaturasImpartidas($usuario["id_usuario"]);
 
 // var_dump($_POST);
 include("views/partials/miPerfilView.php");

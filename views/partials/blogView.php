@@ -31,7 +31,7 @@
                   <div class="d-flex justify-content-center mb-3">
                     <small class="mr-3"><i class="fa fa-user text-primary"></i> Admin</small>
                     <small class="mr-3"><i class="fa fa-folder text-primary"></i> Web Design</small>
-                    <small class="mr-3"><i class="fa fa-comments text-primary"></i> 15</small>
+                    <small class="mr-3"><i class="fa fa-comments text-primary"></i> <?= $postPaginados["NumComentarios"];?></small>
                   </div>
                   <p> <?= $postPaginados["descripcion"]; ?> </p>
                   <form action="postDetalle" method="post">
