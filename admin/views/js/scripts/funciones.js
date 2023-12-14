@@ -61,12 +61,16 @@ function editarArea(area) {
 }
 
 function editarAsignatura(asignatura) {
-    $("#formularioEditarAsignaturaModal").modal("show");
 
     $('#edit_id').val(asignatura.id_asignatura);
     $('#edit_nombre').val(asignatura.nombre_asignatura);
     $('#edit_descripcion').val(asignatura.descripcion_asignatura);
     $('#edit_area').val(asignatura.area_academica);
+
+    document.getElementById('edit_previsualizarImg').src = asignatura.portada_asignatura;
+    document.getElementById('edit_previsualizarImg').style.display = 'block';
+
+    $("#formularioEditarAsignaturaModal").modal("show");
 
 }
 

@@ -24,7 +24,7 @@
           <?php foreach ($areasAcademicasPaginadas as $areaAcademica) { ?>
             <div class="col-lg-4 mb-5">
               <div class="card border-0 bg-light shadow-sm pb-2">
-                <img class="card-img-top mb-2" src="views/img/class-<?= rand(1, 3); ?>.jpg" alt="" />
+                <img class="card-img-top mb-2" src="<?= "admin/" . $areaAcademica["portada_area"] ?>" alt="" />
                 <div class="card-body text-center">
                   <h4><?= $areaAcademica["nombre_area"] ?></h4>
                   <p class="card-text"><?= $areaAcademica["descripcion_area"] ?></p>

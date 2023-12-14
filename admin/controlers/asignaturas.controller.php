@@ -34,6 +34,7 @@
 
             //Insertamos los datos si todo ha salido bien
             $respuesta=AsignaturasModel::mdlInsertar($tabla,$datos);
+            return $respuesta;
 
 
             // Para insertar datos sigue esta estructura

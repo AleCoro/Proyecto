@@ -269,7 +269,13 @@ function cargarCalendarioMiPerfil(usuario) {
 }
 
 function mostrarComentarios() {
-    document.getElementById("comentarios").classList.remove("d-none");
+    var comentariosElement = $("#comentarios");
+    comentariosElement.slideToggle("slow");
+}
+
+function ocultarComentarios() {
+    var comentariosElement = $("#comentarios");
+    comentariosElement.hide();
 }
 
 function previsualizarIMG(img, campo) {

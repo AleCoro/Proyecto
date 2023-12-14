@@ -70,15 +70,15 @@ class PostsController
 
     }
 
-    public function ctrActualizar($tabla,$datos,$campo_id,$id,$redireccion)
+    public function ctrActualizar($tabla, $datos, $campo_id, $id, $redireccion)
     {
         // Validamos los datos
-        $datos = PostsController::ctrValidarDatos($datos,$redireccion);
+        $datos = PostsController::ctrValidarDatos($datos, $redireccion);
 
-        PostsModel::mdlActualizar($tabla,$datos,$campo_id,$id);
+        PostsModel::mdlActualizar($tabla, $datos, $campo_id, $id);
 
         // Para actualizar datos sigue esta estructura
-        
+
         // if (isset($_POST["nombre"]) && !empty($_POST["nombre"])) {
         //     $datos = array(
         //         "nombre" => $_POST["nombre"],
@@ -95,7 +95,7 @@ class PostsController
         //     $crudController->ctrActualizar($tabla,$datos,$redireccion,$id);
         //     // var_dump($inmueble);
         //   }
-        
+
     }
 
     public function ctrEliminar($tabla, $campo_id, $id, $redireccion)
@@ -219,11 +219,17 @@ class PostsController
         return $respuesta;
     }
 
-        //Ultimos Posts
-        public function ctrUltimosPost()
-        {
-            $respuesta = PostsModel::mdlUltimosPost();
-    
-            return $respuesta;
-        }
+    //Ultimos Posts
+    public function ctrUltimosPost()
+    {
+        $respuesta = PostsModel::mdlUltimosPost();
+
+        return $respuesta;
+    }
+
+    public function formatearFecha($fechaOriginal)
+    {
+        $datetime = new DateTime($fechaOriginal);
+        return $datetime->format('d/m/Y H:i');
+    }
 }

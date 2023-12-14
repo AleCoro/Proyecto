@@ -136,7 +136,7 @@ foreach ($ultimosPosts as &$ultimoPost) {
 unset($ultimoPost);
 
 // Informacion del Creador
-$creador = $usuariosController->ctrMostrarUsuarioWhere("id_usuario", $_SESSION["id_post"]);
+$creador = $usuariosController->ctrMostrarUsuarioWhere("id_usuario", $post["creador"]);
 // var_dump($creador);
 
 
