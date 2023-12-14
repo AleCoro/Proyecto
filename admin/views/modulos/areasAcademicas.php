@@ -11,21 +11,95 @@ if (isset($_POST["accion"]) && $_POST["accion"] == "InsertarArea") {
         "descripcion_area" => $_POST["add_descripcion"]
     );
 
-    $areasAcademicasController->ctrInsertar("areas_academicas", $datos, "areasAcademicas");
+    $id_area = $areasAcademicasController->ctrInsertar("areas_academicas", $datos, "areasAcademicas");
 
-    echo "<script>
-        async function showSuccessAlert() {
-            await Swal.fire({
-                position: 'top-center',
-                icon: 'success',
-                title: 'Area Academica Creada',
-                showConfirmButton: false,
-                timer: 1400
-            });
-            window.location.href = 'areasAcademicas';
+    // Valido el fichero
+    if (isset($_FILES["add_portada"]["tmp_name"]) && $_FILES["add_portada"]["tmp_name"] !== "") {
+        //Definimo el tamaño maximo de megas
+        $sizeMegas = 2;
+        $sizeMegas = $sizeMegas * 1048576;
+        //Sacamos el tamaño de nuestro fichero
+        $size = filesize($_FILES["add_portada"]["tmp_name"]);
+
+        if ($size < $sizeMegas) {
+
+            list($ancho, $alto) = getimagesize($_FILES["add_portada"]["tmp_name"]);
+            $nuevoAncho = 600;
+            $nuevoAlto = 400;
+
+            // SEGUN FORMATO DE FOTO APLICAMOS UNAS FUNCIONES U OTRAS
+            if ($_FILES["add_portada"]["type"] == "image/jpeg") {
+
+                // GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+                $ruta = "views/img/areasAcademicas/" . $id_area . "-" . $_POST["add_nombre"] . ".jpeg";
+                $origen = imagecreatefromjpeg($_FILES["add_portada"]["tmp_name"]);
+                $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+                imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+                imagejpeg($destino, $ruta);
+            }
+
+            if ($_FILES["add_portada"]["type"] == "image/png") {
+
+                // GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+                $ruta = "views/img/areasAcademicas/" . $id_area . "-" . $_POST["add_nombre"] . ".png";
+                $origen = imagecreatefrompng($_FILES["add_portada"]["tmp_name"]);
+                $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+                imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+                imagepng($destino, $ruta);
+            }
+            $datos["portada_area"] = $ruta;
+
+            if (!isset($destino)) {
+                echo "<script>
+                        async function showSuccessAlert() {
+                            await Swal.fire({
+                                position: 'top-center',
+                                icon: 'error',
+                                title: 'Tipo de fichero incorrecto',
+                                showConfirmButton: false,
+                                timer: 1400
+                            });
+                            window.location.href = 'areasAcademicas';
+                        }
+                        showSuccessAlert();
+                    </script>";
+                $datos["portada_area"] = null;
+            }
+        } else {
+            echo "<script>
+                    async function showSuccessAlert() {
+                        await Swal.fire({
+                            position: 'top-center',
+                            icon: 'error',
+                            title: 'Fichero demasiado grande',
+                            showConfirmButton: false,
+                            timer: 1400
+                        });
+                        window.location.href = 'areasAcademicas';
+                    }
+                    showSuccessAlert();
+                </script>";
         }
-        showSuccessAlert();
-    </script>";
+    }
+
+    if (!isset($datos["portada_area"])) {
+        $areasAcademicasController->ctrEliminar("areas_academicas", "id_area", $id_area, null);
+    } else {
+        $areasAcademicasController->ctrActualizar("areas_academicas", $datos, null, $id_area);
+        echo "<script>
+                async function showSuccessAlert() {
+                    await Swal.fire({
+                        position: 'top-center',
+                        icon: 'success',
+                        title: 'Area Academica Creada',
+                        showConfirmButton: false,
+                        timer: 1400
+                    });
+                    window.location.href = 'areasAcademicas';
+                }
+                showSuccessAlert();
+            </script>";
+    }
 }
 
 if (isset($_POST["accion"]) && $_POST["accion"] == "EditarArea") {
@@ -36,21 +110,89 @@ if (isset($_POST["accion"]) && $_POST["accion"] == "EditarArea") {
 
     $id = $_POST["edit_id"];
 
-    $areasAcademicasController->ctrActualizar("areas_academicas", $datos, "areasAcademicas", $id);
+    if (isset($_FILES["edit_portada"]["tmp_name"]) && $_FILES["edit_portada"]["tmp_name"] !== "") {
+        //Definimo el tamaño maximo de megas
+        $sizeMegas = 2;
+        $sizeMegas = $sizeMegas * 1048576;
+        //Sacamos el tamaño de nuestro fichero
+        $size = filesize($_FILES["edit_portada"]["tmp_name"]);
+
+        if ($size < $sizeMegas) {
+
+            list($ancho, $alto) = getimagesize($_FILES["edit_portada"]["tmp_name"]);
+            $nuevoAncho = 600;
+            $nuevoAlto = 400;
+
+            // SEGUN FORMATO DE FOTO APLICAMOS UNAS FUNCIONES U OTRAS
+            if ($_FILES["edit_portada"]["type"] == "image/jpeg") {
+
+                // GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+                $ruta = "views/img/areasAcademicas/" . $id . "-" . $_POST["edit_nombre"] . ".jpeg";
+                $origen = imagecreatefromjpeg($_FILES["edit_portada"]["tmp_name"]);
+                $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+                imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+                imagejpeg($destino, $ruta);
+            }
+
+            if ($_FILES["edit_portada"]["type"] == "image/png") {
+
+                // GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+                $ruta = "views/img/areasAcademicas/" . $id . "-" . $_POST["edit_nombre"] . ".png";
+                $origen = imagecreatefrompng($_FILES["edit_portada"]["tmp_name"]);
+                $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+                imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+                imagepng($destino, $ruta);
+            }
+            $datos["portada_area"] = $ruta;
+
+            if (!isset($destino)) {
+                echo "<script>
+                        async function showSuccessAlert() {
+                            await Swal.fire({
+                                position: 'top-center',
+                                icon: 'error',
+                                title: 'Tipo de fichero incorrecto',
+                                showConfirmButton: false,
+                                timer: 1400
+                            });
+                            window.location.href = 'areasAcademicas';
+                        }
+                        showSuccessAlert();
+                    </script>";
+                $datos["portada_area"] = null;
+            }
+        } else {
+            echo "<script>
+                    async function showSuccessAlert() {
+                        await Swal.fire({
+                            position: 'top-center',
+                            icon: 'error',
+                            title: 'Fichero demasiado grande',
+                            showConfirmButton: false,
+                            timer: 1400
+                        });
+                        window.location.href = 'areasAcademicas';
+                    }
+                    showSuccessAlert();
+                </script>";
+        }
+    }
+
+    $areasAcademicasController->ctrActualizar("areas_academicas", $datos, null, $id);
 
     echo "<script>
-        async function showSuccessAlert() {
-            await Swal.fire({
-                position: 'top-center',
-                icon: 'success',
-                title: 'Area Academica Actualizada',
-                showConfirmButton: false,
-                timer: 1400
-            });
-            window.location.href = 'areasAcademicas';
-        }
-        showSuccessAlert();
-    </script>";
+            async function showSuccessAlert() {
+                await Swal.fire({
+                    position: 'top-center',
+                    icon: 'success',
+                    title: 'Area Academica Actualizado',
+                    showConfirmButton: false,
+                    timer: 1400
+                });
+                window.location.href = 'areasAcademicas';
+            }
+            showSuccessAlert();
+        </script>";
 }
 
 if (isset($_POST["accion"]) && $_POST["accion"] == "EliminarArea") {
@@ -65,6 +207,10 @@ if (isset($_POST["accion"]) && $_POST["accion"] == "EliminarArea") {
     $asignaturasController->ctrEliminar("asignaturas", "area_academica", $_POST["id_area"], "areasAcademicas");
     // Eliminamos el areaAcademica
     $areasAcademicasController->ctrEliminar("areas_academicas", "id_area", $_POST["id_area"], "areasAcademicas");
+
+    if (isset($_POST["img"]) && $_POST["img"] != "") {
+        unlink($_POST["img"]);
+    }
 
     echo "<script>
         async function showSuccessAlert() {

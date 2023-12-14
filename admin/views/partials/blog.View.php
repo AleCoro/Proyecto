@@ -48,7 +48,6 @@
                                 <td><?= $post["contenido"]; ?></td>
                                 <td class="text-center">
                                     <img id="imagen-pequena" style="width: 80px; height: 60px;" src="<?= $post["imagen"]; ?>" onclick="mostrarIMG(this)">
-                                    <!-- <a id="single_image" href="<?= $post["imagen"]; ?>"><img style="width: 80px; height: 60px;" src="<?= $post["imagen"]; ?>" alt="" /></a> -->
                                 </td>
                                 <td><?= $post["fecha_publicacion"]; ?></td>
                                 <td>
@@ -151,8 +150,8 @@
 <div class="modal fade" id="formularioEditarPostModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalFormTitle" aria-hidden="true">
     <form method="POST" action="blog" id="formularioEditarPost" enctype="multipart/form-data">
         <input type="hidden" name="accion" value="EditarPost">
-        <input type="hidden" name="edit_id" id="edit_id" >
-        <input type="hidden" name="img_old" id="img_old" >
+        <input type="hidden" name="edit_id" id="edit_id">
+        <input type="hidden" name="img_old" id="img_old">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -162,7 +161,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                <div class="form-row">
+                    <div class="form-row">
                         <div class="form-group col-md-3">
                             <label for="inputState">Titulo:</label>
                             <input type="text" class="form-control" name="edit_titulo" id="edit_titulo" required>
@@ -213,7 +212,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    CargarEditor();
-</script>

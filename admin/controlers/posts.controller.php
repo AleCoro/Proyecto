@@ -37,19 +37,6 @@
 
             return $respuesta;
 
-            // if ($respuesta) {
-            //     echo "<script>
-            //             alert('¡Se ha dado de alta correctamente!');
-            //             window.location = '$redireccion';
-            //         </script>";
-            // }else {
-            //     echo "<script>
-            //         alert('¡Error al dar de alta!');
-            //         window.location = '$redireccion';
-            //     </script>";
-            // }
-
-
             // Para insertar datos sigue esta estructura
             
             // if (isset($_POST["nombre"]) && !empty($_POST["nombre"])) {

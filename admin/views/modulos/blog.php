@@ -219,10 +219,9 @@ if (isset($_POST["accion"]) && $_POST["accion"] == "EditarPost") {
         }
     }
 
-    if (isset($datos["imagen"]) && $datos["imagen"] !== null) {
-        $postController->ctrActualizar("post", $datos, null, $id_post);
+    $postController->ctrActualizar("post", $datos, null, $id_post);
 
-        echo "<script>
+    echo "<script>
         async function showSuccessAlert() {
             await Swal.fire({
                 position: 'top-center',
@@ -235,7 +234,6 @@ if (isset($_POST["accion"]) && $_POST["accion"] == "EditarPost") {
         }
         showSuccessAlert();
     </script>";
-    }
 }
 
 

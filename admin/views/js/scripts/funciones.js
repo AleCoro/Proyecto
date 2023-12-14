@@ -19,7 +19,6 @@ function getXMLHTTPRequest() {
 var xmlhttp = getXMLHTTPRequest();
 
 function editarAlumno(alumno) {
-    $("#formularioEditarAlumnoModal").modal("show");
 
     $('#edit_id').val(alumno.id_usuario);
     $('#edit_usuario').val(alumno.usuario);
@@ -29,6 +28,8 @@ function editarAlumno(alumno) {
     $('#edit_telefono').val(alumno.telefono);
     $('#edit_email').val(alumno.email);
     $('#edit_fecha_nacimiento').val(alumno.fecha_nacimiento);
+
+    $("#formularioEditarAlumnoModal").modal("show");
 
 }
 
@@ -47,11 +48,15 @@ function editarProfesor(profesor) {
 }
 
 function editarArea(area) {
-    $("#formularioEditarAreaModal").modal("show");
 
     $('#edit_id').val(area.id_area);
     $('#edit_nombre').val(area.nombre_area);
     $('#edit_descripcion').val(area.descripcion_area);
+
+    document.getElementById('edit_previsualizarImg').src = area.portada_area;
+    document.getElementById('edit_previsualizarImg').style.display = 'block';
+
+    $("#formularioEditarAreaModal").modal("show");
 
 }
 
@@ -71,6 +76,7 @@ function editarPost(post) {
     $('#edit_titulo').val(post.titulo);
     $('#edit_descripcion').val(post.descripcion);
     // document.getElementById('editor2').setData(post.contenido);
+    campoImg = document.getElementById('edit_portada');
 
     editorElement = document.getElementById('editor2');
     if (editorElement && editorElement.editor) {
@@ -91,33 +97,13 @@ function editarPost(post) {
             });
     }
 
+    campoImg.src = post.imagen;
 
     document.getElementById('edit_previsualizarImg').src = post.imagen;
     document.getElementById('edit_previsualizarImg').style.display = 'block';
 
     $("#formularioEditarPostModal").modal("show");
 
-}
-
-function CargarEditor() {
-    ClassicEditor
-        .create(document.querySelector('#editor1'))
-        .then(editor => {
-            const maxLength = 500; // Establece el límite de caracteres
-
-            editor.model.document.on('change:data', () => {
-                const texto = editor.getData().replace(/<[^>]*>/g, ''); // Elimina etiquetas HTML para contar solo el texto
-                const caracteresActuales = texto.length;
-
-                if (caracteresActuales > maxLength) {
-                    const textoRecortado = texto.substring(0, maxLength);
-                    editor.setData(textoRecortado);
-                }
-            });
-        })
-        .catch(error => {
-            console.error(error);
-        });
 }
 
 function previsualizarIMG(img, campo) {
@@ -139,3 +125,22 @@ function mostrarIMG(img) {
     $('#modalImagen').modal('show'); // Muestra el modal con la imagen grande
 
 }
+
+ClassicEditor
+    .create(document.querySelector('#editor1'))
+    .then(editor => {
+        const maxLength = 500; // Establece el límite de caracteres
+
+        editor.model.document.on('change:data', () => {
+            const texto = editor.getData().replace(/<[^>]*>/g, ''); // Elimina etiquetas HTML para contar solo el texto
+            const caracteresActuales = texto.length;
+
+            if (caracteresActuales > maxLength) {
+                const textoRecortado = texto.substring(0, maxLength);
+                editor.setData(textoRecortado);
+            }
+        });
+    })
+    .catch(error => {
+        console.error(error);
+    });

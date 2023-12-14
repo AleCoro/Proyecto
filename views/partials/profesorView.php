@@ -146,7 +146,7 @@
           <div class="form-group">
             <label>Selecciona los temas que quieras ver en la clase</label>
             <div class="select2-cyan">
-              <select class="select2" multiple="multiple" id="temas" name="temas[]" data-placeholder="Selecciona el tema" style="width: 100%;">
+              <select class="select2" required multiple="multiple" id="temas" name="temas[]" data-placeholder="Selecciona el tema" style="width: 100%;">
               </select>
             </div>
           </div>

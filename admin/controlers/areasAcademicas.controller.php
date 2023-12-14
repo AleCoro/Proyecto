@@ -36,6 +36,8 @@
             //Insertamos los datos si todo ha salido bien
             $respuesta=AreasAcademicasModel::mdlInsertar($tabla,$datos);
 
+            return $respuesta;
+
 
 
             // Para insertar datos sigue esta estructura
@@ -61,7 +63,7 @@
         public function ctrActualizar($tabla,$datos,$redireccion,$id)
         {
             // Validamos los datos
-            $datos = AreasAcademicasController::ctrValidarDatos($datos,$redireccion);
+            // $datos = AreasAcademicasController::ctrValidarDatos($datos,$redireccion);
 
             $respuesta=AreasAcademicasModel::mdlActualizar($tabla,$datos,$id);
 
