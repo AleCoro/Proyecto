@@ -2,13 +2,12 @@
 class RolesController{
     
     public function ctrInsertar($tabla, $datos){
-
         // Validamos los datos
         $datos = RolesController::ctrValidarDatos($datos);
 
         //Insertamos los datos si todo ha salido bien
-        RolesModel::mdlInsertar($tabla, $datos);
-
+        $respuesta = RolesModel::mdlInsertar($tabla, $datos);
+        return $respuesta;
     }
 
     public function ctrValidarDatos($datos){
@@ -25,59 +24,24 @@ class RolesController{
     }
 
     public function ctrMostrarRegistroWhere($tabla,$campo,$valor){
-            
         $respuesta=RolesModel::mdlMostrarRegistroWhere($tabla,$campo,$valor);
-
         return $respuesta;
     }
 
     public function ctrMostrarRegistrosWhere($tabla,$campo,$valor){
-            
         $respuesta=RolesModel::mdlMostrarRegistrosWhere($tabla,$campo,$valor);
-
         return $respuesta;
     }
 
     public function ctrMostrarRegistrosWhereIn($tabla,$campo,$valor){
-            
         $respuesta=RolesModel::mdlMostrarRegistrosWhereIn($tabla,$campo,$valor);
-
         return $respuesta;
     }
 
-    public function ctrEliminar($tabla, $campo_id, $id, $redireccion)
-    {
+    public function ctrEliminar($tabla, $campo_id, $id){
         if (isset($id)) {
             $respuesta = AsignaturasModel::mdlEliminar($tabla, $campo_id, $id);
-
-            if ($respuesta) {
-                echo "<script>
-                        alert('¡Se ha eliminado correctamente!');
-                        window.location = '$redireccion';
-                    </script>";
-            } else {
-                echo "<script>
-                    alert('¡Error al eliminar!');
-                    window.location = '$redireccion';
-                </script>";
-            }
+            return $respuesta;
         }
-
-
-        // Para eliminar datos sigue esta estructura
-        
-        // if (isset($_POST["eliminar"]) && !empty($_POST["eliminar"])) {
-
-        //     $tabla = "producto";
-        //     $redireccion = "inicio";
-
-        //     $id = $_POST["eliminar"];
-
-        //     $crudController = new AsignaturasController();
-        //     $crudController->ctrEliminar($tabla,$redireccion,$id);
-        //     // var_dump($inmueble);
-        //   }
-        
     }
-    
 }

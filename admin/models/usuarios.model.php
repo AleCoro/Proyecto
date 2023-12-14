@@ -3,8 +3,6 @@ require_once("conexion.php");
 
 class ModeloUsuarios
 {
-    // ====================================== MOSTRAR USUARIOS ======================================
-
     static public function mdlMostrarUsuarios($tabla)
     {
         $conexion = Conexion::conectar();
@@ -15,9 +13,7 @@ class ModeloUsuarios
         // $sentencia->close();
         $sentencia = null;
     }
-
-    // ====================================== MOSTRAR USUARIO WHERE ======================================
-
+    
     static public function mdlMostrarUsuarioWhere($tabla, $campo, $valor)
     {
         $conexion = Conexion::conectar();
@@ -29,8 +25,6 @@ class ModeloUsuarios
         // $sentencia->close();
         $sentencia = null;
     }
-
-    // ====================================== BORRAR USUARIOS ======================================
 
     static public function mdlBorrarUsuario($tabla, $id)
     {
@@ -51,8 +45,6 @@ class ModeloUsuarios
         }
         $sentencia = null;
     }
-
-    // ====================================== ACTUALIZAR USUARIO ======================================
 
     public static function mdlActualizarUsuario($tabla, $datos, $id)
     {
@@ -83,8 +75,6 @@ class ModeloUsuarios
         }
         $sentencia = null;
     }
-
-    // ====================================== VALIDAR DATOS ======================================
 
     public static function mdlValidarFichero($fichero, $directorio, $nombreFichero)
     {
@@ -127,8 +117,6 @@ class ModeloUsuarios
 
         return $ruta;
     }
-
-    // ====================================== CONSULTA MULTITABLA ======================================
 
     static public function mdlDatosProfesor($area)
     {

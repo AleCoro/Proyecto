@@ -35,8 +35,7 @@
 
         public static function mdlMostrar_Ultima_Post($tabla){
             global $conexion;
-            $id="id";
-            $consulta="SELECT * FROM $tabla Order by $id desc LIMIT 1";
+            $consulta="SELECT * FROM $tabla Order by 'id_post' desc LIMIT 1";
             $resultados=$conexion->query($consulta);
             if ($resultados) {
                 $resultado = $resultados->fetch();
@@ -130,48 +129,6 @@
             }
             $sentencia=null;
 
-        }
-
-        public static function mdlValidarFichero($fichero,$directorio,$nombreFichero)
-        {
-            $ruta = "";
-
-            list($ancho, $alto) = getimagesize($fichero["tmp_name"]);
-            $nuevoAncho=400;
-            $nuevoAlto=400;
-
-            // SEGUN FORMATO DE imagen APLICAMOS UNAS FUNCIONES U OTRAS
-            if ($fichero["type"]=="image/jpeg") {
-
-                // CREAMOS EL DIRECTORIO DONDE GUARDAR LA imagen
-                if (!file_exists($directorio)) {
-                    mkdir($directorio, 0755);
-                }
-                
-                // GUARDAMOS LA IMAGEN EN EL DIRECTORIO
-                $ruta = $directorio."/".$nombreFichero.".jpeg";
-                $origen = imagecreatefromjpeg($fichero["tmp_name"]);
-                $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-                imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-                imagejpeg($destino, $ruta);
-            }
-
-            if ($fichero["type"]=="image/png") {
-
-                // CREAMOS EL DIRECTORIO DONDE GUARDAR LA imagen
-                if (!file_exists($directorio)) {
-                    mkdir($directorio, 0755);
-                }
-                
-                // GUARDAMOS LA IMAGEN EN EL DIRECTORIO
-                $ruta = $directorio."/".$nombreFichero.".png";
-                $origen = imagecreatefrompng($fichero["tmp_name"]);
-                $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-                imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-                imagepng($destino, $ruta);
-            }
-
-            return $ruta;
         }
 
     }

@@ -4,8 +4,7 @@ require_once("conexion.php");
 class AsignaturasModel
 {
     // Cargar Asignaturas
-    public static function mdlMostrarAsignaturas($tabla)
-    {
+    public static function mdlMostrarAsignaturas($tabla){
 
         $conexion = Conexion::conectar();
         $sentencia = $conexion->prepare("SELECT * FROM $tabla");
@@ -14,8 +13,7 @@ class AsignaturasModel
         return $registros;
     }
 
-    public static function mdlMostrarAsignaturasWhere($tabla, $campo, $valor)
-    {
+    public static function mdlMostrarAsignaturasWhere($tabla, $campo, $valor){
 
         $conexion = Conexion::conectar();
         $sentencia = $conexion->prepare("SELECT * FROM $tabla WHERE $campo LIKE '$valor'");
@@ -24,8 +22,7 @@ class AsignaturasModel
         return $registros;
     }
 
-    public static function mdlMostrarAsignaturaWhere($tabla, $campo, $valor)
-    {
+    public static function mdlMostrarAsignaturaWhere($tabla, $campo, $valor){
 
         $conexion = Conexion::conectar();
         $sentencia = $conexion->prepare("SELECT * FROM $tabla WHERE $campo LIKE '$valor'");
@@ -34,11 +31,9 @@ class AsignaturasModel
         return $registros;
     }
 
-    public static function mdlMostrar_Ultima_Asignatura($tabla)
-    {
+    public static function mdlMostrar_Ultima_Asignatura($tabla){
         global $conexion;
-        $id = "id";
-        $consulta = "SELECT * FROM $tabla Order by $id desc LIMIT 1";
+        $consulta = "SELECT * FROM $tabla Order by 'id_asignaturas' desc LIMIT 1";
         $resultados = $conexion->query($consulta);
         if ($resultados) {
             $resultado = $resultados->fetch();
@@ -46,8 +41,7 @@ class AsignaturasModel
         }
     }
 
-    public static function mdlMostrar_Asignaturas_Ordenadas($tabla, $campo, $orden)
-    {
+    public static function mdlMostrar_Asignaturas_Ordenadas($tabla, $campo, $orden){
         global $conexion;
         $consulta = "SELECT * FROM $tabla Order by $campo $orden LIMIT 1";
         $resultados = $conexion->query($consulta);
@@ -57,8 +51,7 @@ class AsignaturasModel
         }
     }
 
-    public static function mdlInsertar($tabla, $datos)
-    {
+    public static function mdlInsertar($tabla, $datos){
 
         $conexion = Conexion::conectar();
         //Extraemos los campos
@@ -83,8 +76,7 @@ class AsignaturasModel
         $sentencia = null;
     }
 
-    public static function mdlActualizar($tabla, $datos, $id)
-    {
+    public static function mdlActualizar($tabla, $datos, $id){
 
         $conexion = Conexion::conectar();
         //Extraemos los campos
@@ -113,8 +105,7 @@ class AsignaturasModel
         $sentencia = null;
     }
 
-    public static function mdlEliminar($tabla, $campo_id, $id)
-    {
+    public static function mdlEliminar($tabla, $campo_id, $id){
 
         $conexion = Conexion::conectar();
 
@@ -135,50 +126,7 @@ class AsignaturasModel
         $sentencia = null;
     }
 
-    public static function mdlValidarFichero($fichero, $directorio, $nombreFichero)
-    {
-        $ruta = "";
-
-        list($ancho, $alto) = getimagesize($fichero["tmp_name"]);
-        $nuevoAncho = 400;
-        $nuevoAlto = 400;
-
-        // SEGUN FORMATO DE imagen APLICAMOS UNAS FUNCIONES U OTRAS
-        if ($fichero["type"] == "image/jpeg") {
-
-            // CREAMOS EL DIRECTORIO DONDE GUARDAR LA imagen
-            if (!file_exists($directorio)) {
-                mkdir($directorio, 0755);
-            }
-
-            // GUARDAMOS LA IMAGEN EN EL DIRECTORIO
-            $ruta = $directorio . "/" . $nombreFichero . ".jpeg";
-            $origen = imagecreatefromjpeg($fichero["tmp_name"]);
-            $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-            imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-            imagejpeg($destino, $ruta);
-        }
-
-        if ($fichero["type"] == "image/png") {
-
-            // CREAMOS EL DIRECTORIO DONDE GUARDAR LA imagen
-            if (!file_exists($directorio)) {
-                mkdir($directorio, 0755);
-            }
-
-            // GUARDAMOS LA IMAGEN EN EL DIRECTORIO
-            $ruta = $directorio . "/" . $nombreFichero . ".png";
-            $origen = imagecreatefrompng($fichero["tmp_name"]);
-            $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-            imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-            imagepng($destino, $ruta);
-        }
-
-        return $ruta;
-    }
-
-    public static function mdlReservasPorAsignaturas()
-    {
+    public static function mdlReservasPorAsignaturas(){
         $conexion = Conexion::conectar();
 
         $consulta = "SELECT nombre_asignatura, COUNT(id_asignatura) AS 'num_asignaturas'
@@ -194,8 +142,7 @@ class AsignaturasModel
         }
     }
 
-    public static function mdlReservasPorFecha()
-    {
+    public static function mdlReservasPorFecha(){
         $conexion = Conexion::conectar();
 
         $consulta = "SELECT COUNT(id_reserva) AS TotalReservas, DATE_FORMAT(fecha_reserva, '%d/%m/%Y') AS 'FechaReserva'

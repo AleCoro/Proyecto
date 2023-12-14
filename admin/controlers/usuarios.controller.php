@@ -1,28 +1,19 @@
 <?php
 class UsuariosController
 {
-    // ====================================== MOSTRAR USUARIOS ======================================
-
-    public function ctrMostrarUsuarios()
-    {
+    public function ctrMostrarUsuarios(){
         $tabla = "usuarios";
         $respuesta = ModeloUsuarios::mdlMostrarUsuarios($tabla);
         return $respuesta;
     }
 
-    // ====================================== MOSTRAR USUARIO WHERE ======================================
-
-    public function ctrMostrarUsuarioWhere($campo, $valor)
-    {
+    public function ctrMostrarUsuarioWhere($campo, $valor){
         $tabla = "usuarios";
         $respuesta = ModeloUsuarios::mdlMostrarUsuarioWhere($tabla, $campo, $valor);
         return $respuesta;
     }
 
-    // ====================================== BORRAR USUARIO ======================================
-
-    public function ctrBorrarUsuario($id, $tabla, $redireccion, $foto)
-    {
+    public function ctrBorrarUsuario($id, $tabla, $redireccion, $foto){
         if (isset($id)) {
             if ($foto != "") {
                 unlink($foto);
@@ -45,11 +36,7 @@ class UsuariosController
         }
     }
 
-
-    // ====================================== ACTUALIZAR USUARIO ======================================
-
-    public function ActualizarUsuario($tabla, $datos, $redireccion, $id)
-    {
+    public function ActualizarUsuario($tabla, $datos, $redireccion, $id){
         // Validamos los datos
         $datos = UsuariosController::ValidarDatos($datos, $redireccion);
 
@@ -78,10 +65,7 @@ class UsuariosController
         }
     }
 
-    // ====================================== VALIDAR DATOS ======================================
-    
-    public function ValidarDatos($datos, $redireccion)
-    {
+    public function ValidarDatos($datos, $redireccion){
         // Validamos si en el array asociativo llega un fichero
         foreach ($datos as $campo => $valor) {
             // Validamos tipo texto
@@ -127,10 +111,7 @@ class UsuariosController
         return $datos;
     }
 
-    // ====================================== CONSULTA MULTITABLA ======================================
-
-    public function ctrDatosProfesorPorArea($area)
-    {
+    public function ctrDatosProfesorPorArea($area){
         $respuesta = ModeloUsuarios::mdlDatosProfesorPorArea($area);
         return $respuesta;
     }
