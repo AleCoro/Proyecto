@@ -32,7 +32,7 @@ class AsignaturasModel
     }
 
     public static function mdlMostrar_Ultima_Asignatura($tabla){
-        global $conexion;
+        $conexion = Conexion::conectar();
         $consulta = "SELECT * FROM $tabla Order by 'id_asignaturas' desc LIMIT 1";
         $resultados = $conexion->query($consulta);
         if ($resultados) {
@@ -42,7 +42,7 @@ class AsignaturasModel
     }
 
     public static function mdlMostrar_Asignaturas_Ordenadas($tabla, $campo, $orden){
-        global $conexion;
+        $conexion = Conexion::conectar();
         $consulta = "SELECT * FROM $tabla Order by $campo $orden LIMIT 1";
         $resultados = $conexion->query($consulta);
         if ($resultados) {

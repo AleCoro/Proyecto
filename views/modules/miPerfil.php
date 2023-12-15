@@ -84,7 +84,7 @@ if (isset($_POST["impartir"])) {
                 showSuccessAlert();
             </script>";
     } else {
-        $asignaturasController->ctrInsertar("imparte", $datos, null);
+        $asignaturasController->ctrInsertar("imparte", $datos);
 
         echo "<script>
                 async function showSuccessAlert() {
@@ -185,7 +185,7 @@ if (isset($_POST["accion"]) && $_POST["accion"] == "editarPerfil") {
         $_SESSION["foto"] = $datos["foto"];
     }
 
-    $usuariosController->ActualizarUsuario('usuarios', $datos, null, $_POST["id_usuario"]);
+    $usuariosController->ActualizarUsuario('usuarios', $datos, $_POST["id_usuario"]);
 
 
 
@@ -221,7 +221,7 @@ if (isset($_POST["accion"]) && $_POST["accion"] == "editarClase") {
         "precio" => $_POST["edit_precio"]
     );
 
-    $asignaturasController->ctrActualizar("imparte", $datos, null, "id_imparte", $id_imparte);
+    $asignaturasController->ctrActualizar("imparte", $datos, "id_imparte", $id_imparte);
     echo "<script>
             async function showSuccessAlert() {
                 await Swal.fire({
@@ -240,7 +240,7 @@ if (isset($_POST["accion"]) && $_POST["accion"] == "editarClase") {
 //Cancelamos nuestra clase
 if (isset($_POST["accion"]) && $_POST["accion"] == "eliminarClase") {
 
-    $asignaturasController->ctrEliminar("imparte", "id_imparte", $_POST["delete_id"], null);
+    $asignaturasController->ctrEliminar("imparte", "id_imparte", $_POST["delete_id"]);
 
     echo "<script>
             async function showSuccessAlert() {

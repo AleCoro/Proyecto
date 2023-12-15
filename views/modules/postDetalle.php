@@ -19,13 +19,13 @@ if (isset($_POST["accion"])) {
         if ($_POST["accion"] == "like") {
             $datos["post"] = $_SESSION["id_post"];
             $datos["usuario"] = $_SESSION["id_usuario"];
-            $postsController->ctrInsertar("likes", $datos, null);
+            $postsController->ctrInsertar("likes", $datos);
         }
         // Dar dislike
         if ($_POST["accion"] == "dislike") {
             $datos["post"] = $_SESSION["id_post"];
             $datos["usuario"] = $_SESSION["id_usuario"];
-            $postsController->ctrEliminar("likes", "id_like", $_POST["id_like"], null);
+            $postsController->ctrEliminar("likes", "id_like", $_POST["id_like"]);
         }
         //Comentar
         if ($_POST["accion"] == "comentar") {
@@ -34,7 +34,7 @@ if (isset($_POST["accion"])) {
             $datos["comentario"] = $_POST["comentario"];
 
             if ($datos["comentario"] !== "") {
-                $postsController->ctrInsertar("comentarios", $datos, null);
+                $postsController->ctrInsertar("comentarios", $datos);
 
                 echo "<script>
                     async function showSuccessAlert() {
@@ -57,7 +57,7 @@ if (isset($_POST["accion"])) {
             $datos["comentario"] = $_POST["editComentario"];
 
             if ($datos["comentario"] !== "") {
-                $postsController->ctrActualizar("comentarios", $datos, "id_comentario", $_POST["id_comentario"], null);
+                $postsController->ctrActualizar("comentarios", $datos, "id_comentario", $_POST["id_comentario"]);
 
                 echo "<script>
                             async function showSuccessAlert() {
@@ -77,7 +77,7 @@ if (isset($_POST["accion"])) {
         //Borrar comentario
         if ($_POST["accion"] == "borrarComentario") {
 
-            $postsController->ctrEliminar("comentarios", "id_comentario", $_POST["id_comentario"], null);
+            $postsController->ctrEliminar("comentarios", "id_comentario", $_POST["id_comentario"]);
 
             echo "<script>
                 async function showSuccessAlert() {

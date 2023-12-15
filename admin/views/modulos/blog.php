@@ -26,7 +26,7 @@ if (isset($_POST["accion"]) && $_POST["accion"] == "CrearPost") {
         $datos["contenido"] = $_POST["add_contenido"];
     }
 
-    $id_post = $postController->ctrInsertar("post", $datos, null);
+    $id_post = $postController->ctrInsertar("post", $datos);
 
     // Valido el fichero
     if (isset($_FILES["add_portada"]["tmp_name"]) && $_FILES["add_portada"]["tmp_name"] !== "") {
@@ -99,10 +99,10 @@ if (isset($_POST["accion"]) && $_POST["accion"] == "CrearPost") {
 
     if (!isset($datos["imagen"])) {
         // echo "eliminado";
-        $postController->ctrEliminar("post", "id_post", $id_post, null);
+        $postController->ctrEliminar("post", "id_post", $id_post);
     } else {
         // echo "actualizado";
-        $postController->ctrActualizar("post", $datos, null, $id_post);
+        $postController->ctrActualizar("post", $datos, $id_post);
 
         echo "<script>
                 async function showSuccessAlert() {
@@ -126,7 +126,7 @@ if (isset($_POST["accion"]) && $_POST["accion"] == "EliminarPost") {
         unlink($_POST["img"]);
     }
 
-    $postController->ctrEliminar("post", "id_post", $_POST["id_post"], null);
+    $postController->ctrEliminar("post", "id_post", $_POST["id_post"]);
     echo "<script>
     async function showSuccessAlert() {
         await Swal.fire({
@@ -219,7 +219,7 @@ if (isset($_POST["accion"]) && $_POST["accion"] == "EditarPost") {
         }
     }
 
-    $postController->ctrActualizar("post", $datos, null, $id_post);
+    $postController->ctrActualizar("post", $datos, $id_post);
 
     echo "<script>
         async function showSuccessAlert() {

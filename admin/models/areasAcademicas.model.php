@@ -34,7 +34,7 @@
         }
 
         public static function mdlMostrar_Ultima_AreaAcademica($tabla){
-            global $conexion;
+            $conexion = Conexion::conectar();
             $consulta="SELECT * FROM $tabla Order by 'id_area' desc LIMIT 1";
             $resultados=$conexion->query($consulta);
             if ($resultados) {
@@ -44,7 +44,7 @@
         }
 
         public static function mdlMostrar_AreasAcademicas_Ordenadas($tabla,$campo,$orden){
-            global $conexion;
+            $conexion = Conexion::conectar();
             $consulta="SELECT * FROM $tabla Order by $campo $orden LIMIT 1";
             $resultados=$conexion->query($consulta);
             if ($resultados) {

@@ -4,8 +4,7 @@ require_once("conexion.php");
 class ReservasModel
 {
     // Cargar Reservas
-    public static function mdlMostrarReservas($tabla)
-    {
+    public static function mdlMostrarReservas($tabla){
 
         $conexion = Conexion::conectar();
         $sentencia = $conexion->prepare("SELECT * FROM $tabla");
@@ -14,8 +13,7 @@ class ReservasModel
         return $registros;
     }
 
-    public static function mdlMostrarReservasWhere($tabla, $campo, $valor)
-    {
+    public static function mdlMostrarReservasWhere($tabla, $campo, $valor){
 
         $conexion = Conexion::conectar();
         $sentencia = $conexion->prepare("SELECT * FROM $tabla WHERE $campo LIKE '$valor'");
@@ -24,8 +22,7 @@ class ReservasModel
         return $registros;
     }
 
-    public static function mdlMostrarReservaWhere($tabla, $campo, $valor)
-    {
+    public static function mdlMostrarReservaWhere($tabla, $campo, $valor){
 
         $conexion = Conexion::conectar();
         $sentencia = $conexion->prepare("SELECT * FROM $tabla WHERE $campo LIKE '$valor'");
@@ -34,9 +31,8 @@ class ReservasModel
         return $registros;
     }
 
-    public static function mdlMostrar_Ultima_Reserva($tabla)
-    {
-        global $conexion;
+    public static function mdlMostrar_Ultima_Reserva($tabla){
+        $conexion = Conexion::conectar();
         $id = "id";
         $consulta = "SELECT * FROM $tabla Order by $id desc LIMIT 1";
         $resultados = $conexion->query($consulta);
@@ -46,9 +42,8 @@ class ReservasModel
         }
     }
 
-    public static function mdlMostrar_Reservas_Ordenadas($tabla, $campo, $orden)
-    {
-        global $conexion;
+    public static function mdlMostrar_Reservas_Ordenadas($tabla, $campo, $orden){
+        $conexion = Conexion::conectar();
         $consulta = "SELECT * FROM $tabla Order by $campo $orden LIMIT 1";
         $resultados = $conexion->query($consulta);
         if ($resultados) {
@@ -57,8 +52,7 @@ class ReservasModel
         }
     }
 
-    public static function mdlInsertar($tabla, $datos)
-    {
+    public static function mdlInsertar($tabla, $datos){
 
         $conexion = Conexion::conectar();
         //Extraemos los campos
@@ -83,8 +77,7 @@ class ReservasModel
         $sentencia = null;
     }
 
-    public static function mdlActualizar($tabla, $datos, $id)
-    {
+    public static function mdlActualizar($tabla, $datos, $id){
 
         $conexion = Conexion::conectar();
         //Extraemos los campos
@@ -113,8 +106,7 @@ class ReservasModel
         $sentencia = null;
     }
 
-    public static function mdlEliminar($tabla, $campo_id, $id)
-    {
+    public static function mdlEliminar($tabla, $campo_id, $id){
 
         $conexion = Conexion::conectar();
 
@@ -135,51 +127,8 @@ class ReservasModel
         $sentencia = null;
     }
 
-    public static function mdlValidarFichero($fichero, $directorio, $nombreFichero)
-    {
-        $ruta = "";
-
-        list($ancho, $alto) = getimagesize($fichero["tmp_name"]);
-        $nuevoAncho = 400;
-        $nuevoAlto = 400;
-
-        // SEGUN FORMATO DE imagen APLICAMOS UNAS FUNCIONES U OTRAS
-        if ($fichero["type"] == "image/jpeg") {
-
-            // CREAMOS EL DIRECTORIO DONDE GUARDAR LA imagen
-            if (!file_exists($directorio)) {
-                mkdir($directorio, 0755);
-            }
-
-            // GUARDAMOS LA IMAGEN EN EL DIRECTORIO
-            $ruta = $directorio . "/" . $nombreFichero . ".jpeg";
-            $origen = imagecreatefromjpeg($fichero["tmp_name"]);
-            $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-            imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-            imagejpeg($destino, $ruta);
-        }
-
-        if ($fichero["type"] == "image/png") {
-
-            // CREAMOS EL DIRECTORIO DONDE GUARDAR LA imagen
-            if (!file_exists($directorio)) {
-                mkdir($directorio, 0755);
-            }
-
-            // GUARDAMOS LA IMAGEN EN EL DIRECTORIO
-            $ruta = $directorio . "/" . $nombreFichero . ".png";
-            $origen = imagecreatefrompng($fichero["tmp_name"]);
-            $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-            imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-            imagepng($destino, $ruta);
-        }
-
-        return $ruta;
-    }
-
     // Cargar Paginacion Reservas
-    public static function mdlMostrarPaginacion($tabla, $inicio, $registrosxpagina, $orden)
-    {
+    public static function mdlMostrarPaginacion($tabla, $inicio, $registrosxpagina, $orden){
 
         $consulta = "SELECT * ";
         $consulta .= "FROM $tabla ";
@@ -198,8 +147,7 @@ class ReservasModel
     }
 
     // Ultimas 6 reservas
-    public static function mdlMostrarReservasExpiradas($campo, $valor)
-    {
+    public static function mdlMostrarReservasExpiradas($campo, $valor){
 
         $conexion = Conexion::conectar();
         $sql = "SELECT * FROM reservas as res
@@ -216,8 +164,7 @@ class ReservasModel
     }
 
     // Ultimas 6 reservas
-    public static function mdlMostrarReservasSinExpirar($campo, $valor)
-    {
+    public static function mdlMostrarReservasSinExpirar($campo, $valor){
 
         $conexion = Conexion::conectar();
         $sql = "SELECT * FROM reservas as res

@@ -21,18 +21,18 @@
             return $respuesta;
         }
 
-        public function ctrInsertar($tabla,$datos,$redireccion){
+        public function ctrInsertar($tabla,$datos){
             // Validamos los datos
-            $datos = PostsController::ctrValidarDatos($datos,$redireccion);
+            $datos = PostsController::ctrValidarDatos($datos);
 
             //Insertamos los datos si todo ha salido bien
             $respuesta=PostsModel::mdlInsertar($tabla,$datos);
             return $respuesta;
         }
 
-        public function ctrActualizar($tabla,$datos,$redireccion,$id){
+        public function ctrActualizar($tabla,$datos,$id){
             // Validamos los datos
-            $datos = PostsController::ctrValidarDatos($datos,$redireccion);
+            $datos = PostsController::ctrValidarDatos($datos);
 
             $respuesta=PostsModel::mdlActualizar($tabla,$datos,$id);
             return $respuesta;

@@ -2,10 +2,8 @@
 class LoginController
 {
     // ====================================== INGRESO DE USUARIO ======================================
-
     public function ctrLogin()
     {
-
         if (isset($_POST['usuario'])) {
             $usuario = LoginController::ctrfiltrarVarchar($_POST['usuario']);
             $tabla = "usuarios";
@@ -15,32 +13,32 @@ class LoginController
             // $contraseña = crypt($_POST["password"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
 
             if ($comprobar !== NULL) {
-                $id_usuario = $comprobar["id_usuario"];
-                if (isset($contraseña) && !empty($contraseña)) {
-                    if ($contraseña == $comprobar["password"]) {
-                        $_SESSION["id_usuario"] = $id_usuario;
-                        $_SESSION["foto"] = $comprobar["foto"];
-                        $_SESSION["session_usuario"] = $usuario;
+                if ($comprobar["estado"] == 1) {
+                    $id_usuario = $comprobar["id_usuario"];
+                    if (isset($contraseña) && !empty($contraseña)) {
+                        if ($contraseña == $comprobar["password"]) {
+                            $_SESSION["id_usuario"] = $id_usuario;
+                            $_SESSION["foto"] = $comprobar["foto"];
+                            $_SESSION["session_usuario"] = $usuario;
 
-                        if (isset($_POST["accion"]) && $_POST["accion"] == "reserva") {
-                            $_SESSION["perfilSeleccionado"] = "addRolUser";
-                            $respuesta =  'profesor';
+                            if (isset($_POST["accion"]) && $_POST["accion"] == "reserva") {
+                                $_SESSION["perfilSeleccionado"] = "addRolUser";
+                                $respuesta =  'profesor';
+                            } else {
+                                $respuesta =  'inicio';
+                            }
                         } else {
-                            $respuesta =  'inicio';
+                            $respuesta =  '<br><div class="alert alert-danger">Error al introducir la contraseña</div>';
                         }
-
-
-                        // $respuesta =  '<script>window.location="inicio"</script>';
                     } else {
-                        $respuesta =  '<br><div class="alert alert-danger">Error al introducir la contraseña</div>';
+                        $respuesta =  '<br><div class="alert alert-danger">Rellena la contraseña</div>';
                     }
-                } else {
-                    $respuesta =  '<br><div class="alert alert-danger">Rellena la contraseña</div>';
+                }else {
+                    $respuesta =  '<br><div class="alert alert-danger">Usuario desactivado ponte en contacto con el administrador</div>';
                 }
             } else {
                 $respuesta =  '<br><div class="alert alert-danger">El usuario no existe</div>';
             }
-
             return $respuesta;
         }
     }
@@ -87,7 +85,6 @@ class LoginController
                             return $respuesta;
                         }
                     }
-
 
                     // Insertamos los datos en la tabla usuario
                     $id_insertado = LoginController::ctrRegistrarUsuario($tabla, $datos_usuario);
@@ -141,10 +138,10 @@ class LoginController
                     $UserController = new UsuariosController();
 
                     if (!isset($datos_usuario["foto"])) {
-                        $UserController->ctrBorrarUsuario($id_insertado,"usuarios",null,null);
+                        $UserController->ctrBorrarUsuario($id_insertado, "usuarios", null);
                         return $respuesta;
                     } else {
-                        $UserController->ActualizarUsuario("usuarios", $datos_usuario, null, $id_insertado);
+                        $UserController->ActualizarUsuario("usuarios", $datos_usuario, $id_insertado);
 
                         // Sacamos el id del rol
                         $RolesController = new RolesController();
@@ -179,7 +176,7 @@ class LoginController
 
                             // Insertamos los datos en la tabla imparte
                             $asignaturasController = new AsignaturasController();
-                            $asignaturasController->ctrInsertar("imparte", $datos_imparte, null);
+                            $asignaturasController->ctrInsertar("imparte", $datos_imparte);
                         }
 
                         if ($id_insertado) {
@@ -194,42 +191,36 @@ class LoginController
             } else {
                 $respuesta =  '¡El usuario ya existe!';
             }
-
             return $respuesta;
         }
     }
 
     public function ctrComprobar_Exisitencia_Registro($tabla, $columna, $registro)
     {
-
         $respuesta = LoginModel::mdlComprobar_Exisitencia_Registro($tabla, $columna, $registro);
         return $respuesta;
     }
 
     public function ctrfiltrarVarchar($texto)
     {
-
         $respuesta = LoginModel::mdlfiltrarVarchar($texto);
         return $respuesta;
     }
 
     public function ctrfiltrarCorreo($correo)
     {
-
         $respuesta = LoginModel::mdlfiltrarCorreo($correo);
         return $respuesta;
     }
 
     public function ctrRegistrarUsuario($tabla, $datos)
     {
-
         $respuesta = LoginModel::mdlRegistrarUsuario($tabla, $datos);
         return $respuesta;
     }
 
     public function ctrMostrar_Ultimo_Registro($tabla, $id)
     {
-
         $respuesta = LoginModel::mdlMostrar_Ultimo_Registro($tabla, $id);
         return $respuesta;
     }

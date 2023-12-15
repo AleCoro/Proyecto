@@ -21,9 +21,9 @@
             return $respuesta;
         }
 
-        public function ctrInsertar($tabla,$datos,$redireccion){
+        public function ctrInsertar($tabla,$datos){
             // Validamos los datos
-            $datos = AreasAcademicasController::ctrValidarDatos($datos,$redireccion);
+            $datos = AreasAcademicasController::ctrValidarDatos($datos);
 
             //Insertamos los datos si todo ha salido bien
             $respuesta=AreasAcademicasModel::mdlInsertar($tabla,$datos);
@@ -31,9 +31,9 @@
             
         }
 
-        public function ctrActualizar($tabla,$datos,$redireccion,$id){
+        public function ctrActualizar($tabla,$datos,$id){
             // Validamos los datos
-            $datos = AreasAcademicasController::ctrValidarDatos($datos,$redireccion);
+            $datos = AreasAcademicasController::ctrValidarDatos($datos);
 
             $respuesta=AreasAcademicasModel::mdlActualizar($tabla,$datos,$id);
             return $respuesta;

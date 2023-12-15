@@ -4,8 +4,7 @@ require_once("conexion.php");
 class AreasAcademicasModel
 {
     // Cargar AreasAcademicas
-    public static function mdlMostrarAreasAcademicas($tabla)
-    {
+    public static function mdlMostrarAreasAcademicas($tabla){
 
         $conexion = Conexion::conectar();
         $sentencia = $conexion->prepare("SELECT * FROM $tabla");
@@ -14,8 +13,7 @@ class AreasAcademicasModel
         return $registros;
     }
 
-    public static function mdlMostrarAreasAcademicasWhere($tabla, $campo, $valor)
-    {
+    public static function mdlMostrarAreasAcademicasWhere($tabla, $campo, $valor){
 
         $conexion = Conexion::conectar();
         $sentencia = $conexion->prepare("SELECT * FROM $tabla WHERE $campo LIKE '$valor'");
@@ -24,8 +22,7 @@ class AreasAcademicasModel
         return $registros;
     }
 
-    public static function mdlMostrarAreaAcademicaWhere($tabla, $campo, $valor)
-    {
+    public static function mdlMostrarAreaAcademicaWhere($tabla, $campo, $valor){
 
         $conexion = Conexion::conectar();
         $sentencia = $conexion->prepare("SELECT * FROM $tabla WHERE $campo LIKE '$valor'");
@@ -34,9 +31,9 @@ class AreasAcademicasModel
         return $registros;
     }
 
-    public static function mdlMostrar_Ultima_AreaAcademica($tabla)
-    {
-        global $conexion;
+    public static function mdlMostrar_Ultima_AreaAcademica($tabla){
+
+        $conexion = Conexion::conectar();
         $id = "id";
         $consulta = "SELECT * FROM $tabla Order by $id desc LIMIT 1";
         $resultados = $conexion->query($consulta);
@@ -46,9 +43,9 @@ class AreasAcademicasModel
         }
     }
 
-    public static function mdlMostrar_AreasAcademicas_Ordenadas($tabla, $campo, $orden)
-    {
-        global $conexion;
+    public static function mdlMostrar_AreasAcademicas_Ordenadas($tabla, $campo, $orden){
+
+        $conexion = Conexion::conectar();
         $consulta = "SELECT * FROM $tabla Order by $campo $orden LIMIT 1";
         $resultados = $conexion->query($consulta);
         if ($resultados) {
@@ -57,8 +54,7 @@ class AreasAcademicasModel
         }
     }
 
-    public static function mdlInsertar($tabla, $datos)
-    {
+    public static function mdlInsertar($tabla, $datos){
 
         $conexion = Conexion::conectar();
         //Extraemos los campos
@@ -83,8 +79,7 @@ class AreasAcademicasModel
         $sentencia = null;
     }
 
-    public static function mdlActualizar($tabla, $datos, $id)
-    {
+    public static function mdlActualizar($tabla, $datos, $id){
 
         $conexion = Conexion::conectar();
         //Extraemos los campos
@@ -113,14 +108,12 @@ class AreasAcademicasModel
         $sentencia = null;
     }
 
-    public static function mdlEliminar($tabla, $campo_id, $id)
-    {
+    public static function mdlEliminar($tabla, $campo_id, $id){
 
         $conexion = Conexion::conectar();
 
         //Hacemos la consulta
         $sql = "DELETE FROM $tabla WHERE $campo_id = :id";
-        // var_dump($sql);
 
         //La preparamos
         $sentencia = $conexion->prepare($sql);
@@ -133,48 +126,6 @@ class AreasAcademicasModel
             return false;
         }
         $sentencia = null;
-    }
-
-    public static function mdlValidarFichero($fichero, $directorio, $nombreFichero)
-    {
-        $ruta = "";
-
-        list($ancho, $alto) = getimagesize($fichero["tmp_name"]);
-        $nuevoAncho = 400;
-        $nuevoAlto = 400;
-
-        // SEGUN FORMATO DE imagen APLICAMOS UNAS FUNCIONES U OTRAS
-        if ($fichero["type"] == "image/jpeg") {
-
-            // CREAMOS EL DIRECTORIO DONDE GUARDAR LA imagen
-            if (!file_exists($directorio)) {
-                mkdir($directorio, 0755);
-            }
-
-            // GUARDAMOS LA IMAGEN EN EL DIRECTORIO
-            $ruta = $directorio . "/" . $nombreFichero . ".jpeg";
-            $origen = imagecreatefromjpeg($fichero["tmp_name"]);
-            $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-            imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-            imagejpeg($destino, $ruta);
-        }
-
-        if ($fichero["type"] == "image/png") {
-
-            // CREAMOS EL DIRECTORIO DONDE GUARDAR LA imagen
-            if (!file_exists($directorio)) {
-                mkdir($directorio, 0755);
-            }
-
-            // GUARDAMOS LA IMAGEN EN EL DIRECTORIO
-            $ruta = $directorio . "/" . $nombreFichero . ".png";
-            $origen = imagecreatefrompng($fichero["tmp_name"]);
-            $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-            imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-            imagepng($destino, $ruta);
-        }
-
-        return $ruta;
     }
 
     public static function mdlMostrarPaginacion($tabla,$inicio,$registrosxpagina,$orden){

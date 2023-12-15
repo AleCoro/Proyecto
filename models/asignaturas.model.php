@@ -10,7 +10,6 @@
             $sentencia->execute();
             $registros=$sentencia->fetchAll(PDO::FETCH_ASSOC);
             return $registros;
-
         }
 
         public static function mdlMostrarAsignaturasWhere($tabla,$campo,$valor){
@@ -20,7 +19,6 @@
             $sentencia->execute();
             $registros=$sentencia->fetchAll(PDO::FETCH_ASSOC);
             return $registros;
-
         }
 
         public static function mdlMostrarAsignaturaWhere($tabla,$campo,$valor){
@@ -30,11 +28,10 @@
             $sentencia->execute();
             $registros=$sentencia->fetch();
             return $registros;
-
         }
 
         public static function mdlMostrar_Ultima_Asignatura($tabla){
-            global $conexion;
+            $conexion = Conexion::conectar();
             $id="id";
             $consulta="SELECT * FROM $tabla Order by $id desc LIMIT 1";
             $resultados=$conexion->query($consulta);
@@ -45,7 +42,7 @@
         }
 
         public static function mdlMostrar_Asignaturas_Ordenadas($tabla,$campo,$orden){
-            global $conexion;
+            $conexion = Conexion::conectar();
             $consulta="SELECT * FROM $tabla Order by $campo $orden LIMIT 1";
             $resultados=$conexion->query($consulta);
             if ($resultados) {
@@ -77,7 +74,6 @@
                 return false;
             }
             $sentencia=null;
-
         }
 
         public static function mdlActualizar($tabla,$datos,$campo_id,$id){
@@ -107,7 +103,6 @@
                 return false;
             }
             $sentencia=null;
-
         }
 
         public static function mdlEliminar($tabla, $campo_id, $id){
@@ -129,53 +124,9 @@
                 return false;
             }
             $sentencia=null;
-
         }
 
-        public static function mdlValidarFichero($fichero,$directorio,$nombreFichero)
-        {
-            $ruta = "";
-
-            list($ancho, $alto) = getimagesize($fichero["tmp_name"]);
-            $nuevoAncho=400;
-            $nuevoAlto=400;
-
-            // SEGUN FORMATO DE imagen APLICAMOS UNAS FUNCIONES U OTRAS
-            if ($fichero["type"]=="image/jpeg") {
-
-                // CREAMOS EL DIRECTORIO DONDE GUARDAR LA imagen
-                if (!file_exists($directorio)) {
-                    mkdir($directorio, 0755);
-                }
-                
-                // GUARDAMOS LA IMAGEN EN EL DIRECTORIO
-                $ruta = $directorio."/".$nombreFichero.".jpeg";
-                $origen = imagecreatefromjpeg($fichero["tmp_name"]);
-                $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-                imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-                imagejpeg($destino, $ruta);
-            }
-
-            if ($fichero["type"]=="image/png") {
-
-                // CREAMOS EL DIRECTORIO DONDE GUARDAR LA imagen
-                if (!file_exists($directorio)) {
-                    mkdir($directorio, 0755);
-                }
-                
-                // GUARDAMOS LA IMAGEN EN EL DIRECTORIO
-                $ruta = $directorio."/".$nombreFichero.".png";
-                $origen = imagecreatefrompng($fichero["tmp_name"]);
-                $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-                imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-                imagepng($destino, $ruta);
-            }
-
-            return $ruta;
-        }
-
-        public static function mdlAsignaturasPopulares()
-        {
+        public static function mdlAsignaturasPopulares(){
             $conexion = Conexion::conectar();
 
             $consulta = "SELECT asi.*, res.*, COUNT(DISTINCT(res.id_reserva)) as Reservas, 
@@ -194,8 +145,7 @@
             }
         }
 
-        public static function mdlGetAsignaturasImpartidas($id_profesor)
-        {
+        public static function mdlGetAsignaturasImpartidas($id_profesor){
             $conexion = Conexion::conectar();
 
             $consulta = "SELECT id_reserva, alumno, profesor, GROUP_CONCAT(nombre_asignatura) as 'todasAsignaturas', GROUP_CONCAT(titulo_tema) as 'todosTemas'

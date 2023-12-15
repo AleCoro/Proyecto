@@ -92,9 +92,9 @@ if (isset($_POST["accion"]) && $_POST["accion"] == "InsertarAsignatura") {
     }
 
     if (!isset($datos["portada_asignatura"])) {
-        $asignaturasController->ctrEliminar("asignaturas", "id_asignatura", $id_asignatura, null);
+        $asignaturasController->ctrEliminar("asignaturas", "id_asignatura", $id_asignatura);
     } else {
-        $asignaturasController->ctrActualizar("asignaturas", $datos, null, $id_asignatura);
+        $asignaturasController->ctrActualizar("asignaturas", $datos, $id_asignatura);
         echo "<script>
                 async function showSuccessAlert() {
                     await Swal.fire({
@@ -188,7 +188,7 @@ if (isset($_POST["accion"]) && $_POST["accion"] == "EditarAsignatura") {
         }
     }
 
-    $asignaturasController->ctrActualizar("asignaturas", $datos, "asignaturas", $id);
+    $asignaturasController->ctrActualizar("asignaturas", $datos, $id);
 
     echo "<script>
         async function showSuccessAlert() {

@@ -4,13 +4,12 @@
     class PostsModel{
         // Cargar Posts
         public static function mdlMostrarPosts($tabla){
-            
+
             $conexion = Conexion::conectar();
             $sentencia=$conexion->prepare("SELECT * FROM $tabla");
             $sentencia->execute();
             $registros=$sentencia->fetchAll(PDO::FETCH_ASSOC);
             return $registros;
-
         }
 
         public static function mdlMostrarPostsWhere($tabla,$campo,$valor){
@@ -20,7 +19,6 @@
             $sentencia->execute();
             $registros=$sentencia->fetchAll(PDO::FETCH_ASSOC);
             return $registros;
-
         }
 
         public static function mdlMostrarPostWhere($tabla,$campo,$valor){
@@ -30,11 +28,10 @@
             $sentencia->execute();
             $registros=$sentencia->fetch(PDO::FETCH_ASSOC);
             return $registros;
-
         }
 
         public static function mdlMostrar_Ultima_Post($tabla){
-            global $conexion;
+            $conexion = Conexion::conectar();
             $id="id";
             $consulta="SELECT * FROM $tabla Order by $id desc LIMIT 1";
             $resultados=$conexion->query($consulta);
@@ -45,7 +42,7 @@
         }
 
         public static function mdlMostrar_Posts_Ordenadas($tabla,$campo,$orden){
-            global $conexion;
+            $conexion = Conexion::conectar();
             $consulta="SELECT * FROM $tabla Order by $campo $orden LIMIT 1";
             $resultados=$conexion->query($consulta);
             if ($resultados) {
@@ -77,7 +74,6 @@
                 return false;
             }
             $sentencia=null;
-
         }
 
         public static function mdlActualizar($tabla,$datos,$campo_id,$id){
@@ -132,48 +128,6 @@
 
         }
 
-        public static function mdlValidarFichero($fichero,$directorio,$nombreFichero)
-        {
-            $ruta = "";
-
-            list($ancho, $alto) = getimagesize($fichero["tmp_name"]);
-            $nuevoAncho=400;
-            $nuevoAlto=400;
-
-            // SEGUN FORMATO DE imagen APLICAMOS UNAS FUNCIONES U OTRAS
-            if ($fichero["type"]=="image/jpeg") {
-
-                // CREAMOS EL DIRECTORIO DONDE GUARDAR LA imagen
-                if (!file_exists($directorio)) {
-                    mkdir($directorio, 0755);
-                }
-                
-                // GUARDAMOS LA IMAGEN EN EL DIRECTORIO
-                $ruta = $directorio."/".$nombreFichero.".jpeg";
-                $origen = imagecreatefromjpeg($fichero["tmp_name"]);
-                $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-                imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-                imagejpeg($destino, $ruta);
-            }
-
-            if ($fichero["type"]=="image/png") {
-
-                // CREAMOS EL DIRECTORIO DONDE GUARDAR LA imagen
-                if (!file_exists($directorio)) {
-                    mkdir($directorio, 0755);
-                }
-                
-                // GUARDAMOS LA IMAGEN EN EL DIRECTORIO
-                $ruta = $directorio."/".$nombreFichero.".png";
-                $origen = imagecreatefrompng($fichero["tmp_name"]);
-                $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-                imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-                imagepng($destino, $ruta);
-            }
-
-            return $ruta;
-        }
-
         public static function mdlMostrarPaginacion($tabla,$inicio,$registrosxpagina,$orden){
             
             $consulta="SELECT * ";
@@ -193,8 +147,7 @@
     
         }
 
-        static public function mdlMostrarComentarios($post)
-        {
+        static public function mdlMostrarComentarios($post){
             $conexion = Conexion::conectar();
             $sql = "SELECT *
             FROM comentarios as com
@@ -212,8 +165,7 @@
             $sentencia = null;
         }
 
-        static public function mdlContarComentarios($post)
-        {
+        static public function mdlContarComentarios($post){
             $conexion = Conexion::conectar();
             $sql = "SELECT count(id_comentario) as 'totalComentarios'
             FROM comentarios as com
@@ -230,8 +182,7 @@
             $sentencia = null;
         }
 
-        static public function mdlContarLikes($post)
-        {
+        static public function mdlContarLikes($post){
             $conexion = Conexion::conectar();
             $sql = "SELECT count(id_like) as 'totalLikes'
             FROM likes as l
@@ -248,8 +199,7 @@
             $sentencia = null;
         }
 
-        static public function mdlUltimosPost()
-        {
+        static public function mdlUltimosPost(){
             $conexion = Conexion::conectar();
             $sql = "SELECT *
             FROM post

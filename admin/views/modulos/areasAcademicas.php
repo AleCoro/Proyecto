@@ -83,9 +83,9 @@ if (isset($_POST["accion"]) && $_POST["accion"] == "InsertarArea") {
     }
 
     if (!isset($datos["portada_area"])) {
-        $areasAcademicasController->ctrEliminar("areas_academicas", "id_area", $id_area, null);
+        $areasAcademicasController->ctrEliminar("areas_academicas", "id_area", $id_area);
     } else {
-        $areasAcademicasController->ctrActualizar("areas_academicas", $datos, null, $id_area);
+        $areasAcademicasController->ctrActualizar("areas_academicas", $datos, $id_area);
         echo "<script>
                 async function showSuccessAlert() {
                     await Swal.fire({
@@ -178,7 +178,7 @@ if (isset($_POST["accion"]) && $_POST["accion"] == "EditarArea") {
         }
     }
 
-    $areasAcademicasController->ctrActualizar("areas_academicas", $datos, null, $id);
+    $areasAcademicasController->ctrActualizar("areas_academicas", $datos, $id);
 
     echo "<script>
             async function showSuccessAlert() {
