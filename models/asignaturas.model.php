@@ -148,7 +148,7 @@
         public static function mdlGetAsignaturasImpartidas($id_profesor){
             $conexion = Conexion::conectar();
 
-            $consulta = "SELECT id_reserva, alumno, profesor, GROUP_CONCAT(nombre_asignatura) as 'todasAsignaturas', GROUP_CONCAT(titulo_tema) as 'todosTemas'
+            $consulta = "SELECT id_reserva, alumno, profesor, GROUP_CONCAT(DISTINCT nombre_asignatura) as 'todasAsignaturas', GROUP_CONCAT(DISTINCT titulo_tema) as 'todosTemas'
             FROM reservas as r
             INNER JOIN asignaturas as a ON r.asignatura = a.id_asignatura
             INNER JOIN contenido_clase as c ON r.id_reserva = c.reserva

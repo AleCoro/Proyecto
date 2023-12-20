@@ -27,10 +27,6 @@
               </form>
               <div class="dropdown-divider"></div>
             <?php } ?>
-            <!-- <a href="#" class="dropdown-item">8 friend requests</a>
-        <div class="dropdown-divider"></div>
-        <a href="#" class="dropdown-item">8 friend requests</a>
-        <div class="dropdown-divider"></div> -->
             <a href="logout" class="nav-link">Logout</a>
         </li>
       </ul>
