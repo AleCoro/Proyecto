@@ -142,4 +142,4 @@ $creador = $usuariosController->ctrMostrarUsuarioWhere("id_usuario", $post["crea
 
 
 
-include("views/partials/postDetalle2View.php");
+include("views/partials/postDetalleView.php");

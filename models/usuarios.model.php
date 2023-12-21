@@ -90,14 +90,14 @@ class ModeloUsuarios
                     JOIN imparte as imp ON usu.id_usuario = imp.profesor
                     JOIN asignaturas as asi ON imp.asignatura = asi.id_asignatura
                     JOIN areas_academicas as are ON asi.area_academica = are.id_area
-                    WHERE id_area LIKE '$area' && usu.estado like 1";
+                    WHERE id_area LIKE '$area' && usu.estado like 1 AND imp.fecha_imparte > NOW()";
         } else {
             $sql = "SELECT *
                     FROM usuarios as usu
                     JOIN imparte as imp ON usu.id_usuario = imp.profesor
                     JOIN asignaturas as asi ON imp.asignatura = asi.id_asignatura
                     JOIN areas_academicas as are ON asi.area_academica = are.id_area
-                    WHERE  usu.estado like 1";
+                    WHERE  usu.estado like 1 AND imp.fecha_imparte > NOW()";
         }
 
 
@@ -155,6 +155,7 @@ class ModeloUsuarios
         $sql = "SELECT *, ROUND(AVG(res.valoracion), 2) as ValoracionMedia
         FROM usuarios as usu
         JOIN reservas as res ON usu.id_usuario = res.profesor
+        WHERE res.valoracion > 0
         GROUP BY usu.id_usuario
         ORDER BY ValoracionMedia DESC
         LIMIT 4";

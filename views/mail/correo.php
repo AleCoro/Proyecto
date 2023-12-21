@@ -78,7 +78,7 @@ try {
     }
 
     // Adjuntar la imagen al correo
-    $phpmailer->addAttachment('../img/logo.png', 'logo', 'base64', 'image/png');
+    $phpmailer->addAttachment('https://www.imagenes-temporales.com/subidas/ver/p2WjJ1/', 'logo');
 
     //send the message, check for errors
     if (!$phpmailer->send()) {

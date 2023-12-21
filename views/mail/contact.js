@@ -12,7 +12,7 @@ $(function () {
             var message = $("textarea#message").val();
             var contacto = true;
 
-            alert("hola");
+            // alert("hola");
 
             $this = $("#sendMessageButton");
             $this.prop("disabled", true);

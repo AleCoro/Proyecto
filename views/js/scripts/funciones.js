@@ -82,7 +82,6 @@ function cargarProfesores(id_asignatura) {
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState === 4) {
             if (xmlhttp.status === 200) {
-
                 // Saco los cards
                 var cards = document.querySelectorAll('[id^="card_"]');
 
@@ -93,13 +92,15 @@ function cargarProfesores(id_asignatura) {
                 });
 
                 profesores = JSON.parse(xmlhttp.responseText);
-
+                
                 //Aqui muestro los necesarios
                 profesores.forEach(profesor => {
                     // alert(profesor.id_usuario);
                     card_profesor = document.getElementById("card_" + profesor.id_imparte);
-                    card_profesor.classList.remove("d-none");
-                    card_profesor.classList.add("d-flex");
+                    if (card_profesor !== null) {
+                        card_profesor.classList.remove("d-none");
+                        card_profesor.classList.add("d-flex");
+                    }
                 });
 
                 if (profesores.length == 0) {
@@ -400,8 +401,8 @@ function comprobarSiEstaLogueado() {
     });
 }
 
-function enviarCorreoRegistro(usuario,email) {
-    var url = "views/mail/correo.php?registro=true&usuario="+usuario+"&email="+email;
+function enviarCorreoRegistro(usuario, email) {
+    var url = "views/mail/correo.php?registro=true&usuario=" + usuario + "&email=" + email;
     xmlhttp.open("GET", url);
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState === 4) {
@@ -457,9 +458,9 @@ function cancelarEditComentario(id_comentario) {
 }
 
 function borrarComentario(id_comentario) {
-    document.getElementById("formularioBorrarComentario"+id_comentario).submit();
+    document.getElementById("formularioBorrarComentario" + id_comentario).submit();
 }
 
 function guardarComentario(id_comentario) {
-    document.getElementById("formularioEditarComentario"+id_comentario).submit();
+    document.getElementById("formularioEditarComentario" + id_comentario).submit();
 }
