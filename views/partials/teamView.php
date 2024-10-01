@@ -38,7 +38,7 @@
 
       <div class="row justify-content-center">
         <h4 class="section-title px-5 pb-3">
-          <span class="px-2" id="tituloProfesores"></span>
+          <span class="px-2" id="tituloProfesores">No hay profesores disponibles</span>
         </h4>
       </div>
 

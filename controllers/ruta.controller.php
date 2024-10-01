@@ -3,6 +3,6 @@
         public static function ctrRuta()
         {
             // PONER TU RUTA
-            return "http://localhost/2DAW_2023/Proyecto/";
+            return "http://localhost/2024/Proyecto/";
         }
     }

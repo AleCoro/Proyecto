@@ -25,7 +25,7 @@
                     <p class="mr-3">
                         <i class="fa fa-folder text-primary"></i> Web Design
                     </p>
-                    <p class="mr-3"><i class="fa fa-comments text-primary"></i> 15</p>
+                    <p class="mr-3"><i class="fa fa-comments text-primary"></i> <?= $numComentarios["totalComentarios"]; ?></p>
                 </div>
             </div>
             <div class="mb-5">
